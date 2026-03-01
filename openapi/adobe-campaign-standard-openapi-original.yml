@@ -1,0 +1,1204 @@
+openapi: 3.1.0
+info:
+  title: Adobe Campaign Standard API
+  description: >-
+    REST API for Adobe Campaign Standard enabling integration with marketing
+    campaigns, profiles, workflows, and messaging services. Provides CRUD
+    operations for profiles and services, workflow control, transactional
+    messaging triggers, GDPR/CCPA privacy requests, marketing history access,
+    and custom resource management.
+  version: 1.0.0
+  contact:
+    name: Adobe Developer Support
+    url: https://developer.adobe.com/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+  x-logo:
+    url: https://www.adobe.com/content/dam/cc/icons/adobe-campaign.svg
+externalDocs:
+  description: Adobe Campaign Standard API Documentation
+  url: >-
+    https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/get-started-apis.html
+servers:
+  - url: https://mc.adobe.io/{ORGANIZATION}/campaign
+    description: Adobe Campaign Standard Production
+    variables:
+      ORGANIZATION:
+        description: Your Adobe IMS Organization ID
+        default: YOUR_ORG_ID
+tags:
+  - name: Profiles
+    description: >-
+      Manage recipient profiles including creation, retrieval, update, and
+      deletion of contact records.
+  - name: Services
+    description: >-
+      Manage subscription services that profiles can subscribe to for receiving
+      marketing communications.
+  - name: Subscriptions
+    description: >-
+      Subscribe and unsubscribe profiles to and from services.
+  - name: Workflows
+    description: >-
+      Control workflow execution including starting, pausing, resuming, and
+      stopping marketing workflows.
+  - name: Transactional Messages
+    description: >-
+      Trigger and monitor transactional messages across email, SMS, and push
+      notification channels.
+  - name: Privacy
+    description: >-
+      Create GDPR and CCPA privacy access and deletion requests for data
+      subject compliance.
+  - name: Marketing History
+    description: >-
+      Retrieve marketing event history for profiles including delivery logs
+      and mirror page links.
+  - name: Organizational Units
+    description: >-
+      Retrieve organizational unit structures used for access control and
+      data partitioning.
+  - name: Custom Resources
+    description: >-
+      Access custom resources defined in Campaign Standard, both
+      profile-linked and standalone.
+  - name: Metadata
+    description: >-
+      Discover resource schemas, fields, filters, and data policies for
+      Campaign Standard resources.
+paths:
+  /profileAndServices/profile:
+    get:
+      operationId: listProfiles
+      summary: List profiles
+      description: >-
+        Retrieves a paginated list of recipient profiles. Supports filtering,
+        sorting, and pagination through query parameters.
+      tags:
+        - Profiles
+      parameters:
+        - $ref: '#/components/parameters/LineCount'
+        - $ref: '#/components/parameters/LineStart'
+        - $ref: '#/components/parameters/Order'
+        - $ref: '#/components/parameters/ForcePagination'
+      responses:
+        '200':
+          description: List of profiles retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedProfileResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    post:
+      operationId: createProfile
+      summary: Create a profile
+      description: >-
+        Creates a new recipient profile with the provided attributes.
+      tags:
+        - Profiles
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfileCreate'
+      responses:
+        '201':
+          description: Profile created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /profileAndServices/profile/{PKEY}:
+    get:
+      operationId: getProfile
+      summary: Get a profile
+      description: >-
+        Retrieves a specific recipient profile by its PKEY identifier.
+      tags:
+        - Profiles
+      parameters:
+        - $ref: '#/components/parameters/PKEY'
+      responses:
+        '200':
+          description: Profile retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    patch:
+      operationId: updateProfile
+      summary: Update a profile
+      description: >-
+        Partially updates a recipient profile with the provided attributes.
+      tags:
+        - Profiles
+      parameters:
+        - $ref: '#/components/parameters/PKEY'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfileUpdate'
+      responses:
+        '200':
+          description: Profile updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    delete:
+      operationId: deleteProfile
+      summary: Delete a profile
+      description: >-
+        Deletes a specific recipient profile by its PKEY identifier.
+      tags:
+        - Profiles
+      parameters:
+        - $ref: '#/components/parameters/PKEY'
+      responses:
+        '200':
+          description: Profile deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /profileAndServices/service:
+    get:
+      operationId: listServices
+      summary: List services
+      description: >-
+        Retrieves a paginated list of subscription services.
+      tags:
+        - Services
+      parameters:
+        - $ref: '#/components/parameters/LineCount'
+        - $ref: '#/components/parameters/LineStart'
+        - $ref: '#/components/parameters/Order'
+      responses:
+        '200':
+          description: List of services retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedServiceResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    post:
+      operationId: createService
+      summary: Create a service
+      description: >-
+        Creates a new subscription service.
+      tags:
+        - Services
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceCreate'
+      responses:
+        '201':
+          description: Service created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /profileAndServices/service/{PKEY}:
+    get:
+      operationId: getService
+      summary: Get a service
+      description: >-
+        Retrieves a specific subscription service by its PKEY identifier.
+      tags:
+        - Services
+      parameters:
+        - $ref: '#/components/parameters/PKEY'
+      responses:
+        '200':
+          description: Service retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    patch:
+      operationId: updateService
+      summary: Update a service
+      description: >-
+        Partially updates a subscription service with the provided attributes.
+      tags:
+        - Services
+      parameters:
+        - $ref: '#/components/parameters/PKEY'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceUpdate'
+      responses:
+        '200':
+          description: Service updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    delete:
+      operationId: deleteService
+      summary: Delete a service
+      description: >-
+        Deletes a specific subscription service by its PKEY identifier.
+      tags:
+        - Services
+      parameters:
+        - $ref: '#/components/parameters/PKEY'
+      responses:
+        '200':
+          description: Service deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /profileAndServices/profile/{PKEY}/subscriptions:
+    post:
+      operationId: subscribeProfile
+      summary: Subscribe a profile to a service
+      description: >-
+        Subscribes a profile to a subscription service by providing the
+        service PKEY in the request body.
+      tags:
+        - Subscriptions
+      parameters:
+        - $ref: '#/components/parameters/PKEY'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubscriptionRequest'
+      responses:
+        '201':
+          description: Profile subscribed successfully.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /profileAndServices/service/{servicePKEY}/subscriptions/{profilePKEY}:
+    delete:
+      operationId: unsubscribeProfile
+      summary: Unsubscribe a profile from a service
+      description: >-
+        Removes a profile subscription from a service.
+      tags:
+        - Subscriptions
+      parameters:
+        - name: servicePKEY
+          in: path
+          required: true
+          description: The PKEY of the service.
+          schema:
+            type: string
+        - name: profilePKEY
+          in: path
+          required: true
+          description: The PKEY of the profile to unsubscribe.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Profile unsubscribed successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /workflow/execution/{workflowID}/commands:
+    post:
+      operationId: controlWorkflow
+      summary: Control a workflow
+      description: >-
+        Sends a control command to a workflow. Supported commands are start,
+        pause, resume, and stop. Commands are executed asynchronously.
+      tags:
+        - Workflows
+      parameters:
+        - name: workflowID
+          in: path
+          required: true
+          description: The ID of the workflow to control.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkflowCommand'
+      responses:
+        '200':
+          description: Workflow command accepted successfully.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /{transactionalAPI}/{eventID}:
+    post:
+      operationId: triggerTransactionalEvent
+      summary: Trigger a transactional event
+      description: >-
+        Sends a transactional event to trigger a personalized message. The
+        transactionalAPI path segment corresponds to the event configuration
+        name. Events are processed asynchronously and support email, SMS,
+        and push notification channels.
+      tags:
+        - Transactional Messages
+      parameters:
+        - name: transactionalAPI
+          in: path
+          required: true
+          description: >-
+            The transactional API name corresponding to the event
+            configuration (e.g., EVTorderConfirmation).
+          schema:
+            type: string
+        - name: eventID
+          in: path
+          required: true
+          description: The unique event type identifier.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionalEvent'
+      responses:
+        '200':
+          description: Transactional event accepted for processing.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionalEventResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    get:
+      operationId: getTransactionalEventStatus
+      summary: Get transactional event status
+      description: >-
+        Retrieves the current processing status of a previously triggered
+        transactional event. Statuses include pending, processing, processed,
+        deliveryFailed, routingFailed, targetingFailed, tooOld, and ignored.
+      tags:
+        - Transactional Messages
+      parameters:
+        - name: transactionalAPI
+          in: path
+          required: true
+          description: The transactional API name.
+          schema:
+            type: string
+        - name: eventID
+          in: path
+          required: true
+          description: The unique event type identifier.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Event status retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionalEventStatus'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /privacy/privacyTool:
+    post:
+      operationId: createPrivacyRequest
+      summary: Create a privacy request
+      description: >-
+        Creates a GDPR or CCPA privacy request for data access or deletion.
+        Supports both access requests (retrieve all data for a data subject)
+        and delete requests (remove all data for a data subject).
+      tags:
+        - Privacy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PrivacyRequest'
+      responses:
+        '201':
+          description: Privacy request created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrivacyRequestResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /profileAndServices/history/{PKEY}:
+    get:
+      operationId: getMarketingHistory
+      summary: Get marketing history for a profile
+      description: >-
+        Retrieves the marketing event history for a specific profile,
+        including delivery logs and mirror page links.
+      tags:
+        - Marketing History
+      parameters:
+        - $ref: '#/components/parameters/PKEY'
+      responses:
+        '200':
+          description: Marketing history retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarketingHistory'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /profileAndServicesExt/orgUnitBase:
+    get:
+      operationId: listOrgUnits
+      summary: List organizational units
+      description: >-
+        Retrieves the list of organizational units used for access control
+        and data partitioning.
+      tags:
+        - Organizational Units
+      parameters:
+        - $ref: '#/components/parameters/LineCount'
+        - $ref: '#/components/parameters/LineStart'
+      responses:
+        '200':
+          description: Organizational units retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedOrgUnitResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /profileAndServicesExt/{cusResourceName}:
+    get:
+      operationId: listProfileLinkedCustomResources
+      summary: List profile-linked custom resources
+      description: >-
+        Retrieves records from a profile-linked custom resource. Custom
+        resources are defined with the cus prefix in Campaign Standard.
+      tags:
+        - Custom Resources
+      parameters:
+        - name: cusResourceName
+          in: path
+          required: true
+          description: >-
+            The name of the custom resource (with cus prefix, e.g.,
+            cusMyResource).
+          schema:
+            type: string
+        - $ref: '#/components/parameters/LineCount'
+        - $ref: '#/components/parameters/LineStart'
+        - $ref: '#/components/parameters/Order'
+      responses:
+        '200':
+          description: Custom resource records retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /customResources/{cusResourceName}:
+    get:
+      operationId: listCustomResources
+      summary: List non-profile custom resources
+      description: >-
+        Retrieves records from a standalone custom resource not linked to
+        profiles.
+      tags:
+        - Custom Resources
+      parameters:
+        - name: cusResourceName
+          in: path
+          required: true
+          description: The name of the custom resource.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/LineCount'
+        - $ref: '#/components/parameters/LineStart'
+        - $ref: '#/components/parameters/Order'
+      responses:
+        '200':
+          description: Custom resource records retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /profileAndServices/resourceType/{resourceName}:
+    get:
+      operationId: getResourceMetadata
+      summary: Get resource metadata
+      description: >-
+        Retrieves metadata for a Campaign Standard resource, including field
+        definitions, data types, available filters, and data policies.
+      tags:
+        - Metadata
+      parameters:
+        - name: resourceName
+          in: path
+          required: true
+          description: The name of the resource to describe.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Resource metadata retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceMetadata'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >-
+        OAuth Server-to-Server access token obtained from Adobe IMS at
+        https://ims-na1.adobelogin.com/ims/token/v3
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+      description: >-
+        Your Adobe Developer Console API Key (Client ID).
+  parameters:
+    PKEY:
+      name: PKEY
+      in: path
+      required: true
+      description: The unique PKEY identifier of the resource.
+      schema:
+        type: string
+    LineCount:
+      name: _lineCount
+      in: query
+      required: false
+      description: Number of records to return per page. Default is 25.
+      schema:
+        type: integer
+        default: 25
+    LineStart:
+      name: _lineStart
+      in: query
+      required: false
+      description: Pagination offset from the next node in previous response.
+      schema:
+        type: integer
+    Order:
+      name: _order
+      in: query
+      required: false
+      description: >-
+        Sort order. Use field name for ascending, append %20desc for
+        descending (e.g., email%20desc).
+      schema:
+        type: string
+    ForcePagination:
+      name: _forcePagination
+      in: query
+      required: false
+      description: >-
+        Force pagination for tables with more than 100,000 records.
+      schema:
+        type: boolean
+        default: false
+  schemas:
+    Profile:
+      type: object
+      properties:
+        PKey:
+          type: string
+          description: Unique identifier for the profile.
+          readOnly: true
+        email:
+          type: string
+          format: email
+          description: Email address of the profile.
+        firstName:
+          type: string
+          description: First name of the profile.
+        lastName:
+          type: string
+          description: Last name of the profile.
+        phone:
+          type: string
+          description: Phone number of the profile.
+        mobilePhone:
+          type: string
+          description: Mobile phone number.
+        birthDate:
+          type: string
+          format: date
+          description: Date of birth.
+        gender:
+          type: string
+          enum:
+            - male
+            - female
+            - unknown
+          description: Gender of the profile.
+        preferredLanguage:
+          type: string
+          description: Preferred language code.
+        blackList:
+          type: boolean
+          description: Whether the profile is on the deny list.
+        blackListEmail:
+          type: boolean
+          description: Whether email is blocked for this profile.
+        blackListMobile:
+          type: boolean
+          description: Whether SMS is blocked for this profile.
+        created:
+          type: string
+          format: date-time
+          description: Profile creation timestamp.
+          readOnly: true
+        lastModified:
+          type: string
+          format: date-time
+          description: Last modification timestamp.
+          readOnly: true
+        subscriptions:
+          type: object
+          description: Link to the profile subscriptions.
+          readOnly: true
+          properties:
+            href:
+              type: string
+    ProfileCreate:
+      type: object
+      required:
+        - email
+      properties:
+        email:
+          type: string
+          format: email
+          description: Email address for the new profile.
+        firstName:
+          type: string
+        lastName:
+          type: string
+        phone:
+          type: string
+        mobilePhone:
+          type: string
+        birthDate:
+          type: string
+          format: date
+        gender:
+          type: string
+          enum:
+            - male
+            - female
+            - unknown
+        preferredLanguage:
+          type: string
+    ProfileUpdate:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        firstName:
+          type: string
+        lastName:
+          type: string
+        phone:
+          type: string
+        mobilePhone:
+          type: string
+        birthDate:
+          type: string
+          format: date
+        gender:
+          type: string
+          enum:
+            - male
+            - female
+            - unknown
+        preferredLanguage:
+          type: string
+        blackList:
+          type: boolean
+        blackListEmail:
+          type: boolean
+        blackListMobile:
+          type: boolean
+    Service:
+      type: object
+      properties:
+        PKey:
+          type: string
+          description: Unique identifier for the service.
+          readOnly: true
+        name:
+          type: string
+          description: Internal name of the service.
+        label:
+          type: string
+          description: Display label of the service.
+        messageType:
+          type: string
+          enum:
+            - email
+            - sms
+            - push
+          description: Default channel for the service.
+        start:
+          type: string
+          format: date-time
+          description: Service start date.
+        end:
+          type: string
+          format: date-time
+          description: Service end date.
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        lastModified:
+          type: string
+          format: date-time
+          readOnly: true
+    ServiceCreate:
+      type: object
+      required:
+        - label
+      properties:
+        name:
+          type: string
+        label:
+          type: string
+        messageType:
+          type: string
+          enum:
+            - email
+            - sms
+            - push
+    ServiceUpdate:
+      type: object
+      properties:
+        label:
+          type: string
+        messageType:
+          type: string
+          enum:
+            - email
+            - sms
+            - push
+        start:
+          type: string
+          format: date-time
+        end:
+          type: string
+          format: date-time
+    SubscriptionRequest:
+      type: object
+      required:
+        - service
+      properties:
+        service:
+          type: object
+          properties:
+            PKey:
+              type: string
+              description: The PKEY of the service to subscribe to.
+    WorkflowCommand:
+      type: object
+      required:
+        - method
+      properties:
+        method:
+          type: string
+          enum:
+            - start
+            - pause
+            - resume
+            - stop
+          description: The workflow control command to execute.
+    TransactionalEvent:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          description: Recipient email address (for email channel).
+        mobilePhone:
+          type: string
+          description: Recipient mobile phone (for SMS channel).
+        pushPlatform:
+          type: string
+          enum:
+            - apns
+            - gcm
+          description: Push platform (Apple or Google).
+        ctx:
+          type: object
+          description: >-
+            Context data for message personalization. Contains dynamic
+            fields matching the transactional message template.
+          additionalProperties: true
+        scheduled:
+          type: string
+          format: date-time
+          description: Optional scheduled send time.
+        expiration:
+          type: string
+          format: date-time
+          description: Optional event expiration time.
+    TransactionalEventResponse:
+      type: object
+      properties:
+        PKey:
+          type: string
+          description: The PKEY of the created event.
+        eventId:
+          type: string
+          description: Unique identifier of the event.
+        status:
+          type: string
+          enum:
+            - pending
+          description: Initial status of the event.
+    TransactionalEventStatus:
+      type: object
+      properties:
+        PKey:
+          type: string
+          description: The PKEY of the event.
+        eventId:
+          type: string
+          description: Unique identifier of the event.
+        status:
+          type: string
+          enum:
+            - pending
+            - processing
+            - paused
+            - processed
+            - ignored
+            - deliveryFailed
+            - routingFailed
+            - targetingFailed
+            - tooOld
+          description: Current processing status of the event.
+        reason:
+          type: string
+          description: Failure reason if the event was not processed.
+    PrivacyRequest:
+      type: object
+      required:
+        - name
+        - namespaceName
+        - reconciliationValue
+        - regulation
+        - type
+      properties:
+        name:
+          type: string
+          description: Name identifying the privacy request.
+        namespaceName:
+          type: string
+          description: >-
+            The namespace name used to identify the data subject
+            (e.g., email, phone).
+        reconciliationValue:
+          type: string
+          description: >-
+            The value used to look up the data subject in the specified
+            namespace (e.g., the email address).
+        regulation:
+          type: string
+          enum:
+            - gdpr
+            - ccpa
+          description: The privacy regulation for the request.
+        type:
+          type: string
+          enum:
+            - access
+            - delete
+          description: Whether to access or delete the data subject data.
+    PrivacyRequestResponse:
+      type: object
+      properties:
+        PKey:
+          type: string
+          description: The PKEY of the created privacy request.
+        status:
+          type: string
+          description: Current status of the privacy request.
+    MarketingHistory:
+      type: object
+      properties:
+        PKey:
+          type: string
+          description: Profile PKEY.
+        events:
+          type: array
+          items:
+            type: object
+            properties:
+              eventDate:
+                type: string
+                format: date-time
+                description: Date of the marketing event.
+              channel:
+                type: string
+                description: Channel of the delivery (email, sms, push).
+              deliveryLabel:
+                type: string
+                description: Label of the delivery.
+              mirrorPage:
+                type: object
+                properties:
+                  href:
+                    type: string
+                    format: uri
+                    description: Link to the mirror page.
+    OrgUnit:
+      type: object
+      properties:
+        PKey:
+          type: string
+          description: Unique identifier for the organizational unit.
+        name:
+          type: string
+          description: Internal name of the organizational unit.
+        label:
+          type: string
+          description: Display label of the organizational unit.
+        parentTitle:
+          type: string
+          description: Label of the parent organizational unit.
+    ResourceMetadata:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The resource name.
+        fields:
+          type: array
+          description: List of fields in the resource.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: Field name.
+              type:
+                type: string
+                description: Data type of the field.
+              label:
+                type: string
+                description: Display label of the field.
+        filters:
+          type: array
+          description: Available filters for the resource.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              parameters:
+                type: array
+                items:
+                  type: string
+    PaginatedResponse:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            type: object
+        count:
+          type: object
+          properties:
+            href:
+              type: string
+              description: URL to get the total count.
+        next:
+          type: object
+          properties:
+            href:
+              type: string
+              description: URL for the next page of results.
+    PaginatedProfileResponse:
+      allOf:
+        - $ref: '#/components/schemas/PaginatedResponse'
+        - type: object
+          properties:
+            content:
+              type: array
+              items:
+                $ref: '#/components/schemas/Profile'
+    PaginatedServiceResponse:
+      allOf:
+        - $ref: '#/components/schemas/PaginatedResponse'
+        - type: object
+          properties:
+            content:
+              type: array
+              items:
+                $ref: '#/components/schemas/Service'
+    PaginatedOrgUnitResponse:
+      allOf:
+        - $ref: '#/components/schemas/PaginatedResponse'
+        - type: object
+          properties:
+            content:
+              type: array
+              items:
+                $ref: '#/components/schemas/OrgUnit'
+    ErrorResponse:
+      type: object
+      properties:
+        error_code:
+          type: string
+          description: Numeric error code.
+        message:
+          type: string
+          description: Human-readable error message.
+  responses:
+    BadRequest:
+      description: Invalid request parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication failed. Invalid or expired OAuth token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions for the requested operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+security:
+  - BearerAuth: []
+    ApiKeyAuth: []

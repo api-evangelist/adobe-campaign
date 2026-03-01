@@ -1,0 +1,352 @@
+asyncapi: 2.0.0
+info:
+  title: Adobe Campaign Transactional Messaging Events
+  description: >-
+    Event-driven transactional messaging system for Adobe Campaign. Supports
+    triggering personalized messages across email, SMS, and push notification
+    channels in response to real-time customer events. Events follow an
+    asynchronous lifecycle from submission through delivery or failure. Covers
+    both Campaign Standard REST event triggers and Campaign Classic SOAP
+    PushEvent patterns.
+  version: 1.0.0
+  contact:
+    name: Adobe Developer Support
+    url: https://developer.adobe.com/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+servers:
+  standard:
+    url: https://mc.adobe.io/{ORGANIZATION}/campaign
+    protocol: https
+    description: >-
+      Campaign Standard transactional event endpoint. Events are triggered
+      via REST POST and status is polled via GET.
+  classic:
+    url: https://{instance}.campaign.adobe.com
+    protocol: https
+    description: >-
+      Campaign Classic SOAP-based event endpoint. Events are pushed via
+      nms:rtEvent#PushEvent and nms:batchEvent#PushEvents SOAP methods.
+channels:
+  transactionalEvent/email:
+    description: >-
+      Channel for triggering transactional email messages. Events submitted
+      here are processed asynchronously by the Campaign transactional
+      messaging engine and result in personalized email delivery to the
+      specified recipient.
+    publish:
+      summary: Trigger a transactional email event
+      operationId: triggerEmailEvent
+      message:
+        $ref: '#/components/messages/TransactionalEmailEvent'
+      bindings:
+        http:
+          type: request
+          method: POST
+          headers:
+            type: object
+            properties:
+              Content-Type:
+                type: string
+                enum:
+                  - application/json
+              Authorization:
+                type: string
+                description: Bearer token from Adobe IMS OAuth.
+              X-Api-Key:
+                type: string
+                description: Adobe Developer Console API Key.
+  transactionalEvent/sms:
+    description: >-
+      Channel for triggering transactional SMS messages. Events submitted
+      here result in personalized SMS delivery to the specified mobile
+      phone number.
+    publish:
+      summary: Trigger a transactional SMS event
+      operationId: triggerSmsEvent
+      message:
+        $ref: '#/components/messages/TransactionalSmsEvent'
+      bindings:
+        http:
+          type: request
+          method: POST
+          headers:
+            type: object
+            properties:
+              Content-Type:
+                type: string
+                enum:
+                  - application/json
+  transactionalEvent/push:
+    description: >-
+      Channel for triggering transactional push notifications. Events
+      submitted here result in push notification delivery to the specified
+      device via Apple Push Notification service (APNs) or Firebase Cloud
+      Messaging (FCM).
+    publish:
+      summary: Trigger a transactional push notification event
+      operationId: triggerPushEvent
+      message:
+        $ref: '#/components/messages/TransactionalPushEvent'
+      bindings:
+        http:
+          type: request
+          method: POST
+          headers:
+            type: object
+            properties:
+              Content-Type:
+                type: string
+                enum:
+                  - application/json
+  transactionalEvent/status:
+    description: >-
+      Channel for receiving transactional event status updates. After an
+      event is submitted, its status transitions through the processing
+      lifecycle and can be polled to determine the outcome.
+    subscribe:
+      summary: Receive event processing status updates
+      operationId: receiveEventStatus
+      message:
+        $ref: '#/components/messages/EventStatusUpdate'
+      bindings:
+        http:
+          type: request
+          method: GET
+  batchEvent:
+    description: >-
+      Channel for submitting batches of real-time events via Campaign
+      Classic SOAP interface. More efficient than individual event
+      submission when processing high volumes of transactional events.
+    publish:
+      summary: Submit a batch of transactional events
+      operationId: submitBatchEvents
+      message:
+        $ref: '#/components/messages/BatchEventSubmission'
+      bindings:
+        http:
+          type: request
+          method: POST
+          headers:
+            type: object
+            properties:
+              Content-Type:
+                type: string
+                enum:
+                  - text/xml
+              SOAPAction:
+                type: string
+                enum:
+                  - 'nms:batchEvent#PushEvents'
+components:
+  messages:
+    TransactionalEmailEvent:
+      summary: Transactional email event
+      description: >-
+        Event payload for triggering a transactional email message with
+        personalization context data.
+      payload:
+        $ref: '#/components/schemas/EmailEvent'
+    TransactionalSmsEvent:
+      summary: Transactional SMS event
+      description: >-
+        Event payload for triggering a transactional SMS message.
+      payload:
+        $ref: '#/components/schemas/SmsEvent'
+    TransactionalPushEvent:
+      summary: Transactional push notification event
+      description: >-
+        Event payload for triggering a transactional push notification.
+      payload:
+        $ref: '#/components/schemas/PushEvent'
+    EventStatusUpdate:
+      summary: Event processing status
+      description: >-
+        Status update for a previously submitted transactional event,
+        indicating its current position in the processing lifecycle.
+      payload:
+        $ref: '#/components/schemas/EventStatus'
+    BatchEventSubmission:
+      summary: Batch event submission
+      description: >-
+        SOAP payload containing multiple real-time events for batch
+        processing by Campaign Classic Message Center.
+      payload:
+        $ref: '#/components/schemas/BatchEvent'
+  schemas:
+    EmailEvent:
+      type: object
+      required:
+        - email
+        - ctx
+      properties:
+        email:
+          type: string
+          format: email
+          description: Recipient email address for the transactional message.
+        ctx:
+          type: object
+          description: >-
+            Context data for message personalization. Fields must match
+            the variables defined in the transactional message template.
+          additionalProperties: true
+        scheduled:
+          type: string
+          format: date-time
+          description: Optional scheduled send time for delayed delivery.
+        expiration:
+          type: string
+          format: date-time
+          description: >-
+            Optional expiration time after which the event will not be
+            processed.
+    SmsEvent:
+      type: object
+      required:
+        - mobilePhone
+        - ctx
+      properties:
+        mobilePhone:
+          type: string
+          description: Recipient mobile phone number in international format.
+        ctx:
+          type: object
+          description: Context data for SMS message personalization.
+          additionalProperties: true
+        scheduled:
+          type: string
+          format: date-time
+          description: Optional scheduled send time.
+        expiration:
+          type: string
+          format: date-time
+          description: Optional event expiration time.
+    PushEvent:
+      type: object
+      required:
+        - ctx
+      properties:
+        registrationToken:
+          type: string
+          description: >-
+            Device registration token for push notification delivery
+            (APNs or FCM token).
+        pushPlatform:
+          type: string
+          enum:
+            - apns
+            - gcm
+          description: >-
+            Target push platform. apns for Apple Push Notification service,
+            gcm for Firebase Cloud Messaging (Google).
+        ctx:
+          type: object
+          description: Context data for push notification personalization.
+          additionalProperties: true
+        scheduled:
+          type: string
+          format: date-time
+          description: Optional scheduled send time.
+        expiration:
+          type: string
+          format: date-time
+          description: Optional event expiration time.
+    EventStatus:
+      type: object
+      properties:
+        PKey:
+          type: string
+          description: Unique PKEY identifier of the event.
+        eventId:
+          type: string
+          description: Unique event identifier.
+        status:
+          type: string
+          enum:
+            - pending
+            - processing
+            - paused
+            - processed
+            - ignored
+            - deliveryFailed
+            - routingFailed
+            - targetingFailed
+            - tooOld
+          description: >-
+            Current processing status. pending = queued for processing,
+            processing = currently being handled, paused = temporarily
+            held, processed = successfully delivered, ignored = skipped
+            by rules, deliveryFailed = delivery attempt failed,
+            routingFailed = could not route to execution instance,
+            targetingFailed = recipient targeting failed, tooOld = event
+            exceeded its expiration time.
+        reason:
+          type: string
+          description: >-
+            Human-readable reason for failure status. Only present when
+            status indicates a failure condition.
+        channel:
+          type: string
+          enum:
+            - email
+            - sms
+            - push
+          description: The delivery channel used for the event.
+        timestamp:
+          type: string
+          format: date-time
+          description: Timestamp of the last status update.
+    BatchEvent:
+      type: object
+      description: >-
+        Container for multiple real-time events submitted via Campaign
+        Classic SOAP PushEvents method.
+      properties:
+        events:
+          type: array
+          description: Array of individual transactional events.
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                description: >-
+                  Event type name matching the Message Center event
+                  configuration.
+              email:
+                type: string
+                format: email
+                description: Recipient email address.
+              mobilePhone:
+                type: string
+                description: Recipient mobile phone number.
+              origin:
+                type: string
+                description: Origin identifier for tracking the event source.
+              wishedChannel:
+                type: integer
+                description: >-
+                  Preferred delivery channel. 0 = email, 1 = mobile (SMS),
+                  2 = phone, 3 = push notification.
+              externalId:
+                type: string
+                description: External identifier for deduplication.
+              ctx:
+                type: object
+                description: Context data for message personalization.
+                additionalProperties: true
+    EventMetadata:
+      type: object
+      description: Metadata about the event publication.
+      properties:
+        topic:
+          type: string
+          description: The event topic or channel.
+        schemaVersion:
+          type: string
+          description: Schema version for the event payload.
+        publishDate:
+          type: string
+          format: date-time
+          description: Timestamp when the event was published.

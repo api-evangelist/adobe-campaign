@@ -1,0 +1,793 @@
+openapi: 3.1.0
+info:
+  title: Adobe Campaign Classic API
+  description: >-
+    SOAP-based API for Adobe Campaign Classic v7 and v8, documented as HTTP
+    POST operations. All operations target the single SOAP router endpoint at
+    /nl/jsp/soaprouter.jsp and are differentiated by the SOAPAction header.
+    Provides programmatic access to session management, data querying,
+    record persistence, delivery management, workflow control, subscription
+    management, and real-time transactional event ingestion.
+  version: 8.0.0
+  contact:
+    name: Adobe Developer Support
+    url: https://developer.adobe.com/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+  x-logo:
+    url: https://www.adobe.com/content/dam/cc/icons/adobe-campaign.svg
+externalDocs:
+  description: Campaign Classic SOAP Web Services Documentation
+  url: >-
+    https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/web-service-calls.html
+servers:
+  - url: https://{instance}.campaign.adobe.com
+    description: Campaign Classic Instance
+    variables:
+      instance:
+        description: Your Campaign Classic instance name
+        default: YOUR_INSTANCE
+tags:
+  - name: Session Management
+    description: >-
+      Authenticate and manage server sessions. Logon returns session and
+      security tokens required for all subsequent API calls.
+  - name: Query Definition
+    description: >-
+      Execute queries against Campaign schemas using the xtk:queryDef
+      interface. Supports get, getIfExists, select, and count operations
+      with XPath field expressions, WHERE conditions, and pagination.
+  - name: Data Management
+    description: >-
+      Write, update, and delete data records using the xtk:session#Write
+      method. Supports insert, insertOrUpdate, update, and delete operations
+      via the _operation attribute.
+  - name: Delivery
+    description: >-
+      Prepare and submit message deliveries including email, SMS, and push
+      notifications.
+  - name: Workflow
+    description: >-
+      Start, stop, and signal workflows. PostEvent sends asynchronous signals
+      to trigger workflow transitions.
+  - name: Subscription
+    description: >-
+      Subscribe and unsubscribe recipients to and from information services.
+  - name: Real-Time Events
+    description: >-
+      Push real-time transactional events for immediate or batched processing
+      by the Message Center execution instances.
+paths:
+  /nl/jsp/soaprouter.jsp/xtk-session/Logon:
+    post:
+      operationId: sessionLogon
+      summary: Authenticate and create a session
+      description: >-
+        Authenticates with username and password credentials and returns
+        session and security tokens. These tokens must be passed as cookie
+        (__sessiontoken) and header (X-Security-Token) on all subsequent
+        requests. SOAP Action: xtk:session#Logon
+      tags:
+        - Session Management
+      parameters:
+        - name: SOAPAction
+          in: header
+          required: true
+          schema:
+            type: string
+            const: 'xtk:session#Logon'
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/SessionLogonRequest'
+      responses:
+        '200':
+          description: Authentication successful. Returns session and security tokens.
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SessionLogonResponse'
+        '500':
+          $ref: '#/components/responses/SOAPFault'
+  /nl/jsp/soaprouter.jsp/xtk-session/Logout:
+    post:
+      operationId: sessionLogout
+      summary: Terminate a session
+      description: >-
+        Invalidates the current session and security tokens.
+        SOAP Action: xtk:session#Logout
+      tags:
+        - Session Management
+      parameters:
+        - name: SOAPAction
+          in: header
+          required: true
+          schema:
+            type: string
+            const: 'xtk:session#Logout'
+      security:
+        - SessionToken: []
+      responses:
+        '200':
+          description: Session terminated successfully.
+        '500':
+          $ref: '#/components/responses/SOAPFault'
+  /nl/jsp/soaprouter.jsp/xtk-queryDef/ExecuteQuery:
+    post:
+      operationId: executeQuery
+      summary: Execute a query
+      description: >-
+        Executes a query against a Campaign schema using the xtk:queryDef
+        interface. Supports operations: get (single record, error if missing),
+        getIfExists (single record, null if missing), select (multiple records
+        with pagination), and count (record count). Uses XPath expressions
+        for field selection and WHERE conditions.
+        SOAP Action: xtk:queryDef#ExecuteQuery
+      tags:
+        - Query Definition
+      parameters:
+        - name: SOAPAction
+          in: header
+          required: true
+          schema:
+            type: string
+            const: 'xtk:queryDef#ExecuteQuery'
+      security:
+        - SessionToken: []
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/QueryDefinition'
+      responses:
+        '200':
+          description: Query executed successfully.
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/QueryResult'
+        '500':
+          $ref: '#/components/responses/SOAPFault'
+  /nl/jsp/soaprouter.jsp/xtk-session/Write:
+    post:
+      operationId: sessionWrite
+      summary: Write data records
+      description: >-
+        Writes data records to a Campaign schema. The _operation attribute
+        on the entity element controls the behavior: insert (create new),
+        insertOrUpdate (create or update if exists), update (modify existing),
+        delete (remove record). SOAP Action: xtk:session#Write
+      tags:
+        - Data Management
+      parameters:
+        - name: SOAPAction
+          in: header
+          required: true
+          schema:
+            type: string
+            const: 'xtk:session#Write'
+      security:
+        - SessionToken: []
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/WriteRequest'
+      responses:
+        '200':
+          description: Data written successfully.
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/WriteResponse'
+        '500':
+          $ref: '#/components/responses/SOAPFault'
+  /nl/jsp/soaprouter.jsp/xtk-session/WriteCollection:
+    post:
+      operationId: sessionWriteCollection
+      summary: Write multiple data records
+      description: >-
+        Writes a collection of data records to a Campaign schema in a single
+        call. Each entity element in the collection can have its own
+        _operation attribute. SOAP Action: xtk:session#WriteCollection
+      tags:
+        - Data Management
+      parameters:
+        - name: SOAPAction
+          in: header
+          required: true
+          schema:
+            type: string
+            const: 'xtk:session#WriteCollection'
+      security:
+        - SessionToken: []
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/WriteCollectionRequest'
+      responses:
+        '200':
+          description: Data collection written successfully.
+        '500':
+          $ref: '#/components/responses/SOAPFault'
+  /nl/jsp/soaprouter.jsp/nms-delivery/PrepareAndStart:
+    post:
+      operationId: deliveryPrepareAndStart
+      summary: Prepare and start a delivery
+      description: >-
+        Prepares and immediately starts sending a delivery. Combines the
+        preparation (target calculation, personalization) and sending steps.
+        SOAP Action: nms:delivery#PrepareAndStart
+      tags:
+        - Delivery
+      parameters:
+        - name: SOAPAction
+          in: header
+          required: true
+          schema:
+            type: string
+            const: 'nms:delivery#PrepareAndStart'
+      security:
+        - SessionToken: []
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DeliveryRequest'
+      responses:
+        '200':
+          description: Delivery preparation and sending started.
+        '500':
+          $ref: '#/components/responses/SOAPFault'
+  /nl/jsp/soaprouter.jsp/nms-delivery/SubmitDelivery:
+    post:
+      operationId: submitDelivery
+      summary: Submit a delivery
+      description: >-
+        Submits a delivery for processing. The delivery must be in a valid
+        state for submission. SOAP Action: nms:delivery#SubmitDelivery
+      tags:
+        - Delivery
+      parameters:
+        - name: SOAPAction
+          in: header
+          required: true
+          schema:
+            type: string
+            const: 'nms:delivery#SubmitDelivery'
+      security:
+        - SessionToken: []
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DeliveryRequest'
+      responses:
+        '200':
+          description: Delivery submitted successfully.
+        '500':
+          $ref: '#/components/responses/SOAPFault'
+  /nl/jsp/soaprouter.jsp/xtk-workflow/Start:
+    post:
+      operationId: workflowStart
+      summary: Start a workflow
+      description: >-
+        Starts a workflow by its internal ID. The workflow must be in a
+        stopped state. SOAP Action: xtk:workflow#Start
+      tags:
+        - Workflow
+      parameters:
+        - name: SOAPAction
+          in: header
+          required: true
+          schema:
+            type: string
+            const: 'xtk:workflow#Start'
+      security:
+        - SessionToken: []
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/WorkflowRequest'
+      responses:
+        '200':
+          description: Workflow started successfully.
+        '500':
+          $ref: '#/components/responses/SOAPFault'
+  /nl/jsp/soaprouter.jsp/xtk-workflow/Stop:
+    post:
+      operationId: workflowStop
+      summary: Stop a workflow
+      description: >-
+        Stops a running workflow by its internal ID.
+        SOAP Action: xtk:workflow#Stop
+      tags:
+        - Workflow
+      parameters:
+        - name: SOAPAction
+          in: header
+          required: true
+          schema:
+            type: string
+            const: 'xtk:workflow#Stop'
+      security:
+        - SessionToken: []
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/WorkflowRequest'
+      responses:
+        '200':
+          description: Workflow stopped successfully.
+        '500':
+          $ref: '#/components/responses/SOAPFault'
+  /nl/jsp/soaprouter.jsp/xtk-workflow/PostEvent:
+    post:
+      operationId: workflowPostEvent
+      summary: Post an event signal to a workflow
+      description: >-
+        Sends an asynchronous signal event to a workflow, triggering a
+        transition from an external signal activity. Can include parameters
+        passed as XML variables. SOAP Action: xtk:workflow#PostEvent
+      tags:
+        - Workflow
+      parameters:
+        - name: SOAPAction
+          in: header
+          required: true
+          schema:
+            type: string
+            const: 'xtk:workflow#PostEvent'
+      security:
+        - SessionToken: []
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/WorkflowPostEventRequest'
+      responses:
+        '200':
+          description: Event signal posted to workflow.
+        '500':
+          $ref: '#/components/responses/SOAPFault'
+  /nl/jsp/soaprouter.jsp/nms-subscription/Subscribe:
+    post:
+      operationId: subscribe
+      summary: Subscribe a recipient to a service
+      description: >-
+        Subscribes a recipient to an information service. Requires the
+        service name and a recipient DOM element.
+        SOAP Action: nms:subscription#Subscribe
+      tags:
+        - Subscription
+      parameters:
+        - name: SOAPAction
+          in: header
+          required: true
+          schema:
+            type: string
+            const: 'nms:subscription#Subscribe'
+      security:
+        - SessionToken: []
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/SubscriptionRequest'
+      responses:
+        '200':
+          description: Recipient subscribed successfully.
+        '500':
+          $ref: '#/components/responses/SOAPFault'
+  /nl/jsp/soaprouter.jsp/nms-subscription/Unsubscribe:
+    post:
+      operationId: unsubscribe
+      summary: Unsubscribe a recipient from a service
+      description: >-
+        Unsubscribes a recipient from an information service.
+        SOAP Action: nms:subscription#Unsubscribe
+      tags:
+        - Subscription
+      parameters:
+        - name: SOAPAction
+          in: header
+          required: true
+          schema:
+            type: string
+            const: 'nms:subscription#Unsubscribe'
+      security:
+        - SessionToken: []
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/SubscriptionRequest'
+      responses:
+        '200':
+          description: Recipient unsubscribed successfully.
+        '500':
+          $ref: '#/components/responses/SOAPFault'
+  /nl/jsp/soaprouter.jsp/nms-rtEvent/PushEvent:
+    post:
+      operationId: pushEvent
+      summary: Push a real-time transactional event
+      description: >-
+        Pushes a single real-time event to the Message Center execution
+        instance for transactional message processing. The event must include
+        the event type and recipient context data. Supports email, SMS, and
+        push notification channels. SOAP Action: nms:rtEvent#PushEvent
+      tags:
+        - Real-Time Events
+      parameters:
+        - name: SOAPAction
+          in: header
+          required: true
+          schema:
+            type: string
+            const: 'nms:rtEvent#PushEvent'
+      security:
+        - SessionToken: []
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/PushEventRequest'
+      responses:
+        '200':
+          description: Event accepted for processing. Returns the event ID.
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PushEventResponse'
+        '500':
+          $ref: '#/components/responses/SOAPFault'
+  /nl/jsp/soaprouter.jsp/nms-batchEvent/PushEvents:
+    post:
+      operationId: pushEvents
+      summary: Push batch real-time events
+      description: >-
+        Pushes a batch of real-time events to the Message Center execution
+        instance for transactional message processing. More efficient than
+        individual PushEvent calls when sending multiple events.
+        SOAP Action: nms:batchEvent#PushEvents
+      tags:
+        - Real-Time Events
+      parameters:
+        - name: SOAPAction
+          in: header
+          required: true
+          schema:
+            type: string
+            const: 'nms:batchEvent#PushEvents'
+      security:
+        - SessionToken: []
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/PushEventsRequest'
+      responses:
+        '200':
+          description: Batch of events accepted for processing.
+        '500':
+          $ref: '#/components/responses/SOAPFault'
+components:
+  securitySchemes:
+    SessionToken:
+      type: apiKey
+      in: header
+      name: X-Security-Token
+      description: >-
+        Security token obtained from xtk:session#Logon. Must be passed
+        alongside the session token cookie (__sessiontoken) on all
+        authenticated requests. Tokens have a 24-hour lifecycle.
+  schemas:
+    SessionLogonRequest:
+      type: object
+      xml:
+        name: Envelope
+        prefix: soapenv
+        namespace: http://schemas.xmlsoap.org/soap/envelope/
+      description: >-
+        SOAP envelope containing login credentials for session
+        authentication.
+      properties:
+        strLogin:
+          type: string
+          description: Username for authentication.
+        strPassword:
+          type: string
+          description: Password for authentication.
+    SessionLogonResponse:
+      type: object
+      description: >-
+        SOAP response containing session and security tokens.
+      properties:
+        sessionToken:
+          type: string
+          description: >-
+            Session token to be passed as __sessiontoken cookie on
+            subsequent requests.
+        securityToken:
+          type: string
+          description: >-
+            Security token to be passed as X-Security-Token header on
+            subsequent requests.
+        sessionInfo:
+          type: object
+          description: Information about the authenticated session.
+          properties:
+            serverInfo:
+              type: string
+            timezone:
+              type: string
+    QueryDefinition:
+      type: object
+      description: >-
+        SOAP envelope containing a query definition with schema, operation,
+        selected fields, conditions, and pagination parameters.
+      properties:
+        queryDef:
+          type: object
+          properties:
+            schema:
+              type: string
+              description: >-
+                Target schema name (e.g., nms:recipient, nms:delivery).
+            operation:
+              type: string
+              enum:
+                - get
+                - getIfExists
+                - select
+                - count
+              description: >-
+                Query operation type. get returns single record (error if
+                missing), getIfExists returns single or null, select returns
+                multiple records, count returns record count.
+            lineCount:
+              type: integer
+              description: Maximum number of records to return.
+            startLine:
+              type: integer
+              description: Starting offset for pagination.
+            select:
+              type: object
+              description: >-
+                Field selection using XPath node elements.
+            where:
+              type: object
+              description: >-
+                WHERE conditions using condition elements with expr
+                attributes.
+            orderBy:
+              type: object
+              description: >-
+                ORDER BY clause with sortNode elements.
+    QueryResult:
+      type: object
+      description: >-
+        SOAP response containing query result set as XML elements matching
+        the target schema structure.
+      properties:
+        resultSet:
+          type: object
+          description: >-
+            Collection of result records matching the query criteria.
+    WriteRequest:
+      type: object
+      description: >-
+        SOAP envelope containing an entity element for the target schema with
+        attribute values and an _operation attribute controlling the write
+        behavior.
+      properties:
+        entity:
+          type: object
+          properties:
+            _operation:
+              type: string
+              enum:
+                - insert
+                - insertOrUpdate
+                - update
+                - delete
+              description: >-
+                The write operation to perform. insert creates a new record,
+                insertOrUpdate creates or updates, update modifies existing,
+                delete removes.
+            _schema:
+              type: string
+              description: Target schema name.
+    WriteResponse:
+      type: object
+      description: >-
+        SOAP response confirming the write operation. Returns the primary
+        key of the affected record for insert operations.
+      properties:
+        primaryKey:
+          type: string
+          description: Primary key of the created or modified record.
+    WriteCollectionRequest:
+      type: object
+      description: >-
+        SOAP envelope containing a collection of entity elements for batch
+        write operations. Each entity can specify its own _operation.
+      properties:
+        collection:
+          type: object
+          properties:
+            _schema:
+              type: string
+              description: Target schema name for all entities.
+            entities:
+              type: array
+              description: Array of entity elements to write.
+              items:
+                type: object
+    DeliveryRequest:
+      type: object
+      description: >-
+        SOAP envelope containing the delivery internal name or ID for
+        preparation and sending operations.
+      properties:
+        deliveryId:
+          type: integer
+          description: Internal ID of the delivery.
+        deliveryName:
+          type: string
+          description: Internal name of the delivery.
+    WorkflowRequest:
+      type: object
+      description: >-
+        SOAP envelope containing the workflow internal ID for start/stop
+        operations.
+      properties:
+        workflowId:
+          type: integer
+          description: Internal ID of the workflow.
+    WorkflowPostEventRequest:
+      type: object
+      description: >-
+        SOAP envelope containing a signal event to post to a workflow,
+        including the workflow ID, signal activity name, and optional
+        XML variables.
+      properties:
+        workflowId:
+          type: integer
+          description: Internal ID of the target workflow.
+        activity:
+          type: string
+          description: Name of the external signal activity in the workflow.
+        variables:
+          type: object
+          description: >-
+            XML element containing variable parameters to pass to the
+            workflow transition.
+          additionalProperties: true
+    SubscriptionRequest:
+      type: object
+      description: >-
+        SOAP envelope containing the service name and recipient DOM element
+        for subscribe/unsubscribe operations.
+      properties:
+        serviceName:
+          type: string
+          description: Internal name of the information service.
+        recipient:
+          type: object
+          description: >-
+            Recipient DOM element identifying the subscriber.
+          properties:
+            email:
+              type: string
+              description: Email address of the recipient.
+            id:
+              type: integer
+              description: Internal ID of the recipient.
+        create:
+          type: boolean
+          description: >-
+            Whether to create the recipient if not found (subscribe only).
+    PushEventRequest:
+      type: object
+      description: >-
+        SOAP envelope containing a real-time event for transactional message
+        processing. The rtEvent element includes mandatory attributes for
+        event type and recipient contact, plus a ctx child element for
+        message personalization data.
+      properties:
+        rtEvent:
+          type: object
+          properties:
+            type:
+              type: string
+              description: >-
+                Event type name matching the Message Center event
+                configuration.
+            email:
+              type: string
+              format: email
+              description: Recipient email address.
+            origin:
+              type: string
+              description: >-
+                Origin identifier for tracking the event source.
+            wishedChannel:
+              type: integer
+              description: >-
+                Preferred delivery channel. 0 = email, 1 = mobile (SMS),
+                2 = phone, 3 = push notification.
+            externalId:
+              type: string
+              description: External identifier for deduplication.
+            mobilePhone:
+              type: string
+              description: Recipient mobile phone number (for SMS channel).
+            scheduled:
+              type: string
+              format: date-time
+              description: Optional scheduled processing time.
+            ctx:
+              type: object
+              description: >-
+                Context data XML element containing personalization variables
+                for the transactional message template.
+              additionalProperties: true
+    PushEventResponse:
+      type: object
+      description: >-
+        SOAP response containing the assigned event ID for tracking.
+      properties:
+        eventId:
+          type: integer
+          description: Unique identifier assigned to the ingested event.
+    PushEventsRequest:
+      type: object
+      description: >-
+        SOAP envelope containing a batch of real-time events for bulk
+        transactional message processing.
+      properties:
+        events:
+          type: array
+          description: Array of rtEvent elements.
+          items:
+            $ref: '#/components/schemas/PushEventRequest/properties/rtEvent'
+    SOAPFault:
+      type: object
+      description: >-
+        SOAP fault response indicating an error during operation processing.
+      properties:
+        faultcode:
+          type: string
+          description: Fault code identifying the error category.
+        faultstring:
+          type: string
+          description: Human-readable description of the error.
+        detail:
+          type: string
+          description: Additional error details.
+  responses:
+    SOAPFault:
+      description: SOAP fault indicating an error during operation processing.
+      content:
+        text/xml:
+          schema:
+            $ref: '#/components/schemas/SOAPFault'
