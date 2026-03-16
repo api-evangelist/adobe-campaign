@@ -1,7 +1,9 @@
+aid: adobe-campaign
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/adobe-campaign/refs/heads/main/apis.yml
 name: Adobe Campaign
 description: Adobe Campaign is a comprehensive marketing automation platform that enables businesses to orchestrate personalized customer experiences across multiple channels including email, mobile, social, and web.
-image: https://www.adobe.com/content/dam/cc/icons/adobe-campaign.svg
-url: https://www.adobe.com/marketing/campaign.html
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 type: Index
 tags:
 - Marketing Automation
@@ -9,8 +11,9 @@ tags:
 - Campaign Management
 - Customer Experience
 - Multi-channel Marketing
-created: '2024'
-modified: '2024'
+created: '2024-01-01'
+modified: '2026-03-16'
+specificationVersion: '0.19'
 apis:
 - name: Adobe Campaign Standard API
   description: REST API for Adobe Campaign Standard enabling integration with marketing campaigns, profiles, workflows, and messaging services.
@@ -129,9 +132,8 @@ apis:
   - type: APIReference
     url: https://developer.adobe.com/client-sdks/solution/adobe-campaign-classic/api-reference/
 maintainers:
-- name: Adobe
-  email: support@adobe.com
-  url: https://www.adobe.com
+  - FN: Kin Lane
+    email: kin@apievangelist.com
 common:
 - type: Portal
   url: https://developer.adobe.com/
