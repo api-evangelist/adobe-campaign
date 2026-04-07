@@ -71,7 +71,7 @@ paths:
   /profileAndServices/profile:
     get:
       operationId: listProfiles
-      summary: List profiles
+      summary: Adobe Campaign List profiles
       description: >-
         Retrieves a paginated list of recipient profiles. Supports filtering,
         sorting, and pagination through query parameters.
@@ -97,7 +97,7 @@ paths:
           $ref: '#/components/responses/InternalError'
     post:
       operationId: createProfile
-      summary: Create a profile
+      summary: Adobe Campaign Create a profile
       description: >-
         Creates a new recipient profile with the provided attributes.
       tags:
@@ -124,7 +124,7 @@ paths:
   /profileAndServices/profile/{PKEY}:
     get:
       operationId: getProfile
-      summary: Get a profile
+      summary: Adobe Campaign Get a profile
       description: >-
         Retrieves a specific recipient profile by its PKEY identifier.
       tags:
@@ -146,7 +146,7 @@ paths:
           $ref: '#/components/responses/InternalError'
     patch:
       operationId: updateProfile
-      summary: Update a profile
+      summary: Adobe Campaign Update a profile
       description: >-
         Partially updates a recipient profile with the provided attributes.
       tags:
@@ -176,7 +176,7 @@ paths:
           $ref: '#/components/responses/InternalError'
     delete:
       operationId: deleteProfile
-      summary: Delete a profile
+      summary: Adobe Campaign Delete a profile
       description: >-
         Deletes a specific recipient profile by its PKEY identifier.
       tags:
@@ -195,7 +195,7 @@ paths:
   /profileAndServices/service:
     get:
       operationId: listServices
-      summary: List services
+      summary: Adobe Campaign List services
       description: >-
         Retrieves a paginated list of subscription services.
       tags:
@@ -217,7 +217,7 @@ paths:
           $ref: '#/components/responses/InternalError'
     post:
       operationId: createService
-      summary: Create a service
+      summary: Adobe Campaign Create a service
       description: >-
         Creates a new subscription service.
       tags:
@@ -244,7 +244,7 @@ paths:
   /profileAndServices/service/{PKEY}:
     get:
       operationId: getService
-      summary: Get a service
+      summary: Adobe Campaign Get a service
       description: >-
         Retrieves a specific subscription service by its PKEY identifier.
       tags:
@@ -266,7 +266,7 @@ paths:
           $ref: '#/components/responses/InternalError'
     patch:
       operationId: updateService
-      summary: Update a service
+      summary: Adobe Campaign Update a service
       description: >-
         Partially updates a subscription service with the provided attributes.
       tags:
@@ -296,7 +296,7 @@ paths:
           $ref: '#/components/responses/InternalError'
     delete:
       operationId: deleteService
-      summary: Delete a service
+      summary: Adobe Campaign Delete a service
       description: >-
         Deletes a specific subscription service by its PKEY identifier.
       tags:
@@ -315,7 +315,7 @@ paths:
   /profileAndServices/profile/{PKEY}/subscriptions:
     post:
       operationId: subscribeProfile
-      summary: Subscribe a profile to a service
+      summary: Adobe Campaign Subscribe a profile to a service
       description: >-
         Subscribes a profile to a subscription service by providing the
         service PKEY in the request body.
@@ -343,7 +343,7 @@ paths:
   /profileAndServices/service/{servicePKEY}/subscriptions/{profilePKEY}:
     delete:
       operationId: unsubscribeProfile
-      summary: Unsubscribe a profile from a service
+      summary: Adobe Campaign Unsubscribe a profile from a service
       description: >-
         Removes a profile subscription from a service.
       tags:
@@ -373,7 +373,7 @@ paths:
   /workflow/execution/{workflowID}/commands:
     post:
       operationId: controlWorkflow
-      summary: Control a workflow
+      summary: Adobe Campaign Control a workflow
       description: >-
         Sends a control command to a workflow. Supported commands are start,
         pause, resume, and stop. Commands are executed asynchronously.
@@ -406,7 +406,7 @@ paths:
   /{transactionalAPI}/{eventID}:
     post:
       operationId: triggerTransactionalEvent
-      summary: Trigger a transactional event
+      summary: Adobe Campaign Trigger a transactional event
       description: >-
         Sends a transactional event to trigger a personalized message. The
         transactionalAPI path segment corresponds to the event configuration
@@ -450,7 +450,7 @@ paths:
           $ref: '#/components/responses/InternalError'
     get:
       operationId: getTransactionalEventStatus
-      summary: Get transactional event status
+      summary: Adobe Campaign Get transactional event status
       description: >-
         Retrieves the current processing status of a previously triggered
         transactional event. Statuses include pending, processing, processed,
@@ -486,7 +486,7 @@ paths:
   /privacy/privacyTool:
     post:
       operationId: createPrivacyRequest
-      summary: Create a privacy request
+      summary: Adobe Campaign Create a privacy request
       description: >-
         Creates a GDPR or CCPA privacy request for data access or deletion.
         Supports both access requests (retrieve all data for a data subject)
@@ -515,7 +515,7 @@ paths:
   /profileAndServices/history/{PKEY}:
     get:
       operationId: getMarketingHistory
-      summary: Get marketing history for a profile
+      summary: Adobe Campaign Get marketing history for a profile
       description: >-
         Retrieves the marketing event history for a specific profile,
         including delivery logs and mirror page links.
@@ -539,7 +539,7 @@ paths:
   /profileAndServicesExt/orgUnitBase:
     get:
       operationId: listOrgUnits
-      summary: List organizational units
+      summary: Adobe Campaign List organizational units
       description: >-
         Retrieves the list of organizational units used for access control
         and data partitioning.
@@ -562,7 +562,7 @@ paths:
   /profileAndServicesExt/{cusResourceName}:
     get:
       operationId: listProfileLinkedCustomResources
-      summary: List profile-linked custom resources
+      summary: Adobe Campaign List profile-linked custom resources
       description: >-
         Retrieves records from a profile-linked custom resource. Custom
         resources are defined with the cus prefix in Campaign Standard.
@@ -596,7 +596,7 @@ paths:
   /customResources/{cusResourceName}:
     get:
       operationId: listCustomResources
-      summary: List non-profile custom resources
+      summary: Adobe Campaign List non-profile custom resources
       description: >-
         Retrieves records from a standalone custom resource not linked to
         profiles.
@@ -628,7 +628,7 @@ paths:
   /profileAndServices/resourceType/{resourceName}:
     get:
       operationId: getResourceMetadata
-      summary: Get resource metadata
+      summary: Adobe Campaign Get resource metadata
       description: >-
         Retrieves metadata for a Campaign Standard resource, including field
         definitions, data types, available filters, and data policies.

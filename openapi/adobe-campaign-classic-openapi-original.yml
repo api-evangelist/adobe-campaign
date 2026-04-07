@@ -62,7 +62,7 @@ paths:
   /nl/jsp/soaprouter.jsp/xtk-session/Logon:
     post:
       operationId: sessionLogon
-      summary: Authenticate and create a session
+      summary: Adobe Campaign Authenticate and create a session
       description: >-
         Authenticates with username and password credentials and returns
         session and security tokens. These tokens must be passed as cookie
@@ -95,7 +95,7 @@ paths:
   /nl/jsp/soaprouter.jsp/xtk-session/Logout:
     post:
       operationId: sessionLogout
-      summary: Terminate a session
+      summary: Adobe Campaign Terminate a session
       description: >-
         Invalidates the current session and security tokens.
         SOAP Action: xtk:session#Logout
@@ -118,7 +118,7 @@ paths:
   /nl/jsp/soaprouter.jsp/xtk-queryDef/ExecuteQuery:
     post:
       operationId: executeQuery
-      summary: Execute a query
+      summary: Adobe Campaign Execute a query
       description: >-
         Executes a query against a Campaign schema using the xtk:queryDef
         interface. Supports operations: get (single record, error if missing),
@@ -155,7 +155,7 @@ paths:
   /nl/jsp/soaprouter.jsp/xtk-session/Write:
     post:
       operationId: sessionWrite
-      summary: Write data records
+      summary: Adobe Campaign Write data records
       description: >-
         Writes data records to a Campaign schema. The _operation attribute
         on the entity element controls the behavior: insert (create new),
@@ -190,7 +190,7 @@ paths:
   /nl/jsp/soaprouter.jsp/xtk-session/WriteCollection:
     post:
       operationId: sessionWriteCollection
-      summary: Write multiple data records
+      summary: Adobe Campaign Write multiple data records
       description: >-
         Writes a collection of data records to a Campaign schema in a single
         call. Each entity element in the collection can have its own
@@ -220,7 +220,7 @@ paths:
   /nl/jsp/soaprouter.jsp/nms-delivery/PrepareAndStart:
     post:
       operationId: deliveryPrepareAndStart
-      summary: Prepare and start a delivery
+      summary: Adobe Campaign Prepare and start a delivery
       description: >-
         Prepares and immediately starts sending a delivery. Combines the
         preparation (target calculation, personalization) and sending steps.
@@ -250,7 +250,7 @@ paths:
   /nl/jsp/soaprouter.jsp/nms-delivery/SubmitDelivery:
     post:
       operationId: submitDelivery
-      summary: Submit a delivery
+      summary: Adobe Campaign Submit a delivery
       description: >-
         Submits a delivery for processing. The delivery must be in a valid
         state for submission. SOAP Action: nms:delivery#SubmitDelivery
@@ -279,7 +279,7 @@ paths:
   /nl/jsp/soaprouter.jsp/xtk-workflow/Start:
     post:
       operationId: workflowStart
-      summary: Start a workflow
+      summary: Adobe Campaign Start a workflow
       description: >-
         Starts a workflow by its internal ID. The workflow must be in a
         stopped state. SOAP Action: xtk:workflow#Start
@@ -308,7 +308,7 @@ paths:
   /nl/jsp/soaprouter.jsp/xtk-workflow/Stop:
     post:
       operationId: workflowStop
-      summary: Stop a workflow
+      summary: Adobe Campaign Stop a workflow
       description: >-
         Stops a running workflow by its internal ID.
         SOAP Action: xtk:workflow#Stop
@@ -337,7 +337,7 @@ paths:
   /nl/jsp/soaprouter.jsp/xtk-workflow/PostEvent:
     post:
       operationId: workflowPostEvent
-      summary: Post an event signal to a workflow
+      summary: Adobe Campaign Post an event signal to a workflow
       description: >-
         Sends an asynchronous signal event to a workflow, triggering a
         transition from an external signal activity. Can include parameters
@@ -367,7 +367,7 @@ paths:
   /nl/jsp/soaprouter.jsp/nms-subscription/Subscribe:
     post:
       operationId: subscribe
-      summary: Subscribe a recipient to a service
+      summary: Adobe Campaign Subscribe a recipient to a service
       description: >-
         Subscribes a recipient to an information service. Requires the
         service name and a recipient DOM element.
@@ -397,7 +397,7 @@ paths:
   /nl/jsp/soaprouter.jsp/nms-subscription/Unsubscribe:
     post:
       operationId: unsubscribe
-      summary: Unsubscribe a recipient from a service
+      summary: Adobe Campaign Unsubscribe a recipient from a service
       description: >-
         Unsubscribes a recipient from an information service.
         SOAP Action: nms:subscription#Unsubscribe
@@ -426,7 +426,7 @@ paths:
   /nl/jsp/soaprouter.jsp/nms-rtEvent/PushEvent:
     post:
       operationId: pushEvent
-      summary: Push a real-time transactional event
+      summary: Adobe Campaign Push a real-time transactional event
       description: >-
         Pushes a single real-time event to the Message Center execution
         instance for transactional message processing. The event must include
@@ -461,7 +461,7 @@ paths:
   /nl/jsp/soaprouter.jsp/nms-batchEvent/PushEvents:
     post:
       operationId: pushEvents
-      summary: Push batch real-time events
+      summary: Adobe Campaign Push batch real-time events
       description: >-
         Pushes a batch of real-time events to the Message Center execution
         instance for transactional message processing. More efficient than
