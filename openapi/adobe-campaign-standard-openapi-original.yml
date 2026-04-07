@@ -28,45 +28,41 @@ servers:
         description: Your Adobe IMS Organization ID
         default: YOUR_ORG_ID
 tags:
-  - name: Profiles
-    description: >-
-      Manage recipient profiles including creation, retrieval, update, and
-      deletion of contact records.
-  - name: Services
-    description: >-
-      Manage subscription services that profiles can subscribe to for receiving
-      marketing communications.
-  - name: Subscriptions
-    description: >-
-      Subscribe and unsubscribe profiles to and from services.
-  - name: Workflows
-    description: >-
-      Control workflow execution including starting, pausing, resuming, and
-      stopping marketing workflows.
-  - name: Transactional Messages
-    description: >-
-      Trigger and monitor transactional messages across email, SMS, and push
-      notification channels.
-  - name: Privacy
-    description: >-
-      Create GDPR and CCPA privacy access and deletion requests for data
-      subject compliance.
-  - name: Marketing History
-    description: >-
-      Retrieve marketing event history for profiles including delivery logs
-      and mirror page links.
-  - name: Organizational Units
-    description: >-
-      Retrieve organizational unit structures used for access control and
-      data partitioning.
   - name: Custom Resources
     description: >-
       Access custom resources defined in Campaign Standard, both
       profile-linked and standalone.
+  - name: Marketing History
+    description: >-
+      Retrieve marketing event history for profiles including delivery logs
+      and mirror page links.
   - name: Metadata
     description: >-
       Discover resource schemas, fields, filters, and data policies for
       Campaign Standard resources.
+  - name: Organizational Units
+    description: >-
+      Retrieve organizational unit structures used for access control and
+      data partitioning.
+  - name: Privacy
+    description: >-
+      Create GDPR and CCPA privacy access and deletion requests for data
+      subject compliance.
+  - name: Profiles
+    description: >-
+      Manage recipient profiles including creation, retrieval, update, and
+      deletion of contact records.
+  - name: Subscriptions
+    description: >-
+      Subscribe and unsubscribe profiles to and from services.
+  - name: Transactional Messages
+    description: >-
+      Trigger and monitor transactional messages across email, SMS, and push
+      notification channels.
+  - name: Workflows
+    description: >-
+      Control workflow execution including starting, pausing, resuming, and
+      stopping marketing workflows.
 paths:
   /profileAndServices/profile:
     get:
@@ -198,8 +194,7 @@ paths:
       summary: Adobe Campaign List services
       description: >-
         Retrieves a paginated list of subscription services.
-      tags:
-        - Services
+      tags: []
       parameters:
         - $ref: '#/components/parameters/LineCount'
         - $ref: '#/components/parameters/LineStart'
@@ -220,8 +215,7 @@ paths:
       summary: Adobe Campaign Create a service
       description: >-
         Creates a new subscription service.
-      tags:
-        - Services
+      tags: []
       requestBody:
         required: true
         content:
@@ -247,8 +241,7 @@ paths:
       summary: Adobe Campaign Get a service
       description: >-
         Retrieves a specific subscription service by its PKEY identifier.
-      tags:
-        - Services
+      tags: []
       parameters:
         - $ref: '#/components/parameters/PKEY'
       responses:
@@ -269,8 +262,7 @@ paths:
       summary: Adobe Campaign Update a service
       description: >-
         Partially updates a subscription service with the provided attributes.
-      tags:
-        - Services
+      tags: []
       parameters:
         - $ref: '#/components/parameters/PKEY'
       requestBody:
@@ -299,8 +291,7 @@ paths:
       summary: Adobe Campaign Delete a service
       description: >-
         Deletes a specific subscription service by its PKEY identifier.
-      tags:
-        - Services
+      tags: []
       parameters:
         - $ref: '#/components/parameters/PKEY'
       responses:

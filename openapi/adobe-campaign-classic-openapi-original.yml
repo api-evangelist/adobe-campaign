@@ -29,15 +29,6 @@ servers:
         description: Your Campaign Classic instance name
         default: YOUR_INSTANCE
 tags:
-  - name: Session Management
-    description: >-
-      Authenticate and manage server sessions. Logon returns session and
-      security tokens required for all subsequent API calls.
-  - name: Query Definition
-    description: >-
-      Execute queries against Campaign schemas using the xtk:queryDef
-      interface. Supports get, getIfExists, select, and count operations
-      with XPath field expressions, WHERE conditions, and pagination.
   - name: Data Management
     description: >-
       Write, update, and delete data records using the xtk:session#Write
@@ -47,17 +38,26 @@ tags:
     description: >-
       Prepare and submit message deliveries including email, SMS, and push
       notifications.
-  - name: Workflow
+  - name: Query Definition
     description: >-
-      Start, stop, and signal workflows. PostEvent sends asynchronous signals
-      to trigger workflow transitions.
-  - name: Subscription
-    description: >-
-      Subscribe and unsubscribe recipients to and from information services.
+      Execute queries against Campaign schemas using the xtk:queryDef
+      interface. Supports get, getIfExists, select, and count operations
+      with XPath field expressions, WHERE conditions, and pagination.
   - name: Real-Time Events
     description: >-
       Push real-time transactional events for immediate or batched processing
       by the Message Center execution instances.
+  - name: Session Management
+    description: >-
+      Authenticate and manage server sessions. Logon returns session and
+      security tokens required for all subsequent API calls.
+  - name: Subscription
+    description: >-
+      Subscribe and unsubscribe recipients to and from information services.
+  - name: Workflow
+    description: >-
+      Start, stop, and signal workflows. PostEvent sends asynchronous signals
+      to trigger workflow transitions.
 paths:
   /nl/jsp/soaprouter.jsp/xtk-session/Logon:
     post:
