@@ -1,0 +1,8 @@
+{
+  "email": "user@example.com",
+  "mobilePhone": "example_value",
+  "pushPlatform": "apns",
+  "ctx": {},
+  "scheduled": "example_value",
+  "expiration": "example_value"
+}

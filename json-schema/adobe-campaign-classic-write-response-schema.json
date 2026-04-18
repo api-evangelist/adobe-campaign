@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-campaign/refs/heads/main/json-schema/adobe-campaign-classic-write-response-schema.json",
+  "title": "WriteResponse",
+  "description": "SOAP response confirming the write operation. Returns the primary key of the affected record for insert operations.",
+  "type": "object",
+  "properties": {
+    "primaryKey": {
+      "type": "string",
+      "description": "Primary key of the created or modified record.",
+      "example": "example_value"
+    }
+  }
+}

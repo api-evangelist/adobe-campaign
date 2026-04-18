@@ -1,0 +1,8 @@
+{
+  "sessionToken": "example_value",
+  "securityToken": "example_value",
+  "sessionInfo": {
+    "serverInfo": "example_value",
+    "timezone": "example_value"
+  }
+}

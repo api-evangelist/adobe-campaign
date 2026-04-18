@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-campaign/refs/heads/main/json-structure/adobe-campaign-standard-profile-structure.json",
+  "name": "Profile",
+  "description": "Profile from Adobe Campaign API",
+  "type": "object",
+  "properties": {
+    "PKey": {
+      "type": "string",
+      "description": "Unique identifier for the profile.",
+      "readOnly": true,
+      "example": "example_value"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "Email address of the profile.",
+      "example": "user@example.com"
+    },
+    "firstName": {
+      "type": "string",
+      "description": "First name of the profile.",
+      "example": "Example Campaign"
+    },
+    "lastName": {
+      "type": "string",
+      "description": "Last name of the profile.",
+      "example": "Example Campaign"
+    },
+    "phone": {
+      "type": "string",
+      "description": "Phone number of the profile.",
+      "example": "example_value"
+    },
+    "mobilePhone": {
+      "type": "string",
+      "description": "Mobile phone number.",
+      "example": "example_value"
+    },
+    "birthDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of birth.",
+      "example": "2026-04-17T12:00:00Z"
+    },
+    "gender": {
+      "type": "string",
+      "enum": [
+        "male",
+        "female",
+        "unknown"
+      ],
+      "description": "Gender of the profile.",
+      "example": "male"
+    },
+    "preferredLanguage": {
+      "type": "string",
+      "description": "Preferred language code.",
+      "example": "example_value"
+    },
+    "blackList": {
+      "type": "boolean",
+      "description": "Whether the profile is on the deny list.",
+      "example": true
+    },
+    "blackListEmail": {
+      "type": "boolean",
+      "description": "Whether email is blocked for this profile.",
+      "example": true
+    },
+    "blackListMobile": {
+      "type": "boolean",
+      "description": "Whether SMS is blocked for this profile.",
+      "example": true
+    },
+    "created": {
+      "type": "datetime",
+      "description": "Profile creation timestamp.",
+      "readOnly": true,
+      "example": "example_value"
+    },
+    "lastModified": {
+      "type": "datetime",
+      "description": "Last modification timestamp.",
+      "readOnly": true,
+      "example": "example_value"
+    },
+    "subscriptions": {
+      "type": "object",
+      "description": "Link to the profile subscriptions.",
+      "readOnly": true,
+      "properties": {
+        "href": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

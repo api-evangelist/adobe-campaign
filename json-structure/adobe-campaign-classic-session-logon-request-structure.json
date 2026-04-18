@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-campaign/refs/heads/main/json-structure/adobe-campaign-classic-session-logon-request-structure.json",
+  "name": "SessionLogonRequest",
+  "description": "SOAP envelope containing login credentials for session authentication.",
+  "type": "object",
+  "properties": {
+    "strLogin": {
+      "type": "string",
+      "description": "Username for authentication.",
+      "example": "example_value"
+    },
+    "strPassword": {
+      "type": "string",
+      "description": "Password for authentication.",
+      "example": "example_value"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "rtEvent": {
+    "type": "email",
+    "email": "user@example.com",
+    "origin": "example_value",
+    "wishedChannel": 42,
+    "externalId": "CAM123456",
+    "mobilePhone": "example_value",
+    "scheduled": "example_value",
+    "ctx": {}
+  }
+}

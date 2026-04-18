@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-campaign/refs/heads/main/json-schema/adobe-campaign-classic-workflow-post-event-request-schema.json",
+  "title": "WorkflowPostEventRequest",
+  "description": "SOAP envelope containing a signal event to post to a workflow, including the workflow ID, signal activity name, and optional XML variables.",
+  "type": "object",
+  "properties": {
+    "workflowId": {
+      "type": "integer",
+      "description": "Internal ID of the target workflow.",
+      "example": 42
+    },
+    "activity": {
+      "type": "string",
+      "description": "Name of the external signal activity in the workflow.",
+      "example": "example_value"
+    },
+    "variables": {
+      "type": "object",
+      "description": "XML element containing variable parameters to pass to the workflow transition.",
+      "additionalProperties": true
+    }
+  }
+}

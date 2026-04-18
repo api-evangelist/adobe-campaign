@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-campaign/refs/heads/main/json-structure/adobe-campaign-classic-push-events-request-structure.json",
+  "name": "PushEventsRequest",
+  "description": "SOAP envelope containing a batch of real-time events for bulk transactional message processing.",
+  "type": "object",
+  "properties": {
+    "events": {
+      "type": "array",
+      "description": "Array of rtEvent elements.",
+      "items": {
+        "$ref": "#/components/schemas/PushEventRequest/properties/rtEvent"
+      }
+    }
+  }
+}

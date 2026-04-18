@@ -1,0 +1,266 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "ac": "https://developer.adobe.com/campaign/schema/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "DeliveryRequest": "ac:DeliveryRequest",
+    "MarketingHistory": "ac:MarketingHistory",
+    "OrgUnit": "ac:OrgUnit",
+    "PrivacyRequest": "ac:PrivacyRequest",
+    "PrivacyRequestResponse": "ac:PrivacyRequestResponse",
+    "Profile": "ac:Profile",
+    "ProfileCreate": "ac:ProfileCreate",
+    "ProfileUpdate": "ac:ProfileUpdate",
+    "PushEventRequest": "ac:PushEventRequest",
+    "PushEventResponse": "ac:PushEventResponse",
+    "PushEventsRequest": "ac:PushEventsRequest",
+    "QueryDefinition": "ac:QueryDefinition",
+    "QueryResult": "ac:QueryResult",
+    "SOAPFault": "ac:SOAPFault",
+    "Service": "ac:Service",
+    "ServiceCreate": "ac:ServiceCreate",
+    "ServiceUpdate": "ac:ServiceUpdate",
+    "SessionLogonRequest": "ac:SessionLogonRequest",
+    "SessionLogonResponse": "ac:SessionLogonResponse",
+    "SubscriptionRequest": "ac:SubscriptionRequest",
+    "TransactionalEvent": "ac:TransactionalEvent",
+    "TransactionalEventResponse": "ac:TransactionalEventResponse",
+    "TransactionalEventStatus": "ac:TransactionalEventStatus",
+    "WorkflowCommand": "ac:WorkflowCommand",
+    "WorkflowPostEventRequest": "ac:WorkflowPostEventRequest",
+    "WorkflowRequest": "ac:WorkflowRequest",
+    "WriteCollectionRequest": "ac:WriteCollectionRequest",
+    "WriteRequest": "ac:WriteRequest",
+    "WriteResponse": "ac:WriteResponse",
+    "PKey": {
+      "@id": "ac:PKey",
+      "@type": "xsd:string"
+    },
+    "activity": {
+      "@id": "ac:activity",
+      "@type": "xsd:string"
+    },
+    "birthDate": {
+      "@id": "ac:birthDate",
+      "@type": "xsd:string"
+    },
+    "blackList": {
+      "@id": "ac:blackList",
+      "@type": "xsd:boolean"
+    },
+    "blackListEmail": {
+      "@id": "ac:blackListEmail",
+      "@type": "xsd:boolean"
+    },
+    "blackListMobile": {
+      "@id": "ac:blackListMobile",
+      "@type": "xsd:boolean"
+    },
+    "collection": {
+      "@id": "ac:collection",
+      "@type": "@id"
+    },
+    "create": {
+      "@id": "ac:create",
+      "@type": "xsd:boolean"
+    },
+    "created": {
+      "@id": "ac:created",
+      "@type": "xsd:dateTime"
+    },
+    "ctx": {
+      "@id": "ac:ctx",
+      "@type": "@id"
+    },
+    "deliveryId": {
+      "@id": "ac:deliveryId",
+      "@type": "xsd:integer"
+    },
+    "deliveryName": {
+      "@id": "ac:deliveryName",
+      "@type": "xsd:string"
+    },
+    "detail": {
+      "@id": "ac:detail",
+      "@type": "xsd:string"
+    },
+    "email": {
+      "@id": "ac:email",
+      "@type": "xsd:string"
+    },
+    "end": {
+      "@id": "ac:end",
+      "@type": "xsd:dateTime"
+    },
+    "entity": {
+      "@id": "ac:entity",
+      "@type": "@id"
+    },
+    "eventId": {
+      "@id": "ac:eventId",
+      "@type": "xsd:integer"
+    },
+    "events": {
+      "@id": "ac:events",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "expiration": {
+      "@id": "ac:expiration",
+      "@type": "xsd:dateTime"
+    },
+    "faultcode": {
+      "@id": "ac:faultcode",
+      "@type": "xsd:string"
+    },
+    "faultstring": {
+      "@id": "ac:faultstring",
+      "@type": "xsd:string"
+    },
+    "firstName": {
+      "@id": "ac:firstName",
+      "@type": "xsd:string"
+    },
+    "gender": {
+      "@id": "ac:gender",
+      "@type": "xsd:string"
+    },
+    "label": {
+      "@id": "ac:label",
+      "@type": "xsd:string"
+    },
+    "lastModified": {
+      "@id": "ac:lastModified",
+      "@type": "xsd:dateTime"
+    },
+    "lastName": {
+      "@id": "ac:lastName",
+      "@type": "xsd:string"
+    },
+    "messageType": {
+      "@id": "ac:messageType",
+      "@type": "xsd:string"
+    },
+    "method": {
+      "@id": "ac:method",
+      "@type": "xsd:string"
+    },
+    "mobilePhone": {
+      "@id": "ac:mobilePhone",
+      "@type": "xsd:string"
+    },
+    "name": {
+      "@id": "ac:name",
+      "@type": "xsd:string"
+    },
+    "namespaceName": {
+      "@id": "ac:namespaceName",
+      "@type": "xsd:string"
+    },
+    "parentTitle": {
+      "@id": "ac:parentTitle",
+      "@type": "xsd:string"
+    },
+    "phone": {
+      "@id": "ac:phone",
+      "@type": "xsd:string"
+    },
+    "preferredLanguage": {
+      "@id": "ac:preferredLanguage",
+      "@type": "xsd:string"
+    },
+    "primaryKey": {
+      "@id": "ac:primaryKey",
+      "@type": "xsd:string"
+    },
+    "pushPlatform": {
+      "@id": "ac:pushPlatform",
+      "@type": "xsd:string"
+    },
+    "queryDef": {
+      "@id": "ac:queryDef",
+      "@type": "@id"
+    },
+    "reason": {
+      "@id": "ac:reason",
+      "@type": "xsd:string"
+    },
+    "recipient": {
+      "@id": "ac:recipient",
+      "@type": "@id"
+    },
+    "reconciliationValue": {
+      "@id": "ac:reconciliationValue",
+      "@type": "xsd:string"
+    },
+    "regulation": {
+      "@id": "ac:regulation",
+      "@type": "xsd:string"
+    },
+    "resultSet": {
+      "@id": "ac:resultSet",
+      "@type": "@id"
+    },
+    "rtEvent": {
+      "@id": "ac:rtEvent",
+      "@type": "@id"
+    },
+    "scheduled": {
+      "@id": "ac:scheduled",
+      "@type": "xsd:dateTime"
+    },
+    "securityToken": {
+      "@id": "ac:securityToken",
+      "@type": "xsd:string"
+    },
+    "service": {
+      "@id": "ac:service",
+      "@type": "@id"
+    },
+    "serviceName": {
+      "@id": "ac:serviceName",
+      "@type": "xsd:string"
+    },
+    "sessionInfo": {
+      "@id": "ac:sessionInfo",
+      "@type": "@id"
+    },
+    "sessionToken": {
+      "@id": "ac:sessionToken",
+      "@type": "xsd:string"
+    },
+    "start": {
+      "@id": "ac:start",
+      "@type": "xsd:dateTime"
+    },
+    "status": {
+      "@id": "ac:status",
+      "@type": "xsd:string"
+    },
+    "strLogin": {
+      "@id": "ac:strLogin",
+      "@type": "xsd:string"
+    },
+    "strPassword": {
+      "@id": "ac:strPassword",
+      "@type": "xsd:string"
+    },
+    "subscriptions": {
+      "@id": "ac:subscriptions",
+      "@type": "@id"
+    },
+    "type": {
+      "@id": "ac:type",
+      "@type": "xsd:string"
+    },
+    "variables": {
+      "@id": "ac:variables",
+      "@type": "@id"
+    },
+    "workflowId": {
+      "@id": "ac:workflowId",
+      "@type": "xsd:integer"
+    }
+  }
+}

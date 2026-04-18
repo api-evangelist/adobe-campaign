@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-campaign/refs/heads/main/json-structure/adobe-campaign-standard-privacy-request-response-structure.json",
+  "name": "PrivacyRequestResponse",
+  "description": "PrivacyRequestResponse from Adobe Campaign API",
+  "type": "object",
+  "properties": {
+    "PKey": {
+      "type": "string",
+      "description": "The PKEY of the created privacy request.",
+      "example": "example_value"
+    },
+    "status": {
+      "type": "string",
+      "description": "Current status of the privacy request.",
+      "example": "active"
+    }
+  }
+}

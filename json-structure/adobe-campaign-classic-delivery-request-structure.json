@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-campaign/refs/heads/main/json-structure/adobe-campaign-classic-delivery-request-structure.json",
+  "name": "DeliveryRequest",
+  "description": "SOAP envelope containing the delivery internal name or ID for preparation and sending operations.",
+  "type": "object",
+  "properties": {
+    "deliveryId": {
+      "type": "int32",
+      "description": "Internal ID of the delivery.",
+      "example": 42
+    },
+    "deliveryName": {
+      "type": "string",
+      "description": "Internal name of the delivery.",
+      "example": "Example Campaign"
+    }
+  }
+}

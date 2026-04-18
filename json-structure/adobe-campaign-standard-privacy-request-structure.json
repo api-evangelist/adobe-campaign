@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-campaign/refs/heads/main/json-structure/adobe-campaign-standard-privacy-request-structure.json",
+  "name": "PrivacyRequest",
+  "description": "PrivacyRequest from Adobe Campaign API",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name identifying the privacy request.",
+      "example": "Example Campaign"
+    },
+    "namespaceName": {
+      "type": "string",
+      "description": "The namespace name used to identify the data subject (e.g., email, phone).",
+      "example": "Example Campaign"
+    },
+    "reconciliationValue": {
+      "type": "string",
+      "description": "The value used to look up the data subject in the specified namespace (e.g., the email address).",
+      "example": "example_value"
+    },
+    "regulation": {
+      "type": "string",
+      "enum": [
+        "gdpr",
+        "ccpa"
+      ],
+      "description": "The privacy regulation for the request.",
+      "example": "gdpr"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "access",
+        "delete"
+      ],
+      "description": "Whether to access or delete the data subject data.",
+      "example": "access"
+    }
+  },
+  "required": [
+    "name",
+    "namespaceName",
+    "reconciliationValue",
+    "regulation",
+    "type"
+  ]
+}

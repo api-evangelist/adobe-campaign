@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-campaign/refs/heads/main/json-structure/adobe-campaign-standard-transactional-event-structure.json",
+  "name": "TransactionalEvent",
+  "description": "TransactionalEvent from Adobe Campaign API",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "Recipient email address (for email channel).",
+      "example": "user@example.com"
+    },
+    "mobilePhone": {
+      "type": "string",
+      "description": "Recipient mobile phone (for SMS channel).",
+      "example": "example_value"
+    },
+    "pushPlatform": {
+      "type": "string",
+      "enum": [
+        "apns",
+        "gcm"
+      ],
+      "description": "Push platform (Apple or Google).",
+      "example": "apns"
+    },
+    "ctx": {
+      "type": "object",
+      "description": "Context data for message personalization. Contains dynamic fields matching the transactional message template.",
+      "additionalProperties": true
+    },
+    "scheduled": {
+      "type": "datetime",
+      "description": "Optional scheduled send time.",
+      "example": "example_value"
+    },
+    "expiration": {
+      "type": "datetime",
+      "description": "Optional event expiration time.",
+      "example": "example_value"
+    }
+  }
+}

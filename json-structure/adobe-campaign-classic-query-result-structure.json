@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-campaign/refs/heads/main/json-structure/adobe-campaign-classic-query-result-structure.json",
+  "name": "QueryResult",
+  "description": "SOAP response containing query result set as XML elements matching the target schema structure.",
+  "type": "object",
+  "properties": {
+    "resultSet": {
+      "type": "object",
+      "description": "Collection of result records matching the query criteria."
+    }
+  }
+}

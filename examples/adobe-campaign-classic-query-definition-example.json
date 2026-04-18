@@ -1,0 +1,11 @@
+{
+  "queryDef": {
+    "schema": "example_value",
+    "operation": "select",
+    "lineCount": 42,
+    "startLine": 42,
+    "select": {},
+    "where": {},
+    "orderBy": {}
+  }
+}

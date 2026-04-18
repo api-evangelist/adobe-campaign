@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-campaign/refs/heads/main/json-structure/adobe-campaign-classic-subscription-request-structure.json",
+  "name": "SubscriptionRequest",
+  "description": "SOAP envelope containing the service name and recipient DOM element for subscribe/unsubscribe operations.",
+  "type": "object",
+  "properties": {
+    "serviceName": {
+      "type": "string",
+      "description": "Internal name of the information service.",
+      "example": "Example Campaign"
+    },
+    "recipient": {
+      "type": "object",
+      "description": "Recipient DOM element identifying the subscriber.",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "Email address of the recipient."
+        },
+        "id": {
+          "type": "int32",
+          "description": "Internal ID of the recipient."
+        }
+      }
+    },
+    "create": {
+      "type": "boolean",
+      "description": "Whether to create the recipient if not found (subscribe only).",
+      "example": true
+    }
+  }
+}

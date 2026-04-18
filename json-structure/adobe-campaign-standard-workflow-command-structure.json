@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-campaign/refs/heads/main/json-structure/adobe-campaign-standard-workflow-command-structure.json",
+  "name": "WorkflowCommand",
+  "description": "WorkflowCommand from Adobe Campaign API",
+  "type": "object",
+  "properties": {
+    "method": {
+      "type": "string",
+      "enum": [
+        "start",
+        "pause",
+        "resume",
+        "stop"
+      ],
+      "description": "The workflow control command to execute.",
+      "example": "start"
+    }
+  },
+  "required": [
+    "method"
+  ]
+}

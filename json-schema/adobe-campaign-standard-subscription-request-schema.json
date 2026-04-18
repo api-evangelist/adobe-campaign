@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-campaign/refs/heads/main/json-schema/adobe-campaign-standard-subscription-request-schema.json",
+  "title": "SubscriptionRequest",
+  "description": "SubscriptionRequest from Adobe Campaign API",
+  "type": "object",
+  "properties": {
+    "service": {
+      "type": "object",
+      "properties": {
+        "PKey": {
+          "type": "string",
+          "description": "The PKEY of the service to subscribe to."
+        }
+      }
+    }
+  },
+  "required": [
+    "service"
+  ]
+}

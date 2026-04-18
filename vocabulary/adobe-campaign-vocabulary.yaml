@@ -1,0 +1,53 @@
+vocabulary: 1.0.0
+info:
+  provider: Adobe Campaign
+  description: Vocabulary for Adobe Campaign marketing automation APIs.
+  created: '2026-04-17'
+  modified: '2026-04-17'
+operational:
+  apis:
+  - name: Adobe Campaign Standard API
+    namespace: acs
+    baseUrl: https://mc.adobe.io
+    status: active
+  - name: Adobe Campaign Classic API
+    namespace: acc
+    status: active
+  resources:
+  - name: campaigns
+    description: Marketing campaigns.
+  - name: deliveries
+    description: Email, SMS, and push deliveries.
+  - name: profiles
+    description: Customer profiles and subscriber data.
+  - name: workflows
+    description: Automated marketing workflows.
+  - name: services
+    description: Subscription services.
+  - name: landing-pages
+    description: Campaign landing pages.
+capability:
+  personas:
+  - id: marketing-manager
+    name: Marketing Manager
+  - id: campaign-operator
+    name: Campaign Operator
+  - id: developer
+    name: Integration Developer
+  - id: data-analyst
+    name: Data Analyst
+  domains:
+  - name: campaign-management
+    resources:
+    - campaigns
+    - deliveries
+  - name: audience
+    resources:
+    - profiles
+    - services
+  - name: automation
+    resources:
+    - workflows
+  - name: content
+    resources:
+    - landing-pages

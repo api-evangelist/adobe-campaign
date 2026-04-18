@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-campaign/refs/heads/main/json-schema/adobe-campaign-classic-workflow-request-schema.json",
+  "title": "WorkflowRequest",
+  "description": "SOAP envelope containing the workflow internal ID for start/stop operations.",
+  "type": "object",
+  "properties": {
+    "workflowId": {
+      "type": "integer",
+      "description": "Internal ID of the workflow.",
+      "example": 42
+    }
+  }
+}

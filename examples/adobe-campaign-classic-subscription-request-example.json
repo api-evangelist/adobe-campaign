@@ -1,0 +1,8 @@
+{
+  "serviceName": "Example Campaign",
+  "recipient": {
+    "email": "user@example.com",
+    "id": 42
+  },
+  "create": true
+}

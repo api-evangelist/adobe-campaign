@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-campaign/refs/heads/main/json-schema/adobe-campaign-standard-service-create-schema.json",
+  "title": "ServiceCreate",
+  "description": "ServiceCreate from Adobe Campaign API",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "example": "Example Campaign"
+    },
+    "label": {
+      "type": "string",
+      "example": "Example Campaign"
+    },
+    "messageType": {
+      "type": "string",
+      "enum": [
+        "email",
+        "sms",
+        "push"
+      ],
+      "example": "email"
+    }
+  },
+  "required": [
+    "label"
+  ]
+}

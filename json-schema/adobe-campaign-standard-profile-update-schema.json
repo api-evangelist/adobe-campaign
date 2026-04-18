@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-campaign/refs/heads/main/json-schema/adobe-campaign-standard-profile-update-schema.json",
+  "title": "ProfileUpdate",
+  "description": "ProfileUpdate from Adobe Campaign API",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string",
+      "format": "email",
+      "example": "user@example.com"
+    },
+    "firstName": {
+      "type": "string",
+      "example": "Example Campaign"
+    },
+    "lastName": {
+      "type": "string",
+      "example": "Example Campaign"
+    },
+    "phone": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "mobilePhone": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "birthDate": {
+      "type": "string",
+      "format": "date",
+      "example": "2026-04-17T12:00:00Z"
+    },
+    "gender": {
+      "type": "string",
+      "enum": [
+        "male",
+        "female",
+        "unknown"
+      ],
+      "example": "male"
+    },
+    "preferredLanguage": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "blackList": {
+      "type": "boolean",
+      "example": true
+    },
+    "blackListEmail": {
+      "type": "boolean",
+      "example": true
+    },
+    "blackListMobile": {
+      "type": "boolean",
+      "example": true
+    }
+  }
+}

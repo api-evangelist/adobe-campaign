@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-campaign/refs/heads/main/json-structure/adobe-campaign-classic-write-collection-request-structure.json",
+  "name": "WriteCollectionRequest",
+  "description": "SOAP envelope containing a collection of entity elements for batch write operations. Each entity can specify its own _operation.",
+  "type": "object",
+  "properties": {
+    "collection": {
+      "type": "object",
+      "properties": {
+        "_schema": {
+          "type": "string",
+          "description": "Target schema name for all entities."
+        },
+        "entities": {
+          "type": "array",
+          "description": "Array of entity elements to write.",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  }
+}

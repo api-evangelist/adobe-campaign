@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-campaign/refs/heads/main/json-structure/adobe-campaign-standard-service-update-structure.json",
+  "name": "ServiceUpdate",
+  "description": "ServiceUpdate from Adobe Campaign API",
+  "type": "object",
+  "properties": {
+    "label": {
+      "type": "string",
+      "example": "Example Campaign"
+    },
+    "messageType": {
+      "type": "string",
+      "enum": [
+        "email",
+        "sms",
+        "push"
+      ],
+      "example": "email"
+    },
+    "start": {
+      "type": "datetime",
+      "example": "example_value"
+    },
+    "end": {
+      "type": "datetime",
+      "example": "example_value"
+    }
+  }
+}

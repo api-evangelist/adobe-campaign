@@ -1,0 +1,12 @@
+{
+  "PKey": "example_value",
+  "email": "user@example.com",
+  "firstName": "Example Campaign",
+  "lastName": "Example Campaign",
+  "phone": "example_value",
+  "mobilePhone": "example_value",
+  "birthDate": "2026-04-17T12:00:00Z",
+  "gender": "male",
+  "preferredLanguage": "example_value",
+  "blackList": true
+}

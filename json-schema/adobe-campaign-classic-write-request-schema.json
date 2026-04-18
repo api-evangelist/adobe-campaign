@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-campaign/refs/heads/main/json-schema/adobe-campaign-classic-write-request-schema.json",
+  "title": "WriteRequest",
+  "description": "SOAP envelope containing an entity element for the target schema with attribute values and an _operation attribute controlling the write behavior.",
+  "type": "object",
+  "properties": {
+    "entity": {
+      "type": "object",
+      "properties": {
+        "_operation": {
+          "type": "string",
+          "enum": [
+            "insert",
+            "insertOrUpdate",
+            "update",
+            "delete"
+          ],
+          "description": "The write operation to perform. insert creates a new record, insertOrUpdate creates or updates, update modifies existing, delete removes."
+        },
+        "_schema": {
+          "type": "string",
+          "description": "Target schema name."
+        }
+      }
+    }
+  }
+}

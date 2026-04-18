@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-campaign/refs/heads/main/json-schema/adobe-campaign-standard-workflow-command-schema.json",
+  "title": "WorkflowCommand",
+  "description": "WorkflowCommand from Adobe Campaign API",
+  "type": "object",
+  "properties": {
+    "method": {
+      "type": "string",
+      "enum": [
+        "start",
+        "pause",
+        "resume",
+        "stop"
+      ],
+      "description": "The workflow control command to execute.",
+      "example": "start"
+    }
+  },
+  "required": [
+    "method"
+  ]
+}

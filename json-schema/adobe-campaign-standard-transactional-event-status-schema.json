@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-campaign/refs/heads/main/json-schema/adobe-campaign-standard-transactional-event-status-schema.json",
+  "title": "TransactionalEventStatus",
+  "description": "TransactionalEventStatus from Adobe Campaign API",
+  "type": "object",
+  "properties": {
+    "PKey": {
+      "type": "string",
+      "description": "The PKEY of the event.",
+      "example": "example_value"
+    },
+    "eventId": {
+      "type": "string",
+      "description": "Unique identifier of the event.",
+      "example": "CAM123456"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "processing",
+        "paused",
+        "processed",
+        "ignored",
+        "deliveryFailed",
+        "routingFailed",
+        "targetingFailed",
+        "tooOld"
+      ],
+      "description": "Current processing status of the event.",
+      "example": "pending"
+    },
+    "reason": {
+      "type": "string",
+      "description": "Failure reason if the event was not processed.",
+      "example": "example_value"
+    }
+  }
+}

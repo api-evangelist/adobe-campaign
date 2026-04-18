@@ -1,0 +1,10 @@
+{
+  "PKey": "example_value",
+  "name": "Example Campaign",
+  "label": "Example Campaign",
+  "messageType": "email",
+  "start": "example_value",
+  "end": "example_value",
+  "created": "example_value",
+  "lastModified": "example_value"
+}

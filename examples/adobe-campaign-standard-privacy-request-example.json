@@ -1,0 +1,7 @@
+{
+  "name": "Example Campaign",
+  "namespaceName": "Example Campaign",
+  "reconciliationValue": "example_value",
+  "regulation": "gdpr",
+  "type": "access"
+}

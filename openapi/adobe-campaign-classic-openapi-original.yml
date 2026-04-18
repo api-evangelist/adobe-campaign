@@ -22,61 +22,62 @@ externalDocs:
   url: >-
     https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/web-service-calls.html
 servers:
-  - url: https://{instance}.campaign.adobe.com
-    description: Campaign Classic Instance
-    variables:
-      instance:
-        description: Your Campaign Classic instance name
-        default: YOUR_INSTANCE
+- url: https://{instance}.campaign.adobe.com
+  description: Campaign Classic Instance
+  variables:
+    instance:
+      description: Your Campaign Classic instance name
+      default: YOUR_INSTANCE
 tags:
-  - name: Data Management
-    description: >-
-      Write, update, and delete data records using the xtk:session#Write
-      method. Supports insert, insertOrUpdate, update, and delete operations
-      via the _operation attribute.
-  - name: Delivery
-    description: >-
-      Prepare and submit message deliveries including email, SMS, and push
-      notifications.
-  - name: Query Definition
-    description: >-
-      Execute queries against Campaign schemas using the xtk:queryDef
-      interface. Supports get, getIfExists, select, and count operations
-      with XPath field expressions, WHERE conditions, and pagination.
-  - name: Real-Time Events
-    description: >-
-      Push real-time transactional events for immediate or batched processing
-      by the Message Center execution instances.
-  - name: Session Management
-    description: >-
-      Authenticate and manage server sessions. Logon returns session and
-      security tokens required for all subsequent API calls.
-  - name: Subscription
-    description: >-
-      Subscribe and unsubscribe recipients to and from information services.
-  - name: Workflow
-    description: >-
-      Start, stop, and signal workflows. PostEvent sends asynchronous signals
-      to trigger workflow transitions.
+- name: Data Management
+  description: >-
+    Write, update, and delete data records using the xtk:session#Write
+    method. Supports insert, insertOrUpdate, update, and delete operations
+    via the _operation attribute.
+- name: Delivery
+  description: >-
+    Prepare and submit message deliveries including email, SMS, and push
+    notifications.
+- name: Query Definition
+  description: >-
+    Execute queries against Campaign schemas using the xtk:queryDef
+    interface. Supports get, getIfExists, select, and count operations
+    with XPath field expressions, WHERE conditions, and pagination.
+- name: Real-Time Events
+  description: >-
+    Push real-time transactional events for immediate or batched processing
+    by the Message Center execution instances.
+- name: Session Management
+  description: >-
+    Authenticate and manage server sessions. Logon returns session and
+    security tokens required for all subsequent API calls.
+- name: Subscription
+  description: >-
+    Subscribe and unsubscribe recipients to and from information services.
+- name: Workflow
+  description: >-
+    Start, stop, and signal workflows. PostEvent sends asynchronous signals
+    to trigger workflow transitions.
 paths:
   /nl/jsp/soaprouter.jsp/xtk-session/Logon:
     post:
       operationId: sessionLogon
-      summary: Adobe Campaign Authenticate and create a session
+      summary: Adobe Campaign Authenticate and Create a Session
       description: >-
         Authenticates with username and password credentials and returns
         session and security tokens. These tokens must be passed as cookie
         (__sessiontoken) and header (X-Security-Token) on all subsequent
         requests. SOAP Action: xtk:session#Logon
       tags:
-        - Session Management
+      - Session Management
       parameters:
-        - name: SOAPAction
-          in: header
-          required: true
-          schema:
-            type: string
-            const: 'xtk:session#Logon'
+      - name: SOAPAction
+        in: header
+        required: true
+        schema:
+          type: string
+          const: 'xtk:session#Logon'
+        example: example_value
       requestBody:
         required: true
         content:
@@ -92,33 +93,40 @@ paths:
                 $ref: '#/components/schemas/SessionLogonResponse'
         '500':
           $ref: '#/components/responses/SOAPFault'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /nl/jsp/soaprouter.jsp/xtk-session/Logout:
     post:
       operationId: sessionLogout
-      summary: Adobe Campaign Terminate a session
+      summary: Adobe Campaign Terminate a Session
       description: >-
         Invalidates the current session and security tokens.
         SOAP Action: xtk:session#Logout
       tags:
-        - Session Management
+      - Session Management
       parameters:
-        - name: SOAPAction
-          in: header
-          required: true
-          schema:
-            type: string
-            const: 'xtk:session#Logout'
+      - name: SOAPAction
+        in: header
+        required: true
+        schema:
+          type: string
+          const: 'xtk:session#Logout'
+        example: example_value
       security:
-        - SessionToken: []
+      - SessionToken: []
       responses:
         '200':
           description: Session terminated successfully.
         '500':
           $ref: '#/components/responses/SOAPFault'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /nl/jsp/soaprouter.jsp/xtk-queryDef/ExecuteQuery:
     post:
       operationId: executeQuery
-      summary: Adobe Campaign Execute a query
+      summary: Adobe Campaign Execute a Query
       description: >-
         Executes a query against a Campaign schema using the xtk:queryDef
         interface. Supports operations: get (single record, error if missing),
@@ -127,16 +135,17 @@ paths:
         for field selection and WHERE conditions.
         SOAP Action: xtk:queryDef#ExecuteQuery
       tags:
-        - Query Definition
+      - Query Definition
       parameters:
-        - name: SOAPAction
-          in: header
-          required: true
-          schema:
-            type: string
-            const: 'xtk:queryDef#ExecuteQuery'
+      - name: SOAPAction
+        in: header
+        required: true
+        schema:
+          type: string
+          const: 'xtk:queryDef#ExecuteQuery'
+        example: example_value
       security:
-        - SessionToken: []
+      - SessionToken: []
       requestBody:
         required: true
         content:
@@ -152,26 +161,30 @@ paths:
                 $ref: '#/components/schemas/QueryResult'
         '500':
           $ref: '#/components/responses/SOAPFault'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /nl/jsp/soaprouter.jsp/xtk-session/Write:
     post:
       operationId: sessionWrite
-      summary: Adobe Campaign Write data records
+      summary: Adobe Campaign Write Data Records
       description: >-
         Writes data records to a Campaign schema. The _operation attribute
         on the entity element controls the behavior: insert (create new),
         insertOrUpdate (create or update if exists), update (modify existing),
         delete (remove record). SOAP Action: xtk:session#Write
       tags:
-        - Data Management
+      - Data Management
       parameters:
-        - name: SOAPAction
-          in: header
-          required: true
-          schema:
-            type: string
-            const: 'xtk:session#Write'
+      - name: SOAPAction
+        in: header
+        required: true
+        schema:
+          type: string
+          const: 'xtk:session#Write'
+        example: example_value
       security:
-        - SessionToken: []
+      - SessionToken: []
       requestBody:
         required: true
         content:
@@ -187,25 +200,29 @@ paths:
                 $ref: '#/components/schemas/WriteResponse'
         '500':
           $ref: '#/components/responses/SOAPFault'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /nl/jsp/soaprouter.jsp/xtk-session/WriteCollection:
     post:
       operationId: sessionWriteCollection
-      summary: Adobe Campaign Write multiple data records
+      summary: Adobe Campaign Write Multiple Data Records
       description: >-
         Writes a collection of data records to a Campaign schema in a single
         call. Each entity element in the collection can have its own
         _operation attribute. SOAP Action: xtk:session#WriteCollection
       tags:
-        - Data Management
+      - Data Management
       parameters:
-        - name: SOAPAction
-          in: header
-          required: true
-          schema:
-            type: string
-            const: 'xtk:session#WriteCollection'
+      - name: SOAPAction
+        in: header
+        required: true
+        schema:
+          type: string
+          const: 'xtk:session#WriteCollection'
+        example: example_value
       security:
-        - SessionToken: []
+      - SessionToken: []
       requestBody:
         required: true
         content:
@@ -217,25 +234,29 @@ paths:
           description: Data collection written successfully.
         '500':
           $ref: '#/components/responses/SOAPFault'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /nl/jsp/soaprouter.jsp/nms-delivery/PrepareAndStart:
     post:
       operationId: deliveryPrepareAndStart
-      summary: Adobe Campaign Prepare and start a delivery
+      summary: Adobe Campaign Prepare and Start a Delivery
       description: >-
         Prepares and immediately starts sending a delivery. Combines the
         preparation (target calculation, personalization) and sending steps.
         SOAP Action: nms:delivery#PrepareAndStart
       tags:
-        - Delivery
+      - Delivery
       parameters:
-        - name: SOAPAction
-          in: header
-          required: true
-          schema:
-            type: string
-            const: 'nms:delivery#PrepareAndStart'
+      - name: SOAPAction
+        in: header
+        required: true
+        schema:
+          type: string
+          const: 'nms:delivery#PrepareAndStart'
+        example: example_value
       security:
-        - SessionToken: []
+      - SessionToken: []
       requestBody:
         required: true
         content:
@@ -247,24 +268,28 @@ paths:
           description: Delivery preparation and sending started.
         '500':
           $ref: '#/components/responses/SOAPFault'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /nl/jsp/soaprouter.jsp/nms-delivery/SubmitDelivery:
     post:
       operationId: submitDelivery
-      summary: Adobe Campaign Submit a delivery
+      summary: Adobe Campaign Submit a Delivery
       description: >-
         Submits a delivery for processing. The delivery must be in a valid
         state for submission. SOAP Action: nms:delivery#SubmitDelivery
       tags:
-        - Delivery
+      - Delivery
       parameters:
-        - name: SOAPAction
-          in: header
-          required: true
-          schema:
-            type: string
-            const: 'nms:delivery#SubmitDelivery'
+      - name: SOAPAction
+        in: header
+        required: true
+        schema:
+          type: string
+          const: 'nms:delivery#SubmitDelivery'
+        example: example_value
       security:
-        - SessionToken: []
+      - SessionToken: []
       requestBody:
         required: true
         content:
@@ -276,24 +301,28 @@ paths:
           description: Delivery submitted successfully.
         '500':
           $ref: '#/components/responses/SOAPFault'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /nl/jsp/soaprouter.jsp/xtk-workflow/Start:
     post:
       operationId: workflowStart
-      summary: Adobe Campaign Start a workflow
+      summary: Adobe Campaign Start a Workflow
       description: >-
         Starts a workflow by its internal ID. The workflow must be in a
         stopped state. SOAP Action: xtk:workflow#Start
       tags:
-        - Workflow
+      - Workflow
       parameters:
-        - name: SOAPAction
-          in: header
-          required: true
-          schema:
-            type: string
-            const: 'xtk:workflow#Start'
+      - name: SOAPAction
+        in: header
+        required: true
+        schema:
+          type: string
+          const: 'xtk:workflow#Start'
+        example: example_value
       security:
-        - SessionToken: []
+      - SessionToken: []
       requestBody:
         required: true
         content:
@@ -305,24 +334,28 @@ paths:
           description: Workflow started successfully.
         '500':
           $ref: '#/components/responses/SOAPFault'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /nl/jsp/soaprouter.jsp/xtk-workflow/Stop:
     post:
       operationId: workflowStop
-      summary: Adobe Campaign Stop a workflow
+      summary: Adobe Campaign Stop a Workflow
       description: >-
         Stops a running workflow by its internal ID.
         SOAP Action: xtk:workflow#Stop
       tags:
-        - Workflow
+      - Workflow
       parameters:
-        - name: SOAPAction
-          in: header
-          required: true
-          schema:
-            type: string
-            const: 'xtk:workflow#Stop'
+      - name: SOAPAction
+        in: header
+        required: true
+        schema:
+          type: string
+          const: 'xtk:workflow#Stop'
+        example: example_value
       security:
-        - SessionToken: []
+      - SessionToken: []
       requestBody:
         required: true
         content:
@@ -334,25 +367,29 @@ paths:
           description: Workflow stopped successfully.
         '500':
           $ref: '#/components/responses/SOAPFault'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /nl/jsp/soaprouter.jsp/xtk-workflow/PostEvent:
     post:
       operationId: workflowPostEvent
-      summary: Adobe Campaign Post an event signal to a workflow
+      summary: Adobe Campaign Post an Event Signal to a Workflow
       description: >-
         Sends an asynchronous signal event to a workflow, triggering a
         transition from an external signal activity. Can include parameters
         passed as XML variables. SOAP Action: xtk:workflow#PostEvent
       tags:
-        - Workflow
+      - Workflow
       parameters:
-        - name: SOAPAction
-          in: header
-          required: true
-          schema:
-            type: string
-            const: 'xtk:workflow#PostEvent'
+      - name: SOAPAction
+        in: header
+        required: true
+        schema:
+          type: string
+          const: 'xtk:workflow#PostEvent'
+        example: example_value
       security:
-        - SessionToken: []
+      - SessionToken: []
       requestBody:
         required: true
         content:
@@ -364,25 +401,29 @@ paths:
           description: Event signal posted to workflow.
         '500':
           $ref: '#/components/responses/SOAPFault'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /nl/jsp/soaprouter.jsp/nms-subscription/Subscribe:
     post:
       operationId: subscribe
-      summary: Adobe Campaign Subscribe a recipient to a service
+      summary: Adobe Campaign Subscribe a Recipient to a Service
       description: >-
         Subscribes a recipient to an information service. Requires the
         service name and a recipient DOM element.
         SOAP Action: nms:subscription#Subscribe
       tags:
-        - Subscription
+      - Subscription
       parameters:
-        - name: SOAPAction
-          in: header
-          required: true
-          schema:
-            type: string
-            const: 'nms:subscription#Subscribe'
+      - name: SOAPAction
+        in: header
+        required: true
+        schema:
+          type: string
+          const: 'nms:subscription#Subscribe'
+        example: example_value
       security:
-        - SessionToken: []
+      - SessionToken: []
       requestBody:
         required: true
         content:
@@ -394,24 +435,28 @@ paths:
           description: Recipient subscribed successfully.
         '500':
           $ref: '#/components/responses/SOAPFault'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /nl/jsp/soaprouter.jsp/nms-subscription/Unsubscribe:
     post:
       operationId: unsubscribe
-      summary: Adobe Campaign Unsubscribe a recipient from a service
+      summary: Adobe Campaign Unsubscribe a Recipient from a Service
       description: >-
         Unsubscribes a recipient from an information service.
         SOAP Action: nms:subscription#Unsubscribe
       tags:
-        - Subscription
+      - Subscription
       parameters:
-        - name: SOAPAction
-          in: header
-          required: true
-          schema:
-            type: string
-            const: 'nms:subscription#Unsubscribe'
+      - name: SOAPAction
+        in: header
+        required: true
+        schema:
+          type: string
+          const: 'nms:subscription#Unsubscribe'
+        example: example_value
       security:
-        - SessionToken: []
+      - SessionToken: []
       requestBody:
         required: true
         content:
@@ -423,26 +468,30 @@ paths:
           description: Recipient unsubscribed successfully.
         '500':
           $ref: '#/components/responses/SOAPFault'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /nl/jsp/soaprouter.jsp/nms-rtEvent/PushEvent:
     post:
       operationId: pushEvent
-      summary: Adobe Campaign Push a real-time transactional event
+      summary: Adobe Campaign Push a Real-time Transactional Event
       description: >-
         Pushes a single real-time event to the Message Center execution
         instance for transactional message processing. The event must include
         the event type and recipient context data. Supports email, SMS, and
         push notification channels. SOAP Action: nms:rtEvent#PushEvent
       tags:
-        - Real-Time Events
+      - Real-Time Events
       parameters:
-        - name: SOAPAction
-          in: header
-          required: true
-          schema:
-            type: string
-            const: 'nms:rtEvent#PushEvent'
+      - name: SOAPAction
+        in: header
+        required: true
+        schema:
+          type: string
+          const: 'nms:rtEvent#PushEvent'
+        example: example_value
       security:
-        - SessionToken: []
+      - SessionToken: []
       requestBody:
         required: true
         content:
@@ -458,26 +507,30 @@ paths:
                 $ref: '#/components/schemas/PushEventResponse'
         '500':
           $ref: '#/components/responses/SOAPFault'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /nl/jsp/soaprouter.jsp/nms-batchEvent/PushEvents:
     post:
       operationId: pushEvents
-      summary: Adobe Campaign Push batch real-time events
+      summary: Adobe Campaign Push Batch Real-time Events
       description: >-
         Pushes a batch of real-time events to the Message Center execution
         instance for transactional message processing. More efficient than
         individual PushEvent calls when sending multiple events.
         SOAP Action: nms:batchEvent#PushEvents
       tags:
-        - Real-Time Events
+      - Real-Time Events
       parameters:
-        - name: SOAPAction
-          in: header
-          required: true
-          schema:
-            type: string
-            const: 'nms:batchEvent#PushEvents'
+      - name: SOAPAction
+        in: header
+        required: true
+        schema:
+          type: string
+          const: 'nms:batchEvent#PushEvents'
+        example: example_value
       security:
-        - SessionToken: []
+      - SessionToken: []
       requestBody:
         required: true
         content:
@@ -489,6 +542,9 @@ paths:
           description: Batch of events accepted for processing.
         '500':
           $ref: '#/components/responses/SOAPFault'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     SessionToken:
@@ -513,9 +569,11 @@ components:
         strLogin:
           type: string
           description: Username for authentication.
+          example: example_value
         strPassword:
           type: string
           description: Password for authentication.
+          example: example_value
     SessionLogonResponse:
       type: object
       description: >-
@@ -526,11 +584,13 @@ components:
           description: >-
             Session token to be passed as __sessiontoken cookie on
             subsequent requests.
+          example: example_value
         securityToken:
           type: string
           description: >-
             Security token to be passed as X-Security-Token header on
             subsequent requests.
+          example: example_value
         sessionInfo:
           type: object
           description: Information about the authenticated session.
@@ -555,10 +615,10 @@ components:
             operation:
               type: string
               enum:
-                - get
-                - getIfExists
-                - select
-                - count
+              - get
+              - getIfExists
+              - select
+              - count
               description: >-
                 Query operation type. get returns single record (error if
                 missing), getIfExists returns single or null, select returns
@@ -605,10 +665,10 @@ components:
             _operation:
               type: string
               enum:
-                - insert
-                - insertOrUpdate
-                - update
-                - delete
+              - insert
+              - insertOrUpdate
+              - update
+              - delete
               description: >-
                 The write operation to perform. insert creates a new record,
                 insertOrUpdate creates or updates, update modifies existing,
@@ -625,6 +685,7 @@ components:
         primaryKey:
           type: string
           description: Primary key of the created or modified record.
+          example: example_value
     WriteCollectionRequest:
       type: object
       description: >-
@@ -651,9 +712,11 @@ components:
         deliveryId:
           type: integer
           description: Internal ID of the delivery.
+          example: 42
         deliveryName:
           type: string
           description: Internal name of the delivery.
+          example: Example Campaign
     WorkflowRequest:
       type: object
       description: >-
@@ -663,6 +726,7 @@ components:
         workflowId:
           type: integer
           description: Internal ID of the workflow.
+          example: 42
     WorkflowPostEventRequest:
       type: object
       description: >-
@@ -673,9 +737,11 @@ components:
         workflowId:
           type: integer
           description: Internal ID of the target workflow.
+          example: 42
         activity:
           type: string
           description: Name of the external signal activity in the workflow.
+          example: example_value
         variables:
           type: object
           description: >-
@@ -691,6 +757,7 @@ components:
         serviceName:
           type: string
           description: Internal name of the information service.
+          example: Example Campaign
         recipient:
           type: object
           description: >-
@@ -706,6 +773,7 @@ components:
           type: boolean
           description: >-
             Whether to create the recipient if not found (subscribe only).
+          example: true
     PushEventRequest:
       type: object
       description: >-
@@ -759,6 +827,7 @@ components:
         eventId:
           type: integer
           description: Unique identifier assigned to the ingested event.
+          example: 42
     PushEventsRequest:
       type: object
       description: >-
@@ -778,12 +847,15 @@ components:
         faultcode:
           type: string
           description: Fault code identifying the error category.
+          example: example_value
         faultstring:
           type: string
           description: Human-readable description of the error.
+          example: example_value
         detail:
           type: string
           description: Additional error details.
+          example: example_value
   responses:
     SOAPFault:
       description: SOAP fault indicating an error during operation processing.

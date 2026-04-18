@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-campaign/refs/heads/main/json-schema/adobe-campaign-standard-transactional-event-response-schema.json",
+  "title": "TransactionalEventResponse",
+  "description": "TransactionalEventResponse from Adobe Campaign API",
+  "type": "object",
+  "properties": {
+    "PKey": {
+      "type": "string",
+      "description": "The PKEY of the created event.",
+      "example": "example_value"
+    },
+    "eventId": {
+      "type": "string",
+      "description": "Unique identifier of the event.",
+      "example": "CAM123456"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending"
+      ],
+      "description": "Initial status of the event.",
+      "example": "pending"
+    }
+  }
+}

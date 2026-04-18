@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-campaign/refs/heads/main/json-structure/adobe-campaign-classic-push-event-request-structure.json",
+  "name": "PushEventRequest",
+  "description": "SOAP envelope containing a real-time event for transactional message processing. The rtEvent element includes mandatory attributes for event type and recipient contact, plus a ctx child element for message personalization data.",
+  "type": "object",
+  "properties": {
+    "rtEvent": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Event type name matching the Message Center event configuration."
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Recipient email address."
+        },
+        "origin": {
+          "type": "string",
+          "description": "Origin identifier for tracking the event source."
+        },
+        "wishedChannel": {
+          "type": "int32",
+          "description": "Preferred delivery channel. 0 = email, 1 = mobile (SMS), 2 = phone, 3 = push notification."
+        },
+        "externalId": {
+          "type": "string",
+          "description": "External identifier for deduplication."
+        },
+        "mobilePhone": {
+          "type": "string",
+          "description": "Recipient mobile phone number (for SMS channel)."
+        },
+        "scheduled": {
+          "type": "datetime",
+          "description": "Optional scheduled processing time."
+        },
+        "ctx": {
+          "type": "object",
+          "description": "Context data XML element containing personalization variables for the transactional message template.",
+          "additionalProperties": true
+        }
+      }
+    }
+  }
+}

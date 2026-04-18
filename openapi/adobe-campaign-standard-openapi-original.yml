@@ -21,63 +21,63 @@ externalDocs:
   url: >-
     https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/get-started-apis.html
 servers:
-  - url: https://mc.adobe.io/{ORGANIZATION}/campaign
-    description: Adobe Campaign Standard Production
-    variables:
-      ORGANIZATION:
-        description: Your Adobe IMS Organization ID
-        default: YOUR_ORG_ID
+- url: https://mc.adobe.io/{ORGANIZATION}/campaign
+  description: Adobe Campaign Standard Production
+  variables:
+    ORGANIZATION:
+      description: Your Adobe IMS Organization ID
+      default: YOUR_ORG_ID
 tags:
-  - name: Custom Resources
-    description: >-
-      Access custom resources defined in Campaign Standard, both
-      profile-linked and standalone.
-  - name: Marketing History
-    description: >-
-      Retrieve marketing event history for profiles including delivery logs
-      and mirror page links.
-  - name: Metadata
-    description: >-
-      Discover resource schemas, fields, filters, and data policies for
-      Campaign Standard resources.
-  - name: Organizational Units
-    description: >-
-      Retrieve organizational unit structures used for access control and
-      data partitioning.
-  - name: Privacy
-    description: >-
-      Create GDPR and CCPA privacy access and deletion requests for data
-      subject compliance.
-  - name: Profiles
-    description: >-
-      Manage recipient profiles including creation, retrieval, update, and
-      deletion of contact records.
-  - name: Subscriptions
-    description: >-
-      Subscribe and unsubscribe profiles to and from services.
-  - name: Transactional Messages
-    description: >-
-      Trigger and monitor transactional messages across email, SMS, and push
-      notification channels.
-  - name: Workflows
-    description: >-
-      Control workflow execution including starting, pausing, resuming, and
-      stopping marketing workflows.
+- name: Custom Resources
+  description: >-
+    Access custom resources defined in Campaign Standard, both
+    profile-linked and standalone.
+- name: Marketing History
+  description: >-
+    Retrieve marketing event history for profiles including delivery logs
+    and mirror page links.
+- name: Metadata
+  description: >-
+    Discover resource schemas, fields, filters, and data policies for
+    Campaign Standard resources.
+- name: Organizational Units
+  description: >-
+    Retrieve organizational unit structures used for access control and
+    data partitioning.
+- name: Privacy
+  description: >-
+    Create GDPR and CCPA privacy access and deletion requests for data
+    subject compliance.
+- name: Profiles
+  description: >-
+    Manage recipient profiles including creation, retrieval, update, and
+    deletion of contact records.
+- name: Subscriptions
+  description: >-
+    Subscribe and unsubscribe profiles to and from services.
+- name: Transactional Messages
+  description: >-
+    Trigger and monitor transactional messages across email, SMS, and push
+    notification channels.
+- name: Workflows
+  description: >-
+    Control workflow execution including starting, pausing, resuming, and
+    stopping marketing workflows.
 paths:
   /profileAndServices/profile:
     get:
       operationId: listProfiles
-      summary: Adobe Campaign List profiles
+      summary: Adobe Campaign List Profiles
       description: >-
         Retrieves a paginated list of recipient profiles. Supports filtering,
         sorting, and pagination through query parameters.
       tags:
-        - Profiles
+      - Profiles
       parameters:
-        - $ref: '#/components/parameters/LineCount'
-        - $ref: '#/components/parameters/LineStart'
-        - $ref: '#/components/parameters/Order'
-        - $ref: '#/components/parameters/ForcePagination'
+      - $ref: '#/components/parameters/LineCount'
+      - $ref: '#/components/parameters/LineStart'
+      - $ref: '#/components/parameters/Order'
+      - $ref: '#/components/parameters/ForcePagination'
       responses:
         '200':
           description: List of profiles retrieved successfully.
@@ -91,13 +91,16 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '500':
           $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createProfile
-      summary: Adobe Campaign Create a profile
+      summary: Adobe Campaign Create a Profile
       description: >-
         Creates a new recipient profile with the provided attributes.
       tags:
-        - Profiles
+      - Profiles
       requestBody:
         required: true
         content:
@@ -117,16 +120,19 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '500':
           $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /profileAndServices/profile/{PKEY}:
     get:
       operationId: getProfile
-      summary: Adobe Campaign Get a profile
+      summary: Adobe Campaign Get a Profile
       description: >-
         Retrieves a specific recipient profile by its PKEY identifier.
       tags:
-        - Profiles
+      - Profiles
       parameters:
-        - $ref: '#/components/parameters/PKEY'
+      - $ref: '#/components/parameters/PKEY'
       responses:
         '200':
           description: Profile retrieved successfully.
@@ -140,15 +146,18 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
       operationId: updateProfile
-      summary: Adobe Campaign Update a profile
+      summary: Adobe Campaign Update a Profile
       description: >-
         Partially updates a recipient profile with the provided attributes.
       tags:
-        - Profiles
+      - Profiles
       parameters:
-        - $ref: '#/components/parameters/PKEY'
+      - $ref: '#/components/parameters/PKEY'
       requestBody:
         required: true
         content:
@@ -170,15 +179,18 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteProfile
-      summary: Adobe Campaign Delete a profile
+      summary: Adobe Campaign Delete a Profile
       description: >-
         Deletes a specific recipient profile by its PKEY identifier.
       tags:
-        - Profiles
+      - Profiles
       parameters:
-        - $ref: '#/components/parameters/PKEY'
+      - $ref: '#/components/parameters/PKEY'
       responses:
         '200':
           description: Profile deleted successfully.
@@ -188,17 +200,20 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /profileAndServices/service:
     get:
       operationId: listServices
-      summary: Adobe Campaign List services
+      summary: Adobe Campaign List Services
       description: >-
         Retrieves a paginated list of subscription services.
       tags: []
       parameters:
-        - $ref: '#/components/parameters/LineCount'
-        - $ref: '#/components/parameters/LineStart'
-        - $ref: '#/components/parameters/Order'
+      - $ref: '#/components/parameters/LineCount'
+      - $ref: '#/components/parameters/LineStart'
+      - $ref: '#/components/parameters/Order'
       responses:
         '200':
           description: List of services retrieved successfully.
@@ -210,9 +225,12 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '500':
           $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createService
-      summary: Adobe Campaign Create a service
+      summary: Adobe Campaign Create a Service
       description: >-
         Creates a new subscription service.
       tags: []
@@ -235,15 +253,18 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '500':
           $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /profileAndServices/service/{PKEY}:
     get:
       operationId: getService
-      summary: Adobe Campaign Get a service
+      summary: Adobe Campaign Get a Service
       description: >-
         Retrieves a specific subscription service by its PKEY identifier.
       tags: []
       parameters:
-        - $ref: '#/components/parameters/PKEY'
+      - $ref: '#/components/parameters/PKEY'
       responses:
         '200':
           description: Service retrieved successfully.
@@ -257,14 +278,17 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
       operationId: updateService
-      summary: Adobe Campaign Update a service
+      summary: Adobe Campaign Update a Service
       description: >-
         Partially updates a subscription service with the provided attributes.
       tags: []
       parameters:
-        - $ref: '#/components/parameters/PKEY'
+      - $ref: '#/components/parameters/PKEY'
       requestBody:
         required: true
         content:
@@ -286,14 +310,17 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteService
-      summary: Adobe Campaign Delete a service
+      summary: Adobe Campaign Delete a Service
       description: >-
         Deletes a specific subscription service by its PKEY identifier.
       tags: []
       parameters:
-        - $ref: '#/components/parameters/PKEY'
+      - $ref: '#/components/parameters/PKEY'
       responses:
         '200':
           description: Service deleted successfully.
@@ -303,17 +330,20 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /profileAndServices/profile/{PKEY}/subscriptions:
     post:
       operationId: subscribeProfile
-      summary: Adobe Campaign Subscribe a profile to a service
+      summary: Adobe Campaign Subscribe a Profile to a Service
       description: >-
         Subscribes a profile to a subscription service by providing the
         service PKEY in the request body.
       tags:
-        - Subscriptions
+      - Subscriptions
       parameters:
-        - $ref: '#/components/parameters/PKEY'
+      - $ref: '#/components/parameters/PKEY'
       requestBody:
         required: true
         content:
@@ -331,27 +361,32 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /profileAndServices/service/{servicePKEY}/subscriptions/{profilePKEY}:
     delete:
       operationId: unsubscribeProfile
-      summary: Adobe Campaign Unsubscribe a profile from a service
+      summary: Adobe Campaign Unsubscribe a Profile from a Service
       description: >-
         Removes a profile subscription from a service.
       tags:
-        - Subscriptions
+      - Subscriptions
       parameters:
-        - name: servicePKEY
-          in: path
-          required: true
-          description: The PKEY of the service.
-          schema:
-            type: string
-        - name: profilePKEY
-          in: path
-          required: true
-          description: The PKEY of the profile to unsubscribe.
-          schema:
-            type: string
+      - name: servicePKEY
+        in: path
+        required: true
+        description: The PKEY of the service.
+        schema:
+          type: string
+        example: example_value
+      - name: profilePKEY
+        in: path
+        required: true
+        description: The PKEY of the profile to unsubscribe.
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Profile unsubscribed successfully.
@@ -361,22 +396,26 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /workflow/execution/{workflowID}/commands:
     post:
       operationId: controlWorkflow
-      summary: Adobe Campaign Control a workflow
+      summary: Adobe Campaign Control a Workflow
       description: >-
         Sends a control command to a workflow. Supported commands are start,
         pause, resume, and stop. Commands are executed asynchronously.
       tags:
-        - Workflows
+      - Workflows
       parameters:
-        - name: workflowID
-          in: path
-          required: true
-          description: The ID of the workflow to control.
-          schema:
-            type: string
+      - name: workflowID
+        in: path
+        required: true
+        description: The ID of the workflow to control.
+        schema:
+          type: string
+        example: CAM123456
       requestBody:
         required: true
         content:
@@ -394,32 +433,37 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /{transactionalAPI}/{eventID}:
     post:
       operationId: triggerTransactionalEvent
-      summary: Adobe Campaign Trigger a transactional event
+      summary: Adobe Campaign Trigger a Transactional Event
       description: >-
         Sends a transactional event to trigger a personalized message. The
         transactionalAPI path segment corresponds to the event configuration
         name. Events are processed asynchronously and support email, SMS,
         and push notification channels.
       tags:
-        - Transactional Messages
+      - Transactional Messages
       parameters:
-        - name: transactionalAPI
-          in: path
-          required: true
-          description: >-
-            The transactional API name corresponding to the event
-            configuration (e.g., EVTorderConfirmation).
-          schema:
-            type: string
-        - name: eventID
-          in: path
-          required: true
-          description: The unique event type identifier.
-          schema:
-            type: string
+      - name: transactionalAPI
+        in: path
+        required: true
+        description: >-
+          The transactional API name corresponding to the event
+          configuration (e.g., EVTorderConfirmation).
+        schema:
+          type: string
+        example: example_value
+      - name: eventID
+        in: path
+        required: true
+        description: The unique event type identifier.
+        schema:
+          type: string
+        example: CAM123456
       requestBody:
         required: true
         content:
@@ -439,28 +483,33 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '500':
           $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     get:
       operationId: getTransactionalEventStatus
-      summary: Adobe Campaign Get transactional event status
+      summary: Adobe Campaign Get Transactional Event Status
       description: >-
         Retrieves the current processing status of a previously triggered
         transactional event. Statuses include pending, processing, processed,
         deliveryFailed, routingFailed, targetingFailed, tooOld, and ignored.
       tags:
-        - Transactional Messages
+      - Transactional Messages
       parameters:
-        - name: transactionalAPI
-          in: path
-          required: true
-          description: The transactional API name.
-          schema:
-            type: string
-        - name: eventID
-          in: path
-          required: true
-          description: The unique event type identifier.
-          schema:
-            type: string
+      - name: transactionalAPI
+        in: path
+        required: true
+        description: The transactional API name.
+        schema:
+          type: string
+        example: example_value
+      - name: eventID
+        in: path
+        required: true
+        description: The unique event type identifier.
+        schema:
+          type: string
+        example: CAM123456
       responses:
         '200':
           description: Event status retrieved successfully.
@@ -474,16 +523,19 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /privacy/privacyTool:
     post:
       operationId: createPrivacyRequest
-      summary: Adobe Campaign Create a privacy request
+      summary: Adobe Campaign Create a Privacy Request
       description: >-
         Creates a GDPR or CCPA privacy request for data access or deletion.
         Supports both access requests (retrieve all data for a data subject)
         and delete requests (remove all data for a data subject).
       tags:
-        - Privacy
+      - Privacy
       requestBody:
         required: true
         content:
@@ -503,17 +555,20 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '500':
           $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /profileAndServices/history/{PKEY}:
     get:
       operationId: getMarketingHistory
-      summary: Adobe Campaign Get marketing history for a profile
+      summary: Adobe Campaign Get Marketing History for a Profile
       description: >-
         Retrieves the marketing event history for a specific profile,
         including delivery logs and mirror page links.
       tags:
-        - Marketing History
+      - Marketing History
       parameters:
-        - $ref: '#/components/parameters/PKEY'
+      - $ref: '#/components/parameters/PKEY'
       responses:
         '200':
           description: Marketing history retrieved successfully.
@@ -527,18 +582,21 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /profileAndServicesExt/orgUnitBase:
     get:
       operationId: listOrgUnits
-      summary: Adobe Campaign List organizational units
+      summary: Adobe Campaign List Organizational Units
       description: >-
         Retrieves the list of organizational units used for access control
         and data partitioning.
       tags:
-        - Organizational Units
+      - Organizational Units
       parameters:
-        - $ref: '#/components/parameters/LineCount'
-        - $ref: '#/components/parameters/LineStart'
+      - $ref: '#/components/parameters/LineCount'
+      - $ref: '#/components/parameters/LineStart'
       responses:
         '200':
           description: Organizational units retrieved successfully.
@@ -550,27 +608,31 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '500':
           $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /profileAndServicesExt/{cusResourceName}:
     get:
       operationId: listProfileLinkedCustomResources
-      summary: Adobe Campaign List profile-linked custom resources
+      summary: Adobe Campaign List Profile-linked Custom Resources
       description: >-
         Retrieves records from a profile-linked custom resource. Custom
         resources are defined with the cus prefix in Campaign Standard.
       tags:
-        - Custom Resources
+      - Custom Resources
       parameters:
-        - name: cusResourceName
-          in: path
-          required: true
-          description: >-
-            The name of the custom resource (with cus prefix, e.g.,
-            cusMyResource).
-          schema:
-            type: string
-        - $ref: '#/components/parameters/LineCount'
-        - $ref: '#/components/parameters/LineStart'
-        - $ref: '#/components/parameters/Order'
+      - name: cusResourceName
+        in: path
+        required: true
+        description: >-
+          The name of the custom resource (with cus prefix, e.g.,
+          cusMyResource).
+        schema:
+          type: string
+        example: Example Campaign
+      - $ref: '#/components/parameters/LineCount'
+      - $ref: '#/components/parameters/LineStart'
+      - $ref: '#/components/parameters/Order'
       responses:
         '200':
           description: Custom resource records retrieved successfully.
@@ -584,25 +646,29 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /customResources/{cusResourceName}:
     get:
       operationId: listCustomResources
-      summary: Adobe Campaign List non-profile custom resources
+      summary: Adobe Campaign List Non-profile Custom Resources
       description: >-
         Retrieves records from a standalone custom resource not linked to
         profiles.
       tags:
-        - Custom Resources
+      - Custom Resources
       parameters:
-        - name: cusResourceName
-          in: path
-          required: true
-          description: The name of the custom resource.
-          schema:
-            type: string
-        - $ref: '#/components/parameters/LineCount'
-        - $ref: '#/components/parameters/LineStart'
-        - $ref: '#/components/parameters/Order'
+      - name: cusResourceName
+        in: path
+        required: true
+        description: The name of the custom resource.
+        schema:
+          type: string
+        example: Example Campaign
+      - $ref: '#/components/parameters/LineCount'
+      - $ref: '#/components/parameters/LineStart'
+      - $ref: '#/components/parameters/Order'
       responses:
         '200':
           description: Custom resource records retrieved successfully.
@@ -616,22 +682,26 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /profileAndServices/resourceType/{resourceName}:
     get:
       operationId: getResourceMetadata
-      summary: Adobe Campaign Get resource metadata
+      summary: Adobe Campaign Get Resource Metadata
       description: >-
         Retrieves metadata for a Campaign Standard resource, including field
         definitions, data types, available filters, and data policies.
       tags:
-        - Metadata
+      - Metadata
       parameters:
-        - name: resourceName
-          in: path
-          required: true
-          description: The name of the resource to describe.
-          schema:
-            type: string
+      - name: resourceName
+        in: path
+        required: true
+        description: The name of the resource to describe.
+        schema:
+          type: string
+        example: Example Campaign
       responses:
         '200':
           description: Resource metadata retrieved successfully.
@@ -645,6 +715,9 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     BearerAuth:
@@ -709,55 +782,69 @@ components:
           type: string
           description: Unique identifier for the profile.
           readOnly: true
+          example: example_value
         email:
           type: string
           format: email
           description: Email address of the profile.
+          example: user@example.com
         firstName:
           type: string
           description: First name of the profile.
+          example: Example Campaign
         lastName:
           type: string
           description: Last name of the profile.
+          example: Example Campaign
         phone:
           type: string
           description: Phone number of the profile.
+          example: example_value
         mobilePhone:
           type: string
           description: Mobile phone number.
+          example: example_value
         birthDate:
           type: string
           format: date
           description: Date of birth.
+          example: '2026-04-17T12:00:00Z'
         gender:
           type: string
           enum:
-            - male
-            - female
-            - unknown
+          - male
+          - female
+          - unknown
           description: Gender of the profile.
+          example: male
         preferredLanguage:
           type: string
           description: Preferred language code.
+          example: example_value
         blackList:
           type: boolean
           description: Whether the profile is on the deny list.
+          example: true
         blackListEmail:
           type: boolean
           description: Whether email is blocked for this profile.
+          example: true
         blackListMobile:
           type: boolean
           description: Whether SMS is blocked for this profile.
+          example: true
         created:
           type: string
           format: date-time
           description: Profile creation timestamp.
           readOnly: true
+          example: example_value
         lastModified:
           type: string
           format: date-time
           description: Last modification timestamp.
           readOnly: true
+          example: example_value
         subscriptions:
           type: object
           description: Link to the profile subscriptions.
@@ -768,62 +855,81 @@ components:
     ProfileCreate:
       type: object
       required:
-        - email
+      - email
       properties:
         email:
           type: string
           format: email
           description: Email address for the new profile.
+          example: user@example.com
         firstName:
           type: string
+          example: Example Campaign
         lastName:
           type: string
+          example: Example Campaign
         phone:
           type: string
+          example: example_value
         mobilePhone:
           type: string
+          example: example_value
         birthDate:
           type: string
           format: date
+          example: '2026-04-17T12:00:00Z'
         gender:
           type: string
           enum:
-            - male
-            - female
-            - unknown
+          - male
+          - female
+          - unknown
+          example: male
         preferredLanguage:
           type: string
+          example: example_value
     ProfileUpdate:
       type: object
       properties:
         email:
           type: string
           format: email
+          example: user@example.com
         firstName:
           type: string
+          example: Example Campaign
         lastName:
           type: string
+          example: Example Campaign
         phone:
           type: string
+          example: example_value
         mobilePhone:
           type: string
+          example: example_value
         birthDate:
           type: string
           format: date
+          example: '2026-04-17T12:00:00Z'
         gender:
           type: string
           enum:
-            - male
-            - female
-            - unknown
+          - male
+          - female
+          - unknown
+          example: male
         preferredLanguage:
           type: string
+          example: example_value
         blackList:
           type: boolean
+          example: true
         blackListEmail:
           type: boolean
+          example: true
         blackListMobile:
           type: boolean
+          example: true
     Service:
       type: object
       properties:
@@ -831,71 +937,86 @@ components:
           type: string
           description: Unique identifier for the service.
           readOnly: true
+          example: example_value
         name:
           type: string
           description: Internal name of the service.
+          example: Example Campaign
         label:
           type: string
           description: Display label of the service.
+          example: Example Campaign
         messageType:
           type: string
           enum:
-            - email
-            - sms
-            - push
+          - email
+          - sms
+          - push
           description: Default channel for the service.
+          example: email
         start:
           type: string
           format: date-time
           description: Service start date.
+          example: example_value
         end:
           type: string
           format: date-time
           description: Service end date.
+          example: example_value
         created:
           type: string
           format: date-time
           readOnly: true
+          example: example_value
         lastModified:
           type: string
           format: date-time
           readOnly: true
+          example: example_value
     ServiceCreate:
       type: object
       required:
-        - label
+      - label
       properties:
         name:
           type: string
+          example: Example Campaign
         label:
           type: string
+          example: Example Campaign
         messageType:
           type: string
           enum:
-            - email
-            - sms
-            - push
+          - email
+          - sms
+          - push
+          example: email
     ServiceUpdate:
       type: object
       properties:
         label:
           type: string
+          example: Example Campaign
         messageType:
           type: string
           enum:
-            - email
-            - sms
-            - push
+          - email
+          - sms
+          - push
+          example: email
         start:
           type: string
           format: date-time
+          example: example_value
         end:
           type: string
           format: date-time
+          example: example_value
     SubscriptionRequest:
       type: object
       required:
-        - service
+      - service
       properties:
         service:
           type: object
@@ -906,16 +1027,17 @@ components:
     WorkflowCommand:
       type: object
       required:
-        - method
+      - method
       properties:
         method:
           type: string
           enum:
-            - start
-            - pause
-            - resume
-            - stop
+          - start
+          - pause
+          - resume
+          - stop
           description: The workflow control command to execute.
+          example: start
     TransactionalEvent:
       type: object
       properties:
@@ -923,15 +1045,18 @@ components:
           type: string
           format: email
           description: Recipient email address (for email channel).
+          example: user@example.com
         mobilePhone:
           type: string
           description: Recipient mobile phone (for SMS channel).
+          example: example_value
         pushPlatform:
           type: string
           enum:
-            - apns
-            - gcm
+          - apns
+          - gcm
           description: Push platform (Apple or Google).
+          example: apns
         ctx:
           type: object
           description: >-
@@ -942,98 +1067,115 @@ components:
           type: string
           format: date-time
           description: Optional scheduled send time.
+          example: example_value
         expiration:
           type: string
           format: date-time
           description: Optional event expiration time.
+          example: example_value
     TransactionalEventResponse:
       type: object
       properties:
         PKey:
           type: string
           description: The PKEY of the created event.
+          example: example_value
         eventId:
           type: string
           description: Unique identifier of the event.
+          example: CAM123456
         status:
           type: string
           enum:
-            - pending
+          - pending
           description: Initial status of the event.
+          example: pending
     TransactionalEventStatus:
       type: object
       properties:
         PKey:
           type: string
           description: The PKEY of the event.
+          example: example_value
         eventId:
           type: string
           description: Unique identifier of the event.
+          example: CAM123456
         status:
           type: string
           enum:
-            - pending
-            - processing
-            - paused
-            - processed
-            - ignored
-            - deliveryFailed
-            - routingFailed
-            - targetingFailed
-            - tooOld
+          - pending
+          - processing
+          - paused
+          - processed
+          - ignored
+          - deliveryFailed
+          - routingFailed
+          - targetingFailed
+          - tooOld
           description: Current processing status of the event.
+          example: pending
         reason:
           type: string
           description: Failure reason if the event was not processed.
+          example: example_value
     PrivacyRequest:
       type: object
       required:
-        - name
-        - namespaceName
-        - reconciliationValue
-        - regulation
-        - type
+      - name
+      - namespaceName
+      - reconciliationValue
+      - regulation
+      - type
       properties:
         name:
           type: string
           description: Name identifying the privacy request.
+          example: Example Campaign
         namespaceName:
           type: string
           description: >-
             The namespace name used to identify the data subject
             (e.g., email, phone).
+          example: Example Campaign
         reconciliationValue:
           type: string
           description: >-
             The value used to look up the data subject in the specified
             namespace (e.g., the email address).
+          example: example_value
         regulation:
           type: string
           enum:
-            - gdpr
-            - ccpa
+          - gdpr
+          - ccpa
           description: The privacy regulation for the request.
+          example: gdpr
         type:
           type: string
           enum:
-            - access
-            - delete
+          - access
+          - delete
           description: Whether to access or delete the data subject data.
+          example: access
     PrivacyRequestResponse:
       type: object
       properties:
         PKey:
           type: string
           description: The PKEY of the created privacy request.
+          example: example_value
         status:
           type: string
           description: Current status of the privacy request.
+          example: active
     MarketingHistory:
       type: object
       properties:
         PKey:
           type: string
           description: Profile PKEY.
+          example: example_value
         events:
           type: array
           items:
@@ -1062,21 +1204,26 @@ components:
         PKey:
           type: string
           description: Unique identifier for the organizational unit.
+          example: example_value
         name:
           type: string
           description: Internal name of the organizational unit.
+          example: Example Campaign
         label:
           type: string
           description: Display label of the organizational unit.
+          example: Example Campaign
         parentTitle:
           type: string
           description: Label of the parent organizational unit.
+          example: example_value
     ResourceMetadata:
       type: object
       properties:
         name:
           type: string
           description: The resource name.
+          example: Example Campaign
         fields:
           type: array
           description: List of fields in the resource.
@@ -1125,40 +1272,42 @@ components:
               description: URL for the next page of results.
     PaginatedProfileResponse:
       allOf:
-        - $ref: '#/components/schemas/PaginatedResponse'
-        - type: object
-          properties:
-            content:
-              type: array
-              items:
-                $ref: '#/components/schemas/Profile'
+      - $ref: '#/components/schemas/PaginatedResponse'
+      - type: object
+        properties:
+          content:
+            type: array
+            items:
+              $ref: '#/components/schemas/Profile'
     PaginatedServiceResponse:
       allOf:
-        - $ref: '#/components/schemas/PaginatedResponse'
-        - type: object
-          properties:
-            content:
-              type: array
-              items:
-                $ref: '#/components/schemas/Service'
+      - $ref: '#/components/schemas/PaginatedResponse'
+      - type: object
+        properties:
+          content:
+            type: array
+            items:
+              $ref: '#/components/schemas/Service'
     PaginatedOrgUnitResponse:
       allOf:
-        - $ref: '#/components/schemas/PaginatedResponse'
-        - type: object
-          properties:
-            content:
-              type: array
-              items:
-                $ref: '#/components/schemas/OrgUnit'
+      - $ref: '#/components/schemas/PaginatedResponse'
+      - type: object
+        properties:
+          content:
+            type: array
+            items:
+              $ref: '#/components/schemas/OrgUnit'
     ErrorResponse:
       type: object
       properties:
         error_code:
           type: string
           description: Numeric error code.
+          example: example_value
         message:
           type: string
           description: Human-readable error message.
+          example: example_value
   responses:
     BadRequest:
       description: Invalid request parameters.
@@ -1191,5 +1340,5 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
 security:
-  - BearerAuth: []
-    ApiKeyAuth: []
+- BearerAuth: []
+  ApiKeyAuth: []

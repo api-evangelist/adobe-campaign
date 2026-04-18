@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-campaign/refs/heads/main/json-schema/adobe-campaign-classic-push-event-response-schema.json",
+  "title": "PushEventResponse",
+  "description": "SOAP response containing the assigned event ID for tracking.",
+  "type": "object",
+  "properties": {
+    "eventId": {
+      "type": "integer",
+      "description": "Unique identifier assigned to the ingested event.",
+      "example": 42
+    }
+  }
+}

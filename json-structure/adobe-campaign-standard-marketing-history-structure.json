@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-campaign/refs/heads/main/json-structure/adobe-campaign-standard-marketing-history-structure.json",
+  "name": "MarketingHistory",
+  "description": "MarketingHistory from Adobe Campaign API",
+  "type": "object",
+  "properties": {
+    "PKey": {
+      "type": "string",
+      "description": "Profile PKEY.",
+      "example": "example_value"
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "eventDate": {
+            "type": "datetime",
+            "description": "Date of the marketing event."
+          },
+          "channel": {
+            "type": "string",
+            "description": "Channel of the delivery (email, sms, push)."
+          },
+          "deliveryLabel": {
+            "type": "string",
+            "description": "Label of the delivery."
+          },
+          "mirrorPage": {
+            "type": "object",
+            "properties": {
+              "href": {
+                "type": "string",
+                "format": "uri",
+                "description": "Link to the mirror page."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

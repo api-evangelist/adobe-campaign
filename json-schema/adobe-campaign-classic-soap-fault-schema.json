@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-campaign/refs/heads/main/json-schema/adobe-campaign-classic-soap-fault-schema.json",
+  "title": "SOAPFault",
+  "description": "SOAP fault response indicating an error during operation processing.",
+  "type": "object",
+  "properties": {
+    "faultcode": {
+      "type": "string",
+      "description": "Fault code identifying the error category.",
+      "example": "example_value"
+    },
+    "faultstring": {
+      "type": "string",
+      "description": "Human-readable description of the error.",
+      "example": "example_value"
+    },
+    "detail": {
+      "type": "string",
+      "description": "Additional error details.",
+      "example": "example_value"
+    }
+  }
+}

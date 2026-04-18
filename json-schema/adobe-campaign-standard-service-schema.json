@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-campaign/refs/heads/main/json-schema/adobe-campaign-standard-service-schema.json",
+  "title": "Service",
+  "description": "Service from Adobe Campaign API",
+  "type": "object",
+  "properties": {
+    "PKey": {
+      "type": "string",
+      "description": "Unique identifier for the service.",
+      "readOnly": true,
+      "example": "example_value"
+    },
+    "name": {
+      "type": "string",
+      "description": "Internal name of the service.",
+      "example": "Example Campaign"
+    },
+    "label": {
+      "type": "string",
+      "description": "Display label of the service.",
+      "example": "Example Campaign"
+    },
+    "messageType": {
+      "type": "string",
+      "enum": [
+        "email",
+        "sms",
+        "push"
+      ],
+      "description": "Default channel for the service.",
+      "example": "email"
+    },
+    "start": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Service start date.",
+      "example": "example_value"
+    },
+    "end": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Service end date.",
+      "example": "example_value"
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true,
+      "example": "example_value"
+    },
+    "lastModified": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true,
+      "example": "example_value"
+    }
+  }
+}

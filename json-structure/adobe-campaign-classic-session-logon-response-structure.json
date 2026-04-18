@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-campaign/refs/heads/main/json-structure/adobe-campaign-classic-session-logon-response-structure.json",
+  "name": "SessionLogonResponse",
+  "description": "SOAP response containing session and security tokens.",
+  "type": "object",
+  "properties": {
+    "sessionToken": {
+      "type": "string",
+      "description": "Session token to be passed as __sessiontoken cookie on subsequent requests.",
+      "example": "example_value"
+    },
+    "securityToken": {
+      "type": "string",
+      "description": "Security token to be passed as X-Security-Token header on subsequent requests.",
+      "example": "example_value"
+    },
+    "sessionInfo": {
+      "type": "object",
+      "description": "Information about the authenticated session.",
+      "properties": {
+        "serverInfo": {
+          "type": "string"
+        },
+        "timezone": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

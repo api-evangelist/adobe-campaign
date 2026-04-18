@@ -1,122 +1,89 @@
 # Adobe Campaign (adobe-campaign)
-Adobe Campaign is a comprehensive marketing automation platform that enables businesses to orchestrate personalized customer experiences across multiple channels including email, mobile, social, and web. Its developer platform provides REST APIs, SOAP web services, JavaScript SDKs, and mobile SDK extensions for integrating with campaign management, profile data, workflow automation, and transactional messaging.
+Adobe Campaign is a marketing automation platform enabling businesses to orchestrate personalized customer experiences across email, mobile, social, and web channels.
 
-**URL:** [Visit APIs.json URL](https://www.adobe.com/marketing/campaign.html)
+**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/adobe-campaign/refs/heads/main/apis.yml)
 
-## Scope
-
-- **Type:** Contract
-- **Position:** Consuming
-- **Access:** 3rd-Party
+**Run:** [Capabilities Using Naftiko](https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=company-api-evangelist&utm_content=repo)
 
 ## Tags:
 
- - Marketing Automation, Email Marketing, Campaign Management, Customer Experience, Multi-channel Marketing
+ - Campaign Management, Customer Experience, Email Marketing, Marketing Automation, Multi-Channel Marketing
 
 ## Timestamps
 
 - **Created:** 2024-01-01
-- **Modified:** 2026-02-28
+- **Modified:** 2026-04-17
 
 ## APIs
 
-### Adobe Campaign Standard API
-REST API for Adobe Campaign Standard enabling integration with marketing campaigns, profiles, workflows, and messaging services.
+5 APIs: Adobe Campaign Standard API, Adobe Campaign Classic API, Adobe Campaign v8 API, Transactional Messaging API, Campaign Data Model API.
 
-**Human URL:** [https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/about-campaign-standard-apis.html](https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/about-campaign-standard-apis.html)
+## Features
 
+| Name | Description |
+|------|-------------|
+| Cross-Channel Campaign Orchestration | Design and execute campaigns across email, SMS, push, direct mail, and web. |
+| Profile and Audience Management | Manage customer profiles, segments, and audiences for targeted messaging. |
+| Email Delivery | Send transactional and marketing emails with personalization and A/B testing. |
+| Workflow Automation | Build automated marketing workflows with visual designer. |
+| Real-Time Messaging | Trigger personalized messages based on customer events. |
+| Reporting and Analytics | Campaign performance metrics, delivery statistics, and audience insights. |
+| Content Personalization | Dynamic content blocks and personalization fields. |
+| Push Notifications | Mobile push notifications to iOS and Android. |
+| SMS Messaging | SMS campaigns and transactional messages. |
+| Landing Pages | Campaign landing pages for responses and lead capture. |
 
-#### Tags:
+## Use Cases
 
- - REST API, Marketing, Profiles, Workflows, Email
+| Name | Description |
+|------|-------------|
+| Email Marketing Campaigns | Design, personalize, and send email campaigns with tracking. |
+| Customer Journey Orchestration | Multi-step customer journeys with triggers and automation. |
+| Transactional Messaging | Real-time emails and SMS for order confirmations and alerts. |
+| Lead Nurturing | Automated lead scoring and nurture sequences. |
+| Audience Segmentation | Dynamic audience segments for targeted delivery. |
+| Cross-Channel Coordination | Coordinate messaging across email, SMS, push, and mail. |
 
-#### Properties
+## Solutions
 
-- [Documentation](https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/get-started-apis.html)
-- [OpenAPI](openapi/adobe-campaign-standard-openapi-original.yml)
-- [API Reference](https://developer.adobe.com/campaign/api/)
-- [Authentication](https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/authentication.html)
-- [AsyncAPI](asyncapi/adobe-campaign-transactional-messaging-asyncapi-original.yml)
+| Name | Description |
+|------|-------------|
+| Adobe Campaign Standard | Cloud-native marketing automation with REST APIs. |
+| Adobe Campaign Classic | On-premises/hybrid marketing automation with SOAP APIs. |
+| Adobe Campaign v8 | Latest generation combining Classic power with cloud scalability. |
 
-### Adobe Campaign Classic API
-SOAP and JavaScript APIs for Adobe Campaign Classic v7 and v8, providing programmatic access to campaign management, delivery, and data operations.
+## Artifacts
 
-**Human URL:** [https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/about-web-services.html](https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/about-web-services.html)
+### OpenAPI
 
+2 OpenAPI specs in [openapi/](openapi/).
 
-#### Tags:
+### JSON Schema
 
- - SOAP API, JavaScript, Campaign Classic, Delivery
+30 standalone JSON Schema files in [json-schema/](json-schema/).
 
-#### Properties
+### JSON Structure
 
-- [Documentation](https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/web-service-calls.html)
-- [OpenAPI](openapi/adobe-campaign-classic-openapi-original.yml)
-- [JSAPI Reference](https://experienceleague.adobe.com/developer/campaign-api/api/index.html)
-- [SOAP Methods](https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/soap-methods.html)
-- [AsyncAPI](asyncapi/adobe-campaign-transactional-messaging-asyncapi-original.yml)
+30 JSON Structure files in [json-structure/](json-structure/).
 
-### Adobe Campaign Classic JavaScript SDK
-An open-source JavaScript SDK that wraps Adobe Campaign Classic SOAP APIs in a simple, expressive, JavaScript-idiomatic interface. The SDK supports asynchronous promise-based operations for querying, data management, workflow control, and session management. It works server-side with Node.js and client-side in the browser, abstracting away SOAP calls, XML-to-JSON conversion, and type formatting. Compatible with Campaign Classic v7 and v8.
+### JSON-LD
 
-**Human URL:** [https://opensource.adobe.com/acc-js-sdk/](https://opensource.adobe.com/acc-js-sdk/)
+- [Adobe Campaign Context](json-ld/adobe-campaign-context.jsonld) — 30 types, 57 properties
 
+### Examples
 
-#### Tags:
+30 example JSON files in [examples/](examples/).
 
- - JavaScript SDK, Node.js, Campaign Classic, SOAP Wrapper, Open Source
+## Vocabulary
 
-#### Properties
+- [Adobe Campaign Vocabulary](vocabulary/adobe-campaign-vocabulary.yaml) — 6 resources, 2 APIs, 4 domains, 4 personas
 
-- [Documentation](https://opensource.adobe.com/acc-js-sdk/)
-- [GitHubRepository](https://github.com/adobe/acc-js-sdk)
-- [NPMPackage](https://www.npmjs.com/package/@adobe/acc-js-sdk)
+## Rules
 
-### Adobe I/O Campaign Standard SDK
-A Node.js JavaScript SDK wrapping Adobe Campaign Standard REST APIs for use in Adobe I/O Runtime and App Builder applications. Provides convenience methods for profile management, service operations, workflow control, transactional messaging, GDPR compliance requests, and custom resource management. Handles authentication and API communication for building serverless integrations with Campaign Standard.
-
-**Human URL:** [https://github.com/adobe/aio-lib-campaign-standard](https://github.com/adobe/aio-lib-campaign-standard)
-
-
-#### Tags:
-
- - JavaScript SDK, Node.js, Campaign Standard, Adobe I/O, App Builder
-
-#### Properties
-
-- [Documentation](https://github.com/adobe/aio-lib-campaign-standard/blob/master/README.md)
-- [GitHubRepository](https://github.com/adobe/aio-lib-campaign-standard)
-- [NPMPackage](https://www.npmjs.com/package/@adobe/aio-lib-campaign-standard)
-
-### Adobe Experience Platform Mobile SDK - Campaign Extensions
-Native mobile SDK extensions for iOS and Android that integrate Adobe Campaign push notifications, in-app messaging, and local notifications into mobile applications. Includes the Campaign Classic extension for v7 and v8 providing device registration and notification click tracking, and the Campaign Standard extension providing push identifier management and message interaction tracking. Part of the Adobe Experience Platform Mobile SDK framework.
-
-**Human URL:** [https://developer.adobe.com/client-sdks/solution/adobe-campaign-classic/](https://developer.adobe.com/client-sdks/solution/adobe-campaign-classic/)
-
-
-#### Tags:
-
- - Mobile SDK, iOS, Android, Push Notifications, In-App Messaging
-
-#### Properties
-
-- [Documentation](https://developer.adobe.com/client-sdks/solution/adobe-campaign-classic/)
-- [Documentation](https://developer.adobe.com/client-sdks/solution/adobe-campaign-standard/)
-- [APIReference](https://developer.adobe.com/client-sdks/solution/adobe-campaign-classic/api-reference/)
-
-## Common Properties
-
-- [Portal](https://developer.adobe.com/)
-- [Authentication](https://developer.adobe.com/developer-console/docs/guides/authentication/)
-- [Getting Started](https://experienceleague.adobe.com/docs/campaign-learn/tutorials/overview.html)
-- [Support](https://experienceleague.adobe.com/docs/customer-one/using/home.html)
-- [Status](https://status.adobe.com/)
-- [Terms of Service](https://www.adobe.com/legal/terms.html)
-- [Privacy Policy](https://www.adobe.com/privacy.html)
-- [Blog](https://business.adobe.com/blog/)
+- [Adobe Campaign Spectral Rules](rules/adobe-campaign-spectral-rules.yml) — 17 rules
 
 ## Maintainers
 
-**FN:** API Evangelist
+**FN:** Kin Lane
 
-**Email:** info@apievangelist.com
+**Email:** kin@apievangelist.com

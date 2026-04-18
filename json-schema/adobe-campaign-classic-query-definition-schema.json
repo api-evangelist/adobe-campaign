@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-campaign/refs/heads/main/json-schema/adobe-campaign-classic-query-definition-schema.json",
+  "title": "QueryDefinition",
+  "description": "SOAP envelope containing a query definition with schema, operation, selected fields, conditions, and pagination parameters.",
+  "type": "object",
+  "properties": {
+    "queryDef": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "type": "string",
+          "description": "Target schema name (e.g., nms:recipient, nms:delivery)."
+        },
+        "operation": {
+          "type": "string",
+          "enum": [
+            "get",
+            "getIfExists",
+            "select",
+            "count"
+          ],
+          "description": "Query operation type. get returns single record (error if missing), getIfExists returns single or null, select returns multiple records, count returns record count."
+        },
+        "lineCount": {
+          "type": "integer",
+          "description": "Maximum number of records to return."
+        },
+        "startLine": {
+          "type": "integer",
+          "description": "Starting offset for pagination."
+        },
+        "select": {
+          "type": "object",
+          "description": "Field selection using XPath node elements."
+        },
+        "where": {
+          "type": "object",
+          "description": "WHERE conditions using condition elements with expr attributes."
+        },
+        "orderBy": {
+          "type": "object",
+          "description": "ORDER BY clause with sortNode elements."
+        }
+      }
+    }
+  }
+}
