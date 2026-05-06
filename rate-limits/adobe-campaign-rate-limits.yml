@@ -4,106 +4,55 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Adobe Campaign
 providerId: adobe-campaign
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
-  - Campaign Management
-  - Customer Experience
-  - Email Marketing
-  - Marketing Automation
-  - Multi-Channel Marketing
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Adobe Campaign API surface. Captures per-tier
-  quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to
-  be replaced with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+  - Marketing
+  - Campaign Management
+notes: >-
+  Adobe Campaign Standard documents request throttling on its REST API but
+  exact per-second / per-minute numbers are not published in the public
+  developer docs and vary by hosted-instance configuration. Bulk operations
+  use staging endpoints to avoid synchronous throttling.
+description: >-
+  Adobe Campaign Standard REST API enforces per-tenant throttling. v8/Classic
+  SOAP/REST endpoints are gated by the customer's hosted-instance capacity
+  (typically tied to message-volume contract). Sustained excess returns 429
+  or 503; bulk and transactional traffic should use staging or transactional
+  endpoints rather than the synchronous REST surface.
+sources:
+  - https://developer.adobe.com/campaign-standard-apis/
+  - https://experienceleague.adobe.com/docs/campaign-standard/using/integrating-with-adobe-experience-cloud/standard-apis.html
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
   serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
+  - name: Campaign Standard REST API
+    scope: tenant
     metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Adobe Campaign Standard API
-      - Adobe Campaign Classic API
-      - Adobe Campaign Classic JavaScript SDK
-      - Adobe I/O Campaign Standard SDK
-      - Adobe Experience Platform Mobile SDK - Campaign Extensions
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Adobe Campaign Standard API
-      - Adobe Campaign Classic API
-      - Adobe Campaign Classic JavaScript SDK
-      - Adobe I/O Campaign Standard SDK
-      - Adobe Experience Platform Mobile SDK - Campaign Extensions
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Adobe Campaign Standard API
-      - Adobe Campaign Classic API
-      - Adobe Campaign Classic JavaScript SDK
-      - Adobe I/O Campaign Standard SDK
-      - Adobe Experience Platform Mobile SDK - Campaign Extensions
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Adobe Campaign Standard API
-      - Adobe Campaign Classic API
-      - Adobe Campaign Classic JavaScript SDK
-      - Adobe I/O Campaign Standard SDK
-      - Adobe Experience Platform Mobile SDK - Campaign Extensions
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Adobe Campaign Standard API
-      - Adobe Campaign Classic API
-      - Adobe Campaign Classic JavaScript SDK
-      - Adobe I/O Campaign Standard SDK
-      - Adobe Experience Platform Mobile SDK - Campaign Extensions
+    limit: see https://developer.adobe.com/campaign-standard-apis/
+    notes: >-
+      Per-tenant throttle on the Campaign Standard REST endpoints; bulk
+      operations should use the staging or batch endpoints.
+  - name: v8 / Classic SOAP / REST
+    scope: instance
+    metric: varies
+    limit: see hosted-instance capacity (contracted message volume)
+    notes: >-
+      Throughput is bounded by the customer's hosted-instance capacity rather
+      than a public per-second quota.
 policies:
   - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+    description: Exponential backoff with jitter; honor Retry-After when present.
+  - name: Bulk vs synchronous
+    description: >-
+      Bulk staging endpoints decouple ingestion from synchronous API
+      throttling and are the recommended path for high-volume jobs.
+  - name: Tenant scope
+    description: >-
+      Limits apply across all credentials issued under a single tenant /
+      hosted instance.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
