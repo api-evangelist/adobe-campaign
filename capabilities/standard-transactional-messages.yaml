@@ -1,0 +1,136 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Campaign Standard API — Transactional Messages
+  description: 'Adobe Campaign Standard API — Transactional Messages. 2 operations. Lead operation: Adobe Campaign Trigger
+    a Transactional Event. Self-contained Naftiko capability covering one Adobe Campaign business surface.'
+  tags:
+  - Adobe Campaign
+  - Transactional Messages
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_CAMPAIGN_API_KEY: ADOBE_CAMPAIGN_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: standard-transactional-messages
+    baseUri: https://mc.adobe.io/{ORGANIZATION}/campaign
+    description: Adobe Campaign Standard API — Transactional Messages business capability. Self-contained, no shared references.
+    resources:
+    - name: transactionalAPI-eventID
+      path: /{transactionalAPI}/{eventID}
+      operations:
+      - name: triggertransactionalevent
+        method: POST
+        description: Adobe Campaign Trigger a Transactional Event
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: transactionalAPI
+          in: path
+          type: string
+          description: The transactional API name corresponding to the event configuration (e.g., EVTorderConfirmation).
+          required: true
+        - name: eventID
+          in: path
+          type: string
+          description: The unique event type identifier.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: gettransactionaleventstatus
+        method: GET
+        description: Adobe Campaign Get Transactional Event Status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: transactionalAPI
+          in: path
+          type: string
+          description: The transactional API name.
+          required: true
+        - name: eventID
+          in: path
+          type: string
+          description: The unique event type identifier.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_CAMPAIGN_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: standard-transactional-messages-rest
+    port: 8080
+    description: REST adapter for Adobe Campaign Standard API — Transactional Messages. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/{transactionalapi}/{eventid}
+      name: transactionalapi-eventid
+      description: REST surface for transactionalAPI-eventID.
+      operations:
+      - method: POST
+        name: triggertransactionalevent
+        description: Adobe Campaign Trigger a Transactional Event
+        call: standard-transactional-messages.triggertransactionalevent
+        with:
+          transactionalAPI: rest.transactionalAPI
+          eventID: rest.eventID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: gettransactionaleventstatus
+        description: Adobe Campaign Get Transactional Event Status
+        call: standard-transactional-messages.gettransactionaleventstatus
+        with:
+          transactionalAPI: rest.transactionalAPI
+          eventID: rest.eventID
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: standard-transactional-messages-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Campaign Standard API — Transactional Messages. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: adobe-campaign-trigger-transactional-event
+      description: Adobe Campaign Trigger a Transactional Event
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: standard-transactional-messages.triggertransactionalevent
+      with:
+        transactionalAPI: tools.transactionalAPI
+        eventID: tools.eventID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-campaign-get-transactional-event
+      description: Adobe Campaign Get Transactional Event Status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: standard-transactional-messages.gettransactionaleventstatus
+      with:
+        transactionalAPI: tools.transactionalAPI
+        eventID: tools.eventID
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,197 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Campaign Standard API — Profiles
+  description: 'Adobe Campaign Standard API — Profiles. 5 operations. Lead operation: Adobe Campaign List Profiles. Self-contained
+    Naftiko capability covering one Adobe Campaign business surface.'
+  tags:
+  - Adobe Campaign
+  - Profiles
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_CAMPAIGN_API_KEY: ADOBE_CAMPAIGN_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: standard-profiles
+    baseUri: https://mc.adobe.io/{ORGANIZATION}/campaign
+    description: Adobe Campaign Standard API — Profiles business capability. Self-contained, no shared references.
+    resources:
+    - name: profileAndServices-profile
+      path: /profileAndServices/profile
+      operations:
+      - name: listprofiles
+        method: GET
+        description: Adobe Campaign List Profiles
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createprofile
+        method: POST
+        description: Adobe Campaign Create a Profile
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: profileAndServices-profile-PKEY
+      path: /profileAndServices/profile/{PKEY}
+      operations:
+      - name: getprofile
+        method: GET
+        description: Adobe Campaign Get a Profile
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateprofile
+        method: PATCH
+        description: Adobe Campaign Update a Profile
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteprofile
+        method: DELETE
+        description: Adobe Campaign Delete a Profile
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_CAMPAIGN_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: standard-profiles-rest
+    port: 8080
+    description: REST adapter for Adobe Campaign Standard API — Profiles. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/profileandservices/profile
+      name: profileandservices-profile
+      description: REST surface for profileAndServices-profile.
+      operations:
+      - method: GET
+        name: listprofiles
+        description: Adobe Campaign List Profiles
+        call: standard-profiles.listprofiles
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createprofile
+        description: Adobe Campaign Create a Profile
+        call: standard-profiles.createprofile
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/profileandservices/profile/{pkey}
+      name: profileandservices-profile-pkey
+      description: REST surface for profileAndServices-profile-PKEY.
+      operations:
+      - method: GET
+        name: getprofile
+        description: Adobe Campaign Get a Profile
+        call: standard-profiles.getprofile
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateprofile
+        description: Adobe Campaign Update a Profile
+        call: standard-profiles.updateprofile
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteprofile
+        description: Adobe Campaign Delete a Profile
+        call: standard-profiles.deleteprofile
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: standard-profiles-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Campaign Standard API — Profiles. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: adobe-campaign-list-profiles
+      description: Adobe Campaign List Profiles
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: standard-profiles.listprofiles
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-campaign-create-profile
+      description: Adobe Campaign Create a Profile
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: standard-profiles.createprofile
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-campaign-get-profile
+      description: Adobe Campaign Get a Profile
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: standard-profiles.getprofile
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-campaign-update-profile
+      description: Adobe Campaign Update a Profile
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: standard-profiles.updateprofile
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-campaign-delete-profile
+      description: Adobe Campaign Delete a Profile
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: standard-profiles.deleteprofile
+      outputParameters:
+      - type: object
+        mapping: $.

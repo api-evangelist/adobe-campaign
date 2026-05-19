@@ -1,0 +1,87 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Campaign Standard API — Workflows
+  description: 'Adobe Campaign Standard API — Workflows. 1 operations. Lead operation: Adobe Campaign Control a Workflow.
+    Self-contained Naftiko capability covering one Adobe Campaign business surface.'
+  tags:
+  - Adobe Campaign
+  - Workflows
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_CAMPAIGN_API_KEY: ADOBE_CAMPAIGN_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: standard-workflows
+    baseUri: https://mc.adobe.io/{ORGANIZATION}/campaign
+    description: Adobe Campaign Standard API — Workflows business capability. Self-contained, no shared references.
+    resources:
+    - name: workflow-execution-workflowID-commands
+      path: /workflow/execution/{workflowID}/commands
+      operations:
+      - name: controlworkflow
+        method: POST
+        description: Adobe Campaign Control a Workflow
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: workflowID
+          in: path
+          type: string
+          description: The ID of the workflow to control.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_CAMPAIGN_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: standard-workflows-rest
+    port: 8080
+    description: REST adapter for Adobe Campaign Standard API — Workflows. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/workflow/execution/{workflowid}/commands
+      name: workflow-execution-workflowid-commands
+      description: REST surface for workflow-execution-workflowID-commands.
+      operations:
+      - method: POST
+        name: controlworkflow
+        description: Adobe Campaign Control a Workflow
+        call: standard-workflows.controlworkflow
+        with:
+          workflowID: rest.workflowID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: standard-workflows-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Campaign Standard API — Workflows. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: adobe-campaign-control-workflow
+      description: Adobe Campaign Control a Workflow
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: standard-workflows.controlworkflow
+      with:
+        workflowID: tools.workflowID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

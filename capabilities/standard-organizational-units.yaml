@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Campaign Standard API — Organizational Units
+  description: 'Adobe Campaign Standard API — Organizational Units. 1 operations. Lead operation: Adobe Campaign List Organizational
+    Units. Self-contained Naftiko capability covering one Adobe Campaign business surface.'
+  tags:
+  - Adobe Campaign
+  - Organizational Units
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_CAMPAIGN_API_KEY: ADOBE_CAMPAIGN_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: standard-organizational-units
+    baseUri: https://mc.adobe.io/{ORGANIZATION}/campaign
+    description: Adobe Campaign Standard API — Organizational Units business capability. Self-contained, no shared references.
+    resources:
+    - name: profileAndServicesExt-orgUnitBase
+      path: /profileAndServicesExt/orgUnitBase
+      operations:
+      - name: listorgunits
+        method: GET
+        description: Adobe Campaign List Organizational Units
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_CAMPAIGN_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: standard-organizational-units-rest
+    port: 8080
+    description: REST adapter for Adobe Campaign Standard API — Organizational Units. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/profileandservicesext/orgunitbase
+      name: profileandservicesext-orgunitbase
+      description: REST surface for profileAndServicesExt-orgUnitBase.
+      operations:
+      - method: GET
+        name: listorgunits
+        description: Adobe Campaign List Organizational Units
+        call: standard-organizational-units.listorgunits
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: standard-organizational-units-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Campaign Standard API — Organizational Units. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: adobe-campaign-list-organizational-units
+      description: Adobe Campaign List Organizational Units
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: standard-organizational-units.listorgunits
+      outputParameters:
+      - type: object
+        mapping: $.

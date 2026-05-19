@@ -1,0 +1,196 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Campaign Standard API
+  description: 'Adobe Campaign Standard API. 5 operations. Lead operation: Adobe Campaign List Services. Self-contained Naftiko
+    capability covering one Adobe Campaign business surface.'
+  tags:
+  - Adobe Campaign
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_CAMPAIGN_API_KEY: ADOBE_CAMPAIGN_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: standard-general
+    baseUri: https://mc.adobe.io/{ORGANIZATION}/campaign
+    description: Adobe Campaign Standard API business capability. Self-contained, no shared references.
+    resources:
+    - name: profileAndServices-service
+      path: /profileAndServices/service
+      operations:
+      - name: listservices
+        method: GET
+        description: Adobe Campaign List Services
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createservice
+        method: POST
+        description: Adobe Campaign Create a Service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: profileAndServices-service-PKEY
+      path: /profileAndServices/service/{PKEY}
+      operations:
+      - name: getservice
+        method: GET
+        description: Adobe Campaign Get a Service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateservice
+        method: PATCH
+        description: Adobe Campaign Update a Service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteservice
+        method: DELETE
+        description: Adobe Campaign Delete a Service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_CAMPAIGN_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: standard-general-rest
+    port: 8080
+    description: REST adapter for Adobe Campaign Standard API. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/profileandservices/service
+      name: profileandservices-service
+      description: REST surface for profileAndServices-service.
+      operations:
+      - method: GET
+        name: listservices
+        description: Adobe Campaign List Services
+        call: standard-general.listservices
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createservice
+        description: Adobe Campaign Create a Service
+        call: standard-general.createservice
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/profileandservices/service/{pkey}
+      name: profileandservices-service-pkey
+      description: REST surface for profileAndServices-service-PKEY.
+      operations:
+      - method: GET
+        name: getservice
+        description: Adobe Campaign Get a Service
+        call: standard-general.getservice
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateservice
+        description: Adobe Campaign Update a Service
+        call: standard-general.updateservice
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteservice
+        description: Adobe Campaign Delete a Service
+        call: standard-general.deleteservice
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: standard-general-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Campaign Standard API. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: adobe-campaign-list-services
+      description: Adobe Campaign List Services
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: standard-general.listservices
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-campaign-create-service
+      description: Adobe Campaign Create a Service
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: standard-general.createservice
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-campaign-get-service
+      description: Adobe Campaign Get a Service
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: standard-general.getservice
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-campaign-update-service
+      description: Adobe Campaign Update a Service
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: standard-general.updateservice
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-campaign-delete-service
+      description: Adobe Campaign Delete a Service
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: standard-general.deleteservice
+      outputParameters:
+      - type: object
+        mapping: $.

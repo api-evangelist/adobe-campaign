@@ -1,0 +1,184 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Campaign Classic API — Workflow
+  description: 'Adobe Campaign Classic API — Workflow. 3 operations. Lead operation: Adobe Campaign Post an Event Signal to
+    a Workflow. Self-contained Naftiko capability covering one Adobe Campaign business surface.'
+  tags:
+  - Adobe Campaign
+  - Workflow
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_CAMPAIGN_API_KEY: ADOBE_CAMPAIGN_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: classic-workflow
+    baseUri: https://{instance}.campaign.adobe.com
+    description: Adobe Campaign Classic API — Workflow business capability. Self-contained, no shared references.
+    resources:
+    - name: nl-jsp-soaprouter.jsp-xtk-workflow-PostEvent
+      path: /nl/jsp/soaprouter.jsp/xtk-workflow/PostEvent
+      operations:
+      - name: workflowpostevent
+        method: POST
+        description: Adobe Campaign Post an Event Signal to a Workflow
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: SOAPAction
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: nl-jsp-soaprouter.jsp-xtk-workflow-Start
+      path: /nl/jsp/soaprouter.jsp/xtk-workflow/Start
+      operations:
+      - name: workflowstart
+        method: POST
+        description: Adobe Campaign Start a Workflow
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: SOAPAction
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: nl-jsp-soaprouter.jsp-xtk-workflow-Stop
+      path: /nl/jsp/soaprouter.jsp/xtk-workflow/Stop
+      operations:
+      - name: workflowstop
+        method: POST
+        description: Adobe Campaign Stop a Workflow
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: SOAPAction
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-Security-Token
+      value: '{{env.ADOBE_CAMPAIGN_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: classic-workflow-rest
+    port: 8080
+    description: REST adapter for Adobe Campaign Classic API — Workflow. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/nl/jsp/soaprouter-jsp/xtk-workflow/postevent
+      name: nl-jsp-soaprouter-jsp-xtk-workflow-postevent
+      description: REST surface for nl-jsp-soaprouter.jsp-xtk-workflow-PostEvent.
+      operations:
+      - method: POST
+        name: workflowpostevent
+        description: Adobe Campaign Post an Event Signal to a Workflow
+        call: classic-workflow.workflowpostevent
+        with:
+          SOAPAction: rest.SOAPAction
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/nl/jsp/soaprouter-jsp/xtk-workflow/start
+      name: nl-jsp-soaprouter-jsp-xtk-workflow-start
+      description: REST surface for nl-jsp-soaprouter.jsp-xtk-workflow-Start.
+      operations:
+      - method: POST
+        name: workflowstart
+        description: Adobe Campaign Start a Workflow
+        call: classic-workflow.workflowstart
+        with:
+          SOAPAction: rest.SOAPAction
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/nl/jsp/soaprouter-jsp/xtk-workflow/stop
+      name: nl-jsp-soaprouter-jsp-xtk-workflow-stop
+      description: REST surface for nl-jsp-soaprouter.jsp-xtk-workflow-Stop.
+      operations:
+      - method: POST
+        name: workflowstop
+        description: Adobe Campaign Stop a Workflow
+        call: classic-workflow.workflowstop
+        with:
+          SOAPAction: rest.SOAPAction
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: classic-workflow-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Campaign Classic API — Workflow. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: adobe-campaign-post-event-signal
+      description: Adobe Campaign Post an Event Signal to a Workflow
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: classic-workflow.workflowpostevent
+      with:
+        SOAPAction: tools.SOAPAction
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-campaign-start-workflow
+      description: Adobe Campaign Start a Workflow
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: classic-workflow.workflowstart
+      with:
+        SOAPAction: tools.SOAPAction
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-campaign-stop-workflow
+      description: Adobe Campaign Stop a Workflow
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: classic-workflow.workflowstop
+      with:
+        SOAPAction: tools.SOAPAction
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

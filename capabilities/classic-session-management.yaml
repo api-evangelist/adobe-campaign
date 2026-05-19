@@ -1,0 +1,129 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Campaign Classic API — Session Management
+  description: 'Adobe Campaign Classic API — Session Management. 2 operations. Lead operation: Adobe Campaign Authenticate
+    and Create a Session. Self-contained Naftiko capability covering one Adobe Campaign business surface.'
+  tags:
+  - Adobe Campaign
+  - Session Management
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_CAMPAIGN_API_KEY: ADOBE_CAMPAIGN_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: classic-session-management
+    baseUri: https://{instance}.campaign.adobe.com
+    description: Adobe Campaign Classic API — Session Management business capability. Self-contained, no shared references.
+    resources:
+    - name: nl-jsp-soaprouter.jsp-xtk-session-Logon
+      path: /nl/jsp/soaprouter.jsp/xtk-session/Logon
+      operations:
+      - name: sessionlogon
+        method: POST
+        description: Adobe Campaign Authenticate and Create a Session
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: SOAPAction
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: nl-jsp-soaprouter.jsp-xtk-session-Logout
+      path: /nl/jsp/soaprouter.jsp/xtk-session/Logout
+      operations:
+      - name: sessionlogout
+        method: POST
+        description: Adobe Campaign Terminate a Session
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: SOAPAction
+          in: header
+          type: string
+          required: true
+    authentication:
+      type: apikey
+      key: X-Security-Token
+      value: '{{env.ADOBE_CAMPAIGN_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: classic-session-management-rest
+    port: 8080
+    description: REST adapter for Adobe Campaign Classic API — Session Management. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/nl/jsp/soaprouter-jsp/xtk-session/logon
+      name: nl-jsp-soaprouter-jsp-xtk-session-logon
+      description: REST surface for nl-jsp-soaprouter.jsp-xtk-session-Logon.
+      operations:
+      - method: POST
+        name: sessionlogon
+        description: Adobe Campaign Authenticate and Create a Session
+        call: classic-session-management.sessionlogon
+        with:
+          SOAPAction: rest.SOAPAction
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/nl/jsp/soaprouter-jsp/xtk-session/logout
+      name: nl-jsp-soaprouter-jsp-xtk-session-logout
+      description: REST surface for nl-jsp-soaprouter.jsp-xtk-session-Logout.
+      operations:
+      - method: POST
+        name: sessionlogout
+        description: Adobe Campaign Terminate a Session
+        call: classic-session-management.sessionlogout
+        with:
+          SOAPAction: rest.SOAPAction
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: classic-session-management-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Campaign Classic API — Session Management. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: adobe-campaign-authenticate-and-create
+      description: Adobe Campaign Authenticate and Create a Session
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: classic-session-management.sessionlogon
+      with:
+        SOAPAction: tools.SOAPAction
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-campaign-terminate-session
+      description: Adobe Campaign Terminate a Session
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: classic-session-management.sessionlogout
+      with:
+        SOAPAction: tools.SOAPAction
+      outputParameters:
+      - type: object
+        mapping: $.

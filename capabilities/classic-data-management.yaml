@@ -1,0 +1,136 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Campaign Classic API — Data Management
+  description: 'Adobe Campaign Classic API — Data Management. 2 operations. Lead operation: Adobe Campaign Write Data Records.
+    Self-contained Naftiko capability covering one Adobe Campaign business surface.'
+  tags:
+  - Adobe Campaign
+  - Data Management
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_CAMPAIGN_API_KEY: ADOBE_CAMPAIGN_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: classic-data-management
+    baseUri: https://{instance}.campaign.adobe.com
+    description: Adobe Campaign Classic API — Data Management business capability. Self-contained, no shared references.
+    resources:
+    - name: nl-jsp-soaprouter.jsp-xtk-session-Write
+      path: /nl/jsp/soaprouter.jsp/xtk-session/Write
+      operations:
+      - name: sessionwrite
+        method: POST
+        description: Adobe Campaign Write Data Records
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: SOAPAction
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: nl-jsp-soaprouter.jsp-xtk-session-WriteCollection
+      path: /nl/jsp/soaprouter.jsp/xtk-session/WriteCollection
+      operations:
+      - name: sessionwritecollection
+        method: POST
+        description: Adobe Campaign Write Multiple Data Records
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: SOAPAction
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-Security-Token
+      value: '{{env.ADOBE_CAMPAIGN_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: classic-data-management-rest
+    port: 8080
+    description: REST adapter for Adobe Campaign Classic API — Data Management. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/nl/jsp/soaprouter-jsp/xtk-session/write
+      name: nl-jsp-soaprouter-jsp-xtk-session-write
+      description: REST surface for nl-jsp-soaprouter.jsp-xtk-session-Write.
+      operations:
+      - method: POST
+        name: sessionwrite
+        description: Adobe Campaign Write Data Records
+        call: classic-data-management.sessionwrite
+        with:
+          SOAPAction: rest.SOAPAction
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/nl/jsp/soaprouter-jsp/xtk-session/writecollection
+      name: nl-jsp-soaprouter-jsp-xtk-session-writecollection
+      description: REST surface for nl-jsp-soaprouter.jsp-xtk-session-WriteCollection.
+      operations:
+      - method: POST
+        name: sessionwritecollection
+        description: Adobe Campaign Write Multiple Data Records
+        call: classic-data-management.sessionwritecollection
+        with:
+          SOAPAction: rest.SOAPAction
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: classic-data-management-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Campaign Classic API — Data Management. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: adobe-campaign-write-data-records
+      description: Adobe Campaign Write Data Records
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: classic-data-management.sessionwrite
+      with:
+        SOAPAction: tools.SOAPAction
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-campaign-write-multiple-data
+      description: Adobe Campaign Write Multiple Data Records
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: classic-data-management.sessionwritecollection
+      with:
+        SOAPAction: tools.SOAPAction
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

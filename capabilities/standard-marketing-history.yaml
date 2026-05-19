@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Campaign Standard API — Marketing History
+  description: 'Adobe Campaign Standard API — Marketing History. 1 operations. Lead operation: Adobe Campaign Get Marketing
+    History for a Profile. Self-contained Naftiko capability covering one Adobe Campaign business surface.'
+  tags:
+  - Adobe Campaign
+  - Marketing History
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_CAMPAIGN_API_KEY: ADOBE_CAMPAIGN_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: standard-marketing-history
+    baseUri: https://mc.adobe.io/{ORGANIZATION}/campaign
+    description: Adobe Campaign Standard API — Marketing History business capability. Self-contained, no shared references.
+    resources:
+    - name: profileAndServices-history-PKEY
+      path: /profileAndServices/history/{PKEY}
+      operations:
+      - name: getmarketinghistory
+        method: GET
+        description: Adobe Campaign Get Marketing History for a Profile
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_CAMPAIGN_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: standard-marketing-history-rest
+    port: 8080
+    description: REST adapter for Adobe Campaign Standard API — Marketing History. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/profileandservices/history/{pkey}
+      name: profileandservices-history-pkey
+      description: REST surface for profileAndServices-history-PKEY.
+      operations:
+      - method: GET
+        name: getmarketinghistory
+        description: Adobe Campaign Get Marketing History for a Profile
+        call: standard-marketing-history.getmarketinghistory
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: standard-marketing-history-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Campaign Standard API — Marketing History. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: adobe-campaign-get-marketing-history
+      description: Adobe Campaign Get Marketing History for a Profile
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: standard-marketing-history.getmarketinghistory
+      outputParameters:
+      - type: object
+        mapping: $.

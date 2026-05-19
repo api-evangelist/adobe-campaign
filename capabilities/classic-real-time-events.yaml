@@ -1,0 +1,136 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Campaign Classic API — Real-Time Events
+  description: 'Adobe Campaign Classic API — Real-Time Events. 2 operations. Lead operation: Adobe Campaign Push Batch Real-time
+    Events. Self-contained Naftiko capability covering one Adobe Campaign business surface.'
+  tags:
+  - Adobe Campaign
+  - Real-Time Events
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_CAMPAIGN_API_KEY: ADOBE_CAMPAIGN_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: classic-real-time-events
+    baseUri: https://{instance}.campaign.adobe.com
+    description: Adobe Campaign Classic API — Real-Time Events business capability. Self-contained, no shared references.
+    resources:
+    - name: nl-jsp-soaprouter.jsp-nms-batchEvent-PushEvents
+      path: /nl/jsp/soaprouter.jsp/nms-batchEvent/PushEvents
+      operations:
+      - name: pushevents
+        method: POST
+        description: Adobe Campaign Push Batch Real-time Events
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: SOAPAction
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: nl-jsp-soaprouter.jsp-nms-rtEvent-PushEvent
+      path: /nl/jsp/soaprouter.jsp/nms-rtEvent/PushEvent
+      operations:
+      - name: pushevent
+        method: POST
+        description: Adobe Campaign Push a Real-time Transactional Event
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: SOAPAction
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-Security-Token
+      value: '{{env.ADOBE_CAMPAIGN_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: classic-real-time-events-rest
+    port: 8080
+    description: REST adapter for Adobe Campaign Classic API — Real-Time Events. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/nl/jsp/soaprouter-jsp/nms-batchevent/pushevents
+      name: nl-jsp-soaprouter-jsp-nms-batchevent-pushevents
+      description: REST surface for nl-jsp-soaprouter.jsp-nms-batchEvent-PushEvents.
+      operations:
+      - method: POST
+        name: pushevents
+        description: Adobe Campaign Push Batch Real-time Events
+        call: classic-real-time-events.pushevents
+        with:
+          SOAPAction: rest.SOAPAction
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/nl/jsp/soaprouter-jsp/nms-rtevent/pushevent
+      name: nl-jsp-soaprouter-jsp-nms-rtevent-pushevent
+      description: REST surface for nl-jsp-soaprouter.jsp-nms-rtEvent-PushEvent.
+      operations:
+      - method: POST
+        name: pushevent
+        description: Adobe Campaign Push a Real-time Transactional Event
+        call: classic-real-time-events.pushevent
+        with:
+          SOAPAction: rest.SOAPAction
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: classic-real-time-events-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Campaign Classic API — Real-Time Events. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: adobe-campaign-push-batch-real
+      description: Adobe Campaign Push Batch Real-time Events
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: classic-real-time-events.pushevents
+      with:
+        SOAPAction: tools.SOAPAction
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-campaign-push-real-time
+      description: Adobe Campaign Push a Real-time Transactional Event
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: classic-real-time-events.pushevent
+      with:
+        SOAPAction: tools.SOAPAction
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

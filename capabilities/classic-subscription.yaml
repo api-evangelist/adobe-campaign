@@ -1,0 +1,136 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Campaign Classic API — Subscription
+  description: 'Adobe Campaign Classic API — Subscription. 2 operations. Lead operation: Adobe Campaign Subscribe a Recipient
+    to a Service. Self-contained Naftiko capability covering one Adobe Campaign business surface.'
+  tags:
+  - Adobe Campaign
+  - Subscription
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_CAMPAIGN_API_KEY: ADOBE_CAMPAIGN_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: classic-subscription
+    baseUri: https://{instance}.campaign.adobe.com
+    description: Adobe Campaign Classic API — Subscription business capability. Self-contained, no shared references.
+    resources:
+    - name: nl-jsp-soaprouter.jsp-nms-subscription-Subscribe
+      path: /nl/jsp/soaprouter.jsp/nms-subscription/Subscribe
+      operations:
+      - name: subscribe
+        method: POST
+        description: Adobe Campaign Subscribe a Recipient to a Service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: SOAPAction
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: nl-jsp-soaprouter.jsp-nms-subscription-Unsubscribe
+      path: /nl/jsp/soaprouter.jsp/nms-subscription/Unsubscribe
+      operations:
+      - name: unsubscribe
+        method: POST
+        description: Adobe Campaign Unsubscribe a Recipient from a Service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: SOAPAction
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-Security-Token
+      value: '{{env.ADOBE_CAMPAIGN_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: classic-subscription-rest
+    port: 8080
+    description: REST adapter for Adobe Campaign Classic API — Subscription. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/nl/jsp/soaprouter-jsp/nms-subscription/subscribe
+      name: nl-jsp-soaprouter-jsp-nms-subscription-subscribe
+      description: REST surface for nl-jsp-soaprouter.jsp-nms-subscription-Subscribe.
+      operations:
+      - method: POST
+        name: subscribe
+        description: Adobe Campaign Subscribe a Recipient to a Service
+        call: classic-subscription.subscribe
+        with:
+          SOAPAction: rest.SOAPAction
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/nl/jsp/soaprouter-jsp/nms-subscription/unsubscribe
+      name: nl-jsp-soaprouter-jsp-nms-subscription-unsubscribe
+      description: REST surface for nl-jsp-soaprouter.jsp-nms-subscription-Unsubscribe.
+      operations:
+      - method: POST
+        name: unsubscribe
+        description: Adobe Campaign Unsubscribe a Recipient from a Service
+        call: classic-subscription.unsubscribe
+        with:
+          SOAPAction: rest.SOAPAction
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: classic-subscription-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Campaign Classic API — Subscription. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: adobe-campaign-subscribe-recipient-service
+      description: Adobe Campaign Subscribe a Recipient to a Service
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: classic-subscription.subscribe
+      with:
+        SOAPAction: tools.SOAPAction
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-campaign-unsubscribe-recipient-service
+      description: Adobe Campaign Unsubscribe a Recipient from a Service
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: classic-subscription.unsubscribe
+      with:
+        SOAPAction: tools.SOAPAction
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

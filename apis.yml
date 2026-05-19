@@ -138,6 +138,8 @@ maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/showcase/adobe-campaign
 - type: Portal
   url: https://developer.adobe.com/
 - type: Authentication
