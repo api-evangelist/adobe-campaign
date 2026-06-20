@@ -4,7 +4,7 @@ name: Adobe Campaign
 description: Adobe Campaign is a comprehensive marketing automation platform that
   enables businesses to orchestrate personalized customer experiences across multiple
   channels including email, mobile, social, and web.
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 type: Index
 tags:
   - Campaign Management
@@ -70,7 +70,7 @@ apis:
       control, and session management. It works server-side with Node.js and client-side
       in the browser, abstracting away SOAP calls, XML-to-JSON conversion, and type
       formatting. Compatible with Campaign Classic v7 and v8.
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://opensource.adobe.com/acc-js-sdk/
     baseURL: https://{instance}.campaign.adobe.com
     tags:
@@ -93,7 +93,7 @@ apis:
       methods for profile management, service operations, workflow control, transactional
       messaging, GDPR compliance requests, and custom resource management. Handles authentication
       and API communication for building serverless integrations with Campaign Standard.
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://github.com/adobe/aio-lib-campaign-standard
     baseURL: https://mc.adobe.io/{ORGANIZATION}/campaign
     tags:
@@ -117,7 +117,7 @@ apis:
       device registration and notification click tracking, and the Campaign Standard
       extension providing push identifier management and message interaction tracking.
       Part of the Adobe Experience Platform Mobile SDK framework.
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://developer.adobe.com/client-sdks/solution/adobe-campaign-classic/
     baseURL: https://api.example.com
     tags:
