@@ -3,12 +3,10 @@
   "feeds": [
     {
       "source": "https://business.adobe.com/blog/",
-      "feed_url": null,
-      "title": "Adobe Business Blog",
       "saved": 0,
-      "error": "timeout"
+      "error": "timeout 60000ms on fetch"
     }
   ],
-  "fetched": "2026-06-21T17:00:00Z",
-  "post_count": 0
+  "post_count": 0,
+  "fetched": "2026-06-27T12:21:20Z"
 }
