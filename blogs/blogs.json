@@ -2,11 +2,10 @@
   "repo": "adobe-campaign",
   "feeds": [
     {
-      "source": "https://business.adobe.com/blog/",
-      "saved": 0,
-      "error": "timeout 60000ms on fetch"
+      "source": "https://www.adobe.com/privacy.html",
+      "error": "TimeoutError"
     }
   ],
   "post_count": 0,
-  "fetched": "2026-06-27T12:21:20Z"
+  "fetched": "2026-07-11T11:50:51Z"
 }
