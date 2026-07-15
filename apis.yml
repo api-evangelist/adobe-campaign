@@ -138,6 +138,8 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 common:
+  - type: AgenticAccess
+    url: agentic-access/adobe-campaign-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/adobe-campaign-vulnerability-disclosure.yml
   - type: DomainSecurity
