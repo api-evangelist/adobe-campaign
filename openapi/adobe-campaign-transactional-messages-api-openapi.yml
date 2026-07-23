@@ -1,0 +1,231 @@
+openapi: 3.1.0
+info:
+  title: Adobe Campaign Classic Custom Resources Transactional Messages API
+  description: SOAP-based API for Adobe Campaign Classic v7 and v8, documented as HTTP POST operations. All operations target the single SOAP router endpoint at /nl/jsp/soaprouter.jsp and are differentiated by the SOAPAction header. Provides programmatic access to session management, data querying, record persistence, delivery management, workflow control, subscription management, and real-time transactional event ingestion.
+  version: 8.0.0
+  contact:
+    name: Adobe Developer Support
+    url: https://developer.adobe.com/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+  x-logo:
+    url: https://www.adobe.com/content/dam/cc/icons/adobe-campaign.svg
+servers:
+- url: https://{instance}.campaign.adobe.com
+  description: Campaign Classic Instance
+  variables:
+    instance:
+      description: Your Campaign Classic instance name
+      default: YOUR_INSTANCE
+tags:
+- name: Transactional Messages
+  description: Trigger and monitor transactional messages across email, SMS, and push notification channels.
+paths:
+  /{transactionalAPI}/{eventID}:
+    post:
+      operationId: triggerTransactionalEvent
+      summary: Adobe Campaign Trigger a Transactional Event
+      description: Sends a transactional event to trigger a personalized message. The transactionalAPI path segment corresponds to the event configuration name. Events are processed asynchronously and support email, SMS, and push notification channels.
+      tags:
+      - Transactional Messages
+      parameters:
+      - name: transactionalAPI
+        in: path
+        required: true
+        description: The transactional API name corresponding to the event configuration (e.g., EVTorderConfirmation).
+        schema:
+          type: string
+        example: example_value
+      - name: eventID
+        in: path
+        required: true
+        description: The unique event type identifier.
+        schema:
+          type: string
+        example: CAM123456
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionalEvent'
+      responses:
+        '200':
+          description: Transactional event accepted for processing.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionalEventResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      operationId: getTransactionalEventStatus
+      summary: Adobe Campaign Get Transactional Event Status
+      description: Retrieves the current processing status of a previously triggered transactional event. Statuses include pending, processing, processed, deliveryFailed, routingFailed, targetingFailed, tooOld, and ignored.
+      tags:
+      - Transactional Messages
+      parameters:
+      - name: transactionalAPI
+        in: path
+        required: true
+        description: The transactional API name.
+        schema:
+          type: string
+        example: example_value
+      - name: eventID
+        in: path
+        required: true
+        description: The unique event type identifier.
+        schema:
+          type: string
+        example: CAM123456
+      responses:
+        '200':
+          description: Event status retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionalEventStatus'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    InternalError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication failed. Invalid or expired OAuth token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error_code:
+          type: string
+          description: Numeric error code.
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message.
+          example: example_value
+    TransactionalEventStatus:
+      type: object
+      properties:
+        PKey:
+          type: string
+          description: The PKEY of the event.
+          example: example_value
+        eventId:
+          type: string
+          description: Unique identifier of the event.
+          example: CAM123456
+        status:
+          type: string
+          enum:
+          - pending
+          - processing
+          - paused
+          - processed
+          - ignored
+          - deliveryFailed
+          - routingFailed
+          - targetingFailed
+          - tooOld
+          description: Current processing status of the event.
+          example: pending
+        reason:
+          type: string
+          description: Failure reason if the event was not processed.
+          example: example_value
+    TransactionalEventResponse:
+      type: object
+      properties:
+        PKey:
+          type: string
+          description: The PKEY of the created event.
+          example: example_value
+        eventId:
+          type: string
+          description: Unique identifier of the event.
+          example: CAM123456
+        status:
+          type: string
+          enum:
+          - pending
+          description: Initial status of the event.
+          example: pending
+    TransactionalEvent:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          description: Recipient email address (for email channel).
+          example: user@example.com
+        mobilePhone:
+          type: string
+          description: Recipient mobile phone (for SMS channel).
+          example: example_value
+        pushPlatform:
+          type: string
+          enum:
+          - apns
+          - gcm
+          description: Push platform (Apple or Google).
+          example: apns
+        ctx:
+          type: object
+          description: Context data for message personalization. Contains dynamic fields matching the transactional message template.
+          additionalProperties: true
+        scheduled:
+          type: string
+          format: date-time
+          description: Optional scheduled send time.
+          example: example_value
+        expiration:
+          type: string
+          format: date-time
+          description: Optional event expiration time.
+          example: example_value
+  securitySchemes:
+    SessionToken:
+      type: apiKey
+      in: header
+      name: X-Security-Token
+      description: Security token obtained from xtk:session#Logon. Must be passed alongside the session token cookie (__sessiontoken) on all authenticated requests. Tokens have a 24-hour lifecycle.
+externalDocs:
+  description: Campaign Classic SOAP Web Services Documentation
+  url: https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/web-service-calls.html

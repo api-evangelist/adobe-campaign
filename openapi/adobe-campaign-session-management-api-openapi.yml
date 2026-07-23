@@ -1,0 +1,152 @@
+openapi: 3.1.0
+info:
+  title: Adobe Campaign Classic Custom Resources Session Management API
+  description: SOAP-based API for Adobe Campaign Classic v7 and v8, documented as HTTP POST operations. All operations target the single SOAP router endpoint at /nl/jsp/soaprouter.jsp and are differentiated by the SOAPAction header. Provides programmatic access to session management, data querying, record persistence, delivery management, workflow control, subscription management, and real-time transactional event ingestion.
+  version: 8.0.0
+  contact:
+    name: Adobe Developer Support
+    url: https://developer.adobe.com/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+  x-logo:
+    url: https://www.adobe.com/content/dam/cc/icons/adobe-campaign.svg
+servers:
+- url: https://{instance}.campaign.adobe.com
+  description: Campaign Classic Instance
+  variables:
+    instance:
+      description: Your Campaign Classic instance name
+      default: YOUR_INSTANCE
+tags:
+- name: Session Management
+  description: Authenticate and manage server sessions. Logon returns session and security tokens required for all subsequent API calls.
+paths:
+  /nl/jsp/soaprouter.jsp/xtk-session/Logon:
+    post:
+      operationId: sessionLogon
+      summary: Adobe Campaign Authenticate and Create a Session
+      description: 'Authenticates with username and password credentials and returns session and security tokens. These tokens must be passed as cookie (__sessiontoken) and header (X-Security-Token) on all subsequent requests. SOAP Action: xtk:session#Logon'
+      tags:
+      - Session Management
+      parameters:
+      - name: SOAPAction
+        in: header
+        required: true
+        schema:
+          type: string
+          const: xtk:session#Logon
+        example: example_value
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/SessionLogonRequest'
+      responses:
+        '200':
+          description: Authentication successful. Returns session and security tokens.
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SessionLogonResponse'
+        '500':
+          $ref: '#/components/responses/SOAPFault'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /nl/jsp/soaprouter.jsp/xtk-session/Logout:
+    post:
+      operationId: sessionLogout
+      summary: Adobe Campaign Terminate a Session
+      description: 'Invalidates the current session and security tokens. SOAP Action: xtk:session#Logout'
+      tags:
+      - Session Management
+      parameters:
+      - name: SOAPAction
+        in: header
+        required: true
+        schema:
+          type: string
+          const: xtk:session#Logout
+        example: example_value
+      security:
+      - SessionToken: []
+      responses:
+        '200':
+          description: Session terminated successfully.
+        '500':
+          $ref: '#/components/responses/SOAPFault'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    SOAPFault:
+      description: SOAP fault indicating an error during operation processing.
+      content:
+        text/xml:
+          schema:
+            $ref: '#/components/schemas/SOAPFault'
+  schemas:
+    SOAPFault:
+      type: object
+      description: SOAP fault response indicating an error during operation processing.
+      properties:
+        faultcode:
+          type: string
+          description: Fault code identifying the error category.
+          example: example_value
+        faultstring:
+          type: string
+          description: Human-readable description of the error.
+          example: example_value
+        detail:
+          type: string
+          description: Additional error details.
+          example: example_value
+    SessionLogonRequest:
+      type: object
+      xml:
+        name: Envelope
+        prefix: soapenv
+        namespace: http://schemas.xmlsoap.org/soap/envelope/
+      description: SOAP envelope containing login credentials for session authentication.
+      properties:
+        strLogin:
+          type: string
+          description: Username for authentication.
+          example: example_value
+        strPassword:
+          type: string
+          description: Password for authentication.
+          example: example_value
+    SessionLogonResponse:
+      type: object
+      description: SOAP response containing session and security tokens.
+      properties:
+        sessionToken:
+          type: string
+          description: Session token to be passed as __sessiontoken cookie on subsequent requests.
+          example: example_value
+        securityToken:
+          type: string
+          description: Security token to be passed as X-Security-Token header on subsequent requests.
+          example: example_value
+        sessionInfo:
+          type: object
+          description: Information about the authenticated session.
+          properties:
+            serverInfo:
+              type: string
+            timezone:
+              type: string
+  securitySchemes:
+    SessionToken:
+      type: apiKey
+      in: header
+      name: X-Security-Token
+      description: Security token obtained from xtk:session#Logon. Must be passed alongside the session token cookie (__sessiontoken) on all authenticated requests. Tokens have a 24-hour lifecycle.
+externalDocs:
+  description: Campaign Classic SOAP Web Services Documentation
+  url: https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/web-service-calls.html

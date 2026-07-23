@@ -1,0 +1,431 @@
+openapi: 3.1.0
+info:
+  title: Adobe Campaign Classic Custom Resources Profiles API
+  description: SOAP-based API for Adobe Campaign Classic v7 and v8, documented as HTTP POST operations. All operations target the single SOAP router endpoint at /nl/jsp/soaprouter.jsp and are differentiated by the SOAPAction header. Provides programmatic access to session management, data querying, record persistence, delivery management, workflow control, subscription management, and real-time transactional event ingestion.
+  version: 8.0.0
+  contact:
+    name: Adobe Developer Support
+    url: https://developer.adobe.com/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+  x-logo:
+    url: https://www.adobe.com/content/dam/cc/icons/adobe-campaign.svg
+servers:
+- url: https://{instance}.campaign.adobe.com
+  description: Campaign Classic Instance
+  variables:
+    instance:
+      description: Your Campaign Classic instance name
+      default: YOUR_INSTANCE
+tags:
+- name: Profiles
+  description: Manage recipient profiles including creation, retrieval, update, and deletion of contact records.
+paths:
+  /profileAndServices/profile:
+    get:
+      operationId: listProfiles
+      summary: Adobe Campaign List Profiles
+      description: Retrieves a paginated list of recipient profiles. Supports filtering, sorting, and pagination through query parameters.
+      tags:
+      - Profiles
+      parameters:
+      - $ref: '#/components/parameters/LineCount'
+      - $ref: '#/components/parameters/LineStart'
+      - $ref: '#/components/parameters/Order'
+      - $ref: '#/components/parameters/ForcePagination'
+      responses:
+        '200':
+          description: List of profiles retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedProfileResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createProfile
+      summary: Adobe Campaign Create a Profile
+      description: Creates a new recipient profile with the provided attributes.
+      tags:
+      - Profiles
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfileCreate'
+      responses:
+        '201':
+          description: Profile created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /profileAndServices/profile/{PKEY}:
+    get:
+      operationId: getProfile
+      summary: Adobe Campaign Get a Profile
+      description: Retrieves a specific recipient profile by its PKEY identifier.
+      tags:
+      - Profiles
+      parameters:
+      - $ref: '#/components/parameters/PKEY'
+      responses:
+        '200':
+          description: Profile retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      operationId: updateProfile
+      summary: Adobe Campaign Update a Profile
+      description: Partially updates a recipient profile with the provided attributes.
+      tags:
+      - Profiles
+      parameters:
+      - $ref: '#/components/parameters/PKEY'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfileUpdate'
+      responses:
+        '200':
+          description: Profile updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteProfile
+      summary: Adobe Campaign Delete a Profile
+      description: Deletes a specific recipient profile by its PKEY identifier.
+      tags:
+      - Profiles
+      parameters:
+      - $ref: '#/components/parameters/PKEY'
+      responses:
+        '200':
+          description: Profile deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    InternalError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions for the requested operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication failed. Invalid or expired OAuth token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    LineStart:
+      name: _lineStart
+      in: query
+      required: false
+      description: Pagination offset from the next node in previous response.
+      schema:
+        type: integer
+    Order:
+      name: _order
+      in: query
+      required: false
+      description: Sort order. Use field name for ascending, append %20desc for descending (e.g., email%20desc).
+      schema:
+        type: string
+    ForcePagination:
+      name: _forcePagination
+      in: query
+      required: false
+      description: Force pagination for tables with more than 100,000 records.
+      schema:
+        type: boolean
+        default: false
+    LineCount:
+      name: _lineCount
+      in: query
+      required: false
+      description: Number of records to return per page. Default is 25.
+      schema:
+        type: integer
+        default: 25
+    PKEY:
+      name: PKEY
+      in: path
+      required: true
+      description: The unique PKEY identifier of the resource.
+      schema:
+        type: string
+  schemas:
+    PaginatedProfileResponse:
+      allOf:
+      - $ref: '#/components/schemas/PaginatedResponse'
+      - type: object
+        properties:
+          content:
+            type: array
+            items:
+              $ref: '#/components/schemas/Profile'
+    PaginatedResponse:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            type: object
+        count:
+          type: object
+          properties:
+            href:
+              type: string
+              description: URL to get the total count.
+        next:
+          type: object
+          properties:
+            href:
+              type: string
+              description: URL for the next page of results.
+    ErrorResponse:
+      type: object
+      properties:
+        error_code:
+          type: string
+          description: Numeric error code.
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message.
+          example: example_value
+    ProfileUpdate:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          example: user@example.com
+        firstName:
+          type: string
+          example: Example Campaign
+        lastName:
+          type: string
+          example: Example Campaign
+        phone:
+          type: string
+          example: example_value
+        mobilePhone:
+          type: string
+          example: example_value
+        birthDate:
+          type: string
+          format: date
+          example: '2026-04-17T12:00:00Z'
+        gender:
+          type: string
+          enum:
+          - male
+          - female
+          - unknown
+          example: male
+        preferredLanguage:
+          type: string
+          example: example_value
+        blackList:
+          type: boolean
+          example: true
+        blackListEmail:
+          type: boolean
+          example: true
+        blackListMobile:
+          type: boolean
+          example: true
+    Profile:
+      type: object
+      properties:
+        PKey:
+          type: string
+          description: Unique identifier for the profile.
+          readOnly: true
+          example: example_value
+        email:
+          type: string
+          format: email
+          description: Email address of the profile.
+          example: user@example.com
+        firstName:
+          type: string
+          description: First name of the profile.
+          example: Example Campaign
+        lastName:
+          type: string
+          description: Last name of the profile.
+          example: Example Campaign
+        phone:
+          type: string
+          description: Phone number of the profile.
+          example: example_value
+        mobilePhone:
+          type: string
+          description: Mobile phone number.
+          example: example_value
+        birthDate:
+          type: string
+          format: date
+          description: Date of birth.
+          example: '2026-04-17T12:00:00Z'
+        gender:
+          type: string
+          enum:
+          - male
+          - female
+          - unknown
+          description: Gender of the profile.
+          example: male
+        preferredLanguage:
+          type: string
+          description: Preferred language code.
+          example: example_value
+        blackList:
+          type: boolean
+          description: Whether the profile is on the deny list.
+          example: true
+        blackListEmail:
+          type: boolean
+          description: Whether email is blocked for this profile.
+          example: true
+        blackListMobile:
+          type: boolean
+          description: Whether SMS is blocked for this profile.
+          example: true
+        created:
+          type: string
+          format: date-time
+          description: Profile creation timestamp.
+          readOnly: true
+          example: example_value
+        lastModified:
+          type: string
+          format: date-time
+          description: Last modification timestamp.
+          readOnly: true
+          example: example_value
+        subscriptions:
+          type: object
+          description: Link to the profile subscriptions.
+          readOnly: true
+          properties:
+            href:
+              type: string
+    ProfileCreate:
+      type: object
+      required:
+      - email
+      properties:
+        email:
+          type: string
+          format: email
+          description: Email address for the new profile.
+          example: user@example.com
+        firstName:
+          type: string
+          example: Example Campaign
+        lastName:
+          type: string
+          example: Example Campaign
+        phone:
+          type: string
+          example: example_value
+        mobilePhone:
+          type: string
+          example: example_value
+        birthDate:
+          type: string
+          format: date
+          example: '2026-04-17T12:00:00Z'
+        gender:
+          type: string
+          enum:
+          - male
+          - female
+          - unknown
+          example: male
+        preferredLanguage:
+          type: string
+          example: example_value
+  securitySchemes:
+    SessionToken:
+      type: apiKey
+      in: header
+      name: X-Security-Token
+      description: Security token obtained from xtk:session#Logon. Must be passed alongside the session token cookie (__sessiontoken) on all authenticated requests. Tokens have a 24-hour lifecycle.
+externalDocs:
+  description: Campaign Classic SOAP Web Services Documentation
+  url: https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/web-service-calls.html

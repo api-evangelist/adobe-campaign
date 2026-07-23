@@ -1,0 +1,341 @@
+openapi: 3.1.0
+info:
+  title: Adobe Campaign Classic Custom Resources ProfileAndServices API
+  description: SOAP-based API for Adobe Campaign Classic v7 and v8, documented as HTTP POST operations. All operations target the single SOAP router endpoint at /nl/jsp/soaprouter.jsp and are differentiated by the SOAPAction header. Provides programmatic access to session management, data querying, record persistence, delivery management, workflow control, subscription management, and real-time transactional event ingestion.
+  version: 8.0.0
+  contact:
+    name: Adobe Developer Support
+    url: https://developer.adobe.com/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+  x-logo:
+    url: https://www.adobe.com/content/dam/cc/icons/adobe-campaign.svg
+servers:
+- url: https://{instance}.campaign.adobe.com
+  description: Campaign Classic Instance
+  variables:
+    instance:
+      description: Your Campaign Classic instance name
+      default: YOUR_INSTANCE
+tags:
+- name: ProfileAndServices
+paths:
+  /profileAndServices/service:
+    get:
+      operationId: listServices
+      summary: Adobe Campaign List Services
+      description: Retrieves a paginated list of subscription services.
+      tags:
+      - ProfileAndServices
+      parameters:
+      - $ref: '#/components/parameters/LineCount'
+      - $ref: '#/components/parameters/LineStart'
+      - $ref: '#/components/parameters/Order'
+      responses:
+        '200':
+          description: List of services retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedServiceResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createService
+      summary: Adobe Campaign Create a Service
+      description: Creates a new subscription service.
+      tags:
+      - ProfileAndServices
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceCreate'
+      responses:
+        '201':
+          description: Service created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /profileAndServices/service/{PKEY}:
+    get:
+      operationId: getService
+      summary: Adobe Campaign Get a Service
+      description: Retrieves a specific subscription service by its PKEY identifier.
+      tags:
+      - ProfileAndServices
+      parameters:
+      - $ref: '#/components/parameters/PKEY'
+      responses:
+        '200':
+          description: Service retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      operationId: updateService
+      summary: Adobe Campaign Update a Service
+      description: Partially updates a subscription service with the provided attributes.
+      tags:
+      - ProfileAndServices
+      parameters:
+      - $ref: '#/components/parameters/PKEY'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceUpdate'
+      responses:
+        '200':
+          description: Service updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteService
+      summary: Adobe Campaign Delete a Service
+      description: Deletes a specific subscription service by its PKEY identifier.
+      tags:
+      - ProfileAndServices
+      parameters:
+      - $ref: '#/components/parameters/PKEY'
+      responses:
+        '200':
+          description: Service deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    InternalError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication failed. Invalid or expired OAuth token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ServiceUpdate:
+      type: object
+      properties:
+        label:
+          type: string
+          example: Example Campaign
+        messageType:
+          type: string
+          enum:
+          - email
+          - sms
+          - push
+          example: email
+        start:
+          type: string
+          format: date-time
+          example: example_value
+        end:
+          type: string
+          format: date-time
+          example: example_value
+    PaginatedResponse:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            type: object
+        count:
+          type: object
+          properties:
+            href:
+              type: string
+              description: URL to get the total count.
+        next:
+          type: object
+          properties:
+            href:
+              type: string
+              description: URL for the next page of results.
+    Service:
+      type: object
+      properties:
+        PKey:
+          type: string
+          description: Unique identifier for the service.
+          readOnly: true
+          example: example_value
+        name:
+          type: string
+          description: Internal name of the service.
+          example: Example Campaign
+        label:
+          type: string
+          description: Display label of the service.
+          example: Example Campaign
+        messageType:
+          type: string
+          enum:
+          - email
+          - sms
+          - push
+          description: Default channel for the service.
+          example: email
+        start:
+          type: string
+          format: date-time
+          description: Service start date.
+          example: example_value
+        end:
+          type: string
+          format: date-time
+          description: Service end date.
+          example: example_value
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+          example: example_value
+        lastModified:
+          type: string
+          format: date-time
+          readOnly: true
+          example: example_value
+    PaginatedServiceResponse:
+      allOf:
+      - $ref: '#/components/schemas/PaginatedResponse'
+      - type: object
+        properties:
+          content:
+            type: array
+            items:
+              $ref: '#/components/schemas/Service'
+    ErrorResponse:
+      type: object
+      properties:
+        error_code:
+          type: string
+          description: Numeric error code.
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message.
+          example: example_value
+    ServiceCreate:
+      type: object
+      required:
+      - label
+      properties:
+        name:
+          type: string
+          example: Example Campaign
+        label:
+          type: string
+          example: Example Campaign
+        messageType:
+          type: string
+          enum:
+          - email
+          - sms
+          - push
+          example: email
+  parameters:
+    LineStart:
+      name: _lineStart
+      in: query
+      required: false
+      description: Pagination offset from the next node in previous response.
+      schema:
+        type: integer
+    Order:
+      name: _order
+      in: query
+      required: false
+      description: Sort order. Use field name for ascending, append %20desc for descending (e.g., email%20desc).
+      schema:
+        type: string
+    LineCount:
+      name: _lineCount
+      in: query
+      required: false
+      description: Number of records to return per page. Default is 25.
+      schema:
+        type: integer
+        default: 25
+    PKEY:
+      name: PKEY
+      in: path
+      required: true
+      description: The unique PKEY identifier of the resource.
+      schema:
+        type: string
+  securitySchemes:
+    SessionToken:
+      type: apiKey
+      in: header
+      name: X-Security-Token
+      description: Security token obtained from xtk:session#Logon. Must be passed alongside the session token cookie (__sessiontoken) on all authenticated requests. Tokens have a 24-hour lifecycle.
+externalDocs:
+  description: Campaign Classic SOAP Web Services Documentation
+  url: https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/web-service-calls.html

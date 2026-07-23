@@ -1,0 +1,130 @@
+openapi: 3.1.0
+info:
+  title: Adobe Campaign Classic Custom Resources Metadata API
+  description: SOAP-based API for Adobe Campaign Classic v7 and v8, documented as HTTP POST operations. All operations target the single SOAP router endpoint at /nl/jsp/soaprouter.jsp and are differentiated by the SOAPAction header. Provides programmatic access to session management, data querying, record persistence, delivery management, workflow control, subscription management, and real-time transactional event ingestion.
+  version: 8.0.0
+  contact:
+    name: Adobe Developer Support
+    url: https://developer.adobe.com/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+  x-logo:
+    url: https://www.adobe.com/content/dam/cc/icons/adobe-campaign.svg
+servers:
+- url: https://{instance}.campaign.adobe.com
+  description: Campaign Classic Instance
+  variables:
+    instance:
+      description: Your Campaign Classic instance name
+      default: YOUR_INSTANCE
+tags:
+- name: Metadata
+  description: Discover resource schemas, fields, filters, and data policies for Campaign Standard resources.
+paths:
+  /profileAndServices/resourceType/{resourceName}:
+    get:
+      operationId: getResourceMetadata
+      summary: Adobe Campaign Get Resource Metadata
+      description: Retrieves metadata for a Campaign Standard resource, including field definitions, data types, available filters, and data policies.
+      tags:
+      - Metadata
+      parameters:
+      - name: resourceName
+        in: path
+        required: true
+        description: The name of the resource to describe.
+        schema:
+          type: string
+        example: Example Campaign
+      responses:
+        '200':
+          description: Resource metadata retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceMetadata'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    InternalError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication failed. Invalid or expired OAuth token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error_code:
+          type: string
+          description: Numeric error code.
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message.
+          example: example_value
+    ResourceMetadata:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The resource name.
+          example: Example Campaign
+        fields:
+          type: array
+          description: List of fields in the resource.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: Field name.
+              type:
+                type: string
+                description: Data type of the field.
+              label:
+                type: string
+                description: Display label of the field.
+        filters:
+          type: array
+          description: Available filters for the resource.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              parameters:
+                type: array
+                items:
+                  type: string
+  securitySchemes:
+    SessionToken:
+      type: apiKey
+      in: header
+      name: X-Security-Token
+      description: Security token obtained from xtk:session#Logon. Must be passed alongside the session token cookie (__sessiontoken) on all authenticated requests. Tokens have a 24-hour lifecycle.
+externalDocs:
+  description: Campaign Classic SOAP Web Services Documentation
+  url: https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/web-service-calls.html

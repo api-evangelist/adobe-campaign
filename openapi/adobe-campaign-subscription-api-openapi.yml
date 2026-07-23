@@ -1,0 +1,142 @@
+openapi: 3.1.0
+info:
+  title: Adobe Campaign Classic Custom Resources Subscription API
+  description: SOAP-based API for Adobe Campaign Classic v7 and v8, documented as HTTP POST operations. All operations target the single SOAP router endpoint at /nl/jsp/soaprouter.jsp and are differentiated by the SOAPAction header. Provides programmatic access to session management, data querying, record persistence, delivery management, workflow control, subscription management, and real-time transactional event ingestion.
+  version: 8.0.0
+  contact:
+    name: Adobe Developer Support
+    url: https://developer.adobe.com/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+  x-logo:
+    url: https://www.adobe.com/content/dam/cc/icons/adobe-campaign.svg
+servers:
+- url: https://{instance}.campaign.adobe.com
+  description: Campaign Classic Instance
+  variables:
+    instance:
+      description: Your Campaign Classic instance name
+      default: YOUR_INSTANCE
+tags:
+- name: Subscription
+  description: Subscribe and unsubscribe recipients to and from information services.
+paths:
+  /nl/jsp/soaprouter.jsp/nms-subscription/Subscribe:
+    post:
+      operationId: subscribe
+      summary: Adobe Campaign Subscribe a Recipient to a Service
+      description: 'Subscribes a recipient to an information service. Requires the service name and a recipient DOM element. SOAP Action: nms:subscription#Subscribe'
+      tags:
+      - Subscription
+      parameters:
+      - name: SOAPAction
+        in: header
+        required: true
+        schema:
+          type: string
+          const: nms:subscription#Subscribe
+        example: example_value
+      security:
+      - SessionToken: []
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/SubscriptionRequest'
+      responses:
+        '200':
+          description: Recipient subscribed successfully.
+        '500':
+          $ref: '#/components/responses/SOAPFault'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /nl/jsp/soaprouter.jsp/nms-subscription/Unsubscribe:
+    post:
+      operationId: unsubscribe
+      summary: Adobe Campaign Unsubscribe a Recipient from a Service
+      description: 'Unsubscribes a recipient from an information service. SOAP Action: nms:subscription#Unsubscribe'
+      tags:
+      - Subscription
+      parameters:
+      - name: SOAPAction
+        in: header
+        required: true
+        schema:
+          type: string
+          const: nms:subscription#Unsubscribe
+        example: example_value
+      security:
+      - SessionToken: []
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/SubscriptionRequest'
+      responses:
+        '200':
+          description: Recipient unsubscribed successfully.
+        '500':
+          $ref: '#/components/responses/SOAPFault'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    SubscriptionRequest:
+      type: object
+      description: SOAP envelope containing the service name and recipient DOM element for subscribe/unsubscribe operations.
+      properties:
+        serviceName:
+          type: string
+          description: Internal name of the information service.
+          example: Example Campaign
+        recipient:
+          type: object
+          description: Recipient DOM element identifying the subscriber.
+          properties:
+            email:
+              type: string
+              description: Email address of the recipient.
+            id:
+              type: integer
+              description: Internal ID of the recipient.
+        create:
+          type: boolean
+          description: Whether to create the recipient if not found (subscribe only).
+          example: true
+    SOAPFault:
+      type: object
+      description: SOAP fault response indicating an error during operation processing.
+      properties:
+        faultcode:
+          type: string
+          description: Fault code identifying the error category.
+          example: example_value
+        faultstring:
+          type: string
+          description: Human-readable description of the error.
+          example: example_value
+        detail:
+          type: string
+          description: Additional error details.
+          example: example_value
+  responses:
+    SOAPFault:
+      description: SOAP fault indicating an error during operation processing.
+      content:
+        text/xml:
+          schema:
+            $ref: '#/components/schemas/SOAPFault'
+  securitySchemes:
+    SessionToken:
+      type: apiKey
+      in: header
+      name: X-Security-Token
+      description: Security token obtained from xtk:session#Logon. Must be passed alongside the session token cookie (__sessiontoken) on all authenticated requests. Tokens have a 24-hour lifecycle.
+externalDocs:
+  description: Campaign Classic SOAP Web Services Documentation
+  url: https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/web-service-calls.html

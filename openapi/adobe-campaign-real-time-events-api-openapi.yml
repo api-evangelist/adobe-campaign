@@ -1,0 +1,175 @@
+openapi: 3.1.0
+info:
+  title: Adobe Campaign Classic Custom Resources Real-Time Events API
+  description: SOAP-based API for Adobe Campaign Classic v7 and v8, documented as HTTP POST operations. All operations target the single SOAP router endpoint at /nl/jsp/soaprouter.jsp and are differentiated by the SOAPAction header. Provides programmatic access to session management, data querying, record persistence, delivery management, workflow control, subscription management, and real-time transactional event ingestion.
+  version: 8.0.0
+  contact:
+    name: Adobe Developer Support
+    url: https://developer.adobe.com/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+  x-logo:
+    url: https://www.adobe.com/content/dam/cc/icons/adobe-campaign.svg
+servers:
+- url: https://{instance}.campaign.adobe.com
+  description: Campaign Classic Instance
+  variables:
+    instance:
+      description: Your Campaign Classic instance name
+      default: YOUR_INSTANCE
+tags:
+- name: Real-Time Events
+  description: Push real-time transactional events for immediate or batched processing by the Message Center execution instances.
+paths:
+  /nl/jsp/soaprouter.jsp/nms-rtEvent/PushEvent:
+    post:
+      operationId: pushEvent
+      summary: Adobe Campaign Push a Real-time Transactional Event
+      description: 'Pushes a single real-time event to the Message Center execution instance for transactional message processing. The event must include the event type and recipient context data. Supports email, SMS, and push notification channels. SOAP Action: nms:rtEvent#PushEvent'
+      tags:
+      - Real-Time Events
+      parameters:
+      - name: SOAPAction
+        in: header
+        required: true
+        schema:
+          type: string
+          const: nms:rtEvent#PushEvent
+        example: example_value
+      security:
+      - SessionToken: []
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/PushEventRequest'
+      responses:
+        '200':
+          description: Event accepted for processing. Returns the event ID.
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PushEventResponse'
+        '500':
+          $ref: '#/components/responses/SOAPFault'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /nl/jsp/soaprouter.jsp/nms-batchEvent/PushEvents:
+    post:
+      operationId: pushEvents
+      summary: Adobe Campaign Push Batch Real-time Events
+      description: 'Pushes a batch of real-time events to the Message Center execution instance for transactional message processing. More efficient than individual PushEvent calls when sending multiple events. SOAP Action: nms:batchEvent#PushEvents'
+      tags:
+      - Real-Time Events
+      parameters:
+      - name: SOAPAction
+        in: header
+        required: true
+        schema:
+          type: string
+          const: nms:batchEvent#PushEvents
+        example: example_value
+      security:
+      - SessionToken: []
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/PushEventsRequest'
+      responses:
+        '200':
+          description: Batch of events accepted for processing.
+        '500':
+          $ref: '#/components/responses/SOAPFault'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    PushEventsRequest:
+      type: object
+      description: SOAP envelope containing a batch of real-time events for bulk transactional message processing.
+      properties:
+        events:
+          type: array
+          description: Array of rtEvent elements.
+          items:
+            $ref: '#/components/schemas/PushEventRequest/properties/rtEvent'
+    SOAPFault:
+      type: object
+      description: SOAP fault response indicating an error during operation processing.
+      properties:
+        faultcode:
+          type: string
+          description: Fault code identifying the error category.
+          example: example_value
+        faultstring:
+          type: string
+          description: Human-readable description of the error.
+          example: example_value
+        detail:
+          type: string
+          description: Additional error details.
+          example: example_value
+    PushEventRequest:
+      type: object
+      description: SOAP envelope containing a real-time event for transactional message processing. The rtEvent element includes mandatory attributes for event type and recipient contact, plus a ctx child element for message personalization data.
+      properties:
+        rtEvent:
+          type: object
+          properties:
+            type:
+              type: string
+              description: Event type name matching the Message Center event configuration.
+            email:
+              type: string
+              format: email
+              description: Recipient email address.
+            origin:
+              type: string
+              description: Origin identifier for tracking the event source.
+            wishedChannel:
+              type: integer
+              description: Preferred delivery channel. 0 = email, 1 = mobile (SMS), 2 = phone, 3 = push notification.
+            externalId:
+              type: string
+              description: External identifier for deduplication.
+            mobilePhone:
+              type: string
+              description: Recipient mobile phone number (for SMS channel).
+            scheduled:
+              type: string
+              format: date-time
+              description: Optional scheduled processing time.
+            ctx:
+              type: object
+              description: Context data XML element containing personalization variables for the transactional message template.
+              additionalProperties: true
+    PushEventResponse:
+      type: object
+      description: SOAP response containing the assigned event ID for tracking.
+      properties:
+        eventId:
+          type: integer
+          description: Unique identifier assigned to the ingested event.
+          example: 42
+  responses:
+    SOAPFault:
+      description: SOAP fault indicating an error during operation processing.
+      content:
+        text/xml:
+          schema:
+            $ref: '#/components/schemas/SOAPFault'
+  securitySchemes:
+    SessionToken:
+      type: apiKey
+      in: header
+      name: X-Security-Token
+      description: Security token obtained from xtk:session#Logon. Must be passed alongside the session token cookie (__sessiontoken) on all authenticated requests. Tokens have a 24-hour lifecycle.
+externalDocs:
+  description: Campaign Classic SOAP Web Services Documentation
+  url: https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/web-service-calls.html

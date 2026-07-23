@@ -1,0 +1,153 @@
+openapi: 3.1.0
+info:
+  title: Adobe Campaign Classic Custom Resources Subscriptions API
+  description: SOAP-based API for Adobe Campaign Classic v7 and v8, documented as HTTP POST operations. All operations target the single SOAP router endpoint at /nl/jsp/soaprouter.jsp and are differentiated by the SOAPAction header. Provides programmatic access to session management, data querying, record persistence, delivery management, workflow control, subscription management, and real-time transactional event ingestion.
+  version: 8.0.0
+  contact:
+    name: Adobe Developer Support
+    url: https://developer.adobe.com/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+  x-logo:
+    url: https://www.adobe.com/content/dam/cc/icons/adobe-campaign.svg
+servers:
+- url: https://{instance}.campaign.adobe.com
+  description: Campaign Classic Instance
+  variables:
+    instance:
+      description: Your Campaign Classic instance name
+      default: YOUR_INSTANCE
+tags:
+- name: Subscriptions
+  description: Subscribe and unsubscribe profiles to and from services.
+paths:
+  /profileAndServices/profile/{PKEY}/subscriptions:
+    post:
+      operationId: subscribeProfile
+      summary: Adobe Campaign Subscribe a Profile to a Service
+      description: Subscribes a profile to a subscription service by providing the service PKEY in the request body.
+      tags:
+      - Subscriptions
+      parameters:
+      - $ref: '#/components/parameters/PKEY'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubscriptionRequest'
+      responses:
+        '201':
+          description: Profile subscribed successfully.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /profileAndServices/service/{servicePKEY}/subscriptions/{profilePKEY}:
+    delete:
+      operationId: unsubscribeProfile
+      summary: Adobe Campaign Unsubscribe a Profile from a Service
+      description: Removes a profile subscription from a service.
+      tags:
+      - Subscriptions
+      parameters:
+      - name: servicePKEY
+        in: path
+        required: true
+        description: The PKEY of the service.
+        schema:
+          type: string
+        example: example_value
+      - name: profilePKEY
+        in: path
+        required: true
+        description: The PKEY of the profile to unsubscribe.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Profile unsubscribed successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    InternalError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication failed. Invalid or expired OAuth token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error_code:
+          type: string
+          description: Numeric error code.
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message.
+          example: example_value
+    SubscriptionRequest:
+      type: object
+      required:
+      - service
+      properties:
+        service:
+          type: object
+          properties:
+            PKey:
+              type: string
+              description: The PKEY of the service to subscribe to.
+  parameters:
+    PKEY:
+      name: PKEY
+      in: path
+      required: true
+      description: The unique PKEY identifier of the resource.
+      schema:
+        type: string
+  securitySchemes:
+    SessionToken:
+      type: apiKey
+      in: header
+      name: X-Security-Token
+      description: Security token obtained from xtk:session#Logon. Must be passed alongside the session token cookie (__sessiontoken) on all authenticated requests. Tokens have a 24-hour lifecycle.
+externalDocs:
+  description: Campaign Classic SOAP Web Services Documentation
+  url: https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/web-service-calls.html

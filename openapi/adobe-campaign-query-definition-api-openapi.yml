@@ -1,0 +1,133 @@
+openapi: 3.1.0
+info:
+  title: Adobe Campaign Classic Custom Resources Query Definition API
+  description: SOAP-based API for Adobe Campaign Classic v7 and v8, documented as HTTP POST operations. All operations target the single SOAP router endpoint at /nl/jsp/soaprouter.jsp and are differentiated by the SOAPAction header. Provides programmatic access to session management, data querying, record persistence, delivery management, workflow control, subscription management, and real-time transactional event ingestion.
+  version: 8.0.0
+  contact:
+    name: Adobe Developer Support
+    url: https://developer.adobe.com/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+  x-logo:
+    url: https://www.adobe.com/content/dam/cc/icons/adobe-campaign.svg
+servers:
+- url: https://{instance}.campaign.adobe.com
+  description: Campaign Classic Instance
+  variables:
+    instance:
+      description: Your Campaign Classic instance name
+      default: YOUR_INSTANCE
+tags:
+- name: Query Definition
+  description: Execute queries against Campaign schemas using the xtk:queryDef interface. Supports get, getIfExists, select, and count operations with XPath field expressions, WHERE conditions, and pagination.
+paths:
+  /nl/jsp/soaprouter.jsp/xtk-queryDef/ExecuteQuery:
+    post:
+      operationId: executeQuery
+      summary: Adobe Campaign Execute a Query
+      description: 'Executes a query against a Campaign schema using the xtk:queryDef interface. Supports operations: get (single record, error if missing), getIfExists (single record, null if missing), select (multiple records with pagination), and count (record count). Uses XPath expressions for field selection and WHERE conditions. SOAP Action: xtk:queryDef#ExecuteQuery'
+      tags:
+      - Query Definition
+      parameters:
+      - name: SOAPAction
+        in: header
+        required: true
+        schema:
+          type: string
+          const: xtk:queryDef#ExecuteQuery
+        example: example_value
+      security:
+      - SessionToken: []
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/QueryDefinition'
+      responses:
+        '200':
+          description: Query executed successfully.
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/QueryResult'
+        '500':
+          $ref: '#/components/responses/SOAPFault'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    QueryDefinition:
+      type: object
+      description: SOAP envelope containing a query definition with schema, operation, selected fields, conditions, and pagination parameters.
+      properties:
+        queryDef:
+          type: object
+          properties:
+            schema:
+              type: string
+              description: Target schema name (e.g., nms:recipient, nms:delivery).
+            operation:
+              type: string
+              enum:
+              - get
+              - getIfExists
+              - select
+              - count
+              description: Query operation type. get returns single record (error if missing), getIfExists returns single or null, select returns multiple records, count returns record count.
+            lineCount:
+              type: integer
+              description: Maximum number of records to return.
+            startLine:
+              type: integer
+              description: Starting offset for pagination.
+            select:
+              type: object
+              description: Field selection using XPath node elements.
+            where:
+              type: object
+              description: WHERE conditions using condition elements with expr attributes.
+            orderBy:
+              type: object
+              description: ORDER BY clause with sortNode elements.
+    QueryResult:
+      type: object
+      description: SOAP response containing query result set as XML elements matching the target schema structure.
+      properties:
+        resultSet:
+          type: object
+          description: Collection of result records matching the query criteria.
+    SOAPFault:
+      type: object
+      description: SOAP fault response indicating an error during operation processing.
+      properties:
+        faultcode:
+          type: string
+          description: Fault code identifying the error category.
+          example: example_value
+        faultstring:
+          type: string
+          description: Human-readable description of the error.
+          example: example_value
+        detail:
+          type: string
+          description: Additional error details.
+          example: example_value
+  responses:
+    SOAPFault:
+      description: SOAP fault indicating an error during operation processing.
+      content:
+        text/xml:
+          schema:
+            $ref: '#/components/schemas/SOAPFault'
+  securitySchemes:
+    SessionToken:
+      type: apiKey
+      in: header
+      name: X-Security-Token
+      description: Security token obtained from xtk:session#Logon. Must be passed alongside the session token cookie (__sessiontoken) on all authenticated requests. Tokens have a 24-hour lifecycle.
+externalDocs:
+  description: Campaign Classic SOAP Web Services Documentation
+  url: https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/web-service-calls.html

@@ -1,0 +1,165 @@
+openapi: 3.1.0
+info:
+  title: Adobe Campaign Classic Custom Resources Data Management API
+  description: SOAP-based API for Adobe Campaign Classic v7 and v8, documented as HTTP POST operations. All operations target the single SOAP router endpoint at /nl/jsp/soaprouter.jsp and are differentiated by the SOAPAction header. Provides programmatic access to session management, data querying, record persistence, delivery management, workflow control, subscription management, and real-time transactional event ingestion.
+  version: 8.0.0
+  contact:
+    name: Adobe Developer Support
+    url: https://developer.adobe.com/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+  x-logo:
+    url: https://www.adobe.com/content/dam/cc/icons/adobe-campaign.svg
+servers:
+- url: https://{instance}.campaign.adobe.com
+  description: Campaign Classic Instance
+  variables:
+    instance:
+      description: Your Campaign Classic instance name
+      default: YOUR_INSTANCE
+tags:
+- name: Data Management
+  description: Write, update, and delete data records using the xtk:session#Write method. Supports insert, insertOrUpdate, update, and delete operations via the _operation attribute.
+paths:
+  /nl/jsp/soaprouter.jsp/xtk-session/Write:
+    post:
+      operationId: sessionWrite
+      summary: Adobe Campaign Write Data Records
+      description: 'Writes data records to a Campaign schema. The _operation attribute on the entity element controls the behavior: insert (create new), insertOrUpdate (create or update if exists), update (modify existing), delete (remove record). SOAP Action: xtk:session#Write'
+      tags:
+      - Data Management
+      parameters:
+      - name: SOAPAction
+        in: header
+        required: true
+        schema:
+          type: string
+          const: xtk:session#Write
+        example: example_value
+      security:
+      - SessionToken: []
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/WriteRequest'
+      responses:
+        '200':
+          description: Data written successfully.
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/WriteResponse'
+        '500':
+          $ref: '#/components/responses/SOAPFault'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /nl/jsp/soaprouter.jsp/xtk-session/WriteCollection:
+    post:
+      operationId: sessionWriteCollection
+      summary: Adobe Campaign Write Multiple Data Records
+      description: 'Writes a collection of data records to a Campaign schema in a single call. Each entity element in the collection can have its own _operation attribute. SOAP Action: xtk:session#WriteCollection'
+      tags:
+      - Data Management
+      parameters:
+      - name: SOAPAction
+        in: header
+        required: true
+        schema:
+          type: string
+          const: xtk:session#WriteCollection
+        example: example_value
+      security:
+      - SessionToken: []
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/WriteCollectionRequest'
+      responses:
+        '200':
+          description: Data collection written successfully.
+        '500':
+          $ref: '#/components/responses/SOAPFault'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    WriteRequest:
+      type: object
+      description: SOAP envelope containing an entity element for the target schema with attribute values and an _operation attribute controlling the write behavior.
+      properties:
+        entity:
+          type: object
+          properties:
+            _operation:
+              type: string
+              enum:
+              - insert
+              - insertOrUpdate
+              - update
+              - delete
+              description: The write operation to perform. insert creates a new record, insertOrUpdate creates or updates, update modifies existing, delete removes.
+            _schema:
+              type: string
+              description: Target schema name.
+    WriteResponse:
+      type: object
+      description: SOAP response confirming the write operation. Returns the primary key of the affected record for insert operations.
+      properties:
+        primaryKey:
+          type: string
+          description: Primary key of the created or modified record.
+          example: example_value
+    SOAPFault:
+      type: object
+      description: SOAP fault response indicating an error during operation processing.
+      properties:
+        faultcode:
+          type: string
+          description: Fault code identifying the error category.
+          example: example_value
+        faultstring:
+          type: string
+          description: Human-readable description of the error.
+          example: example_value
+        detail:
+          type: string
+          description: Additional error details.
+          example: example_value
+    WriteCollectionRequest:
+      type: object
+      description: SOAP envelope containing a collection of entity elements for batch write operations. Each entity can specify its own _operation.
+      properties:
+        collection:
+          type: object
+          properties:
+            _schema:
+              type: string
+              description: Target schema name for all entities.
+            entities:
+              type: array
+              description: Array of entity elements to write.
+              items:
+                type: object
+  responses:
+    SOAPFault:
+      description: SOAP fault indicating an error during operation processing.
+      content:
+        text/xml:
+          schema:
+            $ref: '#/components/schemas/SOAPFault'
+  securitySchemes:
+    SessionToken:
+      type: apiKey
+      in: header
+      name: X-Security-Token
+      description: Security token obtained from xtk:session#Logon. Must be passed alongside the session token cookie (__sessiontoken) on all authenticated requests. Tokens have a 24-hour lifecycle.
+externalDocs:
+  description: Campaign Classic SOAP Web Services Documentation
+  url: https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/web-service-calls.html

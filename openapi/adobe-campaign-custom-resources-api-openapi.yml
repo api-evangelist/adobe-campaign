@@ -1,0 +1,175 @@
+openapi: 3.1.0
+info:
+  title: Adobe Campaign Classic Custom Resources API
+  description: SOAP-based API for Adobe Campaign Classic v7 and v8, documented as HTTP POST operations. All operations target the single SOAP router endpoint at /nl/jsp/soaprouter.jsp and are differentiated by the SOAPAction header. Provides programmatic access to session management, data querying, record persistence, delivery management, workflow control, subscription management, and real-time transactional event ingestion.
+  version: 8.0.0
+  contact:
+    name: Adobe Developer Support
+    url: https://developer.adobe.com/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+  x-logo:
+    url: https://www.adobe.com/content/dam/cc/icons/adobe-campaign.svg
+servers:
+- url: https://{instance}.campaign.adobe.com
+  description: Campaign Classic Instance
+  variables:
+    instance:
+      description: Your Campaign Classic instance name
+      default: YOUR_INSTANCE
+tags:
+- name: Custom Resources
+  description: Access custom resources defined in Campaign Standard, both profile-linked and standalone.
+paths:
+  /profileAndServicesExt/{cusResourceName}:
+    get:
+      operationId: listProfileLinkedCustomResources
+      summary: Adobe Campaign List Profile-linked Custom Resources
+      description: Retrieves records from a profile-linked custom resource. Custom resources are defined with the cus prefix in Campaign Standard.
+      tags:
+      - Custom Resources
+      parameters:
+      - name: cusResourceName
+        in: path
+        required: true
+        description: The name of the custom resource (with cus prefix, e.g., cusMyResource).
+        schema:
+          type: string
+        example: Example Campaign
+      - $ref: '#/components/parameters/LineCount'
+      - $ref: '#/components/parameters/LineStart'
+      - $ref: '#/components/parameters/Order'
+      responses:
+        '200':
+          description: Custom resource records retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /customResources/{cusResourceName}:
+    get:
+      operationId: listCustomResources
+      summary: Adobe Campaign List Non-profile Custom Resources
+      description: Retrieves records from a standalone custom resource not linked to profiles.
+      tags:
+      - Custom Resources
+      parameters:
+      - name: cusResourceName
+        in: path
+        required: true
+        description: The name of the custom resource.
+        schema:
+          type: string
+        example: Example Campaign
+      - $ref: '#/components/parameters/LineCount'
+      - $ref: '#/components/parameters/LineStart'
+      - $ref: '#/components/parameters/Order'
+      responses:
+        '200':
+          description: Custom resource records retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    InternalError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication failed. Invalid or expired OAuth token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    LineStart:
+      name: _lineStart
+      in: query
+      required: false
+      description: Pagination offset from the next node in previous response.
+      schema:
+        type: integer
+    Order:
+      name: _order
+      in: query
+      required: false
+      description: Sort order. Use field name for ascending, append %20desc for descending (e.g., email%20desc).
+      schema:
+        type: string
+    LineCount:
+      name: _lineCount
+      in: query
+      required: false
+      description: Number of records to return per page. Default is 25.
+      schema:
+        type: integer
+        default: 25
+  schemas:
+    PaginatedResponse:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            type: object
+        count:
+          type: object
+          properties:
+            href:
+              type: string
+              description: URL to get the total count.
+        next:
+          type: object
+          properties:
+            href:
+              type: string
+              description: URL for the next page of results.
+    ErrorResponse:
+      type: object
+      properties:
+        error_code:
+          type: string
+          description: Numeric error code.
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message.
+          example: example_value
+  securitySchemes:
+    SessionToken:
+      type: apiKey
+      in: header
+      name: X-Security-Token
+      description: Security token obtained from xtk:session#Logon. Must be passed alongside the session token cookie (__sessiontoken) on all authenticated requests. Tokens have a 24-hour lifecycle.
+externalDocs:
+  description: Campaign Classic SOAP Web Services Documentation
+  url: https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/web-service-calls.html

@@ -1,0 +1,146 @@
+openapi: 3.1.0
+info:
+  title: Adobe Campaign Classic Custom Resources Organizational Units API
+  description: SOAP-based API for Adobe Campaign Classic v7 and v8, documented as HTTP POST operations. All operations target the single SOAP router endpoint at /nl/jsp/soaprouter.jsp and are differentiated by the SOAPAction header. Provides programmatic access to session management, data querying, record persistence, delivery management, workflow control, subscription management, and real-time transactional event ingestion.
+  version: 8.0.0
+  contact:
+    name: Adobe Developer Support
+    url: https://developer.adobe.com/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+  x-logo:
+    url: https://www.adobe.com/content/dam/cc/icons/adobe-campaign.svg
+servers:
+- url: https://{instance}.campaign.adobe.com
+  description: Campaign Classic Instance
+  variables:
+    instance:
+      description: Your Campaign Classic instance name
+      default: YOUR_INSTANCE
+tags:
+- name: Organizational Units
+  description: Retrieve organizational unit structures used for access control and data partitioning.
+paths:
+  /profileAndServicesExt/orgUnitBase:
+    get:
+      operationId: listOrgUnits
+      summary: Adobe Campaign List Organizational Units
+      description: Retrieves the list of organizational units used for access control and data partitioning.
+      tags:
+      - Organizational Units
+      parameters:
+      - $ref: '#/components/parameters/LineCount'
+      - $ref: '#/components/parameters/LineStart'
+      responses:
+        '200':
+          description: Organizational units retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedOrgUnitResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    InternalError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication failed. Invalid or expired OAuth token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    LineStart:
+      name: _lineStart
+      in: query
+      required: false
+      description: Pagination offset from the next node in previous response.
+      schema:
+        type: integer
+    LineCount:
+      name: _lineCount
+      in: query
+      required: false
+      description: Number of records to return per page. Default is 25.
+      schema:
+        type: integer
+        default: 25
+  schemas:
+    PaginatedResponse:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            type: object
+        count:
+          type: object
+          properties:
+            href:
+              type: string
+              description: URL to get the total count.
+        next:
+          type: object
+          properties:
+            href:
+              type: string
+              description: URL for the next page of results.
+    OrgUnit:
+      type: object
+      properties:
+        PKey:
+          type: string
+          description: Unique identifier for the organizational unit.
+          example: example_value
+        name:
+          type: string
+          description: Internal name of the organizational unit.
+          example: Example Campaign
+        label:
+          type: string
+          description: Display label of the organizational unit.
+          example: Example Campaign
+        parentTitle:
+          type: string
+          description: Label of the parent organizational unit.
+          example: example_value
+    ErrorResponse:
+      type: object
+      properties:
+        error_code:
+          type: string
+          description: Numeric error code.
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message.
+          example: example_value
+    PaginatedOrgUnitResponse:
+      allOf:
+      - $ref: '#/components/schemas/PaginatedResponse'
+      - type: object
+        properties:
+          content:
+            type: array
+            items:
+              $ref: '#/components/schemas/OrgUnit'
+  securitySchemes:
+    SessionToken:
+      type: apiKey
+      in: header
+      name: X-Security-Token
+      description: Security token obtained from xtk:session#Logon. Must be passed alongside the session token cookie (__sessiontoken) on all authenticated requests. Tokens have a 24-hour lifecycle.
+externalDocs:
+  description: Campaign Classic SOAP Web Services Documentation
+  url: https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/web-service-calls.html
