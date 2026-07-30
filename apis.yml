@@ -4,7 +4,20 @@ name: Adobe Campaign
 description: Adobe Campaign is a comprehensive marketing automation platform that
   enables businesses to orchestrate personalized customer experiences across multiple
   channels including email, mobile, social, and web.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/adobe-campaign.png
 type: Index
 tags:
   - Campaign Management
@@ -16,124 +29,585 @@ created: '2024-01-01'
 modified: '2026-04-17'
 specificationVersion: '0.19'
 apis:
-  - name: Adobe Campaign Standard API
-    description: REST API for Adobe Campaign Standard enabling integration with marketing
-      campaigns, profiles, workflows, and messaging services.
-    image: https://www.adobe.com/content/dam/cc/icons/adobe-campaign.svg
-    humanURL: https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/about-campaign-standard-apis.html
-    baseURL: https://mc.adobe.io/{ORGANIZATION}/campaign
-    tags:
-    - Email
-    - Marketing
-    - Profiles
-    - REST API
-    - Workflows
-    properties:
-    - type: Documentation
-      url: https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/get-started-apis.html
-    - type: OpenAPI
-      url: openapi/adobe-campaign-standard-openapi-original.yml
-    - type: APIReference
-      url: https://developer.adobe.com/campaign/api/
-    - type: Authentication
-      url: https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/authentication.html
-    - type: AsyncAPI
-      url: asyncapi/adobe-campaign-transactional-messaging-asyncapi-original.yml
-    aid: adobe-campaign:standard-api
-  - name: Adobe Campaign Classic API
-    description: SOAP and JavaScript APIs for Adobe Campaign Classic v7 and v8, providing
-      programmatic access to campaign management, delivery, and data operations.
-    image: https://www.adobe.com/content/dam/cc/icons/adobe-campaign.svg
-    humanURL: https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/about-web-services.html
-    baseURL: https://{instance}.campaign.adobe.com
-    tags:
-    - Campaign Classic
-    - Delivery
-    - JavaScript
-    - SOAP API
-    properties:
-    - type: Documentation
-      url: https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/web-service-calls.html
-    - type: OpenAPI
-      url: openapi/adobe-campaign-classic-openapi-original.yml
-    - type: JSAPI Reference
-      url: https://experienceleague.adobe.com/developer/campaign-api/api/index.html
-    - type: SOAP Methods
-      url: https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/soap-methods.html
-    - type: AsyncAPI
-      url: asyncapi/adobe-campaign-transactional-messaging-asyncapi-original.yml
-    aid: adobe-campaign:classic-api
-  - name: Adobe Campaign Classic JavaScript SDK
-    description: An open-source JavaScript SDK that wraps Adobe Campaign Classic SOAP
-      APIs in a simple, expressive, JavaScript-idiomatic interface. The SDK supports
-      asynchronous promise-based operations for querying, data management, workflow
-      control, and session management. It works server-side with Node.js and client-side
-      in the browser, abstracting away SOAP calls, XML-to-JSON conversion, and type
-      formatting. Compatible with Campaign Classic v7 and v8.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://opensource.adobe.com/acc-js-sdk/
-    baseURL: https://{instance}.campaign.adobe.com
-    tags:
-    - Campaign Classic
-    - JavaScript SDK
-    - Node.js
-    - Open Source
-    - SOAP Wrapper
-    properties:
-    - type: Documentation
-      url: https://opensource.adobe.com/acc-js-sdk/
-    - type: GitHubRepository
-      url: https://github.com/adobe/acc-js-sdk
-    - type: NPMPackage
-      url: https://www.npmjs.com/package/@adobe/acc-js-sdk
-    aid: adobe-campaign:classic-javascript-sdk
-  - name: Adobe I/O Campaign Standard SDK
-    description: A Node.js JavaScript SDK wrapping Adobe Campaign Standard REST APIs
-      for use in Adobe I/O Runtime and App Builder applications. Provides convenience
-      methods for profile management, service operations, workflow control, transactional
-      messaging, GDPR compliance requests, and custom resource management. Handles authentication
-      and API communication for building serverless integrations with Campaign Standard.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://github.com/adobe/aio-lib-campaign-standard
-    baseURL: https://mc.adobe.io/{ORGANIZATION}/campaign
-    tags:
-    - Adobe I/O
-    - App Builder
-    - Campaign Standard
-    - JavaScript SDK
-    - Node.js
-    properties:
-    - type: Documentation
-      url: https://github.com/adobe/aio-lib-campaign-standard/blob/master/README.md
-    - type: GitHubRepository
-      url: https://github.com/adobe/aio-lib-campaign-standard
-    - type: NPMPackage
-      url: https://www.npmjs.com/package/@adobe/aio-lib-campaign-standard
-    aid: adobe-campaign:io-campaign-standard-sdk
-  - name: Adobe Experience Platform Mobile SDK - Campaign Extensions
-    description: Native mobile SDK extensions for iOS and Android that integrate Adobe
-      Campaign push notifications, in-app messaging, and local notifications into mobile
-      applications. Includes the Campaign Classic extension for v7 and v8 providing
-      device registration and notification click tracking, and the Campaign Standard
-      extension providing push identifier management and message interaction tracking.
-      Part of the Adobe Experience Platform Mobile SDK framework.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://developer.adobe.com/client-sdks/solution/adobe-campaign-classic/
-    baseURL: https://api.example.com
-    tags:
-    - Android
-    - In-App Messaging
-    - iOS
-    - Mobile SDK
-    - Push Notifications
-    properties:
-    - type: Documentation
-      url: https://developer.adobe.com/client-sdks/solution/adobe-campaign-classic/
-    - type: Documentation
-      url: https://developer.adobe.com/client-sdks/solution/adobe-campaign-standard/
-    - type: APIReference
-      url: https://developer.adobe.com/client-sdks/solution/adobe-campaign-classic/api-reference/
-    aid: adobe-campaign:experience-platform-mobile-sdk---campaign-extensions
+- name: Adobe Campaign Classic JavaScript SDK
+  description: >-
+    An open-source JavaScript SDK that wraps Adobe Campaign Classic SOAP APIs in a simple, expressive,
+    JavaScript-idiomatic interface. The SDK supports asynchronous promise-based operations for querying,
+    data management, workflow control, and session management. It works server-side with Node.js and client-side
+    in the browser, abstracting away SOAP calls, XML-to-JSON conversion, and type formatting. Compatible
+    with Campaign Classic v7 and v8.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://opensource.adobe.com/acc-js-sdk/
+  baseURL: https://{instance}.campaign.adobe.com
+  tags:
+  - Campaign Classic
+  - JavaScript SDK
+  - Node.js
+  - Open Source
+  - SOAP Wrapper
+  properties:
+  - type: Documentation
+    url: https://opensource.adobe.com/acc-js-sdk/
+  - type: GitHubRepository
+    url: https://github.com/adobe/acc-js-sdk
+  - type: NPMPackage
+    url: https://www.npmjs.com/package/@adobe/acc-js-sdk
+  aid: adobe-campaign:classic-javascript-sdk
+- name: Adobe I/O Campaign Standard SDK
+  description: >-
+    A Node.js JavaScript SDK wrapping Adobe Campaign Standard REST APIs for use in Adobe I/O Runtime and
+    App Builder applications. Provides convenience methods for profile management, service operations,
+    workflow control, transactional messaging, GDPR compliance requests, and custom resource management.
+    Handles authentication and API communication for building serverless integrations with Campaign Standard.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://github.com/adobe/aio-lib-campaign-standard
+  baseURL: https://mc.adobe.io/{ORGANIZATION}/campaign
+  tags:
+  - Adobe I/O
+  - App Builder
+  - Campaign Standard
+  - JavaScript SDK
+  - Node.js
+  properties:
+  - type: Documentation
+    url: https://github.com/adobe/aio-lib-campaign-standard/blob/master/README.md
+  - type: GitHubRepository
+    url: https://github.com/adobe/aio-lib-campaign-standard
+  - type: NPMPackage
+    url: https://www.npmjs.com/package/@adobe/aio-lib-campaign-standard
+  aid: adobe-campaign:io-campaign-standard-sdk
+- name: Adobe Experience Platform Mobile SDK - Campaign Extensions
+  description: >-
+    Native mobile SDK extensions for iOS and Android that integrate Adobe Campaign push notifications,
+    in-app messaging, and local notifications into mobile applications. Includes the Campaign Classic
+    extension for v7 and v8 providing device registration and notification click tracking, and the Campaign
+    Standard extension providing push identifier management and message interaction tracking. Part of
+    the Adobe Experience Platform Mobile SDK framework.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developer.adobe.com/client-sdks/solution/adobe-campaign-classic/
+  baseURL: https://api.example.com
+  tags:
+  - Android
+  - In-App Messaging
+  - iOS
+  - Mobile SDK
+  - Push Notifications
+  properties:
+  - type: Documentation
+    url: https://developer.adobe.com/client-sdks/solution/adobe-campaign-classic/
+  - type: Documentation
+    url: https://developer.adobe.com/client-sdks/solution/adobe-campaign-standard/
+  - type: APIReference
+    url: https://developer.adobe.com/client-sdks/solution/adobe-campaign-classic/api-reference/
+  aid: adobe-campaign:experience-platform-mobile-sdk---campaign-extensions
+- aid: adobe-campaign:adobe-campaign-custom-resources-api
+  name: Adobe Campaign Custom Resources API
+  description: >-
+    Access custom resources defined in Campaign Standard, both profile-linked and standalone.
+  humanURL: >-
+    https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/about-campaign-standard-apis.html
+  baseURL: https://mc.adobe.io/{ORGANIZATION}/campaign
+  tags:
+  - Custom Resources
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-campaign-custom-resources-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/get-started-apis.html
+  - type: APIReference
+    url: https://developer.adobe.com/campaign/api/
+  - type: Authentication
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/authentication.html
+  - type: AsyncAPI
+    url: asyncapi/adobe-campaign-transactional-messaging-asyncapi-original.yml
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/web-service-calls.html
+  - type: JSAPI Reference
+    url: https://experienceleague.adobe.com/developer/campaign-api/api/index.html
+  - type: SOAP Methods
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/soap-methods.html
+- aid: adobe-campaign:adobe-campaign-data-management-api
+  name: Adobe Campaign Data Management API
+  description: >-
+    Write, update, and delete data records using the xtk:session#Write method. Supports insert, insertOrUpdate,
+    update, and delete operations via the _operation attribute.
+  humanURL: >-
+    https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/about-campaign-standard-apis.html
+  baseURL: https://mc.adobe.io/{ORGANIZATION}/campaign
+  tags:
+  - Data Management
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-campaign-data-management-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/get-started-apis.html
+  - type: APIReference
+    url: https://developer.adobe.com/campaign/api/
+  - type: Authentication
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/authentication.html
+  - type: AsyncAPI
+    url: asyncapi/adobe-campaign-transactional-messaging-asyncapi-original.yml
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/web-service-calls.html
+  - type: JSAPI Reference
+    url: https://experienceleague.adobe.com/developer/campaign-api/api/index.html
+  - type: SOAP Methods
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/soap-methods.html
+- aid: adobe-campaign:adobe-campaign-delivery-api
+  name: Adobe Campaign Delivery API
+  description: Prepare and submit message deliveries including email, SMS, and push notifications.
+  humanURL: >-
+    https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/about-campaign-standard-apis.html
+  baseURL: https://mc.adobe.io/{ORGANIZATION}/campaign
+  tags:
+  - Delivery
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-campaign-delivery-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/get-started-apis.html
+  - type: APIReference
+    url: https://developer.adobe.com/campaign/api/
+  - type: Authentication
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/authentication.html
+  - type: AsyncAPI
+    url: asyncapi/adobe-campaign-transactional-messaging-asyncapi-original.yml
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/web-service-calls.html
+  - type: JSAPI Reference
+    url: https://experienceleague.adobe.com/developer/campaign-api/api/index.html
+  - type: SOAP Methods
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/soap-methods.html
+- aid: adobe-campaign:adobe-campaign-marketing-history-api
+  name: Adobe Campaign Marketing History API
+  description: >-
+    Retrieve marketing event history for profiles including delivery logs and mirror page links.
+  humanURL: >-
+    https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/about-campaign-standard-apis.html
+  baseURL: https://mc.adobe.io/{ORGANIZATION}/campaign
+  tags:
+  - Marketing History
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-campaign-marketing-history-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/get-started-apis.html
+  - type: APIReference
+    url: https://developer.adobe.com/campaign/api/
+  - type: Authentication
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/authentication.html
+  - type: AsyncAPI
+    url: asyncapi/adobe-campaign-transactional-messaging-asyncapi-original.yml
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/web-service-calls.html
+  - type: JSAPI Reference
+    url: https://experienceleague.adobe.com/developer/campaign-api/api/index.html
+  - type: SOAP Methods
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/soap-methods.html
+- aid: adobe-campaign:adobe-campaign-metadata-api
+  name: Adobe Campaign Metadata API
+  description: >-
+    Discover resource schemas, fields, filters, and data policies for Campaign Standard resources.
+  humanURL: >-
+    https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/about-campaign-standard-apis.html
+  baseURL: https://mc.adobe.io/{ORGANIZATION}/campaign
+  tags:
+  - Metadata
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-campaign-metadata-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/get-started-apis.html
+  - type: APIReference
+    url: https://developer.adobe.com/campaign/api/
+  - type: Authentication
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/authentication.html
+  - type: AsyncAPI
+    url: asyncapi/adobe-campaign-transactional-messaging-asyncapi-original.yml
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/web-service-calls.html
+  - type: JSAPI Reference
+    url: https://experienceleague.adobe.com/developer/campaign-api/api/index.html
+  - type: SOAP Methods
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/soap-methods.html
+- aid: adobe-campaign:adobe-campaign-organizational-units-api
+  name: Adobe Campaign Organizational Units API
+  description: Retrieve organizational unit structures used for access control and data partitioning.
+  humanURL: >-
+    https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/about-campaign-standard-apis.html
+  baseURL: https://mc.adobe.io/{ORGANIZATION}/campaign
+  tags:
+  - Organizational Units
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-campaign-organizational-units-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/get-started-apis.html
+  - type: APIReference
+    url: https://developer.adobe.com/campaign/api/
+  - type: Authentication
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/authentication.html
+  - type: AsyncAPI
+    url: asyncapi/adobe-campaign-transactional-messaging-asyncapi-original.yml
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/web-service-calls.html
+  - type: JSAPI Reference
+    url: https://experienceleague.adobe.com/developer/campaign-api/api/index.html
+  - type: SOAP Methods
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/soap-methods.html
+- aid: adobe-campaign:adobe-campaign-privacy-api
+  name: Adobe Campaign Privacy API
+  description: Create GDPR and CCPA privacy access and deletion requests for data subject compliance.
+  humanURL: >-
+    https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/about-campaign-standard-apis.html
+  baseURL: https://mc.adobe.io/{ORGANIZATION}/campaign
+  tags:
+  - Privacy
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-campaign-privacy-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/get-started-apis.html
+  - type: APIReference
+    url: https://developer.adobe.com/campaign/api/
+  - type: Authentication
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/authentication.html
+  - type: AsyncAPI
+    url: asyncapi/adobe-campaign-transactional-messaging-asyncapi-original.yml
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/web-service-calls.html
+  - type: JSAPI Reference
+    url: https://experienceleague.adobe.com/developer/campaign-api/api/index.html
+  - type: SOAP Methods
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/soap-methods.html
+- aid: adobe-campaign:adobe-campaign-profileandservices-api
+  name: Adobe Campaign ProfileAndServices API
+  description: The ProfileAndServices API from Adobe Campaign — 2 operation(s) for profileandservices.
+  humanURL: >-
+    https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/about-campaign-standard-apis.html
+  baseURL: https://mc.adobe.io/{ORGANIZATION}/campaign
+  tags:
+  - ProfileAndServices
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-campaign-profileandservices-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/get-started-apis.html
+  - type: APIReference
+    url: https://developer.adobe.com/campaign/api/
+  - type: Authentication
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/authentication.html
+  - type: AsyncAPI
+    url: asyncapi/adobe-campaign-transactional-messaging-asyncapi-original.yml
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/web-service-calls.html
+  - type: JSAPI Reference
+    url: https://experienceleague.adobe.com/developer/campaign-api/api/index.html
+  - type: SOAP Methods
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/soap-methods.html
+- aid: adobe-campaign:adobe-campaign-profiles-api
+  name: Adobe Campaign Profiles API
+  description: >-
+    Manage recipient profiles including creation, retrieval, update, and deletion of contact records.
+  humanURL: >-
+    https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/about-campaign-standard-apis.html
+  baseURL: https://mc.adobe.io/{ORGANIZATION}/campaign
+  tags:
+  - Profiles
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-campaign-profiles-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/get-started-apis.html
+  - type: APIReference
+    url: https://developer.adobe.com/campaign/api/
+  - type: Authentication
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/authentication.html
+  - type: AsyncAPI
+    url: asyncapi/adobe-campaign-transactional-messaging-asyncapi-original.yml
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/web-service-calls.html
+  - type: JSAPI Reference
+    url: https://experienceleague.adobe.com/developer/campaign-api/api/index.html
+  - type: SOAP Methods
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/soap-methods.html
+- aid: adobe-campaign:adobe-campaign-query-definition-api
+  name: Adobe Campaign Query Definition API
+  description: >-
+    Execute queries against Campaign schemas using the xtk:queryDef interface. Supports get, getIfExists,
+    select, and count operations with XPath field expressions, WHERE conditions, and pagination.
+  humanURL: >-
+    https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/about-campaign-standard-apis.html
+  baseURL: https://mc.adobe.io/{ORGANIZATION}/campaign
+  tags:
+  - Query Definition
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-campaign-query-definition-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/get-started-apis.html
+  - type: APIReference
+    url: https://developer.adobe.com/campaign/api/
+  - type: Authentication
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/authentication.html
+  - type: AsyncAPI
+    url: asyncapi/adobe-campaign-transactional-messaging-asyncapi-original.yml
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/web-service-calls.html
+  - type: JSAPI Reference
+    url: https://experienceleague.adobe.com/developer/campaign-api/api/index.html
+  - type: SOAP Methods
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/soap-methods.html
+- aid: adobe-campaign:adobe-campaign-real-time-events-api
+  name: Adobe Campaign Real-Time Events API
+  description: >-
+    Push real-time transactional events for immediate or batched processing by the Message Center execution
+    instances.
+  humanURL: >-
+    https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/about-campaign-standard-apis.html
+  baseURL: https://mc.adobe.io/{ORGANIZATION}/campaign
+  tags:
+  - Real-Time Events
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-campaign-real-time-events-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/get-started-apis.html
+  - type: APIReference
+    url: https://developer.adobe.com/campaign/api/
+  - type: Authentication
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/authentication.html
+  - type: AsyncAPI
+    url: asyncapi/adobe-campaign-transactional-messaging-asyncapi-original.yml
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/web-service-calls.html
+  - type: JSAPI Reference
+    url: https://experienceleague.adobe.com/developer/campaign-api/api/index.html
+  - type: SOAP Methods
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/soap-methods.html
+- aid: adobe-campaign:adobe-campaign-session-management-api
+  name: Adobe Campaign Session Management API
+  description: >-
+    Authenticate and manage server sessions. Logon returns session and security tokens required for all
+    subsequent API calls.
+  humanURL: >-
+    https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/about-campaign-standard-apis.html
+  baseURL: https://mc.adobe.io/{ORGANIZATION}/campaign
+  tags:
+  - Session Management
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-campaign-session-management-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/get-started-apis.html
+  - type: APIReference
+    url: https://developer.adobe.com/campaign/api/
+  - type: Authentication
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/authentication.html
+  - type: AsyncAPI
+    url: asyncapi/adobe-campaign-transactional-messaging-asyncapi-original.yml
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/web-service-calls.html
+  - type: JSAPI Reference
+    url: https://experienceleague.adobe.com/developer/campaign-api/api/index.html
+  - type: SOAP Methods
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/soap-methods.html
+- aid: adobe-campaign:adobe-campaign-subscription-api
+  name: Adobe Campaign Subscription API
+  description: Subscribe and unsubscribe recipients to and from information services.
+  humanURL: >-
+    https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/about-campaign-standard-apis.html
+  baseURL: https://mc.adobe.io/{ORGANIZATION}/campaign
+  tags:
+  - Subscription
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-campaign-subscription-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/get-started-apis.html
+  - type: APIReference
+    url: https://developer.adobe.com/campaign/api/
+  - type: Authentication
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/authentication.html
+  - type: AsyncAPI
+    url: asyncapi/adobe-campaign-transactional-messaging-asyncapi-original.yml
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/web-service-calls.html
+  - type: JSAPI Reference
+    url: https://experienceleague.adobe.com/developer/campaign-api/api/index.html
+  - type: SOAP Methods
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/soap-methods.html
+- aid: adobe-campaign:adobe-campaign-subscriptions-api
+  name: Adobe Campaign Subscriptions API
+  description: Subscribe and unsubscribe profiles to and from services.
+  humanURL: >-
+    https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/about-campaign-standard-apis.html
+  baseURL: https://mc.adobe.io/{ORGANIZATION}/campaign
+  tags:
+  - Subscriptions
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-campaign-subscriptions-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/get-started-apis.html
+  - type: APIReference
+    url: https://developer.adobe.com/campaign/api/
+  - type: Authentication
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/authentication.html
+  - type: AsyncAPI
+    url: asyncapi/adobe-campaign-transactional-messaging-asyncapi-original.yml
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/web-service-calls.html
+  - type: JSAPI Reference
+    url: https://experienceleague.adobe.com/developer/campaign-api/api/index.html
+  - type: SOAP Methods
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/soap-methods.html
+- aid: adobe-campaign:adobe-campaign-transactional-messages-api
+  name: Adobe Campaign Transactional Messages API
+  description: >-
+    Trigger and monitor transactional messages across email, SMS, and push notification channels.
+  humanURL: >-
+    https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/about-campaign-standard-apis.html
+  baseURL: https://mc.adobe.io/{ORGANIZATION}/campaign
+  tags:
+  - Transactional Messages
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-campaign-transactional-messages-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/get-started-apis.html
+  - type: APIReference
+    url: https://developer.adobe.com/campaign/api/
+  - type: Authentication
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/authentication.html
+  - type: AsyncAPI
+    url: asyncapi/adobe-campaign-transactional-messaging-asyncapi-original.yml
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/web-service-calls.html
+  - type: JSAPI Reference
+    url: https://experienceleague.adobe.com/developer/campaign-api/api/index.html
+  - type: SOAP Methods
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/soap-methods.html
+- aid: adobe-campaign:adobe-campaign-workflow-api
+  name: Adobe Campaign Workflow API
+  description: >-
+    Start, stop, and signal workflows. PostEvent sends asynchronous signals to trigger workflow transitions.
+  humanURL: >-
+    https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/about-campaign-standard-apis.html
+  baseURL: https://mc.adobe.io/{ORGANIZATION}/campaign
+  tags:
+  - Workflow
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-campaign-workflow-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/get-started-apis.html
+  - type: APIReference
+    url: https://developer.adobe.com/campaign/api/
+  - type: Authentication
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/authentication.html
+  - type: AsyncAPI
+    url: asyncapi/adobe-campaign-transactional-messaging-asyncapi-original.yml
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/web-service-calls.html
+  - type: JSAPI Reference
+    url: https://experienceleague.adobe.com/developer/campaign-api/api/index.html
+  - type: SOAP Methods
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/soap-methods.html
+- aid: adobe-campaign:adobe-campaign-workflows-api
+  name: Adobe Campaign Workflows API
+  description: >-
+    Control workflow execution including starting, pausing, resuming, and stopping marketing workflows.
+  humanURL: >-
+    https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/about-campaign-standard-apis.html
+  baseURL: https://mc.adobe.io/{ORGANIZATION}/campaign
+  tags:
+  - Workflows
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-campaign-workflows-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/get-started-apis.html
+  - type: APIReference
+    url: https://developer.adobe.com/campaign/api/
+  - type: Authentication
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/authentication.html
+  - type: AsyncAPI
+    url: asyncapi/adobe-campaign-transactional-messaging-asyncapi-original.yml
+  - type: Documentation
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/web-service-calls.html
+  - type: JSAPI Reference
+    url: https://experienceleague.adobe.com/developer/campaign-api/api/index.html
+  - type: SOAP Methods
+    url: >-
+      https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/soap-methods.html
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
