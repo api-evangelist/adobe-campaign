@@ -612,6 +612,15 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 common:
+  - type: IssueTracker
+    url: https://github.com/adobe/acc-js-sdk/issues
+  - type: CodeOfConduct
+    url: https://github.com/adobe/acc-js-sdk/blob/master/CODE_OF_CONDUCT.md
+  - type: ContributionGuide
+    url: https://github.com/adobe/acc-js-sdk/blob/master/.github/CONTRIBUTING.md
+  - type: License
+    name: Apache-2.0
+    url: https://github.com/adobe/acc-js-sdk/blob/master/LICENSE
   - type: AgenticAccess
     url: agentic-access/adobe-campaign-agentic-access.yml
   - type: VulnerabilityDisclosure
