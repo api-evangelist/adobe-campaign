@@ -4,55 +4,93 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Adobe Campaign
 providerId: adobe-campaign
 created: '2026-05-04'
-modified: '2026-05-05'
-reconciled: false
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://experienceleague.adobe.com/en/docs/campaign/campaign-v8/developer/api
+  (fetched 2026-08-13, HTTP 200) and
+  https://experienceleague.adobe.com/en/docs/campaign/campaign-v8/developer/apis/get-started-apis
+  (HTTP 200). Upgraded from the 2026-05-04 bulk-sweep `generated` artifact:
+  the throttle, its unit (TPS), the exhaustion status and the negotiation path
+  are now quoted from Adobe's own documentation rather than inferred.
+modified: '2026-08-13'
+reconciled: true
 tags:
   - Rate Limiting
   - Marketing
   - Campaign Management
-notes: >-
-  Adobe Campaign Standard documents request throttling on its REST API but
-  exact per-second / per-minute numbers are not published in the public
-  developer docs and vary by hosted-instance configuration. Bulk operations
-  use staging endpoints to avoid synchronous throttling.
 description: >-
-  Adobe Campaign Standard REST API enforces per-tenant throttling. v8/Classic
-  SOAP/REST endpoints are gated by the customer's hosted-instance capacity
-  (typically tied to message-volume contract). Sustained excess returns 429
-  or 503; bulk and transactional traffic should use staging or transactional
-  endpoints rather than the synchronous REST surface.
-sources:
-  - https://developer.adobe.com/campaign-standard-apis/
-  - https://experienceleague.adobe.com/docs/campaign-standard/using/integrating-with-adobe-experience-cloud/standard-apis.html
+  Adobe Campaign v8 enforces a throughput ceiling on its API layer, measured in
+  transactions per second. Adobe publishes the existence of the limit, the unit,
+  and the failure status — but not the number. The number is contractual: it is
+  set per customer against the Adobe Campaign Managed Cloud Services product
+  description and the license, and Managed Cloud Services customers can ask
+  Adobe to adapt the throttle per API. Access to the REST surface is itself
+  gated (on-demand, FDA environments only, not available on Enterprise/FFDA
+  deployments).
+notes: >-
+  The honest shape of this artifact is: limit documented, value withheld. That
+  is different from undocumented — an integrator knows a 429 is coming and knows
+  who to call, but cannot size a job in advance without asking their Adobe
+  representative. Two further gaps matter to an agent: Adobe documents NO
+  RateLimit-* or Retry-After response headers, so the only runtime signal is the
+  429 status itself; and 429 is not declared in any published Campaign OpenAPI,
+  including the ones in openapi/ here, so a spec-driven client will treat it as
+  an unmodelled failure.
 responseCodes:
   throttled: 429
   serviceUnavailable: 503
+limit_count: 1
 limits:
-  - name: Campaign Standard REST API
-    scope: tenant
-    metric: requests_per_minute
-    limit: see https://developer.adobe.com/campaign-standard-apis/
-    notes: >-
-      Per-tenant throttle on the Campaign Standard REST endpoints; bulk
-      operations should use the staging or batch endpoints.
-  - name: v8 / Classic SOAP / REST
+  - name: Campaign v8 API layer throughput
     scope: instance
+    metric: transactions_per_second
+    window: 1s
+    limit: undisclosed
+    burst: undisclosed
+    status_on_exhaustion: 429
+    negotiable: true
+    quote: >-
+      "Adobe Campaign v8 comes with a limit on the throughput (TPS) of our API
+      layer. Breaking the limit leads to standard HTTP error (429). As a Managed
+      Cloud Services user, you can contact Adobe to adapt the throttling for each
+      API."
+    source: https://experienceleague.adobe.com/en/docs/campaign/campaign-v8/developer/api
+  - name: License scale limitations
+    scope: contract
     metric: varies
-    limit: see hosted-instance capacity (contracted message volume)
-    notes: >-
-      Throughput is bounded by the customer's hosted-instance capacity rather
-      than a public per-second quota.
+    limit: see product description
+    note: >-
+      Adobe's API getting-started page instructs callers to check the scale
+      limitations of their license agreement before performing API calls, and
+      points at the Adobe Campaign Managed Cloud Services product description.
+    source: https://helpx.adobe.com/legal/product-descriptions/adobe-campaign-managed-cloud-services.html
+headers:
+  rate_limit_headers: []
+  retry_after: undocumented
+  note: No rate-limit response headers are documented on either the REST or the Classic surface.
 policies:
-  - name: Backoff Strategy
-    description: Exponential backoff with jitter; honor Retry-After when present.
-  - name: Bulk vs synchronous
+  - name: Backoff strategy
     description: >-
-      Bulk staging endpoints decouple ingestion from synchronous API
-      throttling and are the recommended path for high-volume jobs.
-  - name: Tenant scope
+      Exponential backoff with jitter on 429. No Retry-After is documented, so a
+      client must choose its own interval.
+  - name: Per-API throttling
     description: >-
-      Limits apply across all credentials issued under a single tenant /
-      hosted instance.
+      Adobe states the throttle can be adapted "for each API", implying the
+      ceiling is per-endpoint-family rather than one global bucket.
+  - name: Server-to-server only
+    description: >-
+      Campaign APIs are documented as server-to-server only, so client-side
+      traffic amplification is out of scope by policy.
+  - name: Access gate
+    description: >-
+      REST API access is on-demand for FDA environments and unavailable on
+      Enterprise (FFDA) deployments — the first limit an integrator meets is
+      entitlement, not throughput.
+sources:
+  - https://experienceleague.adobe.com/en/docs/campaign/campaign-v8/developer/api
+  - https://experienceleague.adobe.com/en/docs/campaign/campaign-v8/developer/apis/get-started-apis
+  - https://helpx.adobe.com/legal/product-descriptions/adobe-campaign-managed-cloud-services.html
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

@@ -1,0 +1,296 @@
+{
+  "item": [
+    {
+      "id": "cb28e7c4-d78f-4fb4-b6fd-d2f9f217d530",
+      "name": "Marketing History",
+      "description": {
+        "content": "Retrieve marketing event history for profiles including delivery logs and mirror page links.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b9da8f87-8055-4bc3-bf7f-d19a29ff09ea",
+          "name": "Adobe Campaign Get Marketing History for a Profile",
+          "request": {
+            "name": "Adobe Campaign Get Marketing History for a Profile",
+            "description": {
+              "content": "Retrieves the marketing event history for a specific profile, including delivery logs and mirror page links.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "profileAndServices",
+                "history",
+                ":PKEY"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "PKEY",
+                  "description": "(Required) The unique PKEY identifier of the resource."
+                },
+                {
+                  "description": "Your Campaign Classic instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d6a58ec1-c499-44e9-a2f2-3bcde211fa8f",
+              "name": "Marketing history retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profileAndServices",
+                    "history",
+                    ":PKEY"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "PKEY",
+                      "description": "(Required) The unique PKEY identifier of the resource."
+                    },
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"PKey\": \"example_value\",\n  \"events\": [\n    {\n      \"eventDate\": \"1964-03-25T00:26:34.643Z\",\n      \"channel\": \"string\",\n      \"deliveryLabel\": \"string\",\n      \"mirrorPage\": {\n        \"href\": \"http://rZlzRjPmNfBZXKbOVQvwTP.gimwD9CivUdNIjOEAbnzFYHTdY38HU\"\n      }\n    },\n    {\n      \"eventDate\": \"2007-08-16T13:19:02.963Z\",\n      \"channel\": \"string\",\n      \"deliveryLabel\": \"string\",\n      \"mirrorPage\": {\n        \"href\": \"https://FwrRDaQVFbyJxpp.ewKOgH.4jUkdA\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1ad874e0-b67f-41fa-9076-d12d5b83f800",
+              "name": "Authentication failed. Invalid or expired OAuth token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profileAndServices",
+                    "history",
+                    ":PKEY"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "PKEY",
+                      "description": "(Required) The unique PKEY identifier of the resource."
+                    },
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b0e9419-3a2f-4c52-b47c-6ebe6c46c262",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profileAndServices",
+                    "history",
+                    ":PKEY"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "PKEY",
+                      "description": "(Required) The unique PKEY identifier of the resource."
+                    },
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "508499d1-d945-47c5-ac6a-d2eb364f8972",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profileAndServices",
+                    "history",
+                    ":PKEY"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "PKEY",
+                      "description": "(Required) The unique PKEY identifier of the resource."
+                    },
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Campaign Classic instance name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "YOUR_INSTANCE",
+      "key": "instance"
+    },
+    {
+      "type": "string",
+      "value": "https://{{instance}}.campaign.adobe.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "abc9218d-7e9b-4486-9fe7-644cad1cde1a",
+    "name": "Adobe Campaign Classic Custom Resources Marketing History API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "SOAP-based API for Adobe Campaign Classic v7 and v8, documented as HTTP POST operations. All operations target the single SOAP router endpoint at /nl/jsp/soaprouter.jsp and are differentiated by the SOAPAction header. Provides programmatic access to session management, data querying, record persistence, delivery management, workflow control, subscription management, and real-time transactional event ingestion.\n\nContact Support:\n Name: Adobe Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

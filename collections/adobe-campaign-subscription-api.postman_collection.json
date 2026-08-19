@@ -1,0 +1,467 @@
+{
+  "item": [
+    {
+      "id": "3be098fc-d907-45da-b97a-196cbc2d8ccf",
+      "name": "Subscription",
+      "description": {
+        "content": "Subscribe and unsubscribe recipients to and from information services.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d012b87a-dcae-4fce-9d32-b785f4873c0c",
+          "name": "Adobe Campaign Subscribe a Recipient to a Service",
+          "request": {
+            "name": "Adobe Campaign Subscribe a Recipient to a Service",
+            "description": {
+              "content": "Subscribes a recipient to an information service. Requires the service name and a recipient DOM element. SOAP Action: nms:subscription#Subscribe",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nl",
+                "jsp",
+                "soaprouter.jsp",
+                "nms-subscription",
+                "Subscribe"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Campaign Classic instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "SOAPAction",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "text/xml"
+              },
+              {
+                "key": "Accept",
+                "value": "text/xml"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-Security-Token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <serviceName>(string)</serviceName>\n  <recipient>\n    <email>(string)</email>\n    <id>(integer)</id>\n  </recipient>\n  <create>(boolean)</create>\n</element>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6ff5a309-9fac-4fdb-8009-83b0511893aa",
+              "name": "Recipient subscribed successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nl",
+                    "jsp",
+                    "soaprouter.jsp",
+                    "nms-subscription",
+                    "Subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Security-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "SOAPAction",
+                    "value": "example_value"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <serviceName>Example Campaign</serviceName>\n  <recipient>\n    <email>(string)</email>\n    <id>(integer)</id>\n  </recipient>\n  <create>true</create>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bebc1781-556c-4095-96f0-0058b92092ca",
+              "name": "SOAP fault indicating an error during operation processing.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nl",
+                    "jsp",
+                    "soaprouter.jsp",
+                    "nms-subscription",
+                    "Subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Security-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "SOAPAction",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <serviceName>Example Campaign</serviceName>\n  <recipient>\n    <email>(string)</email>\n    <id>(integer)</id>\n  </recipient>\n  <create>true</create>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <faultcode>example_value</faultcode>\n  <faultstring>example_value</faultstring>\n  <detail>example_value</detail>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "28aec49c-9ff1-4f3e-b340-edd918539b3e",
+          "name": "Adobe Campaign Unsubscribe a Recipient from a Service",
+          "request": {
+            "name": "Adobe Campaign Unsubscribe a Recipient from a Service",
+            "description": {
+              "content": "Unsubscribes a recipient from an information service. SOAP Action: nms:subscription#Unsubscribe",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nl",
+                "jsp",
+                "soaprouter.jsp",
+                "nms-subscription",
+                "Unsubscribe"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Campaign Classic instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "SOAPAction",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "text/xml"
+              },
+              {
+                "key": "Accept",
+                "value": "text/xml"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-Security-Token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <serviceName>(string)</serviceName>\n  <recipient>\n    <email>(string)</email>\n    <id>(integer)</id>\n  </recipient>\n  <create>(boolean)</create>\n</element>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "154e6eaf-a974-403b-9335-6b2b4d7948fd",
+              "name": "Recipient unsubscribed successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nl",
+                    "jsp",
+                    "soaprouter.jsp",
+                    "nms-subscription",
+                    "Unsubscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Security-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "SOAPAction",
+                    "value": "example_value"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <serviceName>Example Campaign</serviceName>\n  <recipient>\n    <email>(string)</email>\n    <id>(integer)</id>\n  </recipient>\n  <create>true</create>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5f050076-021e-4293-9fa2-8a46fea2d2db",
+              "name": "SOAP fault indicating an error during operation processing.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nl",
+                    "jsp",
+                    "soaprouter.jsp",
+                    "nms-subscription",
+                    "Unsubscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Security-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "SOAPAction",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <serviceName>Example Campaign</serviceName>\n  <recipient>\n    <email>(string)</email>\n    <id>(integer)</id>\n  </recipient>\n  <create>true</create>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <faultcode>example_value</faultcode>\n  <faultstring>example_value</faultstring>\n  <detail>example_value</detail>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Campaign Classic instance name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "YOUR_INSTANCE",
+      "key": "instance"
+    },
+    {
+      "type": "string",
+      "value": "https://{{instance}}.campaign.adobe.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5dcea8a3-0cd3-48af-9a41-3c3905d232a3",
+    "name": "Adobe Campaign Classic Custom Resources Subscription API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "SOAP-based API for Adobe Campaign Classic v7 and v8, documented as HTTP POST operations. All operations target the single SOAP router endpoint at /nl/jsp/soaprouter.jsp and are differentiated by the SOAPAction header. Provides programmatic access to session management, data querying, record persistence, delivery management, workflow control, subscription management, and real-time transactional event ingestion.\n\nContact Support:\n Name: Adobe Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

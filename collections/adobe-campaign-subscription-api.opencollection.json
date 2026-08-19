@@ -1,0 +1,64 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Campaign Classic Custom Resources Subscription API",
+    "version": "8.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Subscription",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Campaign Subscribe a Recipient to a Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.campaign.adobe.com/nl/jsp/soaprouter.jsp/nms-subscription/Subscribe",
+            "headers": [
+              {
+                "name": "SOAPAction",
+                "value": "example_value"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-Security-Token",
+              "value": "{{X-Security-Token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Subscribes a recipient to an information service. Requires the service name and a recipient DOM element. SOAP Action: nms:subscription#Subscribe"
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Unsubscribe a Recipient from a Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.campaign.adobe.com/nl/jsp/soaprouter.jsp/nms-subscription/Unsubscribe",
+            "headers": [
+              {
+                "name": "SOAPAction",
+                "value": "example_value"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-Security-Token",
+              "value": "{{X-Security-Token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Unsubscribes a recipient from an information service. SOAP Action: nms:subscription#Unsubscribe"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

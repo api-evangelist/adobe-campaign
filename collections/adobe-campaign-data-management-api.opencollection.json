@@ -1,0 +1,64 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Campaign Classic Custom Resources Data Management API",
+    "version": "8.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Data Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Campaign Write Data Records",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.campaign.adobe.com/nl/jsp/soaprouter.jsp/xtk-session/Write",
+            "headers": [
+              {
+                "name": "SOAPAction",
+                "value": "example_value"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-Security-Token",
+              "value": "{{X-Security-Token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Writes data records to a Campaign schema. The _operation attribute on the entity element controls the behavior: insert (create new), insertOrUpdate (create or update if exists), update (modify existing), delete (remove record). SOAP Action: xtk:session#Write"
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Write Multiple Data Records",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.campaign.adobe.com/nl/jsp/soaprouter.jsp/xtk-session/WriteCollection",
+            "headers": [
+              {
+                "name": "SOAPAction",
+                "value": "example_value"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-Security-Token",
+              "value": "{{X-Security-Token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Writes a collection of data records to a Campaign schema in a single call. Each entity element in the collection can have its own _operation attribute. SOAP Action: xtk:session#WriteCollection"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

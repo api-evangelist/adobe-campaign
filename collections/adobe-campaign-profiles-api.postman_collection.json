@@ -1,0 +1,1472 @@
+{
+  "item": [
+    {
+      "id": "f7381fd8-a6ff-4e5b-8573-e9cfd3d40273",
+      "name": "Profiles",
+      "description": {
+        "content": "Manage recipient profiles including creation, retrieval, update, and deletion of contact records.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "102d2415-0c5f-4fa3-b9a1-ea2592bf1b87",
+          "name": "Adobe Campaign List Profiles",
+          "request": {
+            "name": "Adobe Campaign List Profiles",
+            "description": {
+              "content": "Retrieves a paginated list of recipient profiles. Supports filtering, sorting, and pagination through query parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "profileAndServices",
+                "profile"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "_lineCount",
+                  "value": "25",
+                  "description": "Number of records to return per page. Default is 25."
+                },
+                {
+                  "disabled": false,
+                  "key": "_lineStart",
+                  "value": "<integer>",
+                  "description": "Pagination offset from the next node in previous response."
+                },
+                {
+                  "disabled": false,
+                  "key": "_order",
+                  "value": "<string>",
+                  "description": "Sort order. Use field name for ascending, append %20desc for descending (e.g., email%20desc)."
+                },
+                {
+                  "disabled": false,
+                  "key": "_forcePagination",
+                  "value": "false",
+                  "description": "Force pagination for tables with more than 100,000 records."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your Campaign Classic instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dba4ce02-0cff-45c1-9562-33c11d5f3834",
+              "name": "List of profiles retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profileAndServices",
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_lineCount",
+                      "value": "25"
+                    },
+                    {
+                      "key": "_lineStart",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "_order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_forcePagination",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"content\": [\n    {\n      \"PKey\": \"example_value\",\n      \"email\": \"user@example.com\",\n      \"firstName\": \"Example Campaign\",\n      \"lastName\": \"Example Campaign\",\n      \"phone\": \"example_value\",\n      \"mobilePhone\": \"example_value\",\n      \"birthDate\": \"1950-10-27\",\n      \"gender\": \"male\",\n      \"preferredLanguage\": \"example_value\",\n      \"blackList\": true,\n      \"blackListEmail\": true,\n      \"blackListMobile\": true,\n      \"created\": \"2008-07-14T10:51:57.860Z\",\n      \"lastModified\": \"2015-11-02T07:05:46.780Z\",\n      \"subscriptions\": {\n        \"href\": \"string\"\n      }\n    },\n    {\n      \"PKey\": \"example_value\",\n      \"email\": \"user@example.com\",\n      \"firstName\": \"Example Campaign\",\n      \"lastName\": \"Example Campaign\",\n      \"phone\": \"example_value\",\n      \"mobilePhone\": \"example_value\",\n      \"birthDate\": \"2004-09-17\",\n      \"gender\": \"male\",\n      \"preferredLanguage\": \"example_value\",\n      \"blackList\": true,\n      \"blackListEmail\": true,\n      \"blackListMobile\": true,\n      \"created\": \"1972-11-17T17:14:52.509Z\",\n      \"lastModified\": \"1958-10-28T11:48:26.559Z\",\n      \"subscriptions\": {\n        \"href\": \"string\"\n      }\n    }\n  ],\n  \"count\": {\n    \"href\": \"string\"\n  },\n  \"next\": {\n    \"href\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d6dcb02-0367-4724-85d3-ffb7a5b2509d",
+              "name": "Authentication failed. Invalid or expired OAuth token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profileAndServices",
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_lineCount",
+                      "value": "25"
+                    },
+                    {
+                      "key": "_lineStart",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "_order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_forcePagination",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da8965c7-3dbe-4c7a-a5be-5ded6ca379b8",
+              "name": "Insufficient permissions for the requested operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profileAndServices",
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_lineCount",
+                      "value": "25"
+                    },
+                    {
+                      "key": "_lineStart",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "_order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_forcePagination",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d7d8a0f2-3906-4204-9831-649ef85c2643",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profileAndServices",
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_lineCount",
+                      "value": "25"
+                    },
+                    {
+                      "key": "_lineStart",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "_order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_forcePagination",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0f46a4eb-be2c-4ec3-a860-110c60cb6134",
+          "name": "Adobe Campaign Create a Profile",
+          "request": {
+            "name": "Adobe Campaign Create a Profile",
+            "description": {
+              "content": "Creates a new recipient profile with the provided attributes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "profileAndServices",
+                "profile"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Campaign Classic instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"<email>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"mobilePhone\": \"<string>\",\n  \"birthDate\": \"<date>\",\n  \"gender\": \"<string>\",\n  \"preferredLanguage\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a7b1f3c5-8488-43ef-b68a-5ffbe6e1e9f3",
+              "name": "Profile created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profileAndServices",
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"user@example.com\",\n  \"firstName\": \"Example Campaign\",\n  \"lastName\": \"Example Campaign\",\n  \"phone\": \"example_value\",\n  \"mobilePhone\": \"example_value\",\n  \"birthDate\": \"<date>\",\n  \"gender\": \"male\",\n  \"preferredLanguage\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"PKey\": \"example_value\",\n  \"email\": \"user@example.com\",\n  \"firstName\": \"Example Campaign\",\n  \"lastName\": \"Example Campaign\",\n  \"phone\": \"example_value\",\n  \"mobilePhone\": \"example_value\",\n  \"birthDate\": \"1968-01-01\",\n  \"gender\": \"male\",\n  \"preferredLanguage\": \"example_value\",\n  \"blackList\": true,\n  \"blackListEmail\": true,\n  \"blackListMobile\": true,\n  \"created\": \"1948-10-27T21:33:31.604Z\",\n  \"lastModified\": \"2017-08-24T13:07:30.611Z\",\n  \"subscriptions\": {\n    \"href\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6fc83b3-2e4b-4cca-85b5-57519a123b23",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profileAndServices",
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"user@example.com\",\n  \"firstName\": \"Example Campaign\",\n  \"lastName\": \"Example Campaign\",\n  \"phone\": \"example_value\",\n  \"mobilePhone\": \"example_value\",\n  \"birthDate\": \"<date>\",\n  \"gender\": \"male\",\n  \"preferredLanguage\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13982225-a959-45dc-b9e3-41e45ca5dff3",
+              "name": "Authentication failed. Invalid or expired OAuth token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profileAndServices",
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"user@example.com\",\n  \"firstName\": \"Example Campaign\",\n  \"lastName\": \"Example Campaign\",\n  \"phone\": \"example_value\",\n  \"mobilePhone\": \"example_value\",\n  \"birthDate\": \"<date>\",\n  \"gender\": \"male\",\n  \"preferredLanguage\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a7a3800a-1bcc-401f-bd87-b7bbaaecd62c",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profileAndServices",
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"user@example.com\",\n  \"firstName\": \"Example Campaign\",\n  \"lastName\": \"Example Campaign\",\n  \"phone\": \"example_value\",\n  \"mobilePhone\": \"example_value\",\n  \"birthDate\": \"<date>\",\n  \"gender\": \"male\",\n  \"preferredLanguage\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "810d5a63-b925-4cdb-8a4a-feefb1567654",
+          "name": "Adobe Campaign Get a Profile",
+          "request": {
+            "name": "Adobe Campaign Get a Profile",
+            "description": {
+              "content": "Retrieves a specific recipient profile by its PKEY identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "profileAndServices",
+                "profile",
+                ":PKEY"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "PKEY",
+                  "description": "(Required) The unique PKEY identifier of the resource."
+                },
+                {
+                  "description": "Your Campaign Classic instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "35182033-0003-44ef-a31e-09027ad7a9d8",
+              "name": "Profile retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profileAndServices",
+                    "profile",
+                    ":PKEY"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "PKEY",
+                      "description": "(Required) The unique PKEY identifier of the resource."
+                    },
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"PKey\": \"example_value\",\n  \"email\": \"user@example.com\",\n  \"firstName\": \"Example Campaign\",\n  \"lastName\": \"Example Campaign\",\n  \"phone\": \"example_value\",\n  \"mobilePhone\": \"example_value\",\n  \"birthDate\": \"1968-01-01\",\n  \"gender\": \"male\",\n  \"preferredLanguage\": \"example_value\",\n  \"blackList\": true,\n  \"blackListEmail\": true,\n  \"blackListMobile\": true,\n  \"created\": \"1948-10-27T21:33:31.604Z\",\n  \"lastModified\": \"2017-08-24T13:07:30.611Z\",\n  \"subscriptions\": {\n    \"href\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5c1050ef-6a32-4726-b020-9d4fd4cd749c",
+              "name": "Authentication failed. Invalid or expired OAuth token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profileAndServices",
+                    "profile",
+                    ":PKEY"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "PKEY",
+                      "description": "(Required) The unique PKEY identifier of the resource."
+                    },
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9760488d-2966-4411-ae70-0b98e6bdb235",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profileAndServices",
+                    "profile",
+                    ":PKEY"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "PKEY",
+                      "description": "(Required) The unique PKEY identifier of the resource."
+                    },
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f106a1a-dfd2-4487-9232-248b7b9cb6de",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profileAndServices",
+                    "profile",
+                    ":PKEY"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "PKEY",
+                      "description": "(Required) The unique PKEY identifier of the resource."
+                    },
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0cdb0913-76bb-4504-986c-629a9114ac63",
+          "name": "Adobe Campaign Update a Profile",
+          "request": {
+            "name": "Adobe Campaign Update a Profile",
+            "description": {
+              "content": "Partially updates a recipient profile with the provided attributes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "profileAndServices",
+                "profile",
+                ":PKEY"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "PKEY",
+                  "description": "(Required) The unique PKEY identifier of the resource."
+                },
+                {
+                  "description": "Your Campaign Classic instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"<email>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"mobilePhone\": \"<string>\",\n  \"birthDate\": \"<date>\",\n  \"gender\": \"<string>\",\n  \"preferredLanguage\": \"<string>\",\n  \"blackList\": \"<boolean>\",\n  \"blackListEmail\": \"<boolean>\",\n  \"blackListMobile\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "eb16a03e-6444-40d2-a989-c3e7b517b354",
+              "name": "Profile updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profileAndServices",
+                    "profile",
+                    ":PKEY"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "PKEY",
+                      "description": "(Required) The unique PKEY identifier of the resource."
+                    },
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"user@example.com\",\n  \"firstName\": \"Example Campaign\",\n  \"lastName\": \"Example Campaign\",\n  \"phone\": \"example_value\",\n  \"mobilePhone\": \"example_value\",\n  \"birthDate\": \"<date>\",\n  \"gender\": \"male\",\n  \"preferredLanguage\": \"example_value\",\n  \"blackList\": true,\n  \"blackListEmail\": true,\n  \"blackListMobile\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"PKey\": \"example_value\",\n  \"email\": \"user@example.com\",\n  \"firstName\": \"Example Campaign\",\n  \"lastName\": \"Example Campaign\",\n  \"phone\": \"example_value\",\n  \"mobilePhone\": \"example_value\",\n  \"birthDate\": \"1968-01-01\",\n  \"gender\": \"male\",\n  \"preferredLanguage\": \"example_value\",\n  \"blackList\": true,\n  \"blackListEmail\": true,\n  \"blackListMobile\": true,\n  \"created\": \"1948-10-27T21:33:31.604Z\",\n  \"lastModified\": \"2017-08-24T13:07:30.611Z\",\n  \"subscriptions\": {\n    \"href\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "148207c5-412d-4418-8822-c9d44b4b1077",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profileAndServices",
+                    "profile",
+                    ":PKEY"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "PKEY",
+                      "description": "(Required) The unique PKEY identifier of the resource."
+                    },
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"user@example.com\",\n  \"firstName\": \"Example Campaign\",\n  \"lastName\": \"Example Campaign\",\n  \"phone\": \"example_value\",\n  \"mobilePhone\": \"example_value\",\n  \"birthDate\": \"<date>\",\n  \"gender\": \"male\",\n  \"preferredLanguage\": \"example_value\",\n  \"blackList\": true,\n  \"blackListEmail\": true,\n  \"blackListMobile\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f44fd748-c1e6-422e-bff8-57414d5eb8c7",
+              "name": "Authentication failed. Invalid or expired OAuth token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profileAndServices",
+                    "profile",
+                    ":PKEY"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "PKEY",
+                      "description": "(Required) The unique PKEY identifier of the resource."
+                    },
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"user@example.com\",\n  \"firstName\": \"Example Campaign\",\n  \"lastName\": \"Example Campaign\",\n  \"phone\": \"example_value\",\n  \"mobilePhone\": \"example_value\",\n  \"birthDate\": \"<date>\",\n  \"gender\": \"male\",\n  \"preferredLanguage\": \"example_value\",\n  \"blackList\": true,\n  \"blackListEmail\": true,\n  \"blackListMobile\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a61d75a-64d0-4ec9-abfb-1e35b20e3592",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profileAndServices",
+                    "profile",
+                    ":PKEY"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "PKEY",
+                      "description": "(Required) The unique PKEY identifier of the resource."
+                    },
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"user@example.com\",\n  \"firstName\": \"Example Campaign\",\n  \"lastName\": \"Example Campaign\",\n  \"phone\": \"example_value\",\n  \"mobilePhone\": \"example_value\",\n  \"birthDate\": \"<date>\",\n  \"gender\": \"male\",\n  \"preferredLanguage\": \"example_value\",\n  \"blackList\": true,\n  \"blackListEmail\": true,\n  \"blackListMobile\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "919e7a76-81d4-4811-9861-6c22de1d2ee2",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profileAndServices",
+                    "profile",
+                    ":PKEY"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "PKEY",
+                      "description": "(Required) The unique PKEY identifier of the resource."
+                    },
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"user@example.com\",\n  \"firstName\": \"Example Campaign\",\n  \"lastName\": \"Example Campaign\",\n  \"phone\": \"example_value\",\n  \"mobilePhone\": \"example_value\",\n  \"birthDate\": \"<date>\",\n  \"gender\": \"male\",\n  \"preferredLanguage\": \"example_value\",\n  \"blackList\": true,\n  \"blackListEmail\": true,\n  \"blackListMobile\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1fc03851-8cc7-4342-a254-100e28baed6c",
+          "name": "Adobe Campaign Delete a Profile",
+          "request": {
+            "name": "Adobe Campaign Delete a Profile",
+            "description": {
+              "content": "Deletes a specific recipient profile by its PKEY identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "profileAndServices",
+                "profile",
+                ":PKEY"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "PKEY",
+                  "description": "(Required) The unique PKEY identifier of the resource."
+                },
+                {
+                  "description": "Your Campaign Classic instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fe09d7d2-b3b4-49b5-92f3-e100c724a3ca",
+              "name": "Profile deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profileAndServices",
+                    "profile",
+                    ":PKEY"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "PKEY",
+                      "description": "(Required) The unique PKEY identifier of the resource."
+                    },
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b65ebc37-e29a-45d6-847e-63f1f65357fb",
+              "name": "Authentication failed. Invalid or expired OAuth token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profileAndServices",
+                    "profile",
+                    ":PKEY"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "PKEY",
+                      "description": "(Required) The unique PKEY identifier of the resource."
+                    },
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "44e0d82b-2a39-4a0d-bb74-399420792abd",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profileAndServices",
+                    "profile",
+                    ":PKEY"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "PKEY",
+                      "description": "(Required) The unique PKEY identifier of the resource."
+                    },
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bce5a0fe-2102-4f94-b911-46ced0d87c4d",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profileAndServices",
+                    "profile",
+                    ":PKEY"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "PKEY",
+                      "description": "(Required) The unique PKEY identifier of the resource."
+                    },
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Campaign Classic instance name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "YOUR_INSTANCE",
+      "key": "instance"
+    },
+    {
+      "type": "string",
+      "value": "https://{{instance}}.campaign.adobe.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1d32ba21-652e-4916-8fbc-edd32b21bbe7",
+    "name": "Adobe Campaign Classic Custom Resources Profiles API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "SOAP-based API for Adobe Campaign Classic v7 and v8, documented as HTTP POST operations. All operations target the single SOAP router endpoint at /nl/jsp/soaprouter.jsp and are differentiated by the SOAPAction header. Provides programmatic access to session management, data querying, record persistence, delivery management, workflow control, subscription management, and real-time transactional event ingestion.\n\nContact Support:\n Name: Adobe Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

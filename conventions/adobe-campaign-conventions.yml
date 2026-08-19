@@ -1,0 +1,152 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://experienceleague.adobe.com/en/docs/campaign/campaign-v8/developer/apis/global-concepts/must-read
+  and .../developer/apis/setting-up-api-access and
+  .../developer/apis/managing-transactional-messages and .../developer/api
+  (all fetched 2026-08-13, HTTP 200); derived from openapi/*.yml
+  (components.parameters and components.schemas).
+summary: >-
+  Adobe Campaign runs two API surfaces with different conventions. The modern
+  REST surface is JSON, HATEOAS-flavoured (every resource URL is returned to you
+  as an href and Adobe explicitly instructs you never to build one yourself),
+  cursor-ish paginated with _lineStart/_lineCount, and authenticated with an IMS
+  bearer token plus an API key. The Campaign Classic surface is SOAP-over-HTTP
+  through a single /nl/jsp/soaprouter.jsp router, authenticated with a session
+  token pair, and returns HTTP 500 with a SOAP Fault for everything that goes
+  wrong. There is no idempotency mechanism on either surface.
+auth:
+  style: bearer + api-key (REST); session-token pair (Classic SOAP)
+  rest_headers:
+    - 'Authorization: Bearer <ACCESS_TOKEN>'
+    - 'X-Api-Key: <API_KEY>'
+    - 'Content-Type: application/json'
+  classic_headers:
+    - 'X-Security-Token: <SECURITY_TOKEN>'
+    - 'Cookie: __sessiontoken=<SESSION_TOKEN>'
+  token_endpoint: https://ims-na1.adobelogin.com/ims/token/v3
+  server_to_server_only: true
+  detail: authentication/adobe-campaign-authentication.yml
+idempotency:
+  supported: false
+  header: null
+  note: >-
+    Adobe Campaign documents NO idempotency key, no request-id dedupe and no
+    replay-safety guarantee on any surface. This matters most on
+    triggerTransactionalEvent, pushEvent/pushEvents, submitDelivery and
+    deliveryPrepareAndStart — a retried POST after a timeout can send a second
+    real message to a real person. The only related controls Adobe exposes are
+    the optional `expiration` and `scheduled` fields in a transactional event
+    payload, which bound WHEN a message is sent, not whether it is sent twice.
+    Because no idempotency support exists, this repo deliberately does NOT wire
+    an Idempotency pointer in apis.yml.
+  mitigation: >-
+    The POST response to a transactional event returns a Primary Key that can be
+    polled with GET for event status; treat that PKey as the dedupe handle in
+    caller-side logic and prefer status polling over blind retry.
+pagination:
+  style: offset-cursor hybrid with follow-the-link
+  parameters:
+    - name: _lineStart
+      in: query
+      type: integer
+      description: Pagination offset, taken from the `next` node of the previous response.
+    - name: _lineCount
+      in: query
+      type: integer
+      default: 25
+      description: Records per page. Default 25.
+    - name: _forcePagination
+      in: query
+      type: boolean
+      default: false
+      description: Force pagination for tables with more than 100,000 records.
+    - name: _order
+      in: query
+      type: string
+      description: 'Sort field; append %20desc for descending, e.g. email%20desc.'
+  response_fields:
+    content: Array of resource objects.
+    next.href: Absolute URL of the next page — follow it rather than incrementing _lineStart.
+    count.href: Absolute URL that returns the total count (a separate request).
+  note: >-
+    Total count is NOT inlined in the list response; it costs an extra round trip
+    to count.href. Agents that need a total must budget for that.
+resource_representation:
+  media_type: application/json
+  format_selection: >-
+    JSON is the default. Format can also be selected with a URL extension
+    (GET /profileAndServices/profile.json) or an HTTP Accept header.
+  identifiers:
+    primary_key: PKey
+    primary_key_rule: >-
+      Adobe states that automatic PKey values must NEVER be stored in an external
+      database or website — they are deployment-specific. Define your own
+      business key field and use custom-key URLs instead.
+    custom_keys: >-
+      A profile resource extended with a custom key field can be addressed as
+      /profileAndServicesExt/profile/<customKey>. Custom keys cannot be changed
+      with PATCH. Top-level profile resources only.
+  hateoas: true
+  hateoas_rule: >-
+    "Do not try to build an URL by yourself. All the URLs are returned by the
+    API." Linked objects come back as {PKey, href, label, name, title}.
+field_expansion:
+  supported: false
+  note: >-
+    No sparse-fieldset or expand parameter is documented. Related resources are
+    reached by following the href on the link object, which is an extra request
+    per relationship.
+versioning:
+  in_path: false
+  header: null
+  detail: lifecycle/adobe-campaign-lifecycle.yml
+error_envelope:
+  media_type: application/json
+  shape: '{ error_code: string, message: string }'
+  rfc9457: false
+  classic_surface: SOAP 1.1 Fault body returned with HTTP 500.
+  detail: errors/adobe-campaign-problem-types.yml
+rate_limit_signaling:
+  documented_limit: true
+  numeric_limit_published: false
+  status_on_exhaustion: 429
+  response_headers: []
+  retry_after: undocumented
+  note: >-
+    Adobe documents that Campaign v8 enforces a TPS ceiling on the API layer and
+    that breaking it returns HTTP 429, but publishes no number and no
+    RateLimit-*/Retry-After header contract. 429 is also absent from every
+    published Campaign OpenAPI.
+  detail: rate-limits/adobe-campaign-rate-limits.yml
+request_tracing:
+  request_id_header: null
+  note: No correlation/request-id header is documented on either surface.
+metadata:
+  custom_fields: >-
+    Campaign is schema-extensible: customers extend nms:recipient and other
+    schemas, and the extended resources appear under /profileAndServicesExt/.
+    Call getResourceMetadata (GET /profileAndServices/resourceType/{resourceName})
+    to discover the deployed shape before writing — the schema is per-instance,
+    so a spec harvested from one tenant does not describe another.
+authorization_model:
+  note: >-
+    Campaign APIs run in the administrator context and are excluded from the role
+    context by default; organizational units and roles do not narrow an API
+    caller unless Adobe configures it. Treat every credential as broadly
+    privileged when assessing agent blast radius.
+  detail: agentic-access/adobe-campaign-agentic-access.yml
+host_split:
+  rest: https://mc.adobe.io/{ORGANIZATION}/campaign
+  classic_soap: https://{instance}.campaign.adobe.com/nl/jsp/soaprouter.jsp
+  note: >-
+    Operations in openapi/ whose path begins /nl/jsp/soaprouter.jsp belong to the
+    Classic instance host, not to mc.adobe.io. The refined per-tag specs in this
+    repo carry a single {instance}.campaign.adobe.com servers block inherited
+    from the Classic original; the REST-path specs
+    (profileAndServices*, customResources, privacy, transactional, workflow
+    execution) are served from mc.adobe.io. The apis.yml baseURL for each entry
+    records the correct host per entry.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

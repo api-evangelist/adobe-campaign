@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Campaign Classic Custom Resources Privacy API",
+    "version": "8.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Privacy",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Campaign Create a Privacy Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.campaign.adobe.com/privacy/privacyTool",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a GDPR or CCPA privacy request for data access or deletion. Supports both access requests (retrieve all data for a data subject) and delete requests (remove all data for a data subject)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

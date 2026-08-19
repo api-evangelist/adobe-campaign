@@ -1,0 +1,67 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://experienceleague.adobe.com/en/docs/campaign/campaign-v8/developer/apis/setting-up-api-access
+  and https://experienceleague.adobe.com/en/docs/campaign/campaign-v8/developer/apis/get-started-apis
+  (fetched 2026-08-13, HTTP 200)
+summary: >-
+  Adobe Campaign has no public, self-serve sandbox. What it does publish is a
+  per-customer STAGE INSTANCE addressed by a distinct ORGANIZATION path segment,
+  provisioned alongside the production instance. That is a real, documented
+  test surface — but it is only reachable by an existing customer with
+  credentials, so an evaluator cannot try the API before buying.
+self_serve: false
+public_test_credentials: false
+test_cards: not-applicable
+test_clock: false
+modes:
+  - name: production
+    base_url_pattern: https://mc.adobe.io/<ORGANIZATION>/campaign
+    description: The production Campaign instance for the tenant.
+  - name: stage
+    base_url_pattern: https://mc.adobe.io/<ORGANIZATION-mkt-stage>/campaign
+    description: >-
+      The staging Campaign instance. Selected purely by the ORGANIZATION path
+      segment — the same credential pattern, the same host, a different tenant
+      id. There is no separate test-key prefix and no header that flips modes,
+      so an integration must be careful that the ORGANIZATION value it is
+      configured with is the one it thinks it is.
+    source: https://experienceleague.adobe.com/en/docs/campaign/campaign-v8/developer/apis/setting-up-api-access
+key_prefixes:
+  test: null
+  live: null
+  note: >-
+    Adobe Developer Console credentials carry no test/live prefix. There is no
+    way to tell from a credential alone whether it points at stage or
+    production — the distinction lives entirely in the ORGANIZATION path
+    segment. Worth flagging to the provider: this is the classic shape that
+    produces an accidental production send.
+tooling:
+  - name: Postman
+    description: >-
+      Adobe's REST API documentation states that all its examples work with
+      Postman. This repo carries generated Postman and OpenCollection files in
+      collections/ built from the OpenAPI files, but Adobe publishes no official
+      public Postman workspace for Campaign.
+    official_public_workspace: false
+  - name: Campaign Client Console
+    description: >-
+      The Campaign v8 Client Console is the interactive surface for building and
+      previewing deliveries, including proof/seed sends, but it is a desktop
+      client for licensed users, not an API playground.
+proofs_and_seeds:
+  description: >-
+    Campaign's in-product safety mechanism for testing a delivery without
+    mailing the real target is seed addresses and proofs (Display mirror page,
+    Preview and proof), configured on the delivery rather than through the API.
+  source: https://experienceleague.adobe.com/en/docs/campaign/campaign-v8/send/validate/preview-and-proof
+access_gate:
+  detail: >-
+    The Campaign v8 REST API is "only available on demand, for all Campaign FDA
+    environments" and is NOT available for Enterprise (FFDA) deployments; access
+    requires contacting an Adobe representative. There is therefore no anonymous
+    path to a working request against this API.
+  source: https://experienceleague.adobe.com/en/docs/campaign/campaign-v8/developer/apis/get-started-apis
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

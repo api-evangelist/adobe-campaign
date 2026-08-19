@@ -1,0 +1,92 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Campaign Classic Custom Resources API",
+    "version": "8.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Custom Resources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Campaign List Profile-linked Custom Resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.campaign.adobe.com/profileAndServicesExt/:cusResourceName",
+            "params": [
+              {
+                "name": "cusResourceName",
+                "value": "Example Campaign",
+                "type": "path",
+                "description": "The name of the custom resource (with cus prefix, e.g., cusMyResource)."
+              },
+              {
+                "name": "_lineCount",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return per page. Default is 25."
+              },
+              {
+                "name": "_lineStart",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset from the next node in previous response."
+              },
+              {
+                "name": "_order",
+                "value": "",
+                "type": "query",
+                "description": "Sort order. Use field name for ascending, append %20desc for descending (e.g., email%20desc)."
+              }
+            ]
+          },
+          "docs": "Retrieves records from a profile-linked custom resource. Custom resources are defined with the cus prefix in Campaign Standard."
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign List Non-profile Custom Resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.campaign.adobe.com/customResources/:cusResourceName",
+            "params": [
+              {
+                "name": "cusResourceName",
+                "value": "Example Campaign",
+                "type": "path",
+                "description": "The name of the custom resource."
+              },
+              {
+                "name": "_lineCount",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return per page. Default is 25."
+              },
+              {
+                "name": "_lineStart",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset from the next node in previous response."
+              },
+              {
+                "name": "_order",
+                "value": "",
+                "type": "query",
+                "description": "Sort order. Use field name for ascending, append %20desc for descending (e.g., email%20desc)."
+              }
+            ]
+          },
+          "docs": "Retrieves records from a standalone custom resource not linked to profiles."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

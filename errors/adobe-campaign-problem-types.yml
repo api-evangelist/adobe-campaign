@@ -1,0 +1,184 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  openapi/*.yml (4xx/5xx responses and components.schemas.ErrorResponse),
+  cross-checked against
+  https://experienceleague.adobe.com/en/docs/campaign/campaign-v8/developer/apis/setting-up-api-access
+  and https://experienceleague.adobe.com/en/docs/campaign/campaign-v8/developer/api
+  (fetched 2026-08-13).
+format: vendor-json
+rfc9457: false
+notes: >-
+  Adobe Campaign does NOT emit RFC 9457 application/problem+json. Errors on the
+  REST surface come back as application/json with a flat two-field envelope
+  ({error_code, message}); there is no type URI, no title/detail split and no
+  instance pointer, so an agent cannot dereference an error class. The Campaign
+  Classic SOAP surface is worse still — it returns HTTP 500 with a SOAP Fault
+  body for every failure, including authorization and validation failures, which
+  is why 500 is the single most common declared status across the specs in this
+  repo (35 of 35 operations declare it). Adobe publishes no consolidated public
+  error-code registry for Campaign, so the numeric error_code values are not
+  enumerable here; the catalog below is the HTTP-level contract only.
+envelope:
+  media_type: application/json
+  shape:
+    error_code:
+      type: string
+      description: Numeric Adobe Campaign error code, serialized as a string.
+    message:
+      type: string
+      description: Human-readable error message.
+  soap_fault:
+    surface: Campaign Classic (https://{instance}.campaign.adobe.com/nl/jsp/soaprouter.jsp)
+    media_type: text/xml
+    description: >-
+      SOAP 1.1 Fault returned with HTTP 500 regardless of error class.
+      faultstring carries the XTK error text.
+problem_types:
+  - status: 400
+    name: BadRequest
+    title: Invalid request parameters
+    description: >-
+      Request body or query parameters failed validation — malformed JSON, an
+      unknown field on the target resource, or a value that does not match the
+      Campaign schema for that resource.
+    operations:
+      - createProfile
+      - updateProfile
+      - createService
+      - updateService
+      - createPrivacyRequest
+      - subscribeProfile
+      - triggerTransactionalEvent
+      - controlWorkflow
+    remediation: >-
+      Fetch the resource schema with getResourceMetadata before writing;
+      Campaign rejects fields that are not in the deployed schema extension.
+    retryable: false
+  - status: 401
+    name: Unauthorized
+    title: Authentication failed — invalid or expired OAuth token
+    description: >-
+      The Adobe IMS bearer token is missing, malformed or expired, or the
+      X-Api-Key header is absent. On the Classic surface, the __sessiontoken
+      cookie / X-Security-Token pair has expired (24-hour lifecycle).
+    operations:
+      - listProfiles
+      - getProfile
+      - createProfile
+      - updateProfile
+      - deleteProfile
+      - listServices
+      - createService
+      - getService
+      - updateService
+      - deleteService
+      - subscribeProfile
+      - unsubscribeProfile
+      - getMarketingHistory
+      - getResourceMetadata
+      - listOrgUnits
+      - listCustomResources
+      - listProfileLinkedCustomResources
+      - createPrivacyRequest
+      - triggerTransactionalEvent
+      - getTransactionalEventStatus
+      - controlWorkflow
+    remediation: >-
+      Re-mint the token at https://ims-na1.adobelogin.com/ims/token/v3 and resend
+      BOTH Authorization: Bearer and X-Api-Key. On Classic, call
+      xtk:session#Logon again.
+    retryable: true
+    retry_after_auth: true
+  - status: 403
+    name: Forbidden
+    title: Insufficient permissions for the requested operation
+    description: >-
+      The credential authenticated but is not entitled to the resource. Rare on
+      Campaign because API callers run in the administrator context and are
+      excluded from the role context by default; a 403 usually means the Adobe
+      Campaign service was not added to the Developer Console project, or an
+      organizational unit restriction was explicitly configured.
+    operations:
+      - listProfiles
+    remediation: >-
+      Confirm the Adobe Campaign service is attached to the Developer Console
+      project and that the ORGANIZATION path segment matches the credential.
+    retryable: false
+  - status: 404
+    name: NotFound
+    title: The requested resource was not found
+    description: >-
+      The PKey, custom key, resource name, eventID or workflow ID does not
+      resolve on this instance. Also returned when a custom resource has not
+      been published to the API.
+    operations:
+      - getProfile
+      - updateProfile
+      - deleteProfile
+      - getService
+      - updateService
+      - deleteService
+      - subscribeProfile
+      - unsubscribeProfile
+      - getMarketingHistory
+      - getResourceMetadata
+      - listCustomResources
+      - listProfileLinkedCustomResources
+      - getTransactionalEventStatus
+      - controlWorkflow
+    remediation: >-
+      Never construct resource URLs by hand — Adobe's own guidance is that all
+      URLs are returned by the API in href fields. Follow the href you were
+      given rather than rebuilding it from a stored PKey, which Adobe explicitly
+      warns must not be persisted outside Campaign.
+    retryable: false
+  - status: 429
+    name: TooManyRequests
+    title: API throughput (TPS) limit exceeded
+    description: >-
+      Campaign v8 enforces a transactions-per-second ceiling on the API layer.
+      Exceeding it returns HTTP 429. This status is documented by Adobe but is
+      NOT declared in any of the OpenAPI files in this repo — a real contract gap
+      worth reporting to the provider.
+    documented_at: https://experienceleague.adobe.com/en/docs/campaign/campaign-v8/developer/api
+    in_spec: false
+    remediation: >-
+      Back off exponentially with jitter. Managed Cloud Services customers can
+      ask Adobe to raise the throttle per API.
+    retryable: true
+  - status: 500
+    name: InternalError
+    title: Internal server error
+    description: >-
+      Server-side failure. On the Classic SOAP surface this is also the carrier
+      for authorization and validation failures, wrapped in a SOAP Fault, so a
+      500 there is not reliable evidence of a transient fault.
+    operations:
+      - sessionLogon
+      - sessionLogout
+      - sessionWrite
+      - sessionWriteCollection
+      - executeQuery
+      - submitDelivery
+      - deliveryPrepareAndStart
+      - pushEvent
+      - pushEvents
+      - subscribe
+      - unsubscribe
+      - workflowStart
+      - workflowStop
+      - workflowPostEvent
+    remediation: >-
+      On the REST surface, retry with backoff. On the Classic SOAP surface, parse
+      faultstring before retrying — a schema or permission fault will never
+      succeed on retry.
+    retryable: conditional
+gaps:
+  - Adobe publishes no public numeric error-code registry for Adobe Campaign.
+  - No 429 response is declared in any published Campaign OpenAPI despite the documented TPS limit.
+  - No Retry-After or RateLimit-* response header is documented.
+  - Errors are not RFC 9457; there is no dereferenceable type URI per error class.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

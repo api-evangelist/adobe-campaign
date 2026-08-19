@@ -1,0 +1,131 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Campaign Classic Custom Resources Profiles API",
+    "version": "8.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Profiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Campaign List Profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.campaign.adobe.com/profileAndServices/profile",
+            "params": [
+              {
+                "name": "_lineCount",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return per page. Default is 25."
+              },
+              {
+                "name": "_lineStart",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset from the next node in previous response."
+              },
+              {
+                "name": "_order",
+                "value": "",
+                "type": "query",
+                "description": "Sort order. Use field name for ascending, append %20desc for descending (e.g., email%20desc)."
+              },
+              {
+                "name": "_forcePagination",
+                "value": "",
+                "type": "query",
+                "description": "Force pagination for tables with more than 100,000 records."
+              }
+            ]
+          },
+          "docs": "Retrieves a paginated list of recipient profiles. Supports filtering, sorting, and pagination through query parameters."
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Create a Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.campaign.adobe.com/profileAndServices/profile",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new recipient profile with the provided attributes."
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Get a Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.campaign.adobe.com/profileAndServices/profile/:PKEY",
+            "params": [
+              {
+                "name": "PKEY",
+                "value": "",
+                "type": "path",
+                "description": "The unique PKEY identifier of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves a specific recipient profile by its PKEY identifier."
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Update a Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{instance}.campaign.adobe.com/profileAndServices/profile/:PKEY",
+            "params": [
+              {
+                "name": "PKEY",
+                "value": "",
+                "type": "path",
+                "description": "The unique PKEY identifier of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Partially updates a recipient profile with the provided attributes."
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Delete a Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{instance}.campaign.adobe.com/profileAndServices/profile/:PKEY",
+            "params": [
+              {
+                "name": "PKEY",
+                "value": "",
+                "type": "path",
+                "description": "The unique PKEY identifier of the resource."
+              }
+            ]
+          },
+          "docs": "Deletes a specific recipient profile by its PKEY identifier."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

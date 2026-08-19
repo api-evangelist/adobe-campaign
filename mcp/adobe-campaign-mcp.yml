@@ -1,0 +1,147 @@
+generated: '2026-08-13'
+method: derived
+status: candidate
+source: >-
+  openapi/*.yml in this repo; negative search of
+  https://experienceleague.adobe.com/llms.txt (section "MCP Server Access",
+  fetched 2026-08-13),
+  https://experienceleague.adobe.com/en/docs/campaign/campaign-v8/developer/apis/get-started-apis
+  and the adobe GitHub organization.
+deployment:
+  mode: none
+  auth: unknown
+  verified: searched
+finding: >-
+  Adobe ships Model Context Protocol servers today, but NOT for Adobe Campaign.
+  Adobe's own llms.txt on the Campaign documentation host enumerates the current
+  Adobe-hosted MCP servers and every one of them is an Adobe Experience Manager
+  server under https://mcp.adobeaemcloud.com/adobe/mcp/ (/content,
+  /content-readonly, /cloudmanager, /experience-governance). That same document
+  states that a dedicated Experience League content MCP server "is not yet
+  generally available". No Campaign-scoped MCP endpoint, no Campaign MCP npm or
+  PyPI package, and no Campaign entry in the MCP registry was found. The AEM
+  servers are deliberately NOT recorded as an Adobe Campaign agent surface —
+  same company, different product, and crediting them here would assert a
+  Campaign capability that does not exist.
+adobe_mcp_servers_elsewhere:
+  - product: Adobe Experience Manager as a Cloud Service
+    endpoints:
+      - https://mcp.adobeaemcloud.com/adobe/mcp/content
+      - https://mcp.adobeaemcloud.com/adobe/mcp/content-readonly
+      - https://mcp.adobeaemcloud.com/adobe/mcp/cloudmanager
+      - https://mcp.adobeaemcloud.com/adobe/mcp/experience-governance
+    documentation: https://experienceleague.adobe.com/en/docs/experience-manager-learn/cloud-service/ai/mcp-servers/overview
+    covers_campaign: false
+server:
+  name: adobe-campaign
+  transport: null
+  url: null
+auth:
+  scheme: oauth2
+  flow: client_credentials
+  token_endpoint: https://ims-na1.adobelogin.com/ims/token/v3
+  additional_header: X-Api-Key
+  note: >-
+    Any future Campaign MCP server would sit behind the same Adobe IMS OAuth
+    Server-to-Server credential the REST API uses; see
+    authentication/adobe-campaign-authentication.yml.
+candidate_tools:
+  - name: list_profiles
+    description: List profiles in the Campaign marketing database.
+    maps_to: openapi/adobe-campaign-profiles-api-openapi.yml#listProfiles
+  - name: get_profile
+    description: Retrieve a single profile by primary key or custom key.
+    maps_to: openapi/adobe-campaign-profiles-api-openapi.yml#getProfile
+  - name: create_profile
+    description: Create a profile.
+    maps_to: openapi/adobe-campaign-profiles-api-openapi.yml#createProfile
+  - name: update_profile
+    description: Patch an existing profile.
+    maps_to: openapi/adobe-campaign-profiles-api-openapi.yml#updateProfile
+  - name: delete_profile
+    description: Delete a profile.
+    maps_to: openapi/adobe-campaign-profiles-api-openapi.yml#deleteProfile
+  - name: get_marketing_history
+    description: Return the marketing history (deliveries received) for a profile.
+    maps_to: openapi/adobe-campaign-marketing-history-api-openapi.yml#getMarketingHistory
+  - name: list_services
+    description: List subscription services.
+    maps_to: openapi/adobe-campaign-profileandservices-api-openapi.yml#listServices
+  - name: create_service
+    description: Create a subscription service.
+    maps_to: openapi/adobe-campaign-profileandservices-api-openapi.yml#createService
+  - name: get_service
+    description: Retrieve a subscription service.
+    maps_to: openapi/adobe-campaign-profileandservices-api-openapi.yml#getService
+  - name: update_service
+    description: Patch a subscription service.
+    maps_to: openapi/adobe-campaign-profileandservices-api-openapi.yml#updateService
+  - name: delete_service
+    description: Delete a subscription service.
+    maps_to: openapi/adobe-campaign-profileandservices-api-openapi.yml#deleteService
+  - name: subscribe_profile
+    description: Subscribe a profile to a service.
+    maps_to: openapi/adobe-campaign-subscriptions-api-openapi.yml#subscribeProfile
+  - name: unsubscribe_profile
+    description: Unsubscribe a profile from a service.
+    maps_to: openapi/adobe-campaign-subscriptions-api-openapi.yml#unsubscribeProfile
+  - name: trigger_transactional_event
+    description: Trigger a transactional message event (email or SMS).
+    maps_to: openapi/adobe-campaign-transactional-messages-api-openapi.yml#triggerTransactionalEvent
+  - name: get_transactional_event_status
+    description: Poll the delivery status of a previously triggered transactional event.
+    maps_to: openapi/adobe-campaign-transactional-messages-api-openapi.yml#getTransactionalEventStatus
+  - name: control_workflow
+    description: Send a start/pause/stop/resume command to a workflow execution.
+    maps_to: openapi/adobe-campaign-workflows-api-openapi.yml#controlWorkflow
+  - name: list_custom_resources
+    description: List rows of a non-profile custom resource.
+    maps_to: openapi/adobe-campaign-custom-resources-api-openapi.yml#listCustomResources
+  - name: list_profile_linked_custom_resources
+    description: List rows of a profile-linked custom resource.
+    maps_to: openapi/adobe-campaign-custom-resources-api-openapi.yml#listProfileLinkedCustomResources
+  - name: get_resource_metadata
+    description: Return the schema/metadata description of a Campaign resource.
+    maps_to: openapi/adobe-campaign-metadata-api-openapi.yml#getResourceMetadata
+  - name: list_org_units
+    description: List organizational units.
+    maps_to: openapi/adobe-campaign-organizational-units-api-openapi.yml#listOrgUnits
+  - name: create_privacy_request
+    description: File a GDPR/CCPA access or delete request against the privacy tool.
+    maps_to: openapi/adobe-campaign-privacy-api-openapi.yml#createPrivacyRequest
+  - name: execute_query
+    description: Run a queryDef against the Campaign data model (Classic SOAP surface).
+    maps_to: openapi/adobe-campaign-query-definition-api-openapi.yml#executeQuery
+  - name: push_event
+    description: Push a single real-time transactional event (Classic SOAP surface).
+    maps_to: openapi/adobe-campaign-real-time-events-api-openapi.yml#pushEvent
+  - name: push_events
+    description: Push a batch of real-time transactional events (Classic SOAP surface).
+    maps_to: openapi/adobe-campaign-real-time-events-api-openapi.yml#pushEvents
+  - name: start_workflow
+    description: Start a workflow (Classic SOAP surface).
+    maps_to: openapi/adobe-campaign-workflow-api-openapi.yml#workflowStart
+  - name: stop_workflow
+    description: Stop a workflow (Classic SOAP surface).
+    maps_to: openapi/adobe-campaign-workflow-api-openapi.yml#workflowStop
+  - name: post_workflow_event
+    description: Post an event signal into a running workflow (Classic SOAP surface).
+    maps_to: openapi/adobe-campaign-workflow-api-openapi.yml#workflowPostEvent
+  - name: submit_delivery
+    description: Submit a delivery for execution (Classic SOAP surface).
+    maps_to: openapi/adobe-campaign-delivery-api-openapi.yml#submitDelivery
+  - name: prepare_and_start_delivery
+    description: Prepare and start a delivery (Classic SOAP surface).
+    maps_to: openapi/adobe-campaign-delivery-api-openapi.yml#deliveryPrepareAndStart
+agentic_guardrails:
+  note: >-
+    Read agentic-access/adobe-campaign-agentic-access.yml before wiring any of
+    these. submit_delivery, prepare_and_start_delivery, trigger_transactional_event,
+    push_event, push_events and start_workflow all send real messages to real
+    people and are irreversible once dispatched; Adobe's own llms.txt states that
+    agent operations against Adobe products must run under the authenticated
+    user's permissions and should escalate to a human where side effects are
+    implied.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

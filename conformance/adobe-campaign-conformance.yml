@@ -1,0 +1,149 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://ims-na1.adobelogin.com/.well-known/openid-configuration and
+  /.well-known/oauth-authorization-server (probed 2026-08-13, HTTP 200);
+  https://adobe.com/.well-known/security.txt (probed 2026-08-13, HTTP 200);
+  https://experienceleague.adobe.com/llms.txt (fetched 2026-08-13);
+  Campaign v8 developer documentation; derived from openapi/*.yml
+standards:
+  - id: oauth2
+    name: OAuth 2.0
+    conforms: true
+    evidence: >-
+      Adobe IMS publishes RFC 8414 authorization server metadata at
+      https://ims-na1.adobelogin.com/.well-known/oauth-authorization-server
+      (HTTP 200): authorization_endpoint /ims/authorize/v2, token_endpoint
+      /ims/token/v3, revocation_endpoint /ims/revoke, jwks_uri /ims/keys,
+      client_secret_basic and client_secret_post. Campaign REST calls carry the
+      resulting bearer token.
+    artifact: well-known/adobe-campaign-oauth-authorization-server.json
+  - id: rfc8414
+    name: OAuth 2.0 Authorization Server Metadata
+    conforms: true
+    evidence: /.well-known/oauth-authorization-server served by the IMS issuer, HTTP 200.
+    artifact: well-known/adobe-campaign-oauth-authorization-server.json
+  - id: rfc7636
+    name: PKCE
+    conforms: true
+    evidence: 'IMS advertises code_challenge_methods_supported: [S256, plain].'
+  - id: oidc
+    name: OpenID Connect Discovery 1.0
+    conforms: true
+    evidence: >-
+      /.well-known/openid-configuration served by IMS with issuer, userinfo
+      endpoint, RS256 id_token signing, subject_types public, and the
+      openid/email/profile scopes.
+    artifact: well-known/adobe-campaign-openid-configuration.json
+  - id: rfc7591
+    name: OAuth 2.0 Dynamic Client Registration
+    conforms: partial
+    evidence: >-
+      IMS advertises a registration_endpoint (https://ims-na1.adobelogin.com/ims/register)
+      in its discovery document. Adobe's documented path to credentials is the
+      Adobe Developer Console, not anonymous dynamic registration.
+  - id: rfc9116
+    name: security.txt
+    conforms: true
+    evidence: >-
+      PGP-signed RFC 9116 document at https://www.adobe.com/.well-known/security.txt
+      with Contact, Policy, Encryption, Acknowledgments, Preferred-Languages,
+      Canonical and Expires 2027-07-30.
+    artifact: well-known/adobe-campaign-security.txt
+  - id: rfc9457
+    name: Problem Details for HTTP APIs
+    conforms: false
+    evidence: >-
+      Errors are application/json with a flat {error_code, message} envelope; no
+      application/problem+json, no type URI. See errors/adobe-campaign-problem-types.yml.
+  - id: rfc8594
+    name: Sunset HTTP Header
+    conforms: false
+    evidence: >-
+      Deprecations are announced in documentation and release notes only. No
+      Sunset or Deprecation response header is emitted.
+  - id: rest
+    name: REST / JSON over HTTP
+    conforms: partial
+    evidence: >-
+      The mc.adobe.io surface is resource-oriented JSON with hypermedia href
+      links and correct verb use (GET/POST/PATCH/DELETE). The Campaign Classic
+      surface is SOAP 1.1 tunnelled over a single POST endpoint
+      (/nl/jsp/soaprouter.jsp), which is not REST at all — 20 of the 35
+      operations in openapi/ are on that surface.
+  - id: hateoas
+    name: Hypermedia as the engine of application state
+    conforms: true
+    evidence: >-
+      Adobe instructs consumers never to construct URLs; every resource and
+      relationship is returned as an href, and pagination advances by following
+      next.href.
+  - id: pagination
+    name: Documented pagination
+    conforms: true
+    evidence: '_lineStart / _lineCount / _forcePagination / _order plus next.href and count.href.'
+  - id: idempotency
+    name: Idempotent request keys
+    conforms: false
+    evidence: >-
+      No idempotency key, no replay protection, no dedupe token documented on any
+      Campaign surface — including the message-sending operations.
+  - id: openapi
+    name: OpenAPI
+    conforms: false
+    evidence: >-
+      Adobe publishes no OpenAPI or Swagger document for Adobe Campaign. Probed
+      2026-08-13: mc.adobe.io/openapi.json 404, mc.adobe.io/swagger.json 404,
+      developer.adobe.com/openapi.json 404, developer.adobe.com/campaign/api/ 404,
+      developer.adobe.com/campaign-standard-apis/ 404. The specs in openapi/ are
+      API Evangelist derivations from Adobe's published reference documentation,
+      not provider artifacts.
+  - id: asyncapi
+    name: AsyncAPI
+    conforms: false
+    evidence: >-
+      Adobe publishes no AsyncAPI for Campaign's transactional/real-time event
+      surface. The document in asyncapi/ is an API Evangelist derivation.
+  - id: mcp
+    name: Model Context Protocol
+    conforms: false
+    evidence: >-
+      Adobe operates MCP servers, but only for Adobe Experience Manager
+      (mcp.adobeaemcloud.com). No Campaign MCP surface exists. See mcp/.
+  - id: a2a
+    name: A2A Agent Card
+    conforms: false
+    evidence: >-
+      /.well-known/agent-card.json and /.well-known/agent.json probed on
+      adobe.com, www.adobe.com, mc.adobe.io and experienceleague.adobe.com —
+      all 404. developer.adobe.com answers 200 with an SPA HTML shell for every
+      /.well-known/* path and is not a card.
+  - id: llmstxt
+    name: llms.txt
+    conforms: true
+    evidence: >-
+      https://experienceleague.adobe.com/llms.txt (HTTP 200, 52KB, version 1.8
+      dated 2026-08-05) is a genuinely well-built llms.txt with a version log,
+      product scope, authorization boundaries, an MCP section and curated URL
+      lists, and it covers Adobe Campaign explicitly. Saved verbatim to
+      llms/adobe-campaign-llms.txt.
+    artifact: llms/adobe-campaign-llms.txt
+  - id: gdpr
+    name: GDPR / data subject rights
+    conforms: true
+    evidence: >-
+      Campaign exposes a dedicated Privacy API (POST /privacy/privacyTool,
+      openapi/adobe-campaign-privacy-api-openapi.yml) for access and delete
+      requests, plus a documented privacy guide.
+    docs: https://experienceleague.adobe.com/en/docs/campaign/campaign-v8/privacy/privacy
+compliance_program:
+  published: true
+  trust_center: https://www.adobe.com/trust.html
+  detail: security/adobe-campaign-trust-center.yml
+  note: >-
+    Adobe maintains a corporate Trust Center covering security, compliance and
+    availability across products, referenced from Adobe's own llms.txt. Named
+    certifications are recorded in the trust-center artifact.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

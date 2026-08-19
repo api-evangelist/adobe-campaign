@@ -1,0 +1,125 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Campaign Classic Custom Resources ProfileAndServices API",
+    "version": "8.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ProfileAndServices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Campaign List Services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.campaign.adobe.com/profileAndServices/service",
+            "params": [
+              {
+                "name": "_lineCount",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return per page. Default is 25."
+              },
+              {
+                "name": "_lineStart",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset from the next node in previous response."
+              },
+              {
+                "name": "_order",
+                "value": "",
+                "type": "query",
+                "description": "Sort order. Use field name for ascending, append %20desc for descending (e.g., email%20desc)."
+              }
+            ]
+          },
+          "docs": "Retrieves a paginated list of subscription services."
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Create a Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.campaign.adobe.com/profileAndServices/service",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new subscription service."
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Get a Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.campaign.adobe.com/profileAndServices/service/:PKEY",
+            "params": [
+              {
+                "name": "PKEY",
+                "value": "",
+                "type": "path",
+                "description": "The unique PKEY identifier of the resource."
+              }
+            ]
+          },
+          "docs": "Retrieves a specific subscription service by its PKEY identifier."
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Update a Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{instance}.campaign.adobe.com/profileAndServices/service/:PKEY",
+            "params": [
+              {
+                "name": "PKEY",
+                "value": "",
+                "type": "path",
+                "description": "The unique PKEY identifier of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Partially updates a subscription service with the provided attributes."
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Delete a Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{instance}.campaign.adobe.com/profileAndServices/service/:PKEY",
+            "params": [
+              {
+                "name": "PKEY",
+                "value": "",
+                "type": "path",
+                "description": "The unique PKEY identifier of the resource."
+              }
+            ]
+          },
+          "docs": "Deletes a specific subscription service by its PKEY identifier."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

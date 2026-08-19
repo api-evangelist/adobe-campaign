@@ -1,0 +1,106 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://experienceleague.adobe.com/llms.txt (Adobe's own product index, fetched
+  2026-08-13);
+  https://experienceleague.adobe.com/en/docs/campaign/campaign-v8/developer/apis/setting-up-api-access;
+  https://experienceleague.adobe.com/en/docs/campaign/campaign-v8/developer/api;
+  https://experienceleague.adobe.com/en/docs/campaign/campaign-v8/releases/release-notes;
+  https://status.adobe.com/ ; openapi/*.yml
+versioning:
+  scheme: product-build
+  api_version_in_path: false
+  api_version_header: null
+  current_product_version: 8.9.3
+  current_product_version_date: '2026-08-11'
+  note: >-
+    There is no API version identifier anywhere in the Adobe Campaign contract —
+    no path segment, no header, no media-type parameter. The REST base is
+    https://mc.adobe.io/{ORGANIZATION}/campaign and the Classic base is
+    https://{instance}.campaign.adobe.com/nl/jsp/soaprouter.jsp. Consumers are
+    pinned to whatever build their instance is running, and Adobe schedules the
+    upgrade.
+deprecation_policy:
+  published: true
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  mechanism: >-
+    Adobe announces deprecations in product documentation and release notes with
+    a named end-of-support date, not in HTTP response headers. No Deprecation or
+    Sunset header is emitted by either Campaign surface, so an agent cannot
+    detect an impending removal at runtime — only a human reading the docs can.
+  deprecations:
+    - subject: Adobe Campaign Standard (the product)
+      status: deprecated
+      replacement: Adobe Journey Optimizer
+      evidence: >-
+        Adobe's own llms.txt tags the Campaign Standard product entry
+        "deprecated" and its documentation home entry reads "Deprecated -
+        migrate to Adobe Journey Optimizer".
+      source: https://experienceleague.adobe.com/llms.txt
+      impact: >-
+        The Campaign Standard REST API on https://mc.adobe.io/{ORGANIZATION}/campaign
+        is the surface most of the OpenAPI files in this repo describe. New
+        integrations should target Campaign v8 or Adobe Journey Optimizer.
+    - subject: Service Account (JWT) credentials
+      status: removed
+      end_of_support: '2025-01-27'
+      replacement: OAuth Server-to-Server credential (Adobe IMS)
+      source: https://experienceleague.adobe.com/en/docs/campaign/campaign-v8/developer/apis/setting-up-api-access
+    - subject: Non-IMS technical operator authentication (pre-8.5.1)
+      status: removed
+      replacement: Adobe Identity Management System (IMS)
+      source: https://experienceleague.adobe.com/en/docs/campaign/technotes-ac/tn-new/ims-migration
+      note: From Campaign v8.5.1, technical operators must connect through Adobe IMS.
+    - subject: Adobe Analytics 1.4 API (consumed by Campaign's Web Analytics connector)
+      status: end-of-life
+      replacement: Adobe Analytics 2.0 API
+      migrated_in: 8.9.3
+      source: https://experienceleague.adobe.com/en/docs/campaign/campaign-v8/releases/release-notes
+    - subject: Campaign Classic v7
+      status: legacy
+      note: >-
+        Adobe's llms.txt tags Campaign Classic "legacy - still widely used in
+        enterprise". It is not marked deprecated; it is the on-premise/hybrid
+        predecessor to v8.
+      source: https://experienceleague.adobe.com/llms.txt
+deprecated_operations_in_spec: []
+deprecated_operations_note: >-
+  No operation in openapi/ carries deprecated: true. The deprecation is at the
+  PRODUCT level (Campaign Standard), not the operation level, so a spec-only
+  reader would miss it entirely.
+status_page:
+  url: https://status.adobe.com/
+  scope: All Adobe cloud services including Adobe Campaign
+  machine_readable: false
+  note: >-
+    Adobe operates a single status page for the whole Experience Cloud. No
+    Statuspage-style JSON API (/api/v2/status.json) or RSS feed is advertised for
+    it, so incident state cannot be polled programmatically from a documented
+    endpoint.
+sla:
+  published: false
+  note: >-
+    Availability commitments live in the Adobe Campaign Managed Cloud Services
+    product description
+    (https://helpx.adobe.com/legal/product-descriptions/adobe-campaign-managed-cloud-services.html)
+    and in the individual enterprise contract, not in the developer
+    documentation. The API docs point at that product description for scale
+    limits rather than publishing them.
+availability_constraints:
+  - constraint: REST APIs are on-demand only
+    detail: >-
+      The Campaign v8 REST API surface is "only available on demand, for all
+      Campaign FDA environments" and is NOT available for Enterprise (FFDA)
+      deployments. Access requires contacting an Adobe representative.
+    source: https://experienceleague.adobe.com/en/docs/campaign/campaign-v8/developer/apis/get-started-apis
+  - constraint: Server-to-server only
+    detail: Adobe Campaign APIs must be used server-to-server only; no browser/client-side use.
+    source: https://experienceleague.adobe.com/en/docs/campaign/campaign-v8/developer/apis/global-concepts/must-read
+release_cadence:
+  observed: roughly quarterly product releases (8.9.1 Jan 2026, 8.9.2 May 2026, 8.9.3 Aug 2026)
+  changelog: changelog/adobe-campaign-changelog.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

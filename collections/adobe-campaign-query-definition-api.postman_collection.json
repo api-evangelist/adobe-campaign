@@ -1,0 +1,258 @@
+{
+  "item": [
+    {
+      "id": "c99b7881-1215-4cb3-9e64-39efa31dd1f0",
+      "name": "Query Definition",
+      "description": {
+        "content": "Execute queries against Campaign schemas using the xtk:queryDef interface. Supports get, getIfExists, select, and count operations with XPath field expressions, WHERE conditions, and pagination.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8bf7d8f3-fd9e-4f8d-8f43-9ccd90a6a0cf",
+          "name": "Adobe Campaign Execute a Query",
+          "request": {
+            "name": "Adobe Campaign Execute a Query",
+            "description": {
+              "content": "Executes a query against a Campaign schema using the xtk:queryDef interface. Supports operations: get (single record, error if missing), getIfExists (single record, null if missing), select (multiple records with pagination), and count (record count). Uses XPath expressions for field selection and WHERE conditions. SOAP Action: xtk:queryDef#ExecuteQuery",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nl",
+                "jsp",
+                "soaprouter.jsp",
+                "xtk-queryDef",
+                "ExecuteQuery"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Campaign Classic instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "SOAPAction",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "text/xml"
+              },
+              {
+                "key": "Accept",
+                "value": "text/xml"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-Security-Token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <queryDef>\n    <schema>(string)</schema>\n    <operation>(string)</operation>\n    <lineCount>(integer)</lineCount>\n    <startLine>(integer)</startLine>\n    <select>\n    </select>\n    <where>\n    </where>\n    <orderBy>\n    </orderBy>\n  </queryDef>\n</element>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ec46c1f5-304e-474f-80cc-84ac2a187f37",
+              "name": "Query executed successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nl",
+                    "jsp",
+                    "soaprouter.jsp",
+                    "xtk-queryDef",
+                    "ExecuteQuery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Security-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "SOAPAction",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <queryDef>\n    <schema>(string)</schema>\n    <operation>(string)</operation>\n    <lineCount>(integer)</lineCount>\n    <startLine>(integer)</startLine>\n    <select>\n    </select>\n    <where>\n    </where>\n    <orderBy>\n    </orderBy>\n  </queryDef>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <resultSet>\n  </resultSet>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "88163824-d2f0-43b0-a1e8-5f112d164d9f",
+              "name": "SOAP fault indicating an error during operation processing.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nl",
+                    "jsp",
+                    "soaprouter.jsp",
+                    "xtk-queryDef",
+                    "ExecuteQuery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Security-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "SOAPAction",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <queryDef>\n    <schema>(string)</schema>\n    <operation>(string)</operation>\n    <lineCount>(integer)</lineCount>\n    <startLine>(integer)</startLine>\n    <select>\n    </select>\n    <where>\n    </where>\n    <orderBy>\n    </orderBy>\n  </queryDef>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <faultcode>example_value</faultcode>\n  <faultstring>example_value</faultstring>\n  <detail>example_value</detail>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Campaign Classic instance name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "YOUR_INSTANCE",
+      "key": "instance"
+    },
+    {
+      "type": "string",
+      "value": "https://{{instance}}.campaign.adobe.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "59dcf4e3-ab3d-4b09-bd86-93bf7282dcf0",
+    "name": "Adobe Campaign Classic Custom Resources Query Definition API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "SOAP-based API for Adobe Campaign Classic v7 and v8, documented as HTTP POST operations. All operations target the single SOAP router endpoint at /nl/jsp/soaprouter.jsp and are differentiated by the SOAPAction header. Provides programmatic access to session management, data querying, record persistence, delivery management, workflow control, subscription management, and real-time transactional event ingestion.\n\nContact Support:\n Name: Adobe Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

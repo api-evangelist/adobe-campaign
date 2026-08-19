@@ -1,0 +1,62 @@
+generated: '2026-08-13'
+method: searched
+source: https://experienceleague.adobe.com/en/docs/campaign/campaign-v8/releases/release-notes (fetched 2026-08-13, HTTP 200)
+docs:
+  release_notes: https://experienceleague.adobe.com/en/docs/campaign/campaign-v8/releases/release-notes
+  documentation_updates: https://experienceleague.adobe.com/en/docs/campaign/campaign-v8/releases/documentation-updates
+  whats_new: https://experienceleague.adobe.com/en/docs/campaign/campaign-v8/new/whats-new
+  experience_cloud_current: https://experienceleague.adobe.com/en/docs/release-notes/experience-cloud/current
+scheme: product-build
+scheme_note: >-
+  Adobe Campaign versions the PRODUCT (Campaign v8 client console + server
+  build), not the API. There is no API version segment in the REST path — the
+  base is https://mc.adobe.io/{ORGANIZATION}/campaign with no /v1 — and no
+  Accept-Version or dated-version header is documented. An API consumer
+  therefore has no version handle of its own: the surface changes when the
+  instance is upgraded. Release notes are dated and per-build, and each fix
+  carries a NEO-#### issue id, which is unusually good traceability for an
+  enterprise product; the gap is that they are written for administrators
+  rather than API consumers, so REST/SOAP contract changes are not called out
+  as such.
+current_version: 8.9.3
+current_version_date: '2026-08-11'
+current_build: '9835'
+entries:
+  - version: 8.9.3
+    date: '2026-08-11'
+    build: '9835'
+    breaking: false
+    highlights:
+      - >-
+        Adobe Analytics connector upgraded from the end-of-life Analytics 1.4
+        API to the Analytics 2.0 API. Adobe performs the migration for hosted
+        customers, but it re-imports the built-in webAnalyticsSendMetrics and
+        webAnalyticsGetWebEvents technical workflows and overwrites the built-in
+        Analytics JavaScript — any customization of those is lost.
+      - Product improvements and security fixes.
+    integration_impact: >-
+      This is the closest thing in the recent window to a breaking change for
+      integrators: customizations layered onto the two built-in Analytics
+      workflows are overwritten on upgrade.
+  - version: 8.9.2
+    date: '2026-05-03'
+    breaking: false
+    mandatory_client_upgrade: true
+    highlights:
+      - All instances upgraded to Debian 13 and PostgreSQL 17.
+      - Fixed transactional-event dates being set incorrectly by a data-type conversion (NEO-93923).
+      - Fixed silent push notifications failing at delivery preparation when title/body were empty (NEO-93739).
+      - Fixed Interaction SOAP calls for offer redemption failing on namespace resolution (NEO-94787).
+      - FDA monitoring now disabled by default to prevent connection-log insertion errors (NEO-94841).
+      - Fixed excessive memory consumption in the email pipeline (NEO-95088).
+  - version: 8.9.1
+    date: '2026-01-27'
+    breaking: false
+    highlights:
+      - Product improvements and fixes; see the release notes page for the per-build list.
+related_deprecations:
+  - Service Account (JWT) credentials stopped working 2025-01-27 — see lifecycle/adobe-campaign-lifecycle.yml.
+  - Adobe Campaign Standard is deprecated in favour of Adobe Journey Optimizer — see lifecycle/adobe-campaign-lifecycle.yml.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

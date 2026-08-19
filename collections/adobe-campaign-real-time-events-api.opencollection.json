@@ -1,0 +1,64 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Campaign Classic Custom Resources Real-Time Events API",
+    "version": "8.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Real-Time Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Campaign Push a Real-time Transactional Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.campaign.adobe.com/nl/jsp/soaprouter.jsp/nms-rtEvent/PushEvent",
+            "headers": [
+              {
+                "name": "SOAPAction",
+                "value": "example_value"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-Security-Token",
+              "value": "{{X-Security-Token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Pushes a single real-time event to the Message Center execution instance for transactional message processing. The event must include the event type and recipient context data. Supports email, SMS, and push notification channels. SOAP Action: nms:rtEvent#PushEvent"
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Push Batch Real-time Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.campaign.adobe.com/nl/jsp/soaprouter.jsp/nms-batchEvent/PushEvents",
+            "headers": [
+              {
+                "name": "SOAPAction",
+                "value": "example_value"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-Security-Token",
+              "value": "{{X-Security-Token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Pushes a batch of real-time events to the Message Center execution instance for transactional message processing. More efficient than individual PushEvent calls when sending multiple events. SOAP Action: nms:batchEvent#PushEvents"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

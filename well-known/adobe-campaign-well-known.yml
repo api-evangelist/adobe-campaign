@@ -1,0 +1,164 @@
+generated: '2026-08-13'
+method: probed
+source: live HTTPS probes of every apis.yml base host, every OpenAPI servers[] host and the docs/console hosts, 2026-08-13
+notes: >-
+  Adobe Campaign's own API bases are templated per customer instance
+  (https://mc.adobe.io/{ORGANIZATION}/campaign and
+  https://{instance}.campaign.adobe.com), so there is no anonymous origin to
+  probe for those two. The probes below therefore cover the hosts Adobe actually
+  operates and that a client touches: the corporate root (adobe.com), the
+  developer portal (developer.adobe.com), the documentation host
+  (experienceleague.adobe.com), the mc.adobe.io API gateway, and Adobe IMS
+  (ims-na1.adobelogin.com), which is the OAuth authorization server every
+  Campaign Standard / Campaign v8 API call authenticates against.
+  developer.adobe.com is a single-page application that answers HTTP 200 with an
+  HTML shell for EVERY /.well-known/* path — those rows are recorded as
+  html-shell and treated as misses, not documents.
+hosts_probed:
+  - adobe.com
+  - www.adobe.com
+  - developer.adobe.com
+  - experienceleague.adobe.com
+  - mc.adobe.io
+  - ims-na1.adobelogin.com
+probes:
+  - host: adobe.com
+    path: /.well-known/security.txt
+    status: 200
+    content_type: text/plain
+    document: true
+    file: well-known/adobe-campaign-security.txt
+    note: >-
+      RFC 9116 security.txt, PGP-signed, Expires 2027-07-30. Canonical
+      https://www.adobe.com/.well-known/security.txt.
+  - host: www.adobe.com
+    path: /.well-known/security.txt
+    status: 200
+    content_type: text/plain
+    document: true
+    file: well-known/adobe-campaign-security.txt
+    note: Canonical location; byte-identical to the adobe.com apex response.
+  - host: ims-na1.adobelogin.com
+    path: /.well-known/openid-configuration
+    status: 200
+    content_type: application/json
+    document: true
+    file: well-known/adobe-campaign-openid-configuration.json
+    note: >-
+      Adobe Identity Management System OIDC discovery. issuer
+      https://ims-na1.adobelogin.com, token endpoint /ims/token/v3 — the exact
+      token endpoint the Campaign API auth docs tell you to call.
+  - host: ims-na1.adobelogin.com
+    path: /.well-known/oauth-authorization-server
+    status: 200
+    content_type: application/json
+    document: true
+    file: well-known/adobe-campaign-oauth-authorization-server.json
+    note: RFC 8414 authorization server metadata for the same IMS issuer.
+  - host: ims-na1.adobelogin.com
+    path: /ims/.well-known/openid-configuration
+    status: 200
+    content_type: application/json
+    document: true
+    note: Duplicate of the root OIDC discovery document; not saved separately.
+  - host: mc.adobe.io
+    path: /.well-known/security.txt
+    status: 404
+  - host: mc.adobe.io
+    path: /.well-known/openid-configuration
+    status: 404
+  - host: mc.adobe.io
+    path: /.well-known/oauth-authorization-server
+    status: 404
+  - host: mc.adobe.io
+    path: /.well-known/api-catalog
+    status: 404
+  - host: mc.adobe.io
+    path: /.well-known/ai-plugin.json
+    status: 404
+  - host: mc.adobe.io
+    path: /.well-known/agent-card.json
+    status: 404
+  - host: mc.adobe.io
+    path: /.well-known/agent.json
+    status: 404
+  - host: mc.adobe.io
+    path: /openapi.json
+    status: 404
+  - host: mc.adobe.io
+    path: /swagger.json
+    status: 404
+  - host: mc.adobe.io
+    path: /llms.txt
+    status: 404
+  - host: developer.adobe.com
+    path: /.well-known/security.txt
+    status: 200
+    document: false
+    html_shell: true
+    note: SPA catch-all returns text/html for every /.well-known/* path. Not a document.
+  - host: developer.adobe.com
+    path: /.well-known/openid-configuration
+    status: 200
+    document: false
+    html_shell: true
+  - host: developer.adobe.com
+    path: /.well-known/oauth-authorization-server
+    status: 200
+    document: false
+    html_shell: true
+  - host: developer.adobe.com
+    path: /.well-known/api-catalog
+    status: 200
+    document: false
+    html_shell: true
+  - host: developer.adobe.com
+    path: /.well-known/ai-plugin.json
+    status: 200
+    document: false
+    html_shell: true
+  - host: developer.adobe.com
+    path: /.well-known/agent-card.json
+    status: 200
+    document: false
+    html_shell: true
+  - host: developer.adobe.com
+    path: /.well-known/agent.json
+    status: 200
+    document: false
+    html_shell: true
+  - host: developer.adobe.com
+    path: /llms.txt
+    status: 404
+  - host: experienceleague.adobe.com
+    path: /.well-known/security.txt
+    status: 404
+  - host: experienceleague.adobe.com
+    path: /.well-known/api-catalog
+    status: 404
+  - host: experienceleague.adobe.com
+    path: /.well-known/agent-card.json
+    status: 404
+  - host: experienceleague.adobe.com
+    path: /.well-known/agent.json
+    status: 404
+  - host: www.adobe.com
+    path: /.well-known/api-catalog
+    status: 404
+  - host: www.adobe.com
+    path: /.well-known/agent-card.json
+    status: 404
+  - host: www.adobe.com
+    path: /.well-known/agent.json
+    status: 404
+summary:
+  documents_found: 4
+  security_txt: true
+  openid_configuration: true
+  oauth_authorization_server: true
+  api_catalog: false
+  ai_plugin: false
+  agent_card: false
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

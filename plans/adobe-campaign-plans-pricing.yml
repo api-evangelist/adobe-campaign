@@ -4,8 +4,31 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Adobe Campaign
 providerId: adobe-campaign
 created: '2026-05-04'
-modified: '2026-05-05'
-reconciled: false
+# Provenance stamped 2026-08-11: the plan SHAPES below came from the API
+# Evangelist bulk sweep dated 2026-05-04. Upgraded 2026-08-13 to method:
+# searched — the contact-sales posture and the access gate are now quoted from
+# Adobe's own live documentation rather than inferred. See roadmap#35.
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://experienceleague.adobe.com/en/docs/campaign/campaign-v8/developer/apis/get-started-apis
+  (HTTP 200, fetched 2026-08-13) and
+  https://experienceleague.adobe.com/llms.txt (HTTP 200, fetched 2026-08-13).
+  https://business.adobe.com/products/campaign/adobe-campaign.html was probed
+  twice on 2026-08-13 and timed out at the edge both times, so no marketing
+  pricing page was read in this pass.
+plan_count: 2
+published_list_pricing: false
+access_gate: >-
+  Adobe Campaign publishes no list price and no self-serve sign-up. Beyond the
+  license itself, the API is separately gated: the Campaign v8 REST surface is
+  "only available on demand, for all Campaign FDA environments", is NOT available
+  for Enterprise (FFDA) deployments, and access requires contacting an Adobe
+  representative. Adobe's API documentation also instructs callers to check the
+  scale limitations of their license agreement, published in the Adobe Campaign
+  Managed Cloud Services product description, before making calls.
+modified: '2026-08-13'
+reconciled: true
 tags:
   - Marketing
   - Campaign Management

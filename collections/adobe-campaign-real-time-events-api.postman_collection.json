@@ -1,0 +1,471 @@
+{
+  "item": [
+    {
+      "id": "c676185e-75f6-4183-a3e9-6277c6afeb00",
+      "name": "Real-Time Events",
+      "description": {
+        "content": "Push real-time transactional events for immediate or batched processing by the Message Center execution instances.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "697a8006-cb28-4afe-84ab-a359b43148d1",
+          "name": "Adobe Campaign Push a Real-time Transactional Event",
+          "request": {
+            "name": "Adobe Campaign Push a Real-time Transactional Event",
+            "description": {
+              "content": "Pushes a single real-time event to the Message Center execution instance for transactional message processing. The event must include the event type and recipient context data. Supports email, SMS, and push notification channels. SOAP Action: nms:rtEvent#PushEvent",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nl",
+                "jsp",
+                "soaprouter.jsp",
+                "nms-rtEvent",
+                "PushEvent"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Campaign Classic instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "SOAPAction",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "text/xml"
+              },
+              {
+                "key": "Accept",
+                "value": "text/xml"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-Security-Token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <rtEvent>\n    <type>(string)</type>\n    <email>(string)</email>\n    <origin>(string)</origin>\n    <wishedChannel>(integer)</wishedChannel>\n    <externalId>(string)</externalId>\n    <mobilePhone>(string)</mobilePhone>\n    <scheduled>(string)</scheduled>\n    <ctx>\n    </ctx>\n  </rtEvent>\n</element>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1583db0f-0529-4016-a248-ae157ce28ab9",
+              "name": "Event accepted for processing. Returns the event ID.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nl",
+                    "jsp",
+                    "soaprouter.jsp",
+                    "nms-rtEvent",
+                    "PushEvent"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Security-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "SOAPAction",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <rtEvent>\n    <type>(string)</type>\n    <email>(string)</email>\n    <origin>(string)</origin>\n    <wishedChannel>(integer)</wishedChannel>\n    <externalId>(string)</externalId>\n    <mobilePhone>(string)</mobilePhone>\n    <scheduled>(string)</scheduled>\n    <ctx>\n    </ctx>\n  </rtEvent>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <eventId>42</eventId>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "1e0d1627-a47b-4596-aed4-405e8a814899",
+              "name": "SOAP fault indicating an error during operation processing.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nl",
+                    "jsp",
+                    "soaprouter.jsp",
+                    "nms-rtEvent",
+                    "PushEvent"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Security-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "SOAPAction",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <rtEvent>\n    <type>(string)</type>\n    <email>(string)</email>\n    <origin>(string)</origin>\n    <wishedChannel>(integer)</wishedChannel>\n    <externalId>(string)</externalId>\n    <mobilePhone>(string)</mobilePhone>\n    <scheduled>(string)</scheduled>\n    <ctx>\n    </ctx>\n  </rtEvent>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <faultcode>example_value</faultcode>\n  <faultstring>example_value</faultstring>\n  <detail>example_value</detail>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eb5d52f2-2a40-4fdf-b09a-3ff284bc4baa",
+          "name": "Adobe Campaign Push Batch Real-time Events",
+          "request": {
+            "name": "Adobe Campaign Push Batch Real-time Events",
+            "description": {
+              "content": "Pushes a batch of real-time events to the Message Center execution instance for transactional message processing. More efficient than individual PushEvent calls when sending multiple events. SOAP Action: nms:batchEvent#PushEvents",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nl",
+                "jsp",
+                "soaprouter.jsp",
+                "nms-batchEvent",
+                "PushEvents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Campaign Classic instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "SOAPAction",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "text/xml"
+              },
+              {
+                "key": "Accept",
+                "value": "text/xml"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-Security-Token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <events>\n    <type>(string)</type>\n    <email>(string)</email>\n    <origin>(string)</origin>\n    <wishedChannel>(integer)</wishedChannel>\n    <externalId>(string)</externalId>\n    <mobilePhone>(string)</mobilePhone>\n    <scheduled>(string)</scheduled>\n    <ctx>\n    </ctx>\n  </events>\n  <events>\n    <type>(string)</type>\n    <email>(string)</email>\n    <origin>(string)</origin>\n    <wishedChannel>(integer)</wishedChannel>\n    <externalId>(string)</externalId>\n    <mobilePhone>(string)</mobilePhone>\n    <scheduled>(string)</scheduled>\n    <ctx>\n    </ctx>\n  </events>\n</element>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8c87f65e-fb88-481d-be94-881447e7cf8a",
+              "name": "Batch of events accepted for processing.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nl",
+                    "jsp",
+                    "soaprouter.jsp",
+                    "nms-batchEvent",
+                    "PushEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Security-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "SOAPAction",
+                    "value": "example_value"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <events>\n    <type>(string)</type>\n    <email>(string)</email>\n    <origin>(string)</origin>\n    <wishedChannel>(integer)</wishedChannel>\n    <externalId>(string)</externalId>\n    <mobilePhone>(string)</mobilePhone>\n    <scheduled>(string)</scheduled>\n    <ctx>\n    </ctx>\n  </events>\n  <events>\n    <type>(string)</type>\n    <email>(string)</email>\n    <origin>(string)</origin>\n    <wishedChannel>(integer)</wishedChannel>\n    <externalId>(string)</externalId>\n    <mobilePhone>(string)</mobilePhone>\n    <scheduled>(string)</scheduled>\n    <ctx>\n    </ctx>\n  </events>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d293a2aa-d7d0-4c1c-b0ea-0c4aeef9e9af",
+              "name": "SOAP fault indicating an error during operation processing.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nl",
+                    "jsp",
+                    "soaprouter.jsp",
+                    "nms-batchEvent",
+                    "PushEvents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Security-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "SOAPAction",
+                    "value": "example_value"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <events>\n    <type>(string)</type>\n    <email>(string)</email>\n    <origin>(string)</origin>\n    <wishedChannel>(integer)</wishedChannel>\n    <externalId>(string)</externalId>\n    <mobilePhone>(string)</mobilePhone>\n    <scheduled>(string)</scheduled>\n    <ctx>\n    </ctx>\n  </events>\n  <events>\n    <type>(string)</type>\n    <email>(string)</email>\n    <origin>(string)</origin>\n    <wishedChannel>(integer)</wishedChannel>\n    <externalId>(string)</externalId>\n    <mobilePhone>(string)</mobilePhone>\n    <scheduled>(string)</scheduled>\n    <ctx>\n    </ctx>\n  </events>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <faultcode>example_value</faultcode>\n  <faultstring>example_value</faultstring>\n  <detail>example_value</detail>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Campaign Classic instance name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "YOUR_INSTANCE",
+      "key": "instance"
+    },
+    {
+      "type": "string",
+      "value": "https://{{instance}}.campaign.adobe.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7461fc51-4dc1-4ce8-9716-727ecee765e9",
+    "name": "Adobe Campaign Classic Custom Resources Real-Time Events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "SOAP-based API for Adobe Campaign Classic v7 and v8, documented as HTTP POST operations. All operations target the single SOAP router endpoint at /nl/jsp/soaprouter.jsp and are differentiated by the SOAPAction header. Provides programmatic access to session management, data querying, record persistence, delivery management, workflow control, subscription management, and real-time transactional event ingestion.\n\nContact Support:\n Name: Adobe Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

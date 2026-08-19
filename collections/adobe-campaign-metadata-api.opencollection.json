@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Campaign Classic Custom Resources Metadata API",
+    "version": "8.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metadata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Campaign Get Resource Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.campaign.adobe.com/profileAndServices/resourceType/:resourceName",
+            "params": [
+              {
+                "name": "resourceName",
+                "value": "Example Campaign",
+                "type": "path",
+                "description": "The name of the resource to describe."
+              }
+            ]
+          },
+          "docs": "Retrieves metadata for a Campaign Standard resource, including field definitions, data types, available filters, and data policies."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

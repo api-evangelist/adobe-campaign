@@ -1,0 +1,72 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Campaign Classic Custom Resources Transactional Messages API",
+    "version": "8.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transactional Messages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Campaign Get Transactional Event Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{instance}.campaign.adobe.com/:transactionalAPI/:eventID",
+            "params": [
+              {
+                "name": "transactionalAPI",
+                "value": "example_value",
+                "type": "path",
+                "description": "The transactional API name."
+              },
+              {
+                "name": "eventID",
+                "value": "CAM123456",
+                "type": "path",
+                "description": "The unique event type identifier."
+              }
+            ]
+          },
+          "docs": "Retrieves the current processing status of a previously triggered transactional event. Statuses include pending, processing, processed, deliveryFailed, routingFailed, targetingFailed, tooOld, and ignored."
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Trigger a Transactional Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.campaign.adobe.com/:transactionalAPI/:eventID",
+            "params": [
+              {
+                "name": "transactionalAPI",
+                "value": "example_value",
+                "type": "path",
+                "description": "The transactional API name corresponding to the event configuration (e.g., EVTorderConfirmation)."
+              },
+              {
+                "name": "eventID",
+                "value": "CAM123456",
+                "type": "path",
+                "description": "The unique event type identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sends a transactional event to trigger a personalized message. The transactionalAPI path segment corresponds to the event configuration name. Events are processed asynchronously and support email, SMS, and push notification channels."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

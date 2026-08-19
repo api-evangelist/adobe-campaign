@@ -1,0 +1,87 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Campaign Classic Custom Resources Workflow API",
+    "version": "8.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Workflow",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Campaign Start a Workflow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.campaign.adobe.com/nl/jsp/soaprouter.jsp/xtk-workflow/Start",
+            "headers": [
+              {
+                "name": "SOAPAction",
+                "value": "example_value"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-Security-Token",
+              "value": "{{X-Security-Token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Starts a workflow by its internal ID. The workflow must be in a stopped state. SOAP Action: xtk:workflow#Start"
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Stop a Workflow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.campaign.adobe.com/nl/jsp/soaprouter.jsp/xtk-workflow/Stop",
+            "headers": [
+              {
+                "name": "SOAPAction",
+                "value": "example_value"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-Security-Token",
+              "value": "{{X-Security-Token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Stops a running workflow by its internal ID. SOAP Action: xtk:workflow#Stop"
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Post an Event Signal to a Workflow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.campaign.adobe.com/nl/jsp/soaprouter.jsp/xtk-workflow/PostEvent",
+            "headers": [
+              {
+                "name": "SOAPAction",
+                "value": "example_value"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-Security-Token",
+              "value": "{{X-Security-Token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Sends an asynchronous signal event to a workflow, triggering a transition from an external signal activity. Can include parameters passed as XML variables. SOAP Action: xtk:workflow#PostEvent"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

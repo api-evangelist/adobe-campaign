@@ -1,0 +1,683 @@
+{
+  "item": [
+    {
+      "id": "9e735b0c-3b94-4e91-84b6-70b0f5d2b801",
+      "name": "Custom Resources",
+      "description": {
+        "content": "Access custom resources defined in Campaign Standard, both profile-linked and standalone.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "470745c7-8123-4a05-8ea6-2394f44fa509",
+          "name": "Adobe Campaign List Profile-linked Custom Resources",
+          "request": {
+            "name": "Adobe Campaign List Profile-linked Custom Resources",
+            "description": {
+              "content": "Retrieves records from a profile-linked custom resource. Custom resources are defined with the cus prefix in Campaign Standard.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "profileAndServicesExt",
+                ":cusResourceName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "_lineCount",
+                  "value": "25",
+                  "description": "Number of records to return per page. Default is 25."
+                },
+                {
+                  "disabled": false,
+                  "key": "_lineStart",
+                  "value": "<integer>",
+                  "description": "Pagination offset from the next node in previous response."
+                },
+                {
+                  "disabled": false,
+                  "key": "_order",
+                  "value": "<string>",
+                  "description": "Sort order. Use field name for ascending, append %20desc for descending (e.g., email%20desc)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "cusResourceName",
+                  "description": "(Required) The name of the custom resource (with cus prefix, e.g., cusMyResource)."
+                },
+                {
+                  "description": "Your Campaign Classic instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a0e45e6a-289e-46e3-a6d8-7f6039f6f1c6",
+              "name": "Custom resource records retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profileAndServicesExt",
+                    ":cusResourceName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_lineCount",
+                      "value": "25"
+                    },
+                    {
+                      "key": "_lineStart",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "_order",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cusResourceName",
+                      "description": "(Required) The name of the custom resource (with cus prefix, e.g., cusMyResource)."
+                    },
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": {\n    \"href\": \"string\"\n  },\n  \"next\": {\n    \"href\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf119b02-33b3-419d-b921-a879eaca84f0",
+              "name": "Authentication failed. Invalid or expired OAuth token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profileAndServicesExt",
+                    ":cusResourceName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_lineCount",
+                      "value": "25"
+                    },
+                    {
+                      "key": "_lineStart",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "_order",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cusResourceName",
+                      "description": "(Required) The name of the custom resource (with cus prefix, e.g., cusMyResource)."
+                    },
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2806d2f7-141f-4e52-a421-cf91ac786aa8",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profileAndServicesExt",
+                    ":cusResourceName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_lineCount",
+                      "value": "25"
+                    },
+                    {
+                      "key": "_lineStart",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "_order",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cusResourceName",
+                      "description": "(Required) The name of the custom resource (with cus prefix, e.g., cusMyResource)."
+                    },
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb7cfefb-5225-42a7-b9c9-ef8e7fb02efc",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profileAndServicesExt",
+                    ":cusResourceName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_lineCount",
+                      "value": "25"
+                    },
+                    {
+                      "key": "_lineStart",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "_order",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cusResourceName",
+                      "description": "(Required) The name of the custom resource (with cus prefix, e.g., cusMyResource)."
+                    },
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bfc7f9c2-5fa3-46fe-8993-0491ba4f0340",
+          "name": "Adobe Campaign List Non-profile Custom Resources",
+          "request": {
+            "name": "Adobe Campaign List Non-profile Custom Resources",
+            "description": {
+              "content": "Retrieves records from a standalone custom resource not linked to profiles.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customResources",
+                ":cusResourceName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "_lineCount",
+                  "value": "25",
+                  "description": "Number of records to return per page. Default is 25."
+                },
+                {
+                  "disabled": false,
+                  "key": "_lineStart",
+                  "value": "<integer>",
+                  "description": "Pagination offset from the next node in previous response."
+                },
+                {
+                  "disabled": false,
+                  "key": "_order",
+                  "value": "<string>",
+                  "description": "Sort order. Use field name for ascending, append %20desc for descending (e.g., email%20desc)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "cusResourceName",
+                  "description": "(Required) The name of the custom resource."
+                },
+                {
+                  "description": "Your Campaign Classic instance name",
+                  "type": "any",
+                  "value": "{{instance}}",
+                  "key": "instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d3f0a04f-c050-41a6-b3bc-3d12ad7c6441",
+              "name": "Custom resource records retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customResources",
+                    ":cusResourceName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_lineCount",
+                      "value": "25"
+                    },
+                    {
+                      "key": "_lineStart",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "_order",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cusResourceName",
+                      "description": "(Required) The name of the custom resource."
+                    },
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": {\n    \"href\": \"string\"\n  },\n  \"next\": {\n    \"href\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e0ec885-3c00-46e5-9c7f-0bdf92a6f0a5",
+              "name": "Authentication failed. Invalid or expired OAuth token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customResources",
+                    ":cusResourceName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_lineCount",
+                      "value": "25"
+                    },
+                    {
+                      "key": "_lineStart",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "_order",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cusResourceName",
+                      "description": "(Required) The name of the custom resource."
+                    },
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7437ebcd-ad83-4cc4-996f-acb9dd58b65e",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customResources",
+                    ":cusResourceName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_lineCount",
+                      "value": "25"
+                    },
+                    {
+                      "key": "_lineStart",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "_order",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cusResourceName",
+                      "description": "(Required) The name of the custom resource."
+                    },
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6de678f-12e5-47cb-84b2-9b026397c50e",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customResources",
+                    ":cusResourceName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_lineCount",
+                      "value": "25"
+                    },
+                    {
+                      "key": "_lineStart",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "_order",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cusResourceName",
+                      "description": "(Required) The name of the custom resource."
+                    },
+                    {
+                      "description": "Your Campaign Classic instance name",
+                      "type": "any",
+                      "value": "{{instance}}",
+                      "key": "instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Campaign Classic instance name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "YOUR_INSTANCE",
+      "key": "instance"
+    },
+    {
+      "type": "string",
+      "value": "https://{{instance}}.campaign.adobe.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "70bfa04d-d1f0-497d-9ca2-c7dfc7b9e530",
+    "name": "Adobe Campaign Classic Custom Resources API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "SOAP-based API for Adobe Campaign Classic v7 and v8, documented as HTTP POST operations. All operations target the single SOAP router endpoint at /nl/jsp/soaprouter.jsp and are differentiated by the SOAPAction header. Provides programmatic access to session management, data querying, record persistence, delivery management, workflow control, subscription management, and real-time transactional event ingestion.\n\nContact Support:\n Name: Adobe Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

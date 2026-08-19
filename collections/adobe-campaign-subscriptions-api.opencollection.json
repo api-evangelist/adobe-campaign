@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Campaign Classic Custom Resources Subscriptions API",
+    "version": "8.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Subscriptions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Campaign Subscribe a Profile to a Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.campaign.adobe.com/profileAndServices/profile/:PKEY/subscriptions",
+            "params": [
+              {
+                "name": "PKEY",
+                "value": "",
+                "type": "path",
+                "description": "The unique PKEY identifier of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Subscribes a profile to a subscription service by providing the service PKEY in the request body."
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Unsubscribe a Profile from a Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{instance}.campaign.adobe.com/profileAndServices/service/:servicePKEY/subscriptions/:profilePKEY",
+            "params": [
+              {
+                "name": "servicePKEY",
+                "value": "example_value",
+                "type": "path",
+                "description": "The PKEY of the service."
+              },
+              {
+                "name": "profilePKEY",
+                "value": "example_value",
+                "type": "path",
+                "description": "The PKEY of the profile to unsubscribe."
+              }
+            ]
+          },
+          "docs": "Removes a profile subscription from a service."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

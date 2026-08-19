@@ -1,0 +1,159 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  registry.npmjs.org, search.maven.org, trunk.cocoapods.org and
+  api.github.com/search (org:adobe) queried directly 2026-08-13; cross-checked
+  against the SDK links already in apis.yml.
+notes: >-
+  Adobe publishes first-party Adobe Campaign client libraries in three places:
+  npm (the Campaign Classic JavaScript SDK and the Adobe I/O Campaign Standard
+  SDK), Maven Central + CocoaPods (the Adobe Experience Platform Mobile SDK
+  Campaign and Campaign Classic extensions for Android and iOS), and npm again
+  for the React Native wrapper. There is no first-party Python, Ruby, Go, PHP,
+  .NET or Java server-side Campaign SDK — server-side integrations call the REST
+  or SOAP surface directly. Mobile-extension currency is the notable decay
+  signal: the iOS/Android Campaign (Standard) extensions last shipped in 2024-2025
+  while the Campaign Classic extensions were refreshed in 2026, which tracks the
+  Campaign Standard end-of-life documented in lifecycle/.
+packages:
+  - name: '@adobe/acc-js-sdk'
+    language: javascript
+    registry: npm
+    url: https://www.npmjs.com/package/@adobe/acc-js-sdk
+    repository: https://github.com/adobe/acc-js-sdk
+    documentation: https://opensource.adobe.com/acc-js-sdk/
+    description: >-
+      Adobe Campaign Classic JavaScript SDK — wraps the xtk/nms SOAP surface
+      (Logon, queryDef, Write, PushEvent, workflow control) behind a JavaScript
+      client. Covers the operations captured in the Classic OpenAPI files in
+      openapi/.
+    official: true
+    license: ISC
+    version: 1.2.2
+    published: '2026-07-24'
+  - name: '@adobe/aio-lib-campaign-standard'
+    language: javascript
+    registry: npm
+    url: https://www.npmjs.com/package/@adobe/aio-lib-campaign-standard
+    repository: https://github.com/adobe/aio-lib-campaign-standard
+    documentation: https://github.com/adobe/aio-lib-campaign-standard/blob/master/README.md
+    description: >-
+      Adobe I/O JavaScript SDK wrapping the Adobe Campaign Standard REST APIs on
+      https://mc.adobe.io/{ORGANIZATION}/campaign. Handles the IMS OAuth
+      Server-to-Server bearer token and X-Api-Key headers.
+    official: true
+    license: Apache-2.0
+    version: 4.0.3
+    published: '2026-03-31'
+  - name: com.adobe.marketing.mobile:campaign
+    language: java
+    platform: android
+    registry: maven
+    url: https://central.sonatype.com/artifact/com.adobe.marketing.mobile/campaign
+    repository: https://github.com/adobe/aepsdk-campaign-android
+    documentation: https://developer.adobe.com/client-sdks/solution/adobe-campaign-standard/
+    description: >-
+      Adobe Experience Platform Mobile SDK Campaign (Standard) extension for
+      Android — in-app messaging, push registration and profile updates against
+      a Campaign Standard instance.
+    official: true
+    license: Apache-2.0
+    version: 3.0.3
+    published: '2025-02-25'
+  - name: com.adobe.marketing.mobile:campaignclassic
+    language: kotlin
+    platform: android
+    registry: maven
+    url: https://central.sonatype.com/artifact/com.adobe.marketing.mobile/campaignclassic
+    repository: https://github.com/adobe/aepsdk-campaignclassic-android
+    documentation: https://developer.adobe.com/client-sdks/solution/adobe-campaign-classic/
+    description: >-
+      Adobe Experience Platform Mobile SDK Campaign Classic extension for
+      Android — device registration and push tracking against a Campaign
+      Classic marketing/mid-sourcing server.
+    official: true
+    license: Apache-2.0
+    version: 3.1.4
+    published: '2025-06-11'
+  - name: AEPCampaign
+    language: swift
+    platform: ios
+    registry: cocoapods
+    url: https://cocoapods.org/pods/AEPCampaign
+    repository: https://github.com/adobe/aepsdk-campaign-ios
+    documentation: https://developer.adobe.com/client-sdks/solution/adobe-campaign-standard/
+    description: >-
+      Adobe Experience Platform Mobile SDK Campaign (Standard) extension for
+      iOS, in Swift.
+    official: true
+    license: Apache-2.0
+    version: 5.0.0
+    published: '2024-03-20'
+  - name: AEPCampaignClassic
+    language: swift
+    platform: ios
+    registry: cocoapods
+    url: https://cocoapods.org/pods/AEPCampaignClassic
+    repository: https://github.com/adobe/aepsdk-campaignclassic-ios
+    documentation: https://developer.adobe.com/client-sdks/solution/adobe-campaign-classic/
+    description: >-
+      Adobe Experience Platform Mobile SDK Campaign Classic extension for iOS,
+      in Swift.
+    official: true
+    license: Apache-2.0
+    version: 5.0.0
+    published: '2024-03-20'
+  - name: '@adobe/react-native-aepcampaignclassic'
+    language: javascript
+    platform: react-native
+    registry: npm
+    url: https://www.npmjs.com/package/@adobe/react-native-aepcampaignclassic
+    repository: https://github.com/adobe/aepsdk-react-native
+    description: >-
+      React Native wrapper around the iOS and Android AEP Campaign Classic
+      extensions.
+    official: true
+    license: Apache-2.0
+    version: 7.0.0
+    published: '2025-03-28'
+  - name: ACPCampaign
+    language: objective-c
+    platform: ios
+    registry: cocoapods
+    url: https://cocoapods.org/pods/ACPCampaign
+    description: >-
+      Superseded ACP-generation Campaign extension for iOS. Retained here as a
+      decay signal only — Adobe's current iOS extension is AEPCampaign.
+    official: true
+    deprecated: true
+    version: 1.1.0
+    published: '2020-12-19'
+absent:
+  - registry: pypi
+    query: adobe-campaign
+    status: 404
+    note: No first-party Python Adobe Campaign client is published.
+  - registry: rubygems
+    query: adobe_campaign
+    status: 404
+    note: No first-party Ruby Adobe Campaign client is published.
+  - registry: nuget
+    query: adobe campaign
+    status: 200
+    note: Search returned 0 hits — no first-party .NET Adobe Campaign client.
+  - registry: maven
+    query: 'g:com.adobe.campaign'
+    status: 200
+    note: >-
+      0 hits — there is no server-side Java Campaign SDK. The only Campaign
+      artifacts on Maven Central sit under com.adobe.marketing.mobile and are
+      mobile extensions, listed above.
+  - registry: npm
+    query: '@adobe/aio-cli-plugin-campaign-standard'
+    status: 404
+    note: >-
+      No Campaign plugin for the Adobe I/O CLI exists, which is why no cli/
+      artifact is written for this provider.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

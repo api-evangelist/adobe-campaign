@@ -1,0 +1,62 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Adobe Campaign Classic Custom Resources Subscriptions API
+  version: 1.0.0
+  x-generated: '2026-08-13'
+  x-method: generated
+  x-source: Derived from openapi/adobe-campaign-subscriptions-api-openapi.yml plus the searched artifacts
+    in this repo. Does not mutate the original spec.
+extends: openapi/adobe-campaign-subscriptions-api-openapi.yml
+actions:
+- target: $.info
+  description: Record the real authentication model, the correct host for this surface, and the API Evangelist
+    artifact set as vendor extensions.
+  update:
+    x-api-evangelist:
+      profile: https://apis.io/provider/adobe-campaign/
+      artifacts:
+        authentication: authentication/adobe-campaign-authentication.yml
+        conventions: conventions/adobe-campaign-conventions.yml
+        errors: errors/adobe-campaign-problem-types.yml
+        lifecycle: lifecycle/adobe-campaign-lifecycle.yml
+        rate-limits: rate-limits/adobe-campaign-rate-limits.yml
+        data-model: data-model/adobe-campaign-data-model.yml
+    x-surface: Campaign Standard / v8 REST
+    x-host: https://mc.adobe.io/{ORGANIZATION}/campaign
+    x-spec-provenance: 'Derived by API Evangelist from Adobe published reference documentation. Adobe
+      publishes no OpenAPI for Adobe Campaign (probed 2026-08-13: mc.adobe.io/openapi.json 404, developer.adobe.com/campaign/api/
+      404).'
+- target: $
+  description: Attach the documented but unspecified throughput limit and the deprecation posture at the
+    document root.
+  update:
+    x-rate-limit:
+      documented: true
+      metric: transactions_per_second
+      value: undisclosed - contractual, negotiable with Adobe
+      status_on_exhaustion: 429
+      headers: []
+      source: https://experienceleague.adobe.com/en/docs/campaign/campaign-v8/developer/api
+    x-idempotency:
+      supported: false
+      note: No idempotency key is documented on any Adobe Campaign surface.
+    x-lifecycle:
+      product_version: 8.9.3
+      api_version_in_path: false
+      sunset_header: false
+      note: Adobe Campaign Standard is deprecated in favour of Adobe Journey Optimizer; Campaign v8 is
+        current.
+- target: $.paths["/profileAndServices/profile/{PKEY}/subscriptions"].post.responses
+  description: Adobe documents HTTP 429 on the Campaign API layer but declares it in no published spec.
+    Add it so a spec-driven client models the throttle.
+  update:
+    '429':
+      description: Too Many Requests. The Campaign API layer TPS ceiling was exceeded. No Retry-After
+        header is documented; back off exponentially with jitter.
+- target: $.paths["/profileAndServices/service/{servicePKEY}/subscriptions/{profilePKEY}"].delete.responses
+  description: Adobe documents HTTP 429 on the Campaign API layer but declares it in no published spec.
+    Add it so a spec-driven client models the throttle.
+  update:
+    '429':
+      description: Too Many Requests. The Campaign API layer TPS ceiling was exceeded. No Retry-After
+        header is documented; back off exponentially with jitter.

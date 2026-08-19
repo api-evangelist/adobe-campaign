@@ -1,0 +1,59 @@
+generated: '2026-08-13'
+method: probed
+source: https://ims-na1.adobelogin.com/.well-known/openid-configuration (HTTP 200, 2026-08-13)
+docs: https://developer.adobe.com/developer-console/docs/guides/authentication/ServerToServerAuthentication/implementation/
+notes: >-
+  Adobe Campaign's own OpenAPI files declare no oauth2 securityScheme — the
+  Classic specs carry only the session-token apiKey scheme. The OAuth surface is
+  therefore recorded from the authorization server itself: Adobe IMS, which
+  Campaign Standard / Campaign v8 REST calls authenticate against. The IMS
+  discovery document advertises only the three OIDC identity scopes below.
+  Product-level entitlement for Campaign is NOT expressed as an OAuth scope
+  string — it is granted by adding the Adobe Campaign service to an Adobe
+  Developer Console project and is carried in the token's organization claim,
+  which is why there is no per-resource scope catalog to publish. Recording that
+  absence is the finding; it is not a gap in our harvest.
+authorization_server:
+  issuer: https://ims-na1.adobelogin.com
+  authorization_endpoint: https://ims-na1.adobelogin.com/ims/authorize/v2
+  token_endpoint: https://ims-na1.adobelogin.com/ims/token/v3
+  revocation_endpoint: https://ims-na1.adobelogin.com/ims/revoke
+  userinfo_endpoint: https://ims-na1.adobelogin.com/ims/userinfo/v2
+  jwks_uri: https://ims-na1.adobelogin.com/ims/keys
+  registration_endpoint: https://ims-na1.adobelogin.com/ims/register
+  grant_types_supported:
+    - authorization_code
+    - implicit_grant
+    - refresh_token
+  code_challenge_methods_supported:
+    - S256
+    - plain
+  token_endpoint_auth_methods_supported:
+    - client_secret_basic
+    - client_secret_post
+scope_count: 3
+scopes:
+  - name: openid
+    description: OIDC identity scope. Requests an ID token for the authenticated Adobe identity.
+    source: ims discovery scopes_supported
+  - name: email
+    description: Releases the email claim on the ID token / userinfo response.
+    source: ims discovery scopes_supported
+  - name: profile
+    description: >-
+      Releases the profile claims (sub, given_name, family_name, name) on the ID
+      token / userinfo response. Unrelated to Adobe Campaign "profile" records.
+    source: ims discovery scopes_supported
+not_scoped:
+  - surface: Campaign Classic SOAP-over-HTTP
+    reason: >-
+      Session-token authentication (xtk:session#Logon) has no OAuth layer and
+      therefore no scopes.
+  - surface: Campaign REST resource permissions
+    reason: >-
+      Campaign APIs run in the administrator context and are excluded from the
+      role context by default, so resource access is not narrowed by a token
+      scope. See authentication/adobe-campaign-authentication.yml#tenancy.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

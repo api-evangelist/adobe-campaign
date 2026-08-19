@@ -1,0 +1,95 @@
+generated: '2026-08-13'
+method: generated
+source: >-
+  openapi/*.yml in this repo (every operationId below was grepped out of a real
+  spec file, none invented), plus conventions/, errors/, lifecycle/ and
+  agentic-access/. Adobe publishes no AGENTS.md or Agent Skills for Adobe
+  Campaign — the Agent Skills Adobe does publish are AEM-specific, per its own
+  llms.txt — so these are API Evangelist generated skills, not provider
+  artifacts.
+provider: Adobe Campaign
+providerId: adobe-campaign
+skill_count: 4
+skills:
+  - name: adobe-campaign-manage-profiles-and-subscriptions
+    file: skills/adobe-campaign-manage-profiles-and-subscriptions.md
+    description: >-
+      Create, find, update and delete marketing profiles and manage their
+      subscriptions to services.
+    surface: Campaign REST (https://mc.adobe.io/{ORGANIZATION}/campaign)
+    consequence: write
+    operations:
+      - listProfiles
+      - getProfile
+      - createProfile
+      - updateProfile
+      - deleteProfile
+      - listServices
+      - getService
+      - createService
+      - subscribeProfile
+      - unsubscribeProfile
+      - getResourceMetadata
+  - name: adobe-campaign-trigger-transactional-message
+    file: skills/adobe-campaign-trigger-transactional-message.md
+    description: >-
+      Trigger a real-time transactional email or SMS from an application event
+      and poll its delivery status.
+    surface: Campaign REST + Campaign Classic SOAP
+    consequence: irreversible-external
+    operations:
+      - triggerTransactionalEvent
+      - getTransactionalEventStatus
+      - pushEvent
+      - pushEvents
+  - name: adobe-campaign-control-workflows-and-deliveries
+    file: skills/adobe-campaign-control-workflows-and-deliveries.md
+    description: >-
+      Start, stop, resume and signal workflows; submit or prepare-and-start a
+      delivery.
+    surface: Campaign REST + Campaign Classic SOAP
+    consequence: irreversible-external
+    operations:
+      - controlWorkflow
+      - workflowStart
+      - workflowStop
+      - workflowPostEvent
+      - submitDelivery
+      - deliveryPrepareAndStart
+  - name: adobe-campaign-privacy-and-data-subject-requests
+    file: skills/adobe-campaign-privacy-and-data-subject-requests.md
+    description: >-
+      File a GDPR/CCPA access or deletion request and read a profile's marketing
+      history.
+    surface: Campaign REST
+    consequence: regulated
+    operations:
+      - createPrivacyRequest
+      - getMarketingHistory
+      - getProfile
+      - deleteProfile
+cross_cutting_rules:
+  - >-
+    Both REST headers are mandatory: Authorization: Bearer AND X-Api-Key. Either
+    alone is rejected.
+  - >-
+    <ORGANIZATION> selects the tenant AND selects stage vs production
+    (<ORGANIZATION-mkt-stage>). There is no test-key prefix.
+  - >-
+    No idempotency key exists on any surface. Never blindly retry a POST that
+    sends a message or creates a record.
+  - >-
+    Never construct a resource URL and never persist a PKey — follow the href the
+    API returns.
+  - >-
+    Discover the schema with getResourceMetadata before writing; the Campaign data
+    model is extended per tenant.
+  - >-
+    429 means the API-layer TPS ceiling was hit. No Retry-After header is
+    documented; back off exponentially with jitter.
+  - >-
+    Campaign API credentials run in the administrator context and are excluded
+    from the role context by default. Assume broad privilege.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

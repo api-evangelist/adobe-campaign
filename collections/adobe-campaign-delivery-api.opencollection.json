@@ -1,0 +1,64 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Campaign Classic Custom Resources Delivery API",
+    "version": "8.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Delivery",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Campaign Prepare and Start a Delivery",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.campaign.adobe.com/nl/jsp/soaprouter.jsp/nms-delivery/PrepareAndStart",
+            "headers": [
+              {
+                "name": "SOAPAction",
+                "value": "example_value"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-Security-Token",
+              "value": "{{X-Security-Token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Prepares and immediately starts sending a delivery. Combines the preparation (target calculation, personalization) and sending steps. SOAP Action: nms:delivery#PrepareAndStart"
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Submit a Delivery",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{instance}.campaign.adobe.com/nl/jsp/soaprouter.jsp/nms-delivery/SubmitDelivery",
+            "headers": [
+              {
+                "name": "SOAPAction",
+                "value": "example_value"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-Security-Token",
+              "value": "{{X-Security-Token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Submits a delivery for processing. The delivery must be in a valid state for submission. SOAP Action: nms:delivery#SubmitDelivery"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
