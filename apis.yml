@@ -49,6 +49,19 @@ tags:
   - Adobe Experience Cloud
   - SMS
   - Push Notifications
+  - Workflow-Automation
+  - Privacy
+tags_raw:
+  - Campaign Management
+  - Customer Experience
+  - Email Marketing
+  - Marketing Automation
+  - Multi-Channel Marketing
+  - Transactional Messaging
+  - Customer Data
+  - Adobe Experience Cloud
+  - SMS
+  - Push Notifications
   - Workflow Automation
   - Privacy
 created: '2024-01-01'
@@ -66,6 +79,12 @@ apis:
   humanURL: https://opensource.adobe.com/acc-js-sdk/
   baseURL: https://{instance}.campaign.adobe.com
   tags:
+  - Campaign Classic
+  - JavaScript SDK
+  - Node.js
+  - Open-Source
+  - SOAP Wrapper
+  tags_raw:
   - Campaign Classic
   - JavaScript SDK
   - Node.js
@@ -548,6 +567,8 @@ apis:
     https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/about-campaign-standard-apis.html
   baseURL: https://mc.adobe.io/{ORGANIZATION}/campaign
   tags:
+  - Subscription
+  tags_raw:
   - Subscriptions
   properties:
   - type: OpenAPI
@@ -612,6 +633,8 @@ apis:
     https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/about-campaign-standard-apis.html
   baseURL: https://{instance}.campaign.adobe.com
   tags:
+  - Workflows
+  tags_raw:
   - Workflow
   properties:
   - type: OpenAPI
