@@ -16,6 +16,20 @@ description: >-
   favour of Adobe Journey Optimizer. The data model is extended per tenant, so
   the deployed shape must be discovered at runtime rather than assumed from a
   specification.
+deliveryModel:
+  model: open-core
+  license: Apache-2.0
+  open_source: true
+  commercial: true
+  callable_host: true
+  label: Open core · an OSS project plus a commercial hosted product
+  confidence: high
+  source:
+  - license
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: contact-sales
@@ -695,6 +709,9 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 common:
+  - type: CapabilityMap
+    url: capabilities/adobe-campaign-capability-edges.yml
+    name: Adobe Campaign Business Capability Map
   - type: Packages
     url: packages/adobe-campaign-packages.yml
   - type: SDKs
