@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Adobe Campaign Classic Custom Resources Query Definition API
+  title: Adobe Campaign Classic Query Definition API
   description: SOAP-based API for Adobe Campaign Classic v7 and v8, documented as HTTP POST operations. All operations target the single SOAP router endpoint at /nl/jsp/soaprouter.jsp and are differentiated by the SOAPAction header. Provides programmatic access to session management, data querying, record persistence, delivery management, workflow control, subscription management, and real-time transactional event ingestion.
   version: 8.0.0
   contact:
@@ -59,6 +59,22 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    SOAPFault:
+      type: object
+      description: SOAP fault response indicating an error during operation processing.
+      properties:
+        faultcode:
+          type: string
+          description: Fault code identifying the error category.
+          example: example_value
+        faultstring:
+          type: string
+          description: Human-readable description of the error.
+          example: example_value
+        detail:
+          type: string
+          description: Additional error details.
+          example: example_value
     QueryDefinition:
       type: object
       description: SOAP envelope containing a query definition with schema, operation, selected fields, conditions, and pagination parameters.
@@ -99,22 +115,6 @@ components:
         resultSet:
           type: object
           description: Collection of result records matching the query criteria.
-    SOAPFault:
-      type: object
-      description: SOAP fault response indicating an error during operation processing.
-      properties:
-        faultcode:
-          type: string
-          description: Fault code identifying the error category.
-          example: example_value
-        faultstring:
-          type: string
-          description: Human-readable description of the error.
-          example: example_value
-        detail:
-          type: string
-          description: Additional error details.
-          example: example_value
   responses:
     SOAPFault:
       description: SOAP fault indicating an error during operation processing.

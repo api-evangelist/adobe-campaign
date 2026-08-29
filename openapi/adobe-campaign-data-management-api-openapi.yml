@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Adobe Campaign Classic Custom Resources Data Management API
+  title: Adobe Campaign Classic Data Management API
   description: SOAP-based API for Adobe Campaign Classic v7 and v8, documented as HTTP POST operations. All operations target the single SOAP router endpoint at /nl/jsp/soaprouter.jsp and are differentiated by the SOAPAction header. Provides programmatic access to session management, data querying, record persistence, delivery management, workflow control, subscription management, and real-time transactional event ingestion.
   version: 8.0.0
   contact:
@@ -89,25 +89,14 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    SOAPFault:
+      description: SOAP fault indicating an error during operation processing.
+      content:
+        text/xml:
+          schema:
+            $ref: '#/components/schemas/SOAPFault'
   schemas:
-    WriteRequest:
-      type: object
-      description: SOAP envelope containing an entity element for the target schema with attribute values and an _operation attribute controlling the write behavior.
-      properties:
-        entity:
-          type: object
-          properties:
-            _operation:
-              type: string
-              enum:
-              - insert
-              - insertOrUpdate
-              - update
-              - delete
-              description: The write operation to perform. insert creates a new record, insertOrUpdate creates or updates, update modifies existing, delete removes.
-            _schema:
-              type: string
-              description: Target schema name.
     WriteResponse:
       type: object
       description: SOAP response confirming the write operation. Returns the primary key of the affected record for insert operations.
@@ -147,13 +136,24 @@ components:
               description: Array of entity elements to write.
               items:
                 type: object
-  responses:
-    SOAPFault:
-      description: SOAP fault indicating an error during operation processing.
-      content:
-        text/xml:
-          schema:
-            $ref: '#/components/schemas/SOAPFault'
+    WriteRequest:
+      type: object
+      description: SOAP envelope containing an entity element for the target schema with attribute values and an _operation attribute controlling the write behavior.
+      properties:
+        entity:
+          type: object
+          properties:
+            _operation:
+              type: string
+              enum:
+              - insert
+              - insertOrUpdate
+              - update
+              - delete
+              description: The write operation to perform. insert creates a new record, insertOrUpdate creates or updates, update modifies existing, delete removes.
+            _schema:
+              type: string
+              description: Target schema name.
   securitySchemes:
     SessionToken:
       type: apiKey

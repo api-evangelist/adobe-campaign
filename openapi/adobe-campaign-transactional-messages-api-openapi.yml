@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Adobe Campaign Classic Custom Resources Transactional Messages API
-  description: SOAP-based API for Adobe Campaign Classic v7 and v8, documented as HTTP POST operations. All operations target the single SOAP router endpoint at /nl/jsp/soaprouter.jsp and are differentiated by the SOAPAction header. Provides programmatic access to session management, data querying, record persistence, delivery management, workflow control, subscription management, and real-time transactional event ingestion.
-  version: 8.0.0
+  title: Adobe Campaign Standard Transactional Messages API
+  description: REST API for Adobe Campaign Standard enabling integration with marketing campaigns, profiles, workflows, and messaging services. Provides CRUD operations for profiles and services, workflow control, transactional messaging triggers, GDPR/CCPA privacy requests, marketing history access, and custom resource management.
+  version: 1.0.0
   contact:
     name: Adobe Developer Support
     url: https://developer.adobe.com/
@@ -12,12 +12,15 @@ info:
   x-logo:
     url: https://www.adobe.com/content/dam/cc/icons/adobe-campaign.svg
 servers:
-- url: https://{instance}.campaign.adobe.com
-  description: Campaign Classic Instance
+- url: https://mc.adobe.io/{ORGANIZATION}/campaign
+  description: Adobe Campaign Standard Production
   variables:
-    instance:
-      description: Your Campaign Classic instance name
-      default: YOUR_INSTANCE
+    ORGANIZATION:
+      description: Your Adobe IMS Organization ID
+      default: YOUR_ORG_ID
+security:
+- BearerAuth: []
+  ApiKeyAuth: []
 tags:
 - name: Transactional Messages
   description: Trigger and monitor transactional messages across email, SMS, and push notification channels.
@@ -105,18 +108,6 @@ paths:
         dispatcher: FALLBACK
 components:
   responses:
-    InternalError:
-      description: Internal server error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication failed. Invalid or expired OAuth token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     BadRequest:
       description: Invalid request parameters.
       content:
@@ -125,6 +116,18 @@ components:
             $ref: '#/components/schemas/ErrorResponse'
     NotFound:
       description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication failed. Invalid or expired OAuth token.
       content:
         application/json:
           schema:
@@ -141,6 +144,23 @@ components:
           type: string
           description: Human-readable error message.
           example: example_value
+    TransactionalEventResponse:
+      type: object
+      properties:
+        PKey:
+          type: string
+          description: The PKEY of the created event.
+          example: example_value
+        eventId:
+          type: string
+          description: Unique identifier of the event.
+          example: CAM123456
+        status:
+          type: string
+          enum:
+          - pending
+          description: Initial status of the event.
+          example: pending
     TransactionalEventStatus:
       type: object
       properties:
@@ -170,23 +190,6 @@ components:
           type: string
           description: Failure reason if the event was not processed.
           example: example_value
-    TransactionalEventResponse:
-      type: object
-      properties:
-        PKey:
-          type: string
-          description: The PKEY of the created event.
-          example: example_value
-        eventId:
-          type: string
-          description: Unique identifier of the event.
-          example: CAM123456
-        status:
-          type: string
-          enum:
-          - pending
-          description: Initial status of the event.
-          example: pending
     TransactionalEvent:
       type: object
       properties:
@@ -221,11 +224,16 @@ components:
           description: Optional event expiration time.
           example: example_value
   securitySchemes:
-    SessionToken:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth Server-to-Server access token obtained from Adobe IMS at https://ims-na1.adobelogin.com/ims/token/v3
+    ApiKeyAuth:
       type: apiKey
       in: header
-      name: X-Security-Token
-      description: Security token obtained from xtk:session#Logon. Must be passed alongside the session token cookie (__sessiontoken) on all authenticated requests. Tokens have a 24-hour lifecycle.
+      name: X-Api-Key
+      description: Your Adobe Developer Console API Key (Client ID).
 externalDocs:
-  description: Campaign Classic SOAP Web Services Documentation
-  url: https://experienceleague.adobe.com/docs/campaign-classic/using/configuring-campaign-classic/api/web-service-calls.html
+  description: Adobe Campaign Standard API Documentation
+  url: https://experienceleague.adobe.com/docs/campaign-standard/using/working-with-apis/get-started-apis.html
