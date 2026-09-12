@@ -709,6 +709,8 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 common:
+  - type: Website
+    url: https://www.adobe.com/
   - type: CapabilityMap
     url: capabilities/adobe-campaign-capability-edges.yml
     name: Adobe Campaign Business Capability Map
