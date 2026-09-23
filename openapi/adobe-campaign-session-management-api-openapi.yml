@@ -81,7 +81,34 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    SOAPFault:
+      description: SOAP fault indicating an error during operation processing.
+      content:
+        text/xml:
+          schema:
+            $ref: '#/components/schemas/SOAPFault'
   schemas:
+    SessionLogonResponse:
+      type: object
+      description: SOAP response containing session and security tokens.
+      properties:
+        sessionToken:
+          type: string
+          description: Session token to be passed as __sessiontoken cookie on subsequent requests.
+          example: example_value
+        securityToken:
+          type: string
+          description: Security token to be passed as X-Security-Token header on subsequent requests.
+          example: example_value
+        sessionInfo:
+          type: object
+          description: Information about the authenticated session.
+          properties:
+            serverInfo:
+              type: string
+            timezone:
+              type: string
     SOAPFault:
       type: object
       description: SOAP fault response indicating an error during operation processing.
@@ -114,33 +141,6 @@ components:
           type: string
           description: Password for authentication.
           example: example_value
-    SessionLogonResponse:
-      type: object
-      description: SOAP response containing session and security tokens.
-      properties:
-        sessionToken:
-          type: string
-          description: Session token to be passed as __sessiontoken cookie on subsequent requests.
-          example: example_value
-        securityToken:
-          type: string
-          description: Security token to be passed as X-Security-Token header on subsequent requests.
-          example: example_value
-        sessionInfo:
-          type: object
-          description: Information about the authenticated session.
-          properties:
-            serverInfo:
-              type: string
-            timezone:
-              type: string
-  responses:
-    SOAPFault:
-      description: SOAP fault indicating an error during operation processing.
-      content:
-        text/xml:
-          schema:
-            $ref: '#/components/schemas/SOAPFault'
   securitySchemes:
     SessionToken:
       type: apiKey

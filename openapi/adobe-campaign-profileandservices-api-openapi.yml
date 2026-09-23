@@ -155,82 +155,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    BadRequest:
-      description: Invalid request parameters.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    InternalError:
-      description: Internal server error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication failed. Invalid or expired OAuth token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    Order:
-      name: _order
-      in: query
-      required: false
-      description: Sort order. Use field name for ascending, append %20desc for descending (e.g., email%20desc).
-      schema:
-        type: string
-    LineStart:
-      name: _lineStart
-      in: query
-      required: false
-      description: Pagination offset from the next node in previous response.
-      schema:
-        type: integer
-    LineCount:
-      name: _lineCount
-      in: query
-      required: false
-      description: Number of records to return per page. Default is 25.
-      schema:
-        type: integer
-        default: 25
-    PKEY:
-      name: PKEY
-      in: path
-      required: true
-      description: The unique PKEY identifier of the resource.
-      schema:
-        type: string
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        error_code:
-          type: string
-          description: Numeric error code.
-          example: example_value
-        message:
-          type: string
-          description: Human-readable error message.
-          example: example_value
-    PaginatedServiceResponse:
-      allOf:
-      - $ref: '#/components/schemas/PaginatedResponse'
-      - type: object
-        properties:
-          content:
-            type: array
-            items:
-              $ref: '#/components/schemas/Service'
     ServiceUpdate:
       type: object
       properties:
@@ -251,6 +176,45 @@ components:
         end:
           type: string
           format: date-time
+          example: example_value
+    PaginatedResponse:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            type: object
+        count:
+          type: object
+          properties:
+            href:
+              type: string
+              description: URL to get the total count.
+        next:
+          type: object
+          properties:
+            href:
+              type: string
+              description: URL for the next page of results.
+    PaginatedServiceResponse:
+      allOf:
+      - $ref: '#/components/schemas/PaginatedResponse'
+      - type: object
+        properties:
+          content:
+            type: array
+            items:
+              $ref: '#/components/schemas/Service'
+    ErrorResponse:
+      type: object
+      properties:
+        error_code:
+          type: string
+          description: Numeric error code.
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message.
           example: example_value
     Service:
       type: object
@@ -296,25 +260,6 @@ components:
           format: date-time
           readOnly: true
           example: example_value
-    PaginatedResponse:
-      type: object
-      properties:
-        content:
-          type: array
-          items:
-            type: object
-        count:
-          type: object
-          properties:
-            href:
-              type: string
-              description: URL to get the total count.
-        next:
-          type: object
-          properties:
-            href:
-              type: string
-              description: URL for the next page of results.
     ServiceCreate:
       type: object
       required:
@@ -333,6 +278,61 @@ components:
           - sms
           - push
           example: email
+  responses:
+    Unauthorized:
+      description: Authentication failed. Invalid or expired OAuth token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    LineCount:
+      name: _lineCount
+      in: query
+      required: false
+      description: Number of records to return per page. Default is 25.
+      schema:
+        type: integer
+        default: 25
+    PKEY:
+      name: PKEY
+      in: path
+      required: true
+      description: The unique PKEY identifier of the resource.
+      schema:
+        type: string
+    LineStart:
+      name: _lineStart
+      in: query
+      required: false
+      description: Pagination offset from the next node in previous response.
+      schema:
+        type: integer
+    Order:
+      name: _order
+      in: query
+      required: false
+      description: Sort order. Use field name for ascending, append %20desc for descending (e.g., email%20desc).
+      schema:
+        type: string
   securitySchemes:
     BearerAuth:
       type: http

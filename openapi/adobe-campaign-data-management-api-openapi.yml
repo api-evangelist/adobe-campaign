@@ -97,14 +97,6 @@ components:
           schema:
             $ref: '#/components/schemas/SOAPFault'
   schemas:
-    WriteResponse:
-      type: object
-      description: SOAP response confirming the write operation. Returns the primary key of the affected record for insert operations.
-      properties:
-        primaryKey:
-          type: string
-          description: Primary key of the created or modified record.
-          example: example_value
     SOAPFault:
       type: object
       description: SOAP fault response indicating an error during operation processing.
@@ -121,21 +113,14 @@ components:
           type: string
           description: Additional error details.
           example: example_value
-    WriteCollectionRequest:
+    WriteResponse:
       type: object
-      description: SOAP envelope containing a collection of entity elements for batch write operations. Each entity can specify its own _operation.
+      description: SOAP response confirming the write operation. Returns the primary key of the affected record for insert operations.
       properties:
-        collection:
-          type: object
-          properties:
-            _schema:
-              type: string
-              description: Target schema name for all entities.
-            entities:
-              type: array
-              description: Array of entity elements to write.
-              items:
-                type: object
+        primaryKey:
+          type: string
+          description: Primary key of the created or modified record.
+          example: example_value
     WriteRequest:
       type: object
       description: SOAP envelope containing an entity element for the target schema with attribute values and an _operation attribute controlling the write behavior.
@@ -154,6 +139,21 @@ components:
             _schema:
               type: string
               description: Target schema name.
+    WriteCollectionRequest:
+      type: object
+      description: SOAP envelope containing a collection of entity elements for batch write operations. Each entity can specify its own _operation.
+      properties:
+        collection:
+          type: object
+          properties:
+            _schema:
+              type: string
+              description: Target schema name for all entities.
+            entities:
+              type: array
+              description: Array of entity elements to write.
+              items:
+                type: object
   securitySchemes:
     SessionToken:
       type: apiKey

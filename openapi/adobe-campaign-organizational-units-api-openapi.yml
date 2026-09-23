@@ -50,46 +50,20 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    Unauthorized:
+      description: Authentication failed. Invalid or expired OAuth token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        error_code:
-          type: string
-          description: Numeric error code.
-          example: example_value
-        message:
-          type: string
-          description: Human-readable error message.
-          example: example_value
-    PaginatedOrgUnitResponse:
-      allOf:
-      - $ref: '#/components/schemas/PaginatedResponse'
-      - type: object
-        properties:
-          content:
-            type: array
-            items:
-              $ref: '#/components/schemas/OrgUnit'
-    OrgUnit:
-      type: object
-      properties:
-        PKey:
-          type: string
-          description: Unique identifier for the organizational unit.
-          example: example_value
-        name:
-          type: string
-          description: Internal name of the organizational unit.
-          example: Example Campaign
-        label:
-          type: string
-          description: Display label of the organizational unit.
-          example: Example Campaign
-        parentTitle:
-          type: string
-          description: Label of the parent organizational unit.
-          example: example_value
     PaginatedResponse:
       type: object
       properties:
@@ -109,27 +83,46 @@ components:
             href:
               type: string
               description: URL for the next page of results.
-  responses:
-    InternalError:
-      description: Internal server error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication failed. Invalid or expired OAuth token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+    ErrorResponse:
+      type: object
+      properties:
+        error_code:
+          type: string
+          description: Numeric error code.
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message.
+          example: example_value
+    OrgUnit:
+      type: object
+      properties:
+        PKey:
+          type: string
+          description: Unique identifier for the organizational unit.
+          example: example_value
+        name:
+          type: string
+          description: Internal name of the organizational unit.
+          example: Example Campaign
+        label:
+          type: string
+          description: Display label of the organizational unit.
+          example: Example Campaign
+        parentTitle:
+          type: string
+          description: Label of the parent organizational unit.
+          example: example_value
+    PaginatedOrgUnitResponse:
+      allOf:
+      - $ref: '#/components/schemas/PaginatedResponse'
+      - type: object
+        properties:
+          content:
+            type: array
+            items:
+              $ref: '#/components/schemas/OrgUnit'
   parameters:
-    LineStart:
-      name: _lineStart
-      in: query
-      required: false
-      description: Pagination offset from the next node in previous response.
-      schema:
-        type: integer
     LineCount:
       name: _lineCount
       in: query
@@ -138,6 +131,13 @@ components:
       schema:
         type: integer
         default: 25
+    LineStart:
+      name: _lineStart
+      in: query
+      required: false
+      description: Pagination offset from the next node in previous response.
+      schema:
+        type: integer
   securitySchemes:
     BearerAuth:
       type: http

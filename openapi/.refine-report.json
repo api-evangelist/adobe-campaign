@@ -35,7 +35,8 @@
     "adobe-campaign-standard-openapi-original.yml: tagged paths GET /profileAndServices/service/{PKEY} -> ProfileAndServices",
     "adobe-campaign-standard-openapi-original.yml: tagged paths PATCH /profileAndServices/service/{PKEY} -> ProfileAndServices",
     "adobe-campaign-standard-openapi-original.yml: tagged paths DELETE /profileAndServices/service/{PKEY} -> ProfileAndServices",
-    "adobe-campaign-standard-openapi-original.yml: declared missing tag: ProfileAndServices"
+    "adobe-campaign-standard-openapi-original.yml: declared missing tag: ProfileAndServices",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "adobe-campaign-custom-resources-api-openapi.yml: previously refined output, superseded by openapi/_original/",

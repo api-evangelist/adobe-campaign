@@ -108,14 +108,8 @@ paths:
         dispatcher: FALLBACK
 components:
   responses:
-    BadRequest:
-      description: Invalid request parameters.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: The requested resource was not found.
+    Unauthorized:
+      description: Authentication failed. Invalid or expired OAuth token.
       content:
         application/json:
           schema:
@@ -126,70 +120,19 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication failed. Invalid or expired OAuth token.
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        error_code:
-          type: string
-          description: Numeric error code.
-          example: example_value
-        message:
-          type: string
-          description: Human-readable error message.
-          example: example_value
-    TransactionalEventResponse:
-      type: object
-      properties:
-        PKey:
-          type: string
-          description: The PKEY of the created event.
-          example: example_value
-        eventId:
-          type: string
-          description: Unique identifier of the event.
-          example: CAM123456
-        status:
-          type: string
-          enum:
-          - pending
-          description: Initial status of the event.
-          example: pending
-    TransactionalEventStatus:
-      type: object
-      properties:
-        PKey:
-          type: string
-          description: The PKEY of the event.
-          example: example_value
-        eventId:
-          type: string
-          description: Unique identifier of the event.
-          example: CAM123456
-        status:
-          type: string
-          enum:
-          - pending
-          - processing
-          - paused
-          - processed
-          - ignored
-          - deliveryFailed
-          - routingFailed
-          - targetingFailed
-          - tooOld
-          description: Current processing status of the event.
-          example: pending
-        reason:
-          type: string
-          description: Failure reason if the event was not processed.
-          example: example_value
     TransactionalEvent:
       type: object
       properties:
@@ -222,6 +165,63 @@ components:
           type: string
           format: date-time
           description: Optional event expiration time.
+          example: example_value
+    TransactionalEventResponse:
+      type: object
+      properties:
+        PKey:
+          type: string
+          description: The PKEY of the created event.
+          example: example_value
+        eventId:
+          type: string
+          description: Unique identifier of the event.
+          example: CAM123456
+        status:
+          type: string
+          enum:
+          - pending
+          description: Initial status of the event.
+          example: pending
+    ErrorResponse:
+      type: object
+      properties:
+        error_code:
+          type: string
+          description: Numeric error code.
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message.
+          example: example_value
+    TransactionalEventStatus:
+      type: object
+      properties:
+        PKey:
+          type: string
+          description: The PKEY of the event.
+          example: example_value
+        eventId:
+          type: string
+          description: Unique identifier of the event.
+          example: CAM123456
+        status:
+          type: string
+          enum:
+          - pending
+          - processing
+          - paused
+          - processed
+          - ignored
+          - deliveryFailed
+          - routingFailed
+          - targetingFailed
+          - tooOld
+          description: Current processing status of the event.
+          example: pending
+        reason:
+          type: string
+          description: Failure reason if the event was not processed.
           example: example_value
   securitySchemes:
     BearerAuth:

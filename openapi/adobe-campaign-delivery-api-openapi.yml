@@ -86,6 +86,18 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    DeliveryRequest:
+      type: object
+      description: SOAP envelope containing the delivery internal name or ID for preparation and sending operations.
+      properties:
+        deliveryId:
+          type: integer
+          description: Internal ID of the delivery.
+          example: 42
+        deliveryName:
+          type: string
+          description: Internal name of the delivery.
+          example: Example Campaign
     SOAPFault:
       type: object
       description: SOAP fault response indicating an error during operation processing.
@@ -102,18 +114,6 @@ components:
           type: string
           description: Additional error details.
           example: example_value
-    DeliveryRequest:
-      type: object
-      description: SOAP envelope containing the delivery internal name or ID for preparation and sending operations.
-      properties:
-        deliveryId:
-          type: integer
-          description: Internal ID of the delivery.
-          example: 42
-        deliveryName:
-          type: string
-          description: Internal name of the delivery.
-          example: Example Campaign
   responses:
     SOAPFault:
       description: SOAP fault indicating an error during operation processing.

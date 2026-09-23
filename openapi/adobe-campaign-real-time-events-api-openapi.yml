@@ -89,16 +89,14 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    SOAPFault:
+      description: SOAP fault indicating an error during operation processing.
+      content:
+        text/xml:
+          schema:
+            $ref: '#/components/schemas/SOAPFault'
   schemas:
-    PushEventsRequest:
-      type: object
-      description: SOAP envelope containing a batch of real-time events for bulk transactional message processing.
-      properties:
-        events:
-          type: array
-          description: Array of rtEvent elements.
-          items:
-            $ref: '#/components/schemas/PushEventRequest/properties/rtEvent'
     SOAPFault:
       type: object
       description: SOAP fault response indicating an error during operation processing.
@@ -115,6 +113,14 @@ components:
           type: string
           description: Additional error details.
           example: example_value
+    PushEventResponse:
+      type: object
+      description: SOAP response containing the assigned event ID for tracking.
+      properties:
+        eventId:
+          type: integer
+          description: Unique identifier assigned to the ingested event.
+          example: 42
     PushEventRequest:
       type: object
       description: SOAP envelope containing a real-time event for transactional message processing. The rtEvent element includes mandatory attributes for event type and recipient contact, plus a ctx child element for message personalization data.
@@ -149,21 +155,15 @@ components:
               type: object
               description: Context data XML element containing personalization variables for the transactional message template.
               additionalProperties: true
-    PushEventResponse:
+    PushEventsRequest:
       type: object
-      description: SOAP response containing the assigned event ID for tracking.
+      description: SOAP envelope containing a batch of real-time events for bulk transactional message processing.
       properties:
-        eventId:
-          type: integer
-          description: Unique identifier assigned to the ingested event.
-          example: 42
-  responses:
-    SOAPFault:
-      description: SOAP fault indicating an error during operation processing.
-      content:
-        text/xml:
-          schema:
-            $ref: '#/components/schemas/SOAPFault'
+        events:
+          type: array
+          description: Array of rtEvent elements.
+          items:
+            $ref: '#/components/schemas/PushEventRequest/properties/rtEvent'
   securitySchemes:
     SessionToken:
       type: apiKey

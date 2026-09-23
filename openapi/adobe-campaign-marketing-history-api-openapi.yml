@@ -52,8 +52,8 @@ paths:
         dispatcher: FALLBACK
 components:
   responses:
-    NotFound:
-      description: The requested resource was not found.
+    Unauthorized:
+      description: Authentication failed. Invalid or expired OAuth token.
       content:
         application/json:
           schema:
@@ -64,24 +64,13 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication failed. Invalid or expired OAuth token.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        error_code:
-          type: string
-          description: Numeric error code.
-          example: example_value
-        message:
-          type: string
-          description: Human-readable error message.
-          example: example_value
     MarketingHistory:
       type: object
       properties:
@@ -111,6 +100,17 @@ components:
                     type: string
                     format: uri
                     description: Link to the mirror page.
+    ErrorResponse:
+      type: object
+      properties:
+        error_code:
+          type: string
+          description: Numeric error code.
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message.
+          example: example_value
   parameters:
     PKEY:
       name: PKEY
