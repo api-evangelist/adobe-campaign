@@ -156,66 +156,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ServiceUpdate:
-      type: object
-      properties:
-        label:
-          type: string
-          example: Example Campaign
-        messageType:
-          type: string
-          enum:
-          - email
-          - sms
-          - push
-          example: email
-        start:
-          type: string
-          format: date-time
-          example: example_value
-        end:
-          type: string
-          format: date-time
-          example: example_value
-    PaginatedResponse:
-      type: object
-      properties:
-        content:
-          type: array
-          items:
-            type: object
-        count:
-          type: object
-          properties:
-            href:
-              type: string
-              description: URL to get the total count.
-        next:
-          type: object
-          properties:
-            href:
-              type: string
-              description: URL for the next page of results.
-    PaginatedServiceResponse:
-      allOf:
-      - $ref: '#/components/schemas/PaginatedResponse'
-      - type: object
-        properties:
-          content:
-            type: array
-            items:
-              $ref: '#/components/schemas/Service'
-    ErrorResponse:
-      type: object
-      properties:
-        error_code:
-          type: string
-          description: Numeric error code.
-          example: example_value
-        message:
-          type: string
-          description: Human-readable error message.
-          example: example_value
     Service:
       type: object
       properties:
@@ -260,6 +200,57 @@ components:
           format: date-time
           readOnly: true
           example: example_value
+    ErrorResponse:
+      type: object
+      properties:
+        error_code:
+          type: string
+          description: Numeric error code.
+          example: example_value
+        message:
+          type: string
+          description: Human-readable error message.
+          example: example_value
+    PaginatedResponse:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            type: object
+        count:
+          type: object
+          properties:
+            href:
+              type: string
+              description: URL to get the total count.
+        next:
+          type: object
+          properties:
+            href:
+              type: string
+              description: URL for the next page of results.
+    ServiceUpdate:
+      type: object
+      properties:
+        label:
+          type: string
+          example: Example Campaign
+        messageType:
+          type: string
+          enum:
+          - email
+          - sms
+          - push
+          example: email
+        start:
+          type: string
+          format: date-time
+          example: example_value
+        end:
+          type: string
+          format: date-time
+          example: example_value
     ServiceCreate:
       type: object
       required:
@@ -278,6 +269,15 @@ components:
           - sms
           - push
           example: email
+    PaginatedServiceResponse:
+      allOf:
+      - $ref: '#/components/schemas/PaginatedResponse'
+      - type: object
+        properties:
+          content:
+            type: array
+            items:
+              $ref: '#/components/schemas/Service'
   responses:
     Unauthorized:
       description: Authentication failed. Invalid or expired OAuth token.
@@ -312,11 +312,11 @@ components:
       schema:
         type: integer
         default: 25
-    PKEY:
-      name: PKEY
-      in: path
-      required: true
-      description: The unique PKEY identifier of the resource.
+    Order:
+      name: _order
+      in: query
+      required: false
+      description: Sort order. Use field name for ascending, append %20desc for descending (e.g., email%20desc).
       schema:
         type: string
     LineStart:
@@ -326,11 +326,11 @@ components:
       description: Pagination offset from the next node in previous response.
       schema:
         type: integer
-    Order:
-      name: _order
-      in: query
-      required: false
-      description: Sort order. Use field name for ascending, append %20desc for descending (e.g., email%20desc).
+    PKEY:
+      name: PKEY
+      in: path
+      required: true
+      description: The unique PKEY identifier of the resource.
       schema:
         type: string
   securitySchemes:

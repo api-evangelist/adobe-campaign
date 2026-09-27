@@ -81,14 +81,23 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    SOAPFault:
-      description: SOAP fault indicating an error during operation processing.
-      content:
-        text/xml:
-          schema:
-            $ref: '#/components/schemas/SOAPFault'
   schemas:
+    SOAPFault:
+      type: object
+      description: SOAP fault response indicating an error during operation processing.
+      properties:
+        faultcode:
+          type: string
+          description: Fault code identifying the error category.
+          example: example_value
+        faultstring:
+          type: string
+          description: Human-readable description of the error.
+          example: example_value
+        detail:
+          type: string
+          description: Additional error details.
+          example: example_value
     SessionLogonResponse:
       type: object
       description: SOAP response containing session and security tokens.
@@ -109,22 +118,6 @@ components:
               type: string
             timezone:
               type: string
-    SOAPFault:
-      type: object
-      description: SOAP fault response indicating an error during operation processing.
-      properties:
-        faultcode:
-          type: string
-          description: Fault code identifying the error category.
-          example: example_value
-        faultstring:
-          type: string
-          description: Human-readable description of the error.
-          example: example_value
-        detail:
-          type: string
-          description: Additional error details.
-          example: example_value
     SessionLogonRequest:
       type: object
       xml:
@@ -141,6 +134,13 @@ components:
           type: string
           description: Password for authentication.
           example: example_value
+  responses:
+    SOAPFault:
+      description: SOAP fault indicating an error during operation processing.
+      content:
+        text/xml:
+          schema:
+            $ref: '#/components/schemas/SOAPFault'
   securitySchemes:
     SessionToken:
       type: apiKey

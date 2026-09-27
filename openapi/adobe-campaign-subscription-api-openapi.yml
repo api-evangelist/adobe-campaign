@@ -85,14 +85,23 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    SOAPFault:
-      description: SOAP fault indicating an error during operation processing.
-      content:
-        text/xml:
-          schema:
-            $ref: '#/components/schemas/SOAPFault'
   schemas:
+    SOAPFault:
+      type: object
+      description: SOAP fault response indicating an error during operation processing.
+      properties:
+        faultcode:
+          type: string
+          description: Fault code identifying the error category.
+          example: example_value
+        faultstring:
+          type: string
+          description: Human-readable description of the error.
+          example: example_value
+        detail:
+          type: string
+          description: Additional error details.
+          example: example_value
     SubscriptionRequest:
       type: object
       description: SOAP envelope containing the service name and recipient DOM element for subscribe/unsubscribe operations.
@@ -115,22 +124,13 @@ components:
           type: boolean
           description: Whether to create the recipient if not found (subscribe only).
           example: true
+  responses:
     SOAPFault:
-      type: object
-      description: SOAP fault response indicating an error during operation processing.
-      properties:
-        faultcode:
-          type: string
-          description: Fault code identifying the error category.
-          example: example_value
-        faultstring:
-          type: string
-          description: Human-readable description of the error.
-          example: example_value
-        detail:
-          type: string
-          description: Additional error details.
-          example: example_value
+      description: SOAP fault indicating an error during operation processing.
+      content:
+        text/xml:
+          schema:
+            $ref: '#/components/schemas/SOAPFault'
   securitySchemes:
     SessionToken:
       type: apiKey

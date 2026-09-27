@@ -58,13 +58,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    SOAPFault:
-      description: SOAP fault indicating an error during operation processing.
-      content:
-        text/xml:
-          schema:
-            $ref: '#/components/schemas/SOAPFault'
   schemas:
     SOAPFault:
       type: object
@@ -122,6 +115,13 @@ components:
         resultSet:
           type: object
           description: Collection of result records matching the query criteria.
+  responses:
+    SOAPFault:
+      description: SOAP fault indicating an error during operation processing.
+      content:
+        text/xml:
+          schema:
+            $ref: '#/components/schemas/SOAPFault'
   securitySchemes:
     SessionToken:
       type: apiKey

@@ -89,38 +89,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    SOAPFault:
-      description: SOAP fault indicating an error during operation processing.
-      content:
-        text/xml:
-          schema:
-            $ref: '#/components/schemas/SOAPFault'
   schemas:
-    SOAPFault:
-      type: object
-      description: SOAP fault response indicating an error during operation processing.
-      properties:
-        faultcode:
-          type: string
-          description: Fault code identifying the error category.
-          example: example_value
-        faultstring:
-          type: string
-          description: Human-readable description of the error.
-          example: example_value
-        detail:
-          type: string
-          description: Additional error details.
-          example: example_value
-    WriteResponse:
-      type: object
-      description: SOAP response confirming the write operation. Returns the primary key of the affected record for insert operations.
-      properties:
-        primaryKey:
-          type: string
-          description: Primary key of the created or modified record.
-          example: example_value
     WriteRequest:
       type: object
       description: SOAP envelope containing an entity element for the target schema with attribute values and an _operation attribute controlling the write behavior.
@@ -139,6 +108,14 @@ components:
             _schema:
               type: string
               description: Target schema name.
+    WriteResponse:
+      type: object
+      description: SOAP response confirming the write operation. Returns the primary key of the affected record for insert operations.
+      properties:
+        primaryKey:
+          type: string
+          description: Primary key of the created or modified record.
+          example: example_value
     WriteCollectionRequest:
       type: object
       description: SOAP envelope containing a collection of entity elements for batch write operations. Each entity can specify its own _operation.
@@ -154,6 +131,29 @@ components:
               description: Array of entity elements to write.
               items:
                 type: object
+    SOAPFault:
+      type: object
+      description: SOAP fault response indicating an error during operation processing.
+      properties:
+        faultcode:
+          type: string
+          description: Fault code identifying the error category.
+          example: example_value
+        faultstring:
+          type: string
+          description: Human-readable description of the error.
+          example: example_value
+        detail:
+          type: string
+          description: Additional error details.
+          example: example_value
+  responses:
+    SOAPFault:
+      description: SOAP fault indicating an error during operation processing.
+      content:
+        text/xml:
+          schema:
+            $ref: '#/components/schemas/SOAPFault'
   securitySchemes:
     SessionToken:
       type: apiKey

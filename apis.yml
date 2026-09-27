@@ -63,7 +63,7 @@ tags:
   - Adobe Experience Cloud
   - SMS
   - Push Notifications
-  - Workflow-Automation
+  - Workflow Automation
   - Privacy
 tags_raw:
   - Campaign Management
@@ -78,6 +78,7 @@ tags_raw:
   - Push Notifications
   - Workflow Automation
   - Privacy
+  - Workflow-Automation
 created: '2024-01-01'
 modified: '2026-08-13'
 specificationVersion: '0.23'
@@ -96,7 +97,7 @@ apis:
   - Campaign Classic
   - JavaScript SDK
   - Node.js
-  - Open-Source
+  - Open Source
   - SOAP Wrapper
   tags_raw:
   - Campaign Classic
@@ -104,6 +105,7 @@ apis:
   - Node.js
   - Open Source
   - SOAP Wrapper
+  - Open-Source
   properties:
   - type: Documentation
     url: https://opensource.adobe.com/acc-js-sdk/
