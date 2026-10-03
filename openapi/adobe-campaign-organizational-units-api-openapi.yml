@@ -51,25 +51,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    PaginatedResponse:
-      type: object
-      properties:
-        content:
-          type: array
-          items:
-            type: object
-        count:
-          type: object
-          properties:
-            href:
-              type: string
-              description: URL to get the total count.
-        next:
-          type: object
-          properties:
-            href:
-              type: string
-              description: URL for the next page of results.
     OrgUnit:
       type: object
       properties:
@@ -89,6 +70,25 @@ components:
           type: string
           description: Label of the parent organizational unit.
           example: example_value
+    PaginatedResponse:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            type: object
+        count:
+          type: object
+          properties:
+            href:
+              type: string
+              description: URL to get the total count.
+        next:
+          type: object
+          properties:
+            href:
+              type: string
+              description: URL for the next page of results.
     PaginatedOrgUnitResponse:
       allOf:
       - $ref: '#/components/schemas/PaginatedResponse'
@@ -109,19 +109,6 @@ components:
           type: string
           description: Human-readable error message.
           example: example_value
-  responses:
-    Unauthorized:
-      description: Authentication failed. Invalid or expired OAuth token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    InternalError:
-      description: Internal server error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   parameters:
     LineCount:
       name: _lineCount
@@ -138,6 +125,19 @@ components:
       description: Pagination offset from the next node in previous response.
       schema:
         type: integer
+  responses:
+    Unauthorized:
+      description: Authentication failed. Invalid or expired OAuth token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     BearerAuth:
       type: http

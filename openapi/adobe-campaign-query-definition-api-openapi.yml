@@ -75,6 +75,13 @@ components:
           type: string
           description: Additional error details.
           example: example_value
+    QueryResult:
+      type: object
+      description: SOAP response containing query result set as XML elements matching the target schema structure.
+      properties:
+        resultSet:
+          type: object
+          description: Collection of result records matching the query criteria.
     QueryDefinition:
       type: object
       description: SOAP envelope containing a query definition with schema, operation, selected fields, conditions, and pagination parameters.
@@ -108,13 +115,6 @@ components:
             orderBy:
               type: object
               description: ORDER BY clause with sortNode elements.
-    QueryResult:
-      type: object
-      description: SOAP response containing query result set as XML elements matching the target schema structure.
-      properties:
-        resultSet:
-          type: object
-          description: Collection of result records matching the query criteria.
   responses:
     SOAPFault:
       description: SOAP fault indicating an error during operation processing.

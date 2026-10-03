@@ -94,6 +94,29 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    Order:
+      name: _order
+      in: query
+      required: false
+      description: Sort order. Use field name for ascending, append %20desc for descending (e.g., email%20desc).
+      schema:
+        type: string
+    LineCount:
+      name: _lineCount
+      in: query
+      required: false
+      description: Number of records to return per page. Default is 25.
+      schema:
+        type: integer
+        default: 25
+    LineStart:
+      name: _lineStart
+      in: query
+      required: false
+      description: Pagination offset from the next node in previous response.
+      schema:
+        type: integer
   schemas:
     PaginatedResponse:
       type: object
@@ -144,29 +167,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    LineCount:
-      name: _lineCount
-      in: query
-      required: false
-      description: Number of records to return per page. Default is 25.
-      schema:
-        type: integer
-        default: 25
-    Order:
-      name: _order
-      in: query
-      required: false
-      description: Sort order. Use field name for ascending, append %20desc for descending (e.g., email%20desc).
-      schema:
-        type: string
-    LineStart:
-      name: _lineStart
-      in: query
-      required: false
-      description: Pagination offset from the next node in previous response.
-      schema:
-        type: integer
   securitySchemes:
     BearerAuth:
       type: http

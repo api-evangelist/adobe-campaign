@@ -98,6 +98,22 @@ components:
           type: string
           description: Additional error details.
           example: example_value
+    SessionLogonRequest:
+      type: object
+      xml:
+        name: Envelope
+        prefix: soapenv
+        namespace: http://schemas.xmlsoap.org/soap/envelope/
+      description: SOAP envelope containing login credentials for session authentication.
+      properties:
+        strLogin:
+          type: string
+          description: Username for authentication.
+          example: example_value
+        strPassword:
+          type: string
+          description: Password for authentication.
+          example: example_value
     SessionLogonResponse:
       type: object
       description: SOAP response containing session and security tokens.
@@ -118,22 +134,6 @@ components:
               type: string
             timezone:
               type: string
-    SessionLogonRequest:
-      type: object
-      xml:
-        name: Envelope
-        prefix: soapenv
-        namespace: http://schemas.xmlsoap.org/soap/envelope/
-      description: SOAP envelope containing login credentials for session authentication.
-      properties:
-        strLogin:
-          type: string
-          description: Username for authentication.
-          example: example_value
-        strPassword:
-          type: string
-          description: Password for authentication.
-          example: example_value
   responses:
     SOAPFault:
       description: SOAP fault indicating an error during operation processing.
