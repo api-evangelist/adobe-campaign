@@ -156,18 +156,18 @@ paths:
         dispatcher: FALLBACK
 components:
   parameters:
-    Order:
-      name: _order
-      in: query
-      required: false
-      description: Sort order. Use field name for ascending, append %20desc for descending (e.g., email%20desc).
-      schema:
-        type: string
     PKEY:
       name: PKEY
       in: path
       required: true
       description: The unique PKEY identifier of the resource.
+      schema:
+        type: string
+    Order:
+      name: _order
+      in: query
+      required: false
+      description: Sort order. Use field name for ascending, append %20desc for descending (e.g., email%20desc).
       schema:
         type: string
     LineCount:
@@ -186,36 +186,6 @@ components:
       schema:
         type: integer
   schemas:
-    ServiceUpdate:
-      type: object
-      properties:
-        label:
-          type: string
-          example: Example Campaign
-        messageType:
-          type: string
-          enum:
-          - email
-          - sms
-          - push
-          example: email
-        start:
-          type: string
-          format: date-time
-          example: example_value
-        end:
-          type: string
-          format: date-time
-          example: example_value
-    PaginatedServiceResponse:
-      allOf:
-      - $ref: '#/components/schemas/PaginatedResponse'
-      - type: object
-        properties:
-          content:
-            type: array
-            items:
-              $ref: '#/components/schemas/Service'
     PaginatedResponse:
       type: object
       properties:
@@ -235,6 +205,33 @@ components:
             href:
               type: string
               description: URL for the next page of results.
+    PaginatedServiceResponse:
+      allOf:
+      - $ref: '#/components/schemas/PaginatedResponse'
+      - type: object
+        properties:
+          content:
+            type: array
+            items:
+              $ref: '#/components/schemas/Service'
+    ServiceCreate:
+      type: object
+      required:
+      - label
+      properties:
+        name:
+          type: string
+          example: Example Campaign
+        label:
+          type: string
+          example: Example Campaign
+        messageType:
+          type: string
+          enum:
+          - email
+          - sms
+          - push
+          example: email
     Service:
       type: object
       properties:
@@ -279,6 +276,27 @@ components:
           format: date-time
           readOnly: true
           example: example_value
+    ServiceUpdate:
+      type: object
+      properties:
+        label:
+          type: string
+          example: Example Campaign
+        messageType:
+          type: string
+          enum:
+          - email
+          - sms
+          - push
+          example: email
+        start:
+          type: string
+          format: date-time
+          example: example_value
+        end:
+          type: string
+          format: date-time
+          example: example_value
     ErrorResponse:
       type: object
       properties:
@@ -290,33 +308,15 @@ components:
           type: string
           description: Human-readable error message.
           example: example_value
-    ServiceCreate:
-      type: object
-      required:
-      - label
-      properties:
-        name:
-          type: string
-          example: Example Campaign
-        label:
-          type: string
-          example: Example Campaign
-        messageType:
-          type: string
-          enum:
-          - email
-          - sms
-          - push
-          example: email
   responses:
-    NotFound:
-      description: The requested resource was not found.
+    InternalError:
+      description: Internal server error.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication failed. Invalid or expired OAuth token.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:
@@ -327,8 +327,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    InternalError:
-      description: Internal server error.
+    Unauthorized:
+      description: Authentication failed. Invalid or expired OAuth token.
       content:
         application/json:
           schema:

@@ -51,25 +51,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    OrgUnit:
-      type: object
-      properties:
-        PKey:
-          type: string
-          description: Unique identifier for the organizational unit.
-          example: example_value
-        name:
-          type: string
-          description: Internal name of the organizational unit.
-          example: Example Campaign
-        label:
-          type: string
-          description: Display label of the organizational unit.
-          example: Example Campaign
-        parentTitle:
-          type: string
-          description: Label of the parent organizational unit.
-          example: example_value
     PaginatedResponse:
       type: object
       properties:
@@ -109,6 +90,38 @@ components:
           type: string
           description: Human-readable error message.
           example: example_value
+    OrgUnit:
+      type: object
+      properties:
+        PKey:
+          type: string
+          description: Unique identifier for the organizational unit.
+          example: example_value
+        name:
+          type: string
+          description: Internal name of the organizational unit.
+          example: Example Campaign
+        label:
+          type: string
+          description: Display label of the organizational unit.
+          example: Example Campaign
+        parentTitle:
+          type: string
+          description: Label of the parent organizational unit.
+          example: example_value
+  responses:
+    InternalError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication failed. Invalid or expired OAuth token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
     LineCount:
       name: _lineCount
@@ -125,19 +138,6 @@ components:
       description: Pagination offset from the next node in previous response.
       schema:
         type: integer
-  responses:
-    Unauthorized:
-      description: Authentication failed. Invalid or expired OAuth token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    InternalError:
-      description: Internal server error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     BearerAuth:
       type: http

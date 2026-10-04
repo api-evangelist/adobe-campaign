@@ -117,22 +117,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    SOAPFault:
-      type: object
-      description: SOAP fault response indicating an error during operation processing.
-      properties:
-        faultcode:
-          type: string
-          description: Fault code identifying the error category.
-          example: example_value
-        faultstring:
-          type: string
-          description: Human-readable description of the error.
-          example: example_value
-        detail:
-          type: string
-          description: Additional error details.
-          example: example_value
     WorkflowPostEventRequest:
       type: object
       description: SOAP envelope containing a signal event to post to a workflow, including the workflow ID, signal activity name, and optional XML variables.
@@ -149,6 +133,22 @@ components:
           type: object
           description: XML element containing variable parameters to pass to the workflow transition.
           additionalProperties: true
+    SOAPFault:
+      type: object
+      description: SOAP fault response indicating an error during operation processing.
+      properties:
+        faultcode:
+          type: string
+          description: Fault code identifying the error category.
+          example: example_value
+        faultstring:
+          type: string
+          description: Human-readable description of the error.
+          example: example_value
+        detail:
+          type: string
+          description: Additional error details.
+          example: example_value
     WorkflowRequest:
       type: object
       description: SOAP envelope containing the workflow internal ID for start/stop operations.

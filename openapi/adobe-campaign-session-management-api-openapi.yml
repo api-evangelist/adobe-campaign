@@ -82,22 +82,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    SOAPFault:
-      type: object
-      description: SOAP fault response indicating an error during operation processing.
-      properties:
-        faultcode:
-          type: string
-          description: Fault code identifying the error category.
-          example: example_value
-        faultstring:
-          type: string
-          description: Human-readable description of the error.
-          example: example_value
-        detail:
-          type: string
-          description: Additional error details.
-          example: example_value
     SessionLogonRequest:
       type: object
       xml:
@@ -113,6 +97,22 @@ components:
         strPassword:
           type: string
           description: Password for authentication.
+          example: example_value
+    SOAPFault:
+      type: object
+      description: SOAP fault response indicating an error during operation processing.
+      properties:
+        faultcode:
+          type: string
+          description: Fault code identifying the error category.
+          example: example_value
+        faultstring:
+          type: string
+          description: Human-readable description of the error.
+          example: example_value
+        detail:
+          type: string
+          description: Additional error details.
           example: example_value
     SessionLogonResponse:
       type: object

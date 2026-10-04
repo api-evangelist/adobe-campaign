@@ -159,70 +159,40 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    Order:
-      name: _order
-      in: query
-      required: false
-      description: Sort order. Use field name for ascending, append %20desc for descending (e.g., email%20desc).
-      schema:
-        type: string
-    ForcePagination:
-      name: _forcePagination
-      in: query
-      required: false
-      description: Force pagination for tables with more than 100,000 records.
-      schema:
-        type: boolean
-        default: false
-    PKEY:
-      name: PKEY
-      in: path
-      required: true
-      description: The unique PKEY identifier of the resource.
-      schema:
-        type: string
-    LineCount:
-      name: _lineCount
-      in: query
-      required: false
-      description: Number of records to return per page. Default is 25.
-      schema:
-        type: integer
-        default: 25
-    LineStart:
-      name: _lineStart
-      in: query
-      required: false
-      description: Pagination offset from the next node in previous response.
-      schema:
-        type: integer
   schemas:
-    ProfileCreate:
+    Profile:
       type: object
-      required:
-      - email
       properties:
+        PKey:
+          type: string
+          description: Unique identifier for the profile.
+          readOnly: true
+          example: example_value
         email:
           type: string
           format: email
-          description: Email address for the new profile.
+          description: Email address of the profile.
           example: user@example.com
         firstName:
           type: string
+          description: First name of the profile.
           example: Example Campaign
         lastName:
           type: string
+          description: Last name of the profile.
           example: Example Campaign
         phone:
           type: string
+          description: Phone number of the profile.
           example: example_value
         mobilePhone:
           type: string
+          description: Mobile phone number.
           example: example_value
         birthDate:
           type: string
           format: date
+          description: Date of birth.
           example: '2026-04-17T12:00:00Z'
         gender:
           type: string
@@ -230,10 +200,43 @@ components:
           - male
           - female
           - unknown
+          description: Gender of the profile.
           example: male
         preferredLanguage:
           type: string
+          description: Preferred language code.
           example: example_value
+        blackList:
+          type: boolean
+          description: Whether the profile is on the deny list.
+          example: true
+        blackListEmail:
+          type: boolean
+          description: Whether email is blocked for this profile.
+          example: true
+        blackListMobile:
+          type: boolean
+          description: Whether SMS is blocked for this profile.
+          example: true
+        created:
+          type: string
+          format: date-time
+          description: Profile creation timestamp.
+          readOnly: true
+          example: example_value
+        lastModified:
+          type: string
+          format: date-time
+          description: Last modification timestamp.
+          readOnly: true
+          example: example_value
+        subscriptions:
+          type: object
+          description: Link to the profile subscriptions.
+          readOnly: true
+          properties:
+            href:
+              type: string
     PaginatedResponse:
       type: object
       properties:
@@ -315,39 +318,31 @@ components:
           type: string
           description: Human-readable error message.
           example: example_value
-    Profile:
+    ProfileCreate:
       type: object
+      required:
+      - email
       properties:
-        PKey:
-          type: string
-          description: Unique identifier for the profile.
-          readOnly: true
-          example: example_value
         email:
           type: string
           format: email
-          description: Email address of the profile.
+          description: Email address for the new profile.
           example: user@example.com
         firstName:
           type: string
-          description: First name of the profile.
           example: Example Campaign
         lastName:
           type: string
-          description: Last name of the profile.
           example: Example Campaign
         phone:
           type: string
-          description: Phone number of the profile.
           example: example_value
         mobilePhone:
           type: string
-          description: Mobile phone number.
           example: example_value
         birthDate:
           type: string
           format: date
-          description: Date of birth.
           example: '2026-04-17T12:00:00Z'
         gender:
           type: string
@@ -355,52 +350,63 @@ components:
           - male
           - female
           - unknown
-          description: Gender of the profile.
           example: male
         preferredLanguage:
           type: string
-          description: Preferred language code.
           example: example_value
-        blackList:
-          type: boolean
-          description: Whether the profile is on the deny list.
-          example: true
-        blackListEmail:
-          type: boolean
-          description: Whether email is blocked for this profile.
-          example: true
-        blackListMobile:
-          type: boolean
-          description: Whether SMS is blocked for this profile.
-          example: true
-        created:
-          type: string
-          format: date-time
-          description: Profile creation timestamp.
-          readOnly: true
-          example: example_value
-        lastModified:
-          type: string
-          format: date-time
-          description: Last modification timestamp.
-          readOnly: true
-          example: example_value
-        subscriptions:
-          type: object
-          description: Link to the profile subscriptions.
-          readOnly: true
-          properties:
-            href:
-              type: string
+  parameters:
+    PKEY:
+      name: PKEY
+      in: path
+      required: true
+      description: The unique PKEY identifier of the resource.
+      schema:
+        type: string
+    Order:
+      name: _order
+      in: query
+      required: false
+      description: Sort order. Use field name for ascending, append %20desc for descending (e.g., email%20desc).
+      schema:
+        type: string
+    ForcePagination:
+      name: _forcePagination
+      in: query
+      required: false
+      description: Force pagination for tables with more than 100,000 records.
+      schema:
+        type: boolean
+        default: false
+    LineCount:
+      name: _lineCount
+      in: query
+      required: false
+      description: Number of records to return per page. Default is 25.
+      schema:
+        type: integer
+        default: 25
+    LineStart:
+      name: _lineStart
+      in: query
+      required: false
+      description: Pagination offset from the next node in previous response.
+      schema:
+        type: integer
   responses:
+    InternalError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     Forbidden:
       description: Insufficient permissions for the requested operation.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication failed. Invalid or expired OAuth token.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:
@@ -411,14 +417,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    InternalError:
-      description: Internal server error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: The requested resource was not found.
+    Unauthorized:
+      description: Authentication failed. Invalid or expired OAuth token.
       content:
         application/json:
           schema:

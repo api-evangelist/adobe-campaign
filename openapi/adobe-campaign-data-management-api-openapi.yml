@@ -90,6 +90,21 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    WriteCollectionRequest:
+      type: object
+      description: SOAP envelope containing a collection of entity elements for batch write operations. Each entity can specify its own _operation.
+      properties:
+        collection:
+          type: object
+          properties:
+            _schema:
+              type: string
+              description: Target schema name for all entities.
+            entities:
+              type: array
+              description: Array of entity elements to write.
+              items:
+                type: object
     SOAPFault:
       type: object
       description: SOAP fault response indicating an error during operation processing.
@@ -105,6 +120,14 @@ components:
         detail:
           type: string
           description: Additional error details.
+          example: example_value
+    WriteResponse:
+      type: object
+      description: SOAP response confirming the write operation. Returns the primary key of the affected record for insert operations.
+      properties:
+        primaryKey:
+          type: string
+          description: Primary key of the created or modified record.
           example: example_value
     WriteRequest:
       type: object
@@ -124,29 +147,6 @@ components:
             _schema:
               type: string
               description: Target schema name.
-    WriteResponse:
-      type: object
-      description: SOAP response confirming the write operation. Returns the primary key of the affected record for insert operations.
-      properties:
-        primaryKey:
-          type: string
-          description: Primary key of the created or modified record.
-          example: example_value
-    WriteCollectionRequest:
-      type: object
-      description: SOAP envelope containing a collection of entity elements for batch write operations. Each entity can specify its own _operation.
-      properties:
-        collection:
-          type: object
-          properties:
-            _schema:
-              type: string
-              description: Target schema name for all entities.
-            entities:
-              type: array
-              description: Array of entity elements to write.
-              items:
-                type: object
   responses:
     SOAPFault:
       description: SOAP fault indicating an error during operation processing.
