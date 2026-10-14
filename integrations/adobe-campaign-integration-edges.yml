@@ -1,5 +1,5 @@
 generated: '2026-10-12'
-method: none
+method: searched
 source:
 - https://zapier.com/apps/adobe-campaign/integrations
 - https://n8n.io/integrations/adobe-campaign/
@@ -7,10 +7,57 @@ source:
 - https://monid.ai/tools/adobe-campaign
 checked:
 - https://composio.dev/toolkits/adobe-campaign
+- https://docs.mparticle.com/integrations/adobe-campaign-manager/audience/
+- https://hightouch.com/docs/destinations/adobe-campaign-classic
 - https://monid.ai/tools/adobe-campaign
 - https://n8n.io/integrations/adobe-campaign/
 - https://zapier.com/apps/adobe-campaign/integrations
 summary: null
 marketplace_apps: []
-edges: []
+edges:
+- partner_name: mParticle
+  partner: mparticle
+  partner_match: aggregator
+  marketplace: coverage
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://docs.mparticle.com/integrations/adobe-campaign-manager/audience/
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - adobe-campaign-manager
+      integration_types:
+      - audience
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Hightouch
+  partner: hightouch
+  partner_match: aggregator
+  marketplace: coverage
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/adobe-campaign-classic
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - adobe-campaign-classic
+      status: released
+      sync_types:
+      - Custom Resources
+      - Recipients
+      sync_modes:
+      - all
+      - insert
+      - update
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
 templates: []
