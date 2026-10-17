@@ -155,83 +155,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    PKEY:
-      name: PKEY
-      in: path
-      required: true
-      description: The unique PKEY identifier of the resource.
-      schema:
-        type: string
-    Order:
-      name: _order
-      in: query
-      required: false
-      description: Sort order. Use field name for ascending, append %20desc for descending (e.g., email%20desc).
-      schema:
-        type: string
-    LineCount:
-      name: _lineCount
-      in: query
-      required: false
-      description: Number of records to return per page. Default is 25.
-      schema:
-        type: integer
-        default: 25
-    LineStart:
-      name: _lineStart
-      in: query
-      required: false
-      description: Pagination offset from the next node in previous response.
-      schema:
-        type: integer
   schemas:
-    PaginatedResponse:
-      type: object
-      properties:
-        content:
-          type: array
-          items:
-            type: object
-        count:
-          type: object
-          properties:
-            href:
-              type: string
-              description: URL to get the total count.
-        next:
-          type: object
-          properties:
-            href:
-              type: string
-              description: URL for the next page of results.
-    PaginatedServiceResponse:
-      allOf:
-      - $ref: '#/components/schemas/PaginatedResponse'
-      - type: object
-        properties:
-          content:
-            type: array
-            items:
-              $ref: '#/components/schemas/Service'
-    ServiceCreate:
-      type: object
-      required:
-      - label
-      properties:
-        name:
-          type: string
-          example: Example Campaign
-        label:
-          type: string
-          example: Example Campaign
-        messageType:
-          type: string
-          enum:
-          - email
-          - sms
-          - push
-          example: email
     Service:
       type: object
       properties:
@@ -297,6 +221,24 @@ components:
           type: string
           format: date-time
           example: example_value
+    ServiceCreate:
+      type: object
+      required:
+      - label
+      properties:
+        name:
+          type: string
+          example: Example Campaign
+        label:
+          type: string
+          example: Example Campaign
+        messageType:
+          type: string
+          enum:
+          - email
+          - sms
+          - push
+          example: email
     ErrorResponse:
       type: object
       properties:
@@ -308,13 +250,35 @@ components:
           type: string
           description: Human-readable error message.
           example: example_value
+    PaginatedResponse:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            type: object
+        count:
+          type: object
+          properties:
+            href:
+              type: string
+              description: URL to get the total count.
+        next:
+          type: object
+          properties:
+            href:
+              type: string
+              description: URL for the next page of results.
+    PaginatedServiceResponse:
+      allOf:
+      - $ref: '#/components/schemas/PaginatedResponse'
+      - type: object
+        properties:
+          content:
+            type: array
+            items:
+              $ref: '#/components/schemas/Service'
   responses:
-    InternalError:
-      description: Internal server error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     NotFound:
       description: The requested resource was not found.
       content:
@@ -333,6 +297,42 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    InternalError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    PKEY:
+      name: PKEY
+      in: path
+      required: true
+      description: The unique PKEY identifier of the resource.
+      schema:
+        type: string
+    Order:
+      name: _order
+      in: query
+      required: false
+      description: Sort order. Use field name for ascending, append %20desc for descending (e.g., email%20desc).
+      schema:
+        type: string
+    LineStart:
+      name: _lineStart
+      in: query
+      required: false
+      description: Pagination offset from the next node in previous response.
+      schema:
+        type: integer
+    LineCount:
+      name: _lineCount
+      in: query
+      required: false
+      description: Number of records to return per page. Default is 25.
+      schema:
+        type: integer
+        default: 25
   securitySchemes:
     BearerAuth:
       type: http

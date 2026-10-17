@@ -133,6 +133,14 @@ components:
           type: object
           description: XML element containing variable parameters to pass to the workflow transition.
           additionalProperties: true
+    WorkflowRequest:
+      type: object
+      description: SOAP envelope containing the workflow internal ID for start/stop operations.
+      properties:
+        workflowId:
+          type: integer
+          description: Internal ID of the workflow.
+          example: 42
     SOAPFault:
       type: object
       description: SOAP fault response indicating an error during operation processing.
@@ -149,14 +157,6 @@ components:
           type: string
           description: Additional error details.
           example: example_value
-    WorkflowRequest:
-      type: object
-      description: SOAP envelope containing the workflow internal ID for start/stop operations.
-      properties:
-        workflowId:
-          type: integer
-          description: Internal ID of the workflow.
-          example: 42
   responses:
     SOAPFault:
       description: SOAP fault indicating an error during operation processing.

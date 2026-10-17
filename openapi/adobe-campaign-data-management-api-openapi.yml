@@ -105,6 +105,24 @@ components:
               description: Array of entity elements to write.
               items:
                 type: object
+    WriteRequest:
+      type: object
+      description: SOAP envelope containing an entity element for the target schema with attribute values and an _operation attribute controlling the write behavior.
+      properties:
+        entity:
+          type: object
+          properties:
+            _operation:
+              type: string
+              enum:
+              - insert
+              - insertOrUpdate
+              - update
+              - delete
+              description: The write operation to perform. insert creates a new record, insertOrUpdate creates or updates, update modifies existing, delete removes.
+            _schema:
+              type: string
+              description: Target schema name.
     SOAPFault:
       type: object
       description: SOAP fault response indicating an error during operation processing.
@@ -129,24 +147,6 @@ components:
           type: string
           description: Primary key of the created or modified record.
           example: example_value
-    WriteRequest:
-      type: object
-      description: SOAP envelope containing an entity element for the target schema with attribute values and an _operation attribute controlling the write behavior.
-      properties:
-        entity:
-          type: object
-          properties:
-            _operation:
-              type: string
-              enum:
-              - insert
-              - insertOrUpdate
-              - update
-              - delete
-              description: The write operation to perform. insert creates a new record, insertOrUpdate creates or updates, update modifies existing, delete removes.
-            _schema:
-              type: string
-              description: Target schema name.
   responses:
     SOAPFault:
       description: SOAP fault indicating an error during operation processing.
