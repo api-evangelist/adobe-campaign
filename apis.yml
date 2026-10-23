@@ -711,6 +711,8 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/adobe-campaign/overview
   - type: Website
     url: https://www.adobe.com/
   - type: CapabilityMap
