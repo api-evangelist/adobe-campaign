@@ -19,6 +19,10 @@ checked:
 - https://repo1.maven.org/maven2
 - https://rubygems.org/api/v1
 - https://zapier.com/apps/adobe-campaign/integrations
+- https://exchange.adobe.com/apps
+- https://exchange.adobe.com/apps/browse/cc
+- https://exchange.adobe.com/apps/browse/ec
+- https://exchange.adobe.com/robots.txt
 summary: null
 marketplace_apps: []
 edges:
@@ -97,4 +101,285 @@ edges:
       - upsert
   detected_by: sweep-cdp.py
   first_seen: '2026-10-14'
+- partner_name: Accenture PLC
+  app: Accenture | Intelligent Personalization Platform (AIPP)
+  apps:
+  - Accenture | Adobe ABM Accelerator
+  - Accenture | Intelligent Personalization Platform (AIPP)
+  - Accenture | Marketing Automation Suite
+  listing_count: 3
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/1200053
+  category: Adobe Exchange Experience Cloud listing (Analytics, Audience Manager, Campaign, Commerce)
+  products:
+  - Analytics
+  - Audience Manager
+  - Campaign
+  - Commerce
+  - Experience Platform
+  - Experience Platform services
+  - Marketo Engage
+  - Target
+  partner_url: https://www.accenture.com/adobe
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Platinum partner
+  partner_held:
+    candidate: accenture
+    why: 'market-fit gate: partner''s own tags carry no creative / media / marketing / analytics / content / commerce
+      / e-sign / work-management term'
+- partner_name: CDW
+  app: Sirius | Digital Foundation for Banking
+  apps:
+  - Sirius | Digital Foundation for Banking
+  listing_count: 1
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/1200158
+  category: Adobe Exchange Experience Cloud listing (Analytics, Campaign, Experience Platform services, Target)
+  products:
+  - Analytics
+  - Campaign
+  - Experience Platform services
+  - Target
+  partner_url: cdw.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Gold partner
+  partner_held:
+    candidate: cdw
+    why: 'market-fit gate: partner''s own tags carry no creative / media / marketing / analytics / content / commerce
+      / e-sign / work-management term'
+- partner_name: Deloitte Consulting
+  app: Deloitte Digital | Closed-Loop Marketing Solution
+  apps:
+  - Deloitte Digital | Closed-Loop Marketing Solution
+  - Deloitte Digital | Connected Studio Powered by Adobe
+  listing_count: 2
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/1200149
+  category: Adobe Exchange Experience Cloud listing (Advertising Cloud, Analytics, Campaign, Commerce)
+  products:
+  - Advertising Cloud
+  - Analytics
+  - Campaign
+  - Commerce
+  - Customer Journey Analytics
+  - Experience Platform apps
+  - Experience Platform services
+  - Journey Optimizer
+  - Marketo Engage
+  - Target
+  - Workfront
+  partner_url: www.deloitte.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Platinum partner
+  partner_held:
+    candidate: deloitte
+    why: systems integrator / consultancy (Adobe solution listing), not a publisher of its own product
+- partner_name: Epsilon
+  app: Agility Loyalty + Adobe Experience Cloud
+  apps:
+  - Agility Loyalty + Adobe Experience Cloud
+  - Epsilon | PeopleCloud Loyalty & Adobe Experience Cloud
+  listing_count: 2
+  partner: epsilon
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/91148
+  category: Adobe Exchange Experience Cloud listing (Analytics, Audience Manager, Campaign, Experience Manager)
+  products:
+  - Analytics
+  - Audience Manager
+  - Campaign
+  - Experience Manager
+  - Experience Platform
+  - Experience Platform services
+  - Target
+  partner_url: https://www.epsilon.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Platinum partner
+  other_publisher_names:
+  - Epsilon Americas
+- partner_name: Ernst & Young LLP U.S.
+  app: EY | Consumer Experience of the Future
+  apps:
+  - EY | Consumer Experience of the Future
+  listing_count: 1
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/1200051
+  category: Adobe Exchange Experience Cloud listing (Analytics, Campaign, Experience Platform, Experience Platform
+    services)
+  products:
+  - Analytics
+  - Campaign
+  - Experience Platform
+  - Experience Platform services
+  - Target
+  partner_url: ey.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Platinum partner
+  partner_held:
+    candidate: ey
+    why: systems integrator / consultancy (Adobe solution listing), not a publisher of its own product
+- partner_name: INFOBIP LTD
+  app: Infobip SMS Messaging Services
+  apps:
+  - Infobip SMS Messaging Services
+  listing_count: 1
+  partner: infobip
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/104254
+  category: Adobe Exchange Experience Cloud listing (Campaign)
+  products:
+  - Campaign
+  partner_url: https://www.infobip.com/
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Gold partner
+- partner_name: Movable Ink
+  app: Movable Ink Studio
+  apps:
+  - Movable Ink Da Vinci
+  - Movable Ink Studio
+  listing_count: 2
+  partner: movable-ink
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/90056
+  category: Adobe Exchange Experience Cloud listing (Campaign)
+  products:
+  - Campaign
+  partner_url: movableink.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Gold partner
+- partner_name: Sinch
+  app: Sinch SMS Messaging Services for Adobe Campaign
+  apps:
+  - Sinch SMS Messaging Services for Adobe Campaign
+  listing_count: 1
+  partner: sinch
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/101791
+  category: Adobe Exchange Experience Cloud listing (Campaign)
+  products:
+  - Campaign
+  partner_url: http://www.sinch.com/
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
+- partner_name: Vibes
+  app: Vibes MRM Connector for Adobe Campaign
+  apps:
+  - Vibes MRM Connector for Adobe Campaign
+  listing_count: 1
+  partner: vibes-platform
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/90050
+  category: Adobe Exchange Experience Cloud listing (Campaign)
+  products:
+  - Campaign
+  partner_url: https://vibes.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
+- partner_name: Virtusa
+  app: Virtusa | vEngage
+  apps:
+  - Virtusa | vEngage
+  listing_count: 1
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/1200076
+  category: Adobe Exchange Experience Cloud listing (Analytics, Campaign, Experience Platform, Experience Platform
+    services)
+  products:
+  - Analytics
+  - Campaign
+  - Experience Platform
+  - Experience Platform services
+  - Target
+  partner_url: https://www.virtusa.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Platinum partner
+  partner_held:
+    candidate: virtusa
+    why: 'market-fit gate: partner''s own tags carry no creative / media / marketing / analytics / content / commerce
+      / e-sign / work-management term'
 templates: []
