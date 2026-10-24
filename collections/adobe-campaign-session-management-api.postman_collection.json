@@ -1,410 +1,405 @@
 {
+  "info": {
+    "_postman_id": "127a8347-34ce-4bf2-9687-115dffcdb0f0",
+    "name": "Adobe Campaign Classic Session Management API",
+    "description": "SOAP-based API for Adobe Campaign Classic v7 and v8, documented as HTTP POST operations. All operations target the single SOAP router endpoint at /nl/jsp/soaprouter.jsp and are differentiated by the SOAPAction header. Provides programmatic access to session management, data querying, record persistence, delivery management, workflow control, subscription management, and real-time transactional event ingestion.\n\nContact Support:\n Name: Adobe Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:05:00.000Z",
+    "updatedAt": "2026-10-21T20:05:00.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-127a8347-34ce-4bf2-9687-115dffcdb0f0"
+  },
   "item": [
     {
-      "id": "61272427-b81d-42a0-b272-a88596e56255",
-      "name": "Session Management",
-      "description": {
-        "content": "Authenticate and manage server sessions. Logon returns session and security tokens required for all subsequent API calls.",
-        "type": "text/plain"
-      },
+      "name": "nl",
       "item": [
         {
-          "id": "82d198ac-3897-491d-a0ad-ec0069eece64",
-          "name": "Adobe Campaign Authenticate and Create a Session",
-          "request": {
-            "name": "Adobe Campaign Authenticate and Create a Session",
-            "description": {
-              "content": "Authenticates with username and password credentials and returns session and security tokens. These tokens must be passed as cookie (__sessiontoken) and header (X-Security-Token) on all subsequent requests. SOAP Action: xtk:session#Logon",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "nl",
-                "jsp",
-                "soaprouter.jsp",
-                "xtk-session",
-                "Logon"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "description": "Your Campaign Classic instance name",
-                  "type": "any",
-                  "value": "{{instance}}",
-                  "key": "instance"
-                }
-              ]
-            },
-            "header": [
-              {
-                "disabled": false,
-                "description": "(Required) ",
-                "key": "SOAPAction",
-                "value": "<string>"
-              },
-              {
-                "key": "Content-Type",
-                "value": "text/xml"
-              },
-              {
-                "key": "Accept",
-                "value": "text/xml"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <strLogin>(string)</strLogin>\n  <strPassword>(string)</strPassword>\n</soapenv:Envelope>",
-              "options": {
-                "raw": {
-                  "language": "xml"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "jsp",
+          "item": [
             {
-              "id": "ef2b5d3b-86c8-4109-8209-352d96e22538",
-              "name": "Authentication successful. Returns session and security tokens.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "nl",
-                    "jsp",
-                    "soaprouter.jsp",
-                    "xtk-session",
-                    "Logon"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "SOAPAction",
-                    "value": "example_value"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "text/xml"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <strLogin>example_value</strLogin>\n  <strPassword>example_value</strPassword>\n</soapenv:Envelope>",
-                  "options": {
-                    "raw": {
-                      "language": "xml"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "soaprouter.jsp",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "text/xml"
+                  "name": "xtk-session",
+                  "item": [
+                    {
+                      "name": "Logon",
+                      "item": [
+                        {
+                          "name": "Adobe Campaign Authenticate and Create a Session",
+                          "id": "4919c0b4-e2ec-49ac-ab4b-9fe4b5aecd75",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "(Required) ",
+                                "key": "SOAPAction",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "text/xml"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/xml"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <strLogin>(string)</strLogin>\n  <strPassword>(string)</strPassword>\n</soapenv:Envelope>",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "xml",
+                                  "language": "xml"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/nl/jsp/soaprouter.jsp/xtk-session/Logon",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "nl",
+                                "jsp",
+                                "soaprouter.jsp",
+                                "xtk-session",
+                                "Logon"
+                              ]
+                            },
+                            "description": "Authenticates with username and password credentials and returns session and security tokens. These tokens must be passed as cookie (__sessiontoken) and header (X-Security-Token) on all subsequent requests. SOAP Action: xtk:session#Logon"
+                          },
+                          "response": [
+                            {
+                              "id": "06a0bf5b-81ff-4c59-b351-d62b62b03a49",
+                              "name": "Authentication successful. Returns session and security tokens.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "(Required) ",
+                                    "key": "SOAPAction",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "text/xml"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/xml"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <strLogin>(string)</strLogin>\n  <strPassword>(string)</strPassword>\n</soapenv:Envelope>",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "xml",
+                                      "language": "xml"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/nl/jsp/soaprouter.jsp/xtk-session/Logon",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "nl",
+                                    "jsp",
+                                    "soaprouter.jsp",
+                                    "xtk-session",
+                                    "Logon"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "xml",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/xml"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <sessionToken>(string)</sessionToken>\n  <securityToken>(string)</securityToken>\n  <sessionInfo>\n    <serverInfo>(string)</serverInfo>\n    <timezone>(string)</timezone>\n  </sessionInfo>\n</element>",
+                              "createdAt": "2026-10-21T20:05:01.000Z",
+                              "updatedAt": "2026-10-21T20:05:01.000Z",
+                              "uid": "35240-06a0bf5b-81ff-4c59-b351-d62b62b03a49"
+                            },
+                            {
+                              "id": "33d260c4-7d3c-43cb-8cbf-539d4358dead",
+                              "name": "SOAP fault indicating an error during operation processing.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "(Required) ",
+                                    "key": "SOAPAction",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "text/xml"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/xml"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <strLogin>(string)</strLogin>\n  <strPassword>(string)</strPassword>\n</soapenv:Envelope>",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "xml",
+                                      "language": "xml"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/nl/jsp/soaprouter.jsp/xtk-session/Logon",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "nl",
+                                    "jsp",
+                                    "soaprouter.jsp",
+                                    "xtk-session",
+                                    "Logon"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "xml",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/xml"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <faultcode>(string)</faultcode>\n  <faultstring>(string)</faultstring>\n  <detail>(string)</detail>\n</element>",
+                              "createdAt": "2026-10-21T20:05:01.000Z",
+                              "updatedAt": "2026-10-21T20:05:01.000Z",
+                              "uid": "35240-33d260c4-7d3c-43cb-8cbf-539d4358dead"
+                            }
+                          ],
+                          "createdAt": "2026-10-21T20:05:01.000Z",
+                          "updatedAt": "2026-10-21T20:05:01.000Z",
+                          "uid": "35240-4919c0b4-e2ec-49ac-ab4b-9fe4b5aecd75"
+                        }
+                      ],
+                      "id": "cd0f458b-4c31-4e20-ba20-52967fa2db22",
+                      "createdAt": "2026-10-21T20:05:01.000Z",
+                      "updatedAt": "2026-10-21T20:05:01.000Z",
+                      "uid": "35240-cd0f458b-4c31-4e20-ba20-52967fa2db22"
+                    },
+                    {
+                      "name": "Logout",
+                      "item": [
+                        {
+                          "name": "Adobe Campaign Terminate a Session",
+                          "id": "29238062-d106-4127-a38c-497dfe30d288",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "apikey",
+                              "apikey": [
+                                {
+                                  "key": "key",
+                                  "value": "X-Security-Token",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "value",
+                                  "value": "{{apiKey}}",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "in",
+                                  "value": "header",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "(Required) ",
+                                "key": "SOAPAction",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/xml"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/nl/jsp/soaprouter.jsp/xtk-session/Logout",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "nl",
+                                "jsp",
+                                "soaprouter.jsp",
+                                "xtk-session",
+                                "Logout"
+                              ]
+                            },
+                            "description": "Invalidates the current session and security tokens. SOAP Action: xtk:session#Logout"
+                          },
+                          "response": [
+                            {
+                              "id": "7c95ce74-4def-4c70-9c04-edd0bf618cb7",
+                              "name": "Session terminated successfully.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "(Required) ",
+                                    "key": "SOAPAction",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "X-Security-Token",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/nl/jsp/soaprouter.jsp/xtk-session/Logout",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "nl",
+                                    "jsp",
+                                    "soaprouter.jsp",
+                                    "xtk-session",
+                                    "Logout"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-10-21T20:05:01.000Z",
+                              "updatedAt": "2026-10-21T20:05:01.000Z",
+                              "uid": "35240-7c95ce74-4def-4c70-9c04-edd0bf618cb7"
+                            },
+                            {
+                              "id": "8f2b9703-4c9a-4a45-89c4-1e11f93fdc41",
+                              "name": "SOAP fault indicating an error during operation processing.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "(Required) ",
+                                    "key": "SOAPAction",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/xml"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "X-Security-Token",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/nl/jsp/soaprouter.jsp/xtk-session/Logout",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "nl",
+                                    "jsp",
+                                    "soaprouter.jsp",
+                                    "xtk-session",
+                                    "Logout"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "xml",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/xml"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <faultcode>(string)</faultcode>\n  <faultstring>(string)</faultstring>\n  <detail>(string)</detail>\n</element>",
+                              "createdAt": "2026-10-21T20:05:01.000Z",
+                              "updatedAt": "2026-10-21T20:05:01.000Z",
+                              "uid": "35240-8f2b9703-4c9a-4a45-89c4-1e11f93fdc41"
+                            }
+                          ],
+                          "createdAt": "2026-10-21T20:05:01.000Z",
+                          "updatedAt": "2026-10-21T20:05:01.000Z",
+                          "uid": "35240-29238062-d106-4127-a38c-497dfe30d288"
+                        }
+                      ],
+                      "id": "de1c2a1f-b752-461e-b8ca-126326e51f05",
+                      "createdAt": "2026-10-21T20:05:01.000Z",
+                      "updatedAt": "2026-10-21T20:05:01.000Z",
+                      "uid": "35240-de1c2a1f-b752-461e-b8ca-126326e51f05"
+                    }
+                  ],
+                  "id": "6482291d-8361-4b8f-9b77-640a9bc04851",
+                  "createdAt": "2026-10-21T20:05:01.000Z",
+                  "updatedAt": "2026-10-21T20:05:01.000Z",
+                  "uid": "35240-6482291d-8361-4b8f-9b77-640a9bc04851"
                 }
               ],
-              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <sessionToken>example_value</sessionToken>\n  <securityToken>example_value</securityToken>\n  <sessionInfo>\n    <serverInfo>(string)</serverInfo>\n    <timezone>(string)</timezone>\n  </sessionInfo>\n</element>",
-              "cookie": [],
-              "_postman_previewlanguage": "xml"
-            },
-            {
-              "id": "c8ecb639-a5a7-461d-95f5-74802950d339",
-              "name": "SOAP fault indicating an error during operation processing.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "nl",
-                    "jsp",
-                    "soaprouter.jsp",
-                    "xtk-session",
-                    "Logon"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "SOAPAction",
-                    "value": "example_value"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "text/xml"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <strLogin>example_value</strLogin>\n  <strPassword>example_value</strPassword>\n</soapenv:Envelope>",
-                  "options": {
-                    "raw": {
-                      "language": "xml"
-                    }
-                  }
-                }
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/xml"
-                }
-              ],
-              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <faultcode>example_value</faultcode>\n  <faultstring>example_value</faultstring>\n  <detail>example_value</detail>\n</element>",
-              "cookie": [],
-              "_postman_previewlanguage": "xml"
+              "id": "21613a67-5f4a-4531-b399-ce39eac45d71",
+              "createdAt": "2026-10-21T20:05:01.000Z",
+              "updatedAt": "2026-10-21T20:05:01.000Z",
+              "uid": "35240-21613a67-5f4a-4531-b399-ce39eac45d71"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "d8058439-f4a8-4d39-a6b7-270f876ec4e6",
-          "name": "Adobe Campaign Terminate a Session",
-          "request": {
-            "name": "Adobe Campaign Terminate a Session",
-            "description": {
-              "content": "Invalidates the current session and security tokens. SOAP Action: xtk:session#Logout",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "nl",
-                "jsp",
-                "soaprouter.jsp",
-                "xtk-session",
-                "Logout"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "description": "Your Campaign Classic instance name",
-                  "type": "any",
-                  "value": "{{instance}}",
-                  "key": "instance"
-                }
-              ]
-            },
-            "header": [
-              {
-                "disabled": false,
-                "description": "(Required) ",
-                "key": "SOAPAction",
-                "value": "<string>"
-              },
-              {
-                "key": "Accept",
-                "value": "text/xml"
-              }
-            ],
-            "method": "POST",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "X-Security-Token"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "09541329-fd14-49d8-a025-f5d4a0a2e1f5",
-              "name": "Session terminated successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "nl",
-                    "jsp",
-                    "soaprouter.jsp",
-                    "xtk-session",
-                    "Logout"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Security-Token",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "SOAPAction",
-                    "value": "example_value"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "05062a92-d7fa-4462-a5b0-0e96392b1a68",
-              "name": "SOAP fault indicating an error during operation processing.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "nl",
-                    "jsp",
-                    "soaprouter.jsp",
-                    "xtk-session",
-                    "Logout"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Security-Token",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "SOAPAction",
-                    "value": "example_value"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "text/xml"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/xml"
-                }
-              ],
-              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <faultcode>example_value</faultcode>\n  <faultstring>example_value</faultstring>\n  <detail>example_value</detail>\n</element>",
-              "cookie": [],
-              "_postman_previewlanguage": "xml"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "84924cc7-431d-4e10-ae4d-f3752d3f70e8",
+          "createdAt": "2026-10-21T20:05:01.000Z",
+          "updatedAt": "2026-10-21T20:05:01.000Z",
+          "uid": "35240-84924cc7-431d-4e10-ae4d-f3752d3f70e8"
         }
       ],
-      "event": []
+      "id": "f8b34453-69b0-4c1e-85ef-752b57be23df",
+      "createdAt": "2026-10-21T20:05:01.000Z",
+      "updatedAt": "2026-10-21T20:05:01.000Z",
+      "uid": "35240-f8b34453-69b0-4c1e-85ef-752b57be23df"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "description": {
-        "content": "Your Campaign Classic instance name",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "YOUR_INSTANCE",
-      "key": "instance"
+      "key": "instance",
+      "value": "YOUR_INSTANCE"
     },
     {
-      "type": "string",
-      "value": "https://{{instance}}.campaign.adobe.com",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://{{instance}}.campaign.adobe.com"
     }
-  ],
-  "info": {
-    "_postman_id": "60c76fc7-64fb-45b3-a12d-78e19f669a07",
-    "name": "Adobe Campaign Classic Custom Resources Session Management API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "SOAP-based API for Adobe Campaign Classic v7 and v8, documented as HTTP POST operations. All operations target the single SOAP router endpoint at /nl/jsp/soaprouter.jsp and are differentiated by the SOAPAction header. Provides programmatic access to session management, data querying, record persistence, delivery management, workflow control, subscription management, and real-time transactional event ingestion.\n\nContact Support:\n Name: Adobe Developer Support",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

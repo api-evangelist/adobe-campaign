@@ -1,694 +1,729 @@
 {
+  "info": {
+    "_postman_id": "0da547a2-d168-4683-b54f-7b3e9aeb260e",
+    "name": "Adobe Campaign Standard Subscriptions API",
+    "description": "REST API for Adobe Campaign Standard enabling integration with marketing campaigns, profiles, workflows, and messaging services. Provides CRUD operations for profiles and services, workflow control, transactional messaging triggers, GDPR/CCPA privacy requests, marketing history access, and custom resource management.\n\nContact Support:\n Name: Adobe Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:05:11.000Z",
+    "updatedAt": "2026-10-21T20:05:11.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0da547a2-d168-4683-b54f-7b3e9aeb260e"
+  },
   "item": [
     {
-      "id": "e7a0d92b-0f7c-4714-82d7-26a7d0d690ac",
-      "name": "Subscriptions",
-      "description": {
-        "content": "Subscribe and unsubscribe profiles to and from services.",
-        "type": "text/plain"
-      },
+      "name": "profileAndServices",
       "item": [
         {
-          "id": "fe6b3076-81f7-4a7b-84f9-7c030c574704",
-          "name": "Adobe Campaign Subscribe a Profile to a Service",
-          "request": {
-            "name": "Adobe Campaign Subscribe a Profile to a Service",
-            "description": {
-              "content": "Subscribes a profile to a subscription service by providing the service PKEY in the request body.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "profileAndServices",
-                "profile",
-                ":PKEY",
-                "subscriptions"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "PKEY",
-                  "description": "(Required) The unique PKEY identifier of the resource."
-                },
-                {
-                  "description": "Your Campaign Classic instance name",
-                  "type": "any",
-                  "value": "{{instance}}",
-                  "key": "instance"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"service\": {\n    \"PKey\": \"<string>\"\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "profile",
+          "item": [
             {
-              "id": "7a35dcb1-775a-49ce-8323-6de96a82e486",
-              "name": "Profile subscribed successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "profileAndServices",
-                    "profile",
-                    ":PKEY",
-                    "subscriptions"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "PKEY",
-                      "description": "(Required) The unique PKEY identifier of the resource."
-                    },
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
-                    }
-                  ]
-                },
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"service\": {\n    \"PKey\": \"<string>\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "header": [
+              "name": "{PKEY}",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "text/plain"
+                  "name": "subscriptions",
+                  "item": [
+                    {
+                      "name": "Adobe Campaign Subscribe a Profile to a Service",
+                      "id": "846c1ceb-4087-4bb3-9a26-5253db1f5679",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"service\": {\n    \"PKey\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/profileAndServices/profile/:PKEY/subscriptions",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "profileAndServices",
+                            "profile",
+                            ":PKEY",
+                            "subscriptions"
+                          ],
+                          "variable": [
+                            {
+                              "id": "ec010c72-5914-4608-bcbf-38df5407555f",
+                              "key": "PKEY",
+                              "value": "<string>",
+                              "description": "(Required) The unique PKEY identifier of the resource."
+                            }
+                          ]
+                        },
+                        "description": "Subscribes a profile to a subscription service by providing the service PKEY in the request body."
+                      },
+                      "response": [
+                        {
+                          "id": "38c9cc27-118a-42e0-8d96-89a1550407e3",
+                          "name": "Profile subscribed successfully.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"service\": {\n    \"PKey\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/profileAndServices/profile/:PKEY/subscriptions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "profileAndServices",
+                                "profile",
+                                ":PKEY",
+                                "subscriptions"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "PKEY"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-10-21T20:05:12.000Z",
+                          "updatedAt": "2026-10-21T20:05:12.000Z",
+                          "uid": "35240-38c9cc27-118a-42e0-8d96-89a1550407e3"
+                        },
+                        {
+                          "id": "6008abc9-a15d-48d9-a4bd-f417874d29fb",
+                          "name": "Invalid request parameters.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"service\": {\n    \"PKey\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/profileAndServices/profile/:PKEY/subscriptions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "profileAndServices",
+                                "profile",
+                                ":PKEY",
+                                "subscriptions"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "PKEY"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error_code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-21T20:05:12.000Z",
+                          "updatedAt": "2026-10-21T20:05:12.000Z",
+                          "uid": "35240-6008abc9-a15d-48d9-a4bd-f417874d29fb"
+                        },
+                        {
+                          "id": "ed3f3788-38c5-4e91-a67c-ba97587f5949",
+                          "name": "Authentication failed. Invalid or expired OAuth token.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"service\": {\n    \"PKey\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/profileAndServices/profile/:PKEY/subscriptions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "profileAndServices",
+                                "profile",
+                                ":PKEY",
+                                "subscriptions"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "PKEY"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error_code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-21T20:05:12.000Z",
+                          "updatedAt": "2026-10-21T20:05:12.000Z",
+                          "uid": "35240-ed3f3788-38c5-4e91-a67c-ba97587f5949"
+                        },
+                        {
+                          "id": "58e2ca8f-2745-4061-a52b-08aa45d9f54a",
+                          "name": "The requested resource was not found.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"service\": {\n    \"PKey\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/profileAndServices/profile/:PKEY/subscriptions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "profileAndServices",
+                                "profile",
+                                ":PKEY",
+                                "subscriptions"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "PKEY"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error_code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-21T20:05:12.000Z",
+                          "updatedAt": "2026-10-21T20:05:12.000Z",
+                          "uid": "35240-58e2ca8f-2745-4061-a52b-08aa45d9f54a"
+                        },
+                        {
+                          "id": "73f4dabb-a9e7-4284-a22d-37f8e93ce10a",
+                          "name": "Internal server error.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"service\": {\n    \"PKey\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/profileAndServices/profile/:PKEY/subscriptions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "profileAndServices",
+                                "profile",
+                                ":PKEY",
+                                "subscriptions"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "PKEY"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error_code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-21T20:05:12.000Z",
+                          "updatedAt": "2026-10-21T20:05:12.000Z",
+                          "uid": "35240-73f4dabb-a9e7-4284-a22d-37f8e93ce10a"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T20:05:12.000Z",
+                      "updatedAt": "2026-10-21T20:05:12.000Z",
+                      "uid": "35240-846c1ceb-4087-4bb3-9a26-5253db1f5679"
+                    }
+                  ],
+                  "id": "20134c6e-d572-4951-a301-e23401ed0338",
+                  "createdAt": "2026-10-21T20:05:12.000Z",
+                  "updatedAt": "2026-10-21T20:05:12.000Z",
+                  "uid": "35240-20134c6e-d572-4951-a301-e23401ed0338"
                 }
               ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "2dd01618-b407-48b0-b24a-f28df1349152",
-              "name": "Invalid request parameters.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "profileAndServices",
-                    "profile",
-                    ":PKEY",
-                    "subscriptions"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "PKEY",
-                      "description": "(Required) The unique PKEY identifier of the resource."
-                    },
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"service\": {\n    \"PKey\": \"<string>\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "7dbd812a-9831-4947-ae81-39a992a56aea",
-              "name": "Authentication failed. Invalid or expired OAuth token.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "profileAndServices",
-                    "profile",
-                    ":PKEY",
-                    "subscriptions"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "PKEY",
-                      "description": "(Required) The unique PKEY identifier of the resource."
-                    },
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"service\": {\n    \"PKey\": \"<string>\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "f85d1869-8ef7-4d7f-8725-e3791c68291b",
-              "name": "The requested resource was not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "profileAndServices",
-                    "profile",
-                    ":PKEY",
-                    "subscriptions"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "PKEY",
-                      "description": "(Required) The unique PKEY identifier of the resource."
-                    },
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"service\": {\n    \"PKey\": \"<string>\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "193bac80-f7b8-4982-9eb8-da891d639f44",
-              "name": "Internal server error.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "profileAndServices",
-                    "profile",
-                    ":PKEY",
-                    "subscriptions"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "PKEY",
-                      "description": "(Required) The unique PKEY identifier of the resource."
-                    },
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"service\": {\n    \"PKey\": \"<string>\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "58be6104-edf6-4c6d-89ac-c8ddfd9f3d78",
+              "createdAt": "2026-10-21T20:05:12.000Z",
+              "updatedAt": "2026-10-21T20:05:12.000Z",
+              "uid": "35240-58be6104-edf6-4c6d-89ac-c8ddfd9f3d78"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "8f5a1430-1121-434d-8ace-6e0e25ff5403",
+          "createdAt": "2026-10-21T20:05:12.000Z",
+          "updatedAt": "2026-10-21T20:05:12.000Z",
+          "uid": "35240-8f5a1430-1121-434d-8ace-6e0e25ff5403"
         },
         {
-          "id": "a76c299a-bbaa-4c4a-9c93-f2d76e792cd2",
-          "name": "Adobe Campaign Unsubscribe a Profile from a Service",
-          "request": {
-            "name": "Adobe Campaign Unsubscribe a Profile from a Service",
-            "description": {
-              "content": "Removes a profile subscription from a service.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "profileAndServices",
-                "service",
-                ":servicePKEY",
-                "subscriptions",
-                ":profilePKEY"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "servicePKEY",
-                  "description": "(Required) The PKEY of the service."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "profilePKEY",
-                  "description": "(Required) The PKEY of the profile to unsubscribe."
-                },
-                {
-                  "description": "Your Campaign Classic instance name",
-                  "type": "any",
-                  "value": "{{instance}}",
-                  "key": "instance"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
+          "name": "service",
+          "item": [
             {
-              "id": "2d7453ba-a916-49bc-a13a-e1f73f14a965",
-              "name": "Profile unsubscribed successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "profileAndServices",
-                    "service",
-                    ":servicePKEY",
-                    "subscriptions",
-                    ":profilePKEY"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "servicePKEY",
-                      "description": "(Required) The PKEY of the service."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "profilePKEY",
-                      "description": "(Required) The PKEY of the profile to unsubscribe."
-                    },
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
-                    }
-                  ]
-                },
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "{servicePKEY}",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "text/plain"
+                  "name": "subscriptions",
+                  "item": [
+                    {
+                      "name": "{profilePKEY}",
+                      "item": [
+                        {
+                          "name": "Adobe Campaign Unsubscribe a Profile from a Service",
+                          "id": "b838c5cc-db65-48c7-91c7-77b5de79198f",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/profileAndServices/service/:servicePKEY/subscriptions/:profilePKEY",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "profileAndServices",
+                                "service",
+                                ":servicePKEY",
+                                "subscriptions",
+                                ":profilePKEY"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "5db019d5-8c36-4e2f-962b-77e48109ac91",
+                                  "key": "servicePKEY",
+                                  "value": "<string>",
+                                  "description": "(Required) The PKEY of the service."
+                                },
+                                {
+                                  "id": "36e51832-3d52-4bfc-9613-65a3a0e672d7",
+                                  "key": "profilePKEY",
+                                  "value": "<string>",
+                                  "description": "(Required) The PKEY of the profile to unsubscribe."
+                                }
+                              ]
+                            },
+                            "description": "Removes a profile subscription from a service."
+                          },
+                          "response": [
+                            {
+                              "id": "57d4be45-1a55-4848-a1b7-f84220c91661",
+                              "name": "Profile unsubscribed successfully.",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/profileAndServices/service/:servicePKEY/subscriptions/:profilePKEY",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "profileAndServices",
+                                    "service",
+                                    ":servicePKEY",
+                                    "subscriptions",
+                                    ":profilePKEY"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "servicePKEY"
+                                    },
+                                    {
+                                      "key": "profilePKEY"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-10-21T20:05:12.000Z",
+                              "updatedAt": "2026-10-21T20:05:12.000Z",
+                              "uid": "35240-57d4be45-1a55-4848-a1b7-f84220c91661"
+                            },
+                            {
+                              "id": "4da88e62-daac-41a2-ab82-2a1fb8cbdd9e",
+                              "name": "Authentication failed. Invalid or expired OAuth token.",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/profileAndServices/service/:servicePKEY/subscriptions/:profilePKEY",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "profileAndServices",
+                                    "service",
+                                    ":servicePKEY",
+                                    "subscriptions",
+                                    ":profilePKEY"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "servicePKEY"
+                                    },
+                                    {
+                                      "key": "profilePKEY"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error_code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-10-21T20:05:12.000Z",
+                              "updatedAt": "2026-10-21T20:05:12.000Z",
+                              "uid": "35240-4da88e62-daac-41a2-ab82-2a1fb8cbdd9e"
+                            },
+                            {
+                              "id": "75143e25-2ae1-49a2-8273-4c8e2316f1f6",
+                              "name": "The requested resource was not found.",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/profileAndServices/service/:servicePKEY/subscriptions/:profilePKEY",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "profileAndServices",
+                                    "service",
+                                    ":servicePKEY",
+                                    "subscriptions",
+                                    ":profilePKEY"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "servicePKEY"
+                                    },
+                                    {
+                                      "key": "profilePKEY"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error_code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-10-21T20:05:12.000Z",
+                              "updatedAt": "2026-10-21T20:05:12.000Z",
+                              "uid": "35240-75143e25-2ae1-49a2-8273-4c8e2316f1f6"
+                            },
+                            {
+                              "id": "148c3a12-98a5-47a1-a651-21995574bca8",
+                              "name": "Internal server error.",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/profileAndServices/service/:servicePKEY/subscriptions/:profilePKEY",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "profileAndServices",
+                                    "service",
+                                    ":servicePKEY",
+                                    "subscriptions",
+                                    ":profilePKEY"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "servicePKEY"
+                                    },
+                                    {
+                                      "key": "profilePKEY"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error_code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-10-21T20:05:12.000Z",
+                              "updatedAt": "2026-10-21T20:05:12.000Z",
+                              "uid": "35240-148c3a12-98a5-47a1-a651-21995574bca8"
+                            }
+                          ],
+                          "createdAt": "2026-10-21T20:05:12.000Z",
+                          "updatedAt": "2026-10-21T20:05:12.000Z",
+                          "uid": "35240-b838c5cc-db65-48c7-91c7-77b5de79198f"
+                        }
+                      ],
+                      "id": "970d839f-fb49-40f2-84e1-f3fbeafafc31",
+                      "createdAt": "2026-10-21T20:05:12.000Z",
+                      "updatedAt": "2026-10-21T20:05:12.000Z",
+                      "uid": "35240-970d839f-fb49-40f2-84e1-f3fbeafafc31"
+                    }
+                  ],
+                  "id": "5e890f6f-bde7-4979-911d-d84b6200f7b5",
+                  "createdAt": "2026-10-21T20:05:12.000Z",
+                  "updatedAt": "2026-10-21T20:05:12.000Z",
+                  "uid": "35240-5e890f6f-bde7-4979-911d-d84b6200f7b5"
                 }
               ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "ba5f8537-b5f2-4641-abab-aa2f270b9b56",
-              "name": "Authentication failed. Invalid or expired OAuth token.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "profileAndServices",
-                    "service",
-                    ":servicePKEY",
-                    "subscriptions",
-                    ":profilePKEY"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "servicePKEY",
-                      "description": "(Required) The PKEY of the service."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "profilePKEY",
-                      "description": "(Required) The PKEY of the profile to unsubscribe."
-                    },
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "32aa179c-5631-46f6-9098-3dbb55a67074",
-              "name": "The requested resource was not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "profileAndServices",
-                    "service",
-                    ":servicePKEY",
-                    "subscriptions",
-                    ":profilePKEY"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "servicePKEY",
-                      "description": "(Required) The PKEY of the service."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "profilePKEY",
-                      "description": "(Required) The PKEY of the profile to unsubscribe."
-                    },
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "65360e9a-b61b-4e77-b16e-a7336ad8a35c",
-              "name": "Internal server error.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "profileAndServices",
-                    "service",
-                    ":servicePKEY",
-                    "subscriptions",
-                    ":profilePKEY"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "servicePKEY",
-                      "description": "(Required) The PKEY of the service."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "profilePKEY",
-                      "description": "(Required) The PKEY of the profile to unsubscribe."
-                    },
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "78cf18b5-0d26-42cd-a4b5-edf57df6b4ef",
+              "createdAt": "2026-10-21T20:05:12.000Z",
+              "updatedAt": "2026-10-21T20:05:12.000Z",
+              "uid": "35240-78cf18b5-0d26-42cd-a4b5-edf57df6b4ef"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "a81139b4-60c9-4d27-a183-520567ad5534",
+          "createdAt": "2026-10-21T20:05:12.000Z",
+          "updatedAt": "2026-10-21T20:05:12.000Z",
+          "uid": "35240-a81139b4-60c9-4d27-a183-520567ad5534"
         }
       ],
-      "event": []
+      "id": "3449ccd9-49d3-40c9-8cd1-adb391c75ca1",
+      "createdAt": "2026-10-21T20:05:12.000Z",
+      "updatedAt": "2026-10-21T20:05:12.000Z",
+      "uid": "35240-3449ccd9-49d3-40c9-8cd1-adb391c75ca1"
     }
   ],
-  "event": [],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
   "variable": [
     {
-      "description": {
-        "content": "Your Campaign Classic instance name",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "YOUR_INSTANCE",
-      "key": "instance"
+      "key": "ORGANIZATION",
+      "value": "YOUR_ORG_ID"
     },
     {
-      "type": "string",
-      "value": "https://{{instance}}.campaign.adobe.com",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://mc.adobe.io/{{ORGANIZATION}}/campaign"
     }
-  ],
-  "info": {
-    "_postman_id": "d55f9028-b3bd-4f3a-9a96-b84cd03f49c2",
-    "name": "Adobe Campaign Classic Custom Resources Subscriptions API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "SOAP-based API for Adobe Campaign Classic v7 and v8, documented as HTTP POST operations. All operations target the single SOAP router endpoint at /nl/jsp/soaprouter.jsp and are differentiated by the SOAPAction header. Provides programmatic access to session management, data querying, record persistence, delivery management, workflow control, subscription management, and real-time transactional event ingestion.\n\nContact Support:\n Name: Adobe Developer Support",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

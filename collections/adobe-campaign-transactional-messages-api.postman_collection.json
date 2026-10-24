@@ -1,656 +1,622 @@
 {
+  "info": {
+    "_postman_id": "01cf2007-5986-422f-98d6-42991ad66cd2",
+    "name": "Adobe Campaign Standard Transactional Messages API",
+    "description": "REST API for Adobe Campaign Standard enabling integration with marketing campaigns, profiles, workflows, and messaging services. Provides CRUD operations for profiles and services, workflow control, transactional messaging triggers, GDPR/CCPA privacy requests, marketing history access, and custom resource management.\n\nContact Support:\n Name: Adobe Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:05:17.000Z",
+    "updatedAt": "2026-10-21T20:05:18.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-01cf2007-5986-422f-98d6-42991ad66cd2"
+  },
   "item": [
     {
-      "id": "44a2dcc6-2b60-44ce-8a9c-1bdc9793b2cc",
-      "name": "Transactional Messages",
-      "description": {
-        "content": "Trigger and monitor transactional messages across email, SMS, and push notification channels.",
-        "type": "text/plain"
-      },
+      "name": "{transactionalAPI}",
       "item": [
         {
-          "id": "750aa5d4-080d-4164-87fb-bb24d381510c",
-          "name": "Adobe Campaign Trigger a Transactional Event",
-          "request": {
-            "name": "Adobe Campaign Trigger a Transactional Event",
-            "description": {
-              "content": "Sends a transactional event to trigger a personalized message. The transactionalAPI path segment corresponds to the event configuration name. Events are processed asynchronously and support email, SMS, and push notification channels.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                ":transactionalAPI",
-                ":eventID"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "transactionalAPI",
-                  "description": "(Required) The transactional API name corresponding to the event configuration (e.g., EVTorderConfirmation)."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "eventID",
-                  "description": "(Required) The unique event type identifier."
-                },
-                {
-                  "description": "Your Campaign Classic instance name",
-                  "type": "any",
-                  "value": "{{instance}}",
-                  "key": "instance"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"email\": \"<email>\",\n  \"mobilePhone\": \"<string>\",\n  \"pushPlatform\": \"<string>\",\n  \"ctx\": {\n    \"key_0\": \"string\"\n  },\n  \"scheduled\": \"<dateTime>\",\n  \"expiration\": \"<dateTime>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "{eventID}",
+          "item": [
             {
-              "id": "d9795813-dc6b-4661-8140-be22c518b076",
-              "name": "Transactional event accepted for processing.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    ":transactionalAPI",
-                    ":eventID"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "transactionalAPI",
-                      "description": "(Required) The transactional API name corresponding to the event configuration (e.g., EVTorderConfirmation)."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "eventID",
-                      "description": "(Required) The unique event type identifier."
-                    },
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
-                    }
-                  ]
-                },
+              "name": "Adobe Campaign Trigger a Transactional Event",
+              "id": "a5ded072-2c1b-41fc-b8f7-f8313a4af0c7",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
                 "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"email\": \"user@example.com\",\n  \"mobilePhone\": \"example_value\",\n  \"pushPlatform\": \"apns\",\n  \"ctx\": {\n    \"key_0\": true,\n    \"key_1\": false\n  },\n  \"scheduled\": \"<dateTime>\",\n  \"expiration\": \"<dateTime>\"\n}",
+                  "raw": "{\n  \"email\": \"<email>\",\n  \"mobilePhone\": \"<string>\",\n  \"pushPlatform\": \"gcm\",\n  \"ctx\": {\n    \"id7\": \"anim velit d\"\n  },\n  \"scheduled\": \"<dateTime>\",\n  \"expiration\": \"<dateTime>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"PKey\": \"example_value\",\n  \"eventId\": \"CAM123456\",\n  \"status\": \"pending\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "a3a09e3a-623c-4ac8-ba6b-a91409dd0d6a",
-              "name": "Invalid request parameters.",
-              "originalRequest": {
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/:transactionalAPI/:eventID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     ":transactionalAPI",
                     ":eventID"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
                   "variable": [
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
+                      "id": "08d5bcce-73dd-42ba-ba5e-af822c8649ac",
                       "key": "transactionalAPI",
+                      "value": "<string>",
                       "description": "(Required) The transactional API name corresponding to the event configuration (e.g., EVTorderConfirmation)."
                     },
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
+                      "id": "07731d11-a21a-4853-b087-84576a37fc4f",
                       "key": "eventID",
+                      "value": "<string>",
                       "description": "(Required) The unique event type identifier."
-                    },
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
                     }
                   ]
                 },
+                "description": "Sends a transactional event to trigger a personalized message. The transactionalAPI path segment corresponds to the event configuration name. Events are processed asynchronously and support email, SMS, and push notification channels."
+              },
+              "response": [
+                {
+                  "id": "92d14c05-d722-41a4-ba6e-a2bd5584f825",
+                  "name": "Transactional event accepted for processing.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<email>\",\n  \"mobilePhone\": \"<string>\",\n  \"pushPlatform\": \"gcm\",\n  \"ctx\": {\n    \"id7\": \"anim velit d\"\n  },\n  \"scheduled\": \"<dateTime>\",\n  \"expiration\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:transactionalAPI/:eventID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":transactionalAPI",
+                        ":eventID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "transactionalAPI"
+                        },
+                        {
+                          "key": "eventID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"PKey\": \"<string>\",\n  \"eventId\": \"<string>\",\n  \"status\": \"pending\"\n}",
+                  "createdAt": "2026-10-21T20:05:18.000Z",
+                  "updatedAt": "2026-10-21T20:05:18.000Z",
+                  "uid": "35240-92d14c05-d722-41a4-ba6e-a2bd5584f825"
+                },
+                {
+                  "id": "c5b4e9a8-30dd-4086-a2f0-71f67587c5fa",
+                  "name": "Invalid request parameters.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<email>\",\n  \"mobilePhone\": \"<string>\",\n  \"pushPlatform\": \"gcm\",\n  \"ctx\": {\n    \"id7\": \"anim velit d\"\n  },\n  \"scheduled\": \"<dateTime>\",\n  \"expiration\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:transactionalAPI/:eventID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":transactionalAPI",
+                        ":eventID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "transactionalAPI"
+                        },
+                        {
+                          "key": "eventID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error_code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:05:18.000Z",
+                  "updatedAt": "2026-10-21T20:05:18.000Z",
+                  "uid": "35240-c5b4e9a8-30dd-4086-a2f0-71f67587c5fa"
+                },
+                {
+                  "id": "805ed5bd-569d-415e-91cf-bc151b2d9d00",
+                  "name": "Authentication failed. Invalid or expired OAuth token.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<email>\",\n  \"mobilePhone\": \"<string>\",\n  \"pushPlatform\": \"gcm\",\n  \"ctx\": {\n    \"id7\": \"anim velit d\"\n  },\n  \"scheduled\": \"<dateTime>\",\n  \"expiration\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:transactionalAPI/:eventID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":transactionalAPI",
+                        ":eventID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "transactionalAPI"
+                        },
+                        {
+                          "key": "eventID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error_code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:05:18.000Z",
+                  "updatedAt": "2026-10-21T20:05:18.000Z",
+                  "uid": "35240-805ed5bd-569d-415e-91cf-bc151b2d9d00"
+                },
+                {
+                  "id": "36bdd832-4ac8-4a74-9ab6-6af3ab561ee2",
+                  "name": "Internal server error.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<email>\",\n  \"mobilePhone\": \"<string>\",\n  \"pushPlatform\": \"gcm\",\n  \"ctx\": {\n    \"id7\": \"anim velit d\"\n  },\n  \"scheduled\": \"<dateTime>\",\n  \"expiration\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:transactionalAPI/:eventID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":transactionalAPI",
+                        ":eventID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "transactionalAPI"
+                        },
+                        {
+                          "key": "eventID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error_code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:05:18.000Z",
+                  "updatedAt": "2026-10-21T20:05:18.000Z",
+                  "uid": "35240-36bdd832-4ac8-4a74-9ab6-6af3ab561ee2"
+                }
+              ],
+              "createdAt": "2026-10-21T20:05:18.000Z",
+              "updatedAt": "2026-10-21T20:05:18.000Z",
+              "uid": "35240-a5ded072-2c1b-41fc-b8f7-f8313a4af0c7"
+            },
+            {
+              "name": "Adobe Campaign Get Transactional Event Status",
+              "id": "e8495845-cdba-4f14-b289-ee4caa077ac6",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
                 "header": [
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"email\": \"user@example.com\",\n  \"mobilePhone\": \"example_value\",\n  \"pushPlatform\": \"apns\",\n  \"ctx\": {\n    \"key_0\": true,\n    \"key_1\": false\n  },\n  \"scheduled\": \"<dateTime>\",\n  \"expiration\": \"<dateTime>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "89af6f64-451c-4807-9e73-f10279d20bd0",
-              "name": "Authentication failed. Invalid or expired OAuth token.",
-              "originalRequest": {
                 "url": {
+                  "raw": "{{baseUrl}}/:transactionalAPI/:eventID",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     ":transactionalAPI",
                     ":eventID"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
                   "variable": [
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
+                      "id": "7c473384-6f2a-4042-9d54-5e6736e860e1",
                       "key": "transactionalAPI",
-                      "description": "(Required) The transactional API name corresponding to the event configuration (e.g., EVTorderConfirmation)."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
                       "value": "<string>",
-                      "key": "eventID",
-                      "description": "(Required) The unique event type identifier."
-                    },
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"email\": \"user@example.com\",\n  \"mobilePhone\": \"example_value\",\n  \"pushPlatform\": \"apns\",\n  \"ctx\": {\n    \"key_0\": true,\n    \"key_1\": false\n  },\n  \"scheduled\": \"<dateTime>\",\n  \"expiration\": \"<dateTime>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "15ff2111-c7ef-4e95-8ab4-29b8aaa3b572",
-              "name": "Internal server error.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    ":transactionalAPI",
-                    ":eventID"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "transactionalAPI",
-                      "description": "(Required) The transactional API name corresponding to the event configuration (e.g., EVTorderConfirmation)."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "eventID",
-                      "description": "(Required) The unique event type identifier."
-                    },
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"email\": \"user@example.com\",\n  \"mobilePhone\": \"example_value\",\n  \"pushPlatform\": \"apns\",\n  \"ctx\": {\n    \"key_0\": true,\n    \"key_1\": false\n  },\n  \"scheduled\": \"<dateTime>\",\n  \"expiration\": \"<dateTime>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "4e51db01-b69d-4245-92cc-29636658eaac",
-          "name": "Adobe Campaign Get Transactional Event Status",
-          "request": {
-            "name": "Adobe Campaign Get Transactional Event Status",
-            "description": {
-              "content": "Retrieves the current processing status of a previously triggered transactional event. Statuses include pending, processing, processed, deliveryFailed, routingFailed, targetingFailed, tooOld, and ignored.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                ":transactionalAPI",
-                ":eventID"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "transactionalAPI",
-                  "description": "(Required) The transactional API name."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "eventID",
-                  "description": "(Required) The unique event type identifier."
-                },
-                {
-                  "description": "Your Campaign Classic instance name",
-                  "type": "any",
-                  "value": "{{instance}}",
-                  "key": "instance"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "2396c09f-da15-4921-8b3c-4bde34c46f99",
-              "name": "Event status retrieved successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    ":transactionalAPI",
-                    ":eventID"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "transactionalAPI",
                       "description": "(Required) The transactional API name."
                     },
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
+                      "id": "216326d8-9967-4841-aaff-40bb24ea8152",
                       "key": "eventID",
+                      "value": "<string>",
                       "description": "(Required) The unique event type identifier."
-                    },
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
                     }
                   ]
                 },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                "description": "Retrieves the current processing status of a previously triggered transactional event. Statuses include pending, processing, processed, deliveryFailed, routingFailed, targetingFailed, tooOld, and ignored."
               },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"PKey\": \"example_value\",\n  \"eventId\": \"CAM123456\",\n  \"status\": \"pending\",\n  \"reason\": \"example_value\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e095ac08-2783-4ef5-94aa-3ae4d140eac3",
-              "name": "Authentication failed. Invalid or expired OAuth token.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    ":transactionalAPI",
-                    ":eventID"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "transactionalAPI",
-                      "description": "(Required) The transactional API name."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "eventID",
-                      "description": "(Required) The unique event type identifier."
-                    },
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
+                  "id": "37161ed1-e13f-4645-aad3-89b663cb073c",
+                  "name": "Event status retrieved successfully.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:transactionalAPI/:eventID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":transactionalAPI",
+                        ":eventID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "transactionalAPI"
+                        },
+                        {
+                          "key": "eventID"
+                        }
+                      ]
                     }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e57129f5-ceaa-4e17-bfed-c8523683852a",
-              "name": "The requested resource was not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    ":transactionalAPI",
-                    ":eventID"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "transactionalAPI",
-                      "description": "(Required) The transactional API name."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "eventID",
-                      "description": "(Required) The unique event type identifier."
-                    },
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
+                      "key": "Content-Type",
+                      "value": "application/json"
                     }
-                  ]
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"PKey\": \"<string>\",\n  \"eventId\": \"<string>\",\n  \"status\": \"targetingFailed\",\n  \"reason\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:05:18.000Z",
+                  "updatedAt": "2026-10-21T20:05:18.000Z",
+                  "uid": "35240-37161ed1-e13f-4645-aad3-89b663cb073c"
                 },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "c559b837-6c3d-4735-b787-9c4c3f2ad375",
-              "name": "Internal server error.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    ":transactionalAPI",
-                    ":eventID"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "transactionalAPI",
-                      "description": "(Required) The transactional API name."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "eventID",
-                      "description": "(Required) The unique event type identifier."
-                    },
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
+                  "id": "086c73f7-38a8-40b2-b2fc-2c23850bcf47",
+                  "name": "Authentication failed. Invalid or expired OAuth token.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:transactionalAPI/:eventID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":transactionalAPI",
+                        ":eventID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "transactionalAPI"
+                        },
+                        {
+                          "key": "eventID"
+                        }
+                      ]
                     }
-                  ]
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error_code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:05:18.000Z",
+                  "updatedAt": "2026-10-21T20:05:18.000Z",
+                  "uid": "35240-086c73f7-38a8-40b2-b2fc-2c23850bcf47"
                 },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "f9a337fa-8999-4dff-a0b5-e2faa1385429",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:transactionalAPI/:eventID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":transactionalAPI",
+                        ":eventID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "transactionalAPI"
+                        },
+                        {
+                          "key": "eventID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error_code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:05:18.000Z",
+                  "updatedAt": "2026-10-21T20:05:18.000Z",
+                  "uid": "35240-f9a337fa-8999-4dff-a0b5-e2faa1385429"
+                },
+                {
+                  "id": "3483c9d7-38e5-4cd0-8f53-e3321caa12f2",
+                  "name": "Internal server error.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:transactionalAPI/:eventID",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":transactionalAPI",
+                        ":eventID"
+                      ],
+                      "variable": [
+                        {
+                          "key": "transactionalAPI"
+                        },
+                        {
+                          "key": "eventID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error_code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:05:18.000Z",
+                  "updatedAt": "2026-10-21T20:05:18.000Z",
+                  "uid": "35240-3483c9d7-38e5-4cd0-8f53-e3321caa12f2"
                 }
               ],
-              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-21T20:05:18.000Z",
+              "updatedAt": "2026-10-21T20:05:18.000Z",
+              "uid": "35240-e8495845-cdba-4f14-b289-ee4caa077ac6"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "cdb7369b-7cbf-4b39-91cd-14074ab119ed",
+          "createdAt": "2026-10-21T20:05:18.000Z",
+          "updatedAt": "2026-10-21T20:05:18.000Z",
+          "uid": "35240-cdb7369b-7cbf-4b39-91cd-14074ab119ed"
         }
       ],
-      "event": []
+      "id": "ca55bcd0-678a-48f4-9d19-74e4a3248d58",
+      "createdAt": "2026-10-21T20:05:18.000Z",
+      "updatedAt": "2026-10-21T20:05:18.000Z",
+      "uid": "35240-ca55bcd0-678a-48f4-9d19-74e4a3248d58"
     }
   ],
-  "event": [],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
   "variable": [
     {
-      "description": {
-        "content": "Your Campaign Classic instance name",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "YOUR_INSTANCE",
-      "key": "instance"
+      "key": "ORGANIZATION",
+      "value": "YOUR_ORG_ID"
     },
     {
-      "type": "string",
-      "value": "https://{{instance}}.campaign.adobe.com",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://mc.adobe.io/{{ORGANIZATION}}/campaign"
     }
-  ],
-  "info": {
-    "_postman_id": "6830ae44-1fc7-4def-a27f-f4e12dfc1731",
-    "name": "Adobe Campaign Classic Custom Resources Transactional Messages API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "SOAP-based API for Adobe Campaign Classic v7 and v8, documented as HTTP POST operations. All operations target the single SOAP router endpoint at /nl/jsp/soaprouter.jsp and are differentiated by the SOAPAction header. Provides programmatic access to session management, data querying, record persistence, delivery management, workflow control, subscription management, and real-time transactional event ingestion.\n\nContact Support:\n Name: Adobe Developer Support",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

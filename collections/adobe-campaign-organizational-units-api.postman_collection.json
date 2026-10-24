@@ -1,253 +1,261 @@
 {
+  "info": {
+    "_postman_id": "a37f20f8-e3ab-4ebb-9e42-1a27577d4cbe",
+    "name": "Adobe Campaign Standard Organizational Units API",
+    "description": "REST API for Adobe Campaign Standard enabling integration with marketing campaigns, profiles, workflows, and messaging services. Provides CRUD operations for profiles and services, workflow control, transactional messaging triggers, GDPR/CCPA privacy requests, marketing history access, and custom resource management.\n\nContact Support:\n Name: Adobe Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:04:21.000Z",
+    "updatedAt": "2026-10-21T20:04:21.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a37f20f8-e3ab-4ebb-9e42-1a27577d4cbe"
+  },
   "item": [
     {
-      "id": "34c4f16d-dbcc-4b17-a27e-cc6fb20079d4",
-      "name": "Organizational Units",
-      "description": {
-        "content": "Retrieve organizational unit structures used for access control and data partitioning.",
-        "type": "text/plain"
-      },
+      "name": "profileAndServicesExt",
       "item": [
         {
-          "id": "d62c0fc7-78bd-45e3-8ae9-841c68533f43",
-          "name": "Adobe Campaign List Organizational Units",
-          "request": {
-            "name": "Adobe Campaign List Organizational Units",
-            "description": {
-              "content": "Retrieves the list of organizational units used for access control and data partitioning.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "profileAndServicesExt",
-                "orgUnitBase"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "_lineCount",
-                  "value": "25",
-                  "description": "Number of records to return per page. Default is 25."
-                },
-                {
-                  "disabled": false,
-                  "key": "_lineStart",
-                  "value": "<integer>",
-                  "description": "Pagination offset from the next node in previous response."
-                }
-              ],
-              "variable": [
-                {
-                  "description": "Your Campaign Classic instance name",
-                  "type": "any",
-                  "value": "{{instance}}",
-                  "key": "instance"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "orgUnitBase",
+          "item": [
             {
-              "id": "ab04dc4c-ce5b-4216-9f68-e6b9cd751b9f",
-              "name": "Organizational units retrieved successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "profileAndServicesExt",
-                    "orgUnitBase"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "_lineCount",
-                      "value": "25"
-                    },
-                    {
-                      "key": "_lineStart",
-                      "value": "<integer>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
-                    }
-                  ]
-                },
+              "name": "Adobe Campaign List Organizational Units",
+              "id": "7e892ff8-2070-48f0-992f-9e781ae15c9c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
                 "header": [
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"content\": [\n    {\n      \"PKey\": \"example_value\",\n      \"name\": \"Example Campaign\",\n      \"label\": \"Example Campaign\",\n      \"parentTitle\": \"example_value\"\n    },\n    {\n      \"PKey\": \"example_value\",\n      \"name\": \"Example Campaign\",\n      \"label\": \"Example Campaign\",\n      \"parentTitle\": \"example_value\"\n    }\n  ],\n  \"count\": {\n    \"href\": \"string\"\n  },\n  \"next\": {\n    \"href\": \"string\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "a0db9c91-15ac-4f04-a2f0-5063c5b695a5",
-              "name": "Authentication failed. Invalid or expired OAuth token.",
-              "originalRequest": {
                 "url": {
+                  "raw": "{{baseUrl}}/profileAndServicesExt/orgUnitBase?_lineCount=25&_lineStart=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "profileAndServicesExt",
                     "orgUnitBase"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
                   "query": [
                     {
+                      "description": "Number of records to return per page. Default is 25.",
                       "key": "_lineCount",
                       "value": "25"
                     },
                     {
+                      "description": "Pagination offset from the next node in previous response.",
                       "key": "_lineStart",
                       "value": "<integer>"
                     }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
-                    }
                   ]
                 },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                "description": "Retrieves the list of organizational units used for access control and data partitioning."
               },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "03784a92-997d-4f7c-8c93-0452213260f8",
-              "name": "Internal server error.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "profileAndServicesExt",
-                    "orgUnitBase"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
+                  "id": "5fe4dd20-1549-4c0a-bbb6-c2075560d562",
+                  "name": "Organizational units retrieved successfully.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/profileAndServicesExt/orgUnitBase?_lineCount=25&_lineStart=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "profileAndServicesExt",
+                        "orgUnitBase"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of records to return per page. Default is 25.",
+                          "key": "_lineCount",
+                          "value": "25"
+                        },
+                        {
+                          "description": "Pagination offset from the next node in previous response.",
+                          "key": "_lineStart",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
                     {
-                      "key": "_lineCount",
-                      "value": "25"
-                    },
-                    {
-                      "key": "_lineStart",
-                      "value": "<integer>"
+                      "key": "Content-Type",
+                      "value": "application/json"
                     }
                   ],
-                  "variable": [
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
-                    }
-                  ]
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"content\": [\n    {\n      \"PKey\": \"<string>\",\n      \"name\": \"<string>\",\n      \"label\": \"<string>\",\n      \"parentTitle\": \"<string>\"\n    },\n    {\n      \"PKey\": \"<string>\",\n      \"name\": \"<string>\",\n      \"label\": \"<string>\",\n      \"parentTitle\": \"<string>\"\n    }\n  ],\n  \"count\": {\n    \"href\": \"<string>\"\n  },\n  \"next\": {\n    \"href\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:04:21.000Z",
+                  "updatedAt": "2026-10-21T20:04:21.000Z",
+                  "uid": "35240-5fe4dd20-1549-4c0a-bbb6-c2075560d562"
                 },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "97a3adb9-d475-4b3b-b214-24c865e6ec18",
+                  "name": "Authentication failed. Invalid or expired OAuth token.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/profileAndServicesExt/orgUnitBase?_lineCount=25&_lineStart=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "profileAndServicesExt",
+                        "orgUnitBase"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of records to return per page. Default is 25.",
+                          "key": "_lineCount",
+                          "value": "25"
+                        },
+                        {
+                          "description": "Pagination offset from the next node in previous response.",
+                          "key": "_lineStart",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error_code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:04:21.000Z",
+                  "updatedAt": "2026-10-21T20:04:21.000Z",
+                  "uid": "35240-97a3adb9-d475-4b3b-b214-24c865e6ec18"
+                },
+                {
+                  "id": "62f0d013-41d2-48cc-a890-405ec8a929cf",
+                  "name": "Internal server error.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/profileAndServicesExt/orgUnitBase?_lineCount=25&_lineStart=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "profileAndServicesExt",
+                        "orgUnitBase"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of records to return per page. Default is 25.",
+                          "key": "_lineCount",
+                          "value": "25"
+                        },
+                        {
+                          "description": "Pagination offset from the next node in previous response.",
+                          "key": "_lineStart",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error_code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:04:21.000Z",
+                  "updatedAt": "2026-10-21T20:04:21.000Z",
+                  "uid": "35240-62f0d013-41d2-48cc-a890-405ec8a929cf"
                 }
               ],
-              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-21T20:04:21.000Z",
+              "updatedAt": "2026-10-21T20:04:21.000Z",
+              "uid": "35240-7e892ff8-2070-48f0-992f-9e781ae15c9c"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "8c799e53-8c68-4ca2-a4d6-344cf94f44c7",
+          "createdAt": "2026-10-21T20:04:21.000Z",
+          "updatedAt": "2026-10-21T20:04:21.000Z",
+          "uid": "35240-8c799e53-8c68-4ca2-a4d6-344cf94f44c7"
         }
       ],
-      "event": []
+      "id": "3e1e60ad-a60f-490a-9ec8-2e5caf9b5ae9",
+      "createdAt": "2026-10-21T20:04:21.000Z",
+      "updatedAt": "2026-10-21T20:04:21.000Z",
+      "uid": "35240-3e1e60ad-a60f-490a-9ec8-2e5caf9b5ae9"
     }
   ],
-  "event": [],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
   "variable": [
     {
-      "description": {
-        "content": "Your Campaign Classic instance name",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "YOUR_INSTANCE",
-      "key": "instance"
+      "key": "ORGANIZATION",
+      "value": "YOUR_ORG_ID"
     },
     {
-      "type": "string",
-      "value": "https://{{instance}}.campaign.adobe.com",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://mc.adobe.io/{{ORGANIZATION}}/campaign"
     }
-  ],
-  "info": {
-    "_postman_id": "2b7069de-e128-4b12-ad08-28c8a07384a4",
-    "name": "Adobe Campaign Classic Custom Resources Organizational Units API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "SOAP-based API for Adobe Campaign Classic v7 and v8, documented as HTTP POST operations. All operations target the single SOAP router endpoint at /nl/jsp/soaprouter.jsp and are differentiated by the SOAPAction header. Provides programmatic access to session management, data querying, record persistence, delivery management, workflow control, subscription management, and real-time transactional event ingestion.\n\nContact Support:\n Name: Adobe Developer Support",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

@@ -1,467 +1,468 @@
 {
+  "info": {
+    "_postman_id": "e1b84779-e3da-4446-ad95-ab76b4f422f3",
+    "name": "Adobe Campaign Classic Delivery API",
+    "description": "SOAP-based API for Adobe Campaign Classic v7 and v8, documented as HTTP POST operations. All operations target the single SOAP router endpoint at /nl/jsp/soaprouter.jsp and are differentiated by the SOAPAction header. Provides programmatic access to session management, data querying, record persistence, delivery management, workflow control, subscription management, and real-time transactional event ingestion.\n\nContact Support:\n Name: Adobe Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:03:59.000Z",
+    "updatedAt": "2026-10-21T20:04:00.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e1b84779-e3da-4446-ad95-ab76b4f422f3"
+  },
   "item": [
     {
-      "id": "d88b17f3-576d-40ad-ab6f-f692b9581c44",
-      "name": "Delivery",
-      "description": {
-        "content": "Prepare and submit message deliveries including email, SMS, and push notifications.",
-        "type": "text/plain"
-      },
+      "name": "nl",
       "item": [
         {
-          "id": "f4e34589-f547-4408-addf-2e136290b807",
-          "name": "Adobe Campaign Prepare and Start a Delivery",
-          "request": {
-            "name": "Adobe Campaign Prepare and Start a Delivery",
-            "description": {
-              "content": "Prepares and immediately starts sending a delivery. Combines the preparation (target calculation, personalization) and sending steps. SOAP Action: nms:delivery#PrepareAndStart",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "nl",
-                "jsp",
-                "soaprouter.jsp",
-                "nms-delivery",
-                "PrepareAndStart"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "description": "Your Campaign Classic instance name",
-                  "type": "any",
-                  "value": "{{instance}}",
-                  "key": "instance"
-                }
-              ]
-            },
-            "header": [
-              {
-                "disabled": false,
-                "description": "(Required) ",
-                "key": "SOAPAction",
-                "value": "<string>"
-              },
-              {
-                "key": "Content-Type",
-                "value": "text/xml"
-              },
-              {
-                "key": "Accept",
-                "value": "text/xml"
-              }
-            ],
-            "method": "POST",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "X-Security-Token"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <deliveryId>(integer)</deliveryId>\n  <deliveryName>(string)</deliveryName>\n</element>",
-              "options": {
-                "raw": {
-                  "language": "xml"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "jsp",
+          "item": [
             {
-              "id": "5047baf7-3093-4fa7-9c1e-94d2c3023d8c",
-              "name": "Delivery preparation and sending started.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "nl",
-                    "jsp",
-                    "soaprouter.jsp",
-                    "nms-delivery",
-                    "PrepareAndStart"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Security-Token",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "SOAPAction",
-                    "value": "example_value"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <deliveryId>42</deliveryId>\n  <deliveryName>Example Campaign</deliveryName>\n</element>",
-                  "options": {
-                    "raw": {
-                      "language": "xml"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "soaprouter.jsp",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "text/plain"
+                  "name": "nms-delivery",
+                  "item": [
+                    {
+                      "name": "PrepareAndStart",
+                      "item": [
+                        {
+                          "name": "Adobe Campaign Prepare and Start a Delivery",
+                          "id": "5f4d2aa4-386a-48d0-97dd-8febc65d9762",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "apikey",
+                              "apikey": [
+                                {
+                                  "key": "key",
+                                  "value": "X-Security-Token",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "value",
+                                  "value": "{{apiKey}}",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "in",
+                                  "value": "header",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "(Required) ",
+                                "key": "SOAPAction",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "text/xml"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/xml"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <deliveryId>(integer)</deliveryId>\n  <deliveryName>(string)</deliveryName>\n</element>",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "xml",
+                                  "language": "xml"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/nl/jsp/soaprouter.jsp/nms-delivery/PrepareAndStart",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "nl",
+                                "jsp",
+                                "soaprouter.jsp",
+                                "nms-delivery",
+                                "PrepareAndStart"
+                              ]
+                            },
+                            "description": "Prepares and immediately starts sending a delivery. Combines the preparation (target calculation, personalization) and sending steps. SOAP Action: nms:delivery#PrepareAndStart"
+                          },
+                          "response": [
+                            {
+                              "id": "34ff3ce3-c70f-4096-9d48-532d18d207bd",
+                              "name": "Delivery preparation and sending started.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "(Required) ",
+                                    "key": "SOAPAction",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "text/xml"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "X-Security-Token",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <deliveryId>(integer)</deliveryId>\n  <deliveryName>(string)</deliveryName>\n</element>",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "xml",
+                                      "language": "xml"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/nl/jsp/soaprouter.jsp/nms-delivery/PrepareAndStart",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "nl",
+                                    "jsp",
+                                    "soaprouter.jsp",
+                                    "nms-delivery",
+                                    "PrepareAndStart"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-10-21T20:04:00.000Z",
+                              "updatedAt": "2026-10-21T20:04:00.000Z",
+                              "uid": "35240-34ff3ce3-c70f-4096-9d48-532d18d207bd"
+                            },
+                            {
+                              "id": "894fc039-cad5-45c2-b112-bc4b1823b33d",
+                              "name": "SOAP fault indicating an error during operation processing.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "(Required) ",
+                                    "key": "SOAPAction",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "text/xml"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/xml"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "X-Security-Token",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <deliveryId>(integer)</deliveryId>\n  <deliveryName>(string)</deliveryName>\n</element>",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "xml",
+                                      "language": "xml"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/nl/jsp/soaprouter.jsp/nms-delivery/PrepareAndStart",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "nl",
+                                    "jsp",
+                                    "soaprouter.jsp",
+                                    "nms-delivery",
+                                    "PrepareAndStart"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "xml",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/xml"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <faultcode>(string)</faultcode>\n  <faultstring>(string)</faultstring>\n  <detail>(string)</detail>\n</element>",
+                              "createdAt": "2026-10-21T20:04:00.000Z",
+                              "updatedAt": "2026-10-21T20:04:00.000Z",
+                              "uid": "35240-894fc039-cad5-45c2-b112-bc4b1823b33d"
+                            }
+                          ],
+                          "createdAt": "2026-10-21T20:04:00.000Z",
+                          "updatedAt": "2026-10-21T20:04:00.000Z",
+                          "uid": "35240-5f4d2aa4-386a-48d0-97dd-8febc65d9762"
+                        }
+                      ],
+                      "id": "f48353a9-c6d6-44db-b067-7b7071fed971",
+                      "createdAt": "2026-10-21T20:04:00.000Z",
+                      "updatedAt": "2026-10-21T20:04:00.000Z",
+                      "uid": "35240-f48353a9-c6d6-44db-b067-7b7071fed971"
+                    },
+                    {
+                      "name": "SubmitDelivery",
+                      "item": [
+                        {
+                          "name": "Adobe Campaign Submit a Delivery",
+                          "id": "951aba9b-a4c1-4b16-ba0a-1f3d9ea78620",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "apikey",
+                              "apikey": [
+                                {
+                                  "key": "key",
+                                  "value": "X-Security-Token",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "value",
+                                  "value": "{{apiKey}}",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "in",
+                                  "value": "header",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "(Required) ",
+                                "key": "SOAPAction",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "text/xml"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/xml"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <deliveryId>(integer)</deliveryId>\n  <deliveryName>(string)</deliveryName>\n</element>",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "xml",
+                                  "language": "xml"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/nl/jsp/soaprouter.jsp/nms-delivery/SubmitDelivery",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "nl",
+                                "jsp",
+                                "soaprouter.jsp",
+                                "nms-delivery",
+                                "SubmitDelivery"
+                              ]
+                            },
+                            "description": "Submits a delivery for processing. The delivery must be in a valid state for submission. SOAP Action: nms:delivery#SubmitDelivery"
+                          },
+                          "response": [
+                            {
+                              "id": "b86ebf2e-cd8d-48ec-b682-590d4af2f29d",
+                              "name": "Delivery submitted successfully.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "(Required) ",
+                                    "key": "SOAPAction",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "text/xml"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "X-Security-Token",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <deliveryId>(integer)</deliveryId>\n  <deliveryName>(string)</deliveryName>\n</element>",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "xml",
+                                      "language": "xml"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/nl/jsp/soaprouter.jsp/nms-delivery/SubmitDelivery",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "nl",
+                                    "jsp",
+                                    "soaprouter.jsp",
+                                    "nms-delivery",
+                                    "SubmitDelivery"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-10-21T20:04:00.000Z",
+                              "updatedAt": "2026-10-21T20:04:00.000Z",
+                              "uid": "35240-b86ebf2e-cd8d-48ec-b682-590d4af2f29d"
+                            },
+                            {
+                              "id": "6b7be05d-cecf-46e0-9e60-4942f7d6e3de",
+                              "name": "SOAP fault indicating an error during operation processing.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "(Required) ",
+                                    "key": "SOAPAction",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "text/xml"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/xml"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "X-Security-Token",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <deliveryId>(integer)</deliveryId>\n  <deliveryName>(string)</deliveryName>\n</element>",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "xml",
+                                      "language": "xml"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/nl/jsp/soaprouter.jsp/nms-delivery/SubmitDelivery",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "nl",
+                                    "jsp",
+                                    "soaprouter.jsp",
+                                    "nms-delivery",
+                                    "SubmitDelivery"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "xml",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/xml"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <faultcode>(string)</faultcode>\n  <faultstring>(string)</faultstring>\n  <detail>(string)</detail>\n</element>",
+                              "createdAt": "2026-10-21T20:04:00.000Z",
+                              "updatedAt": "2026-10-21T20:04:00.000Z",
+                              "uid": "35240-6b7be05d-cecf-46e0-9e60-4942f7d6e3de"
+                            }
+                          ],
+                          "createdAt": "2026-10-21T20:04:00.000Z",
+                          "updatedAt": "2026-10-21T20:04:00.000Z",
+                          "uid": "35240-951aba9b-a4c1-4b16-ba0a-1f3d9ea78620"
+                        }
+                      ],
+                      "id": "64aa9046-5db3-412c-aa98-fcfade6d7b78",
+                      "createdAt": "2026-10-21T20:04:00.000Z",
+                      "updatedAt": "2026-10-21T20:04:00.000Z",
+                      "uid": "35240-64aa9046-5db3-412c-aa98-fcfade6d7b78"
+                    }
+                  ],
+                  "id": "e56723ae-0b27-4626-aa34-ec572b2637ec",
+                  "createdAt": "2026-10-21T20:04:00.000Z",
+                  "updatedAt": "2026-10-21T20:04:00.000Z",
+                  "uid": "35240-e56723ae-0b27-4626-aa34-ec572b2637ec"
                 }
               ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "9e775894-8e09-450f-9ae1-745fda6f16fc",
-              "name": "SOAP fault indicating an error during operation processing.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "nl",
-                    "jsp",
-                    "soaprouter.jsp",
-                    "nms-delivery",
-                    "PrepareAndStart"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Security-Token",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "SOAPAction",
-                    "value": "example_value"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "text/xml"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <deliveryId>42</deliveryId>\n  <deliveryName>Example Campaign</deliveryName>\n</element>",
-                  "options": {
-                    "raw": {
-                      "language": "xml"
-                    }
-                  }
-                }
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/xml"
-                }
-              ],
-              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <faultcode>example_value</faultcode>\n  <faultstring>example_value</faultstring>\n  <detail>example_value</detail>\n</element>",
-              "cookie": [],
-              "_postman_previewlanguage": "xml"
+              "id": "a6fd95b8-878c-44e3-ae48-c0393e892d04",
+              "createdAt": "2026-10-21T20:04:00.000Z",
+              "updatedAt": "2026-10-21T20:04:00.000Z",
+              "uid": "35240-a6fd95b8-878c-44e3-ae48-c0393e892d04"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "c361d96c-7045-49c1-8cde-885ddd951845",
-          "name": "Adobe Campaign Submit a Delivery",
-          "request": {
-            "name": "Adobe Campaign Submit a Delivery",
-            "description": {
-              "content": "Submits a delivery for processing. The delivery must be in a valid state for submission. SOAP Action: nms:delivery#SubmitDelivery",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "nl",
-                "jsp",
-                "soaprouter.jsp",
-                "nms-delivery",
-                "SubmitDelivery"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "description": "Your Campaign Classic instance name",
-                  "type": "any",
-                  "value": "{{instance}}",
-                  "key": "instance"
-                }
-              ]
-            },
-            "header": [
-              {
-                "disabled": false,
-                "description": "(Required) ",
-                "key": "SOAPAction",
-                "value": "<string>"
-              },
-              {
-                "key": "Content-Type",
-                "value": "text/xml"
-              },
-              {
-                "key": "Accept",
-                "value": "text/xml"
-              }
-            ],
-            "method": "POST",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "X-Security-Token"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "header"
-                }
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <deliveryId>(integer)</deliveryId>\n  <deliveryName>(string)</deliveryName>\n</element>",
-              "options": {
-                "raw": {
-                  "language": "xml"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "7e7876c7-82c5-4aea-9ed3-a6e3247f2a9a",
-              "name": "Delivery submitted successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "nl",
-                    "jsp",
-                    "soaprouter.jsp",
-                    "nms-delivery",
-                    "SubmitDelivery"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Security-Token",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "SOAPAction",
-                    "value": "example_value"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <deliveryId>42</deliveryId>\n  <deliveryName>Example Campaign</deliveryName>\n</element>",
-                  "options": {
-                    "raw": {
-                      "language": "xml"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "bfba4ffc-ab50-443b-a710-9f91c2b21f9c",
-              "name": "SOAP fault indicating an error during operation processing.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "nl",
-                    "jsp",
-                    "soaprouter.jsp",
-                    "nms-delivery",
-                    "SubmitDelivery"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Security-Token",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) ",
-                    "key": "SOAPAction",
-                    "value": "example_value"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "text/xml"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <deliveryId>42</deliveryId>\n  <deliveryName>Example Campaign</deliveryName>\n</element>",
-                  "options": {
-                    "raw": {
-                      "language": "xml"
-                    }
-                  }
-                }
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/xml"
-                }
-              ],
-              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <faultcode>example_value</faultcode>\n  <faultstring>example_value</faultstring>\n  <detail>example_value</detail>\n</element>",
-              "cookie": [],
-              "_postman_previewlanguage": "xml"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "c3c8143e-ffc4-42cf-81d1-86c2e32aa75d",
+          "createdAt": "2026-10-21T20:04:00.000Z",
+          "updatedAt": "2026-10-21T20:04:00.000Z",
+          "uid": "35240-c3c8143e-ffc4-42cf-81d1-86c2e32aa75d"
         }
       ],
-      "event": []
+      "id": "b4ffa01b-982f-45b6-aa91-b8544ffb9163",
+      "createdAt": "2026-10-21T20:04:00.000Z",
+      "updatedAt": "2026-10-21T20:04:00.000Z",
+      "uid": "35240-b4ffa01b-982f-45b6-aa91-b8544ffb9163"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "description": {
-        "content": "Your Campaign Classic instance name",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "YOUR_INSTANCE",
-      "key": "instance"
+      "key": "instance",
+      "value": "YOUR_INSTANCE"
     },
     {
-      "type": "string",
-      "value": "https://{{instance}}.campaign.adobe.com",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://{{instance}}.campaign.adobe.com"
     }
-  ],
-  "info": {
-    "_postman_id": "5b73dd04-5459-4c60-9f4a-3b5bb6b3340f",
-    "name": "Adobe Campaign Classic Custom Resources Delivery API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "SOAP-based API for Adobe Campaign Classic v7 and v8, documented as HTTP POST operations. All operations target the single SOAP router endpoint at /nl/jsp/soaprouter.jsp and are differentiated by the SOAPAction header. Provides programmatic access to session management, data querying, record persistence, delivery management, workflow control, subscription management, and real-time transactional event ingestion.\n\nContact Support:\n Name: Adobe Developer Support",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

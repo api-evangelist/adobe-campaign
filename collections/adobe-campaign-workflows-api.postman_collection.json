@@ -1,400 +1,437 @@
 {
+  "info": {
+    "_postman_id": "058f1775-1697-4b9d-8013-f6333815c924",
+    "name": "Adobe Campaign Standard Workflows API",
+    "description": "REST API for Adobe Campaign Standard enabling integration with marketing campaigns, profiles, workflows, and messaging services. Provides CRUD operations for profiles and services, workflow control, transactional messaging triggers, GDPR/CCPA privacy requests, marketing history access, and custom resource management.\n\nContact Support:\n Name: Adobe Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:05:29.000Z",
+    "updatedAt": "2026-10-21T20:05:30.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-058f1775-1697-4b9d-8013-f6333815c924"
+  },
   "item": [
     {
-      "id": "7068acc2-8d3b-4440-a689-8c01627444d1",
-      "name": "Workflows",
-      "description": {
-        "content": "Control workflow execution including starting, pausing, resuming, and stopping marketing workflows.",
-        "type": "text/plain"
-      },
+      "name": "workflow",
       "item": [
         {
-          "id": "7014a19f-447f-4f90-adab-86da1eb81c3a",
-          "name": "Adobe Campaign Control a Workflow",
-          "request": {
-            "name": "Adobe Campaign Control a Workflow",
-            "description": {
-              "content": "Sends a control command to a workflow. Supported commands are start, pause, resume, and stop. Commands are executed asynchronously.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "workflow",
-                "execution",
-                ":workflowID",
-                "commands"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "workflowID",
-                  "description": "(Required) The ID of the workflow to control."
-                },
-                {
-                  "description": "Your Campaign Classic instance name",
-                  "type": "any",
-                  "value": "{{instance}}",
-                  "key": "instance"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"method\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "execution",
+          "item": [
             {
-              "id": "76d51b50-eeeb-4673-866b-694896d32d8b",
-              "name": "Workflow command accepted successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "workflow",
-                    "execution",
-                    ":workflowID",
-                    "commands"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "workflowID",
-                      "description": "(Required) The ID of the workflow to control."
-                    },
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
-                    }
-                  ]
-                },
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"method\": \"start\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "{workflowID}",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "text/plain"
+                  "name": "commands",
+                  "item": [
+                    {
+                      "name": "Adobe Campaign Control a Workflow",
+                      "id": "970f1ad5-aa74-44eb-9620-17a1d77326db",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"method\": \"pause\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/workflow/execution/:workflowID/commands",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "workflow",
+                            "execution",
+                            ":workflowID",
+                            "commands"
+                          ],
+                          "variable": [
+                            {
+                              "id": "6aae7103-fab3-4d4a-9534-cf300339e3c2",
+                              "key": "workflowID",
+                              "value": "<string>",
+                              "description": "(Required) The ID of the workflow to control."
+                            }
+                          ]
+                        },
+                        "description": "Sends a control command to a workflow. Supported commands are start, pause, resume, and stop. Commands are executed asynchronously."
+                      },
+                      "response": [
+                        {
+                          "id": "78d18fe5-2eea-4953-bf9f-0bb2a078c12c",
+                          "name": "Workflow command accepted successfully.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"method\": \"pause\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/workflow/execution/:workflowID/commands",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "workflow",
+                                "execution",
+                                ":workflowID",
+                                "commands"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workflowID"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-10-21T20:05:30.000Z",
+                          "updatedAt": "2026-10-21T20:05:30.000Z",
+                          "uid": "35240-78d18fe5-2eea-4953-bf9f-0bb2a078c12c"
+                        },
+                        {
+                          "id": "7efff0a1-d59d-45d7-b9b6-fa41a3aa4cce",
+                          "name": "Invalid request parameters.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"method\": \"pause\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/workflow/execution/:workflowID/commands",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "workflow",
+                                "execution",
+                                ":workflowID",
+                                "commands"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workflowID"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error_code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-21T20:05:30.000Z",
+                          "updatedAt": "2026-10-21T20:05:30.000Z",
+                          "uid": "35240-7efff0a1-d59d-45d7-b9b6-fa41a3aa4cce"
+                        },
+                        {
+                          "id": "d91103e1-6868-41e5-be96-357d0c8ba8bc",
+                          "name": "Authentication failed. Invalid or expired OAuth token.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"method\": \"pause\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/workflow/execution/:workflowID/commands",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "workflow",
+                                "execution",
+                                ":workflowID",
+                                "commands"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workflowID"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error_code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-21T20:05:30.000Z",
+                          "updatedAt": "2026-10-21T20:05:30.000Z",
+                          "uid": "35240-d91103e1-6868-41e5-be96-357d0c8ba8bc"
+                        },
+                        {
+                          "id": "0716bd1d-b3da-46ab-8a7c-07823eeac11c",
+                          "name": "The requested resource was not found.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"method\": \"pause\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/workflow/execution/:workflowID/commands",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "workflow",
+                                "execution",
+                                ":workflowID",
+                                "commands"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workflowID"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error_code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-21T20:05:30.000Z",
+                          "updatedAt": "2026-10-21T20:05:30.000Z",
+                          "uid": "35240-0716bd1d-b3da-46ab-8a7c-07823eeac11c"
+                        },
+                        {
+                          "id": "46abe00e-bce1-4222-9de9-c97070640a63",
+                          "name": "Internal server error.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"method\": \"pause\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/workflow/execution/:workflowID/commands",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "workflow",
+                                "execution",
+                                ":workflowID",
+                                "commands"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workflowID"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error_code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-21T20:05:30.000Z",
+                          "updatedAt": "2026-10-21T20:05:30.000Z",
+                          "uid": "35240-46abe00e-bce1-4222-9de9-c97070640a63"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T20:05:30.000Z",
+                      "updatedAt": "2026-10-21T20:05:30.000Z",
+                      "uid": "35240-970f1ad5-aa74-44eb-9620-17a1d77326db"
+                    }
+                  ],
+                  "id": "a0739501-6adb-4f57-a261-30e461f62c4e",
+                  "createdAt": "2026-10-21T20:05:30.000Z",
+                  "updatedAt": "2026-10-21T20:05:30.000Z",
+                  "uid": "35240-a0739501-6adb-4f57-a261-30e461f62c4e"
                 }
               ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "5db6d6d8-a5e4-4111-9b34-16d37525ab07",
-              "name": "Invalid request parameters.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "workflow",
-                    "execution",
-                    ":workflowID",
-                    "commands"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "workflowID",
-                      "description": "(Required) The ID of the workflow to control."
-                    },
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"method\": \"start\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e89f0e9d-2708-4d8e-8ebc-ac99ae78f043",
-              "name": "Authentication failed. Invalid or expired OAuth token.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "workflow",
-                    "execution",
-                    ":workflowID",
-                    "commands"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "workflowID",
-                      "description": "(Required) The ID of the workflow to control."
-                    },
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"method\": \"start\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "8280c568-25c4-4057-b204-9f2b310bfa11",
-              "name": "The requested resource was not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "workflow",
-                    "execution",
-                    ":workflowID",
-                    "commands"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "workflowID",
-                      "description": "(Required) The ID of the workflow to control."
-                    },
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"method\": \"start\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "bf0f52b6-f2a9-4760-83e3-1756b02a3212",
-              "name": "Internal server error.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "workflow",
-                    "execution",
-                    ":workflowID",
-                    "commands"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "workflowID",
-                      "description": "(Required) The ID of the workflow to control."
-                    },
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"method\": \"start\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "1b7c630d-e4d5-4497-b602-925efd119a79",
+              "createdAt": "2026-10-21T20:05:30.000Z",
+              "updatedAt": "2026-10-21T20:05:30.000Z",
+              "uid": "35240-1b7c630d-e4d5-4497-b602-925efd119a79"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "8c54778f-dca7-4fc3-9455-1f15a637bc41",
+          "createdAt": "2026-10-21T20:05:30.000Z",
+          "updatedAt": "2026-10-21T20:05:30.000Z",
+          "uid": "35240-8c54778f-dca7-4fc3-9455-1f15a637bc41"
         }
       ],
-      "event": []
+      "id": "9ae7daea-9f02-420a-9520-3a810d8e9d5a",
+      "createdAt": "2026-10-21T20:05:30.000Z",
+      "updatedAt": "2026-10-21T20:05:30.000Z",
+      "uid": "35240-9ae7daea-9f02-420a-9520-3a810d8e9d5a"
     }
   ],
-  "event": [],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
   "variable": [
     {
-      "description": {
-        "content": "Your Campaign Classic instance name",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "YOUR_INSTANCE",
-      "key": "instance"
+      "key": "ORGANIZATION",
+      "value": "YOUR_ORG_ID"
     },
     {
-      "type": "string",
-      "value": "https://{{instance}}.campaign.adobe.com",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://mc.adobe.io/{{ORGANIZATION}}/campaign"
     }
-  ],
-  "info": {
-    "_postman_id": "8e83a130-6ac5-40ce-810a-65254676ffec",
-    "name": "Adobe Campaign Classic Custom Resources Workflows API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "SOAP-based API for Adobe Campaign Classic v7 and v8, documented as HTTP POST operations. All operations target the single SOAP router endpoint at /nl/jsp/soaprouter.jsp and are differentiated by the SOAPAction header. Provides programmatic access to session management, data querying, record persistence, delivery management, workflow control, subscription management, and real-time transactional event ingestion.\n\nContact Support:\n Name: Adobe Developer Support",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

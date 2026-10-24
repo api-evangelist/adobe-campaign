@@ -1,683 +1,704 @@
 {
+  "info": {
+    "_postman_id": "298242a6-0fe4-4395-98b5-3962bc59fe25",
+    "name": "Adobe Campaign Standard Custom Resources API",
+    "description": "REST API for Adobe Campaign Standard enabling integration with marketing campaigns, profiles, workflows, and messaging services. Provides CRUD operations for profiles and services, workflow control, transactional messaging triggers, GDPR/CCPA privacy requests, marketing history access, and custom resource management.\n\nContact Support:\n Name: Adobe Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:03:46.000Z",
+    "updatedAt": "2026-10-21T20:03:47.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-298242a6-0fe4-4395-98b5-3962bc59fe25"
+  },
   "item": [
     {
-      "id": "9e735b0c-3b94-4e91-84b6-70b0f5d2b801",
-      "name": "Custom Resources",
-      "description": {
-        "content": "Access custom resources defined in Campaign Standard, both profile-linked and standalone.",
-        "type": "text/plain"
-      },
+      "name": "profileAndServicesExt",
       "item": [
         {
-          "id": "470745c7-8123-4a05-8ea6-2394f44fa509",
-          "name": "Adobe Campaign List Profile-linked Custom Resources",
-          "request": {
-            "name": "Adobe Campaign List Profile-linked Custom Resources",
-            "description": {
-              "content": "Retrieves records from a profile-linked custom resource. Custom resources are defined with the cus prefix in Campaign Standard.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "profileAndServicesExt",
-                ":cusResourceName"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "_lineCount",
-                  "value": "25",
-                  "description": "Number of records to return per page. Default is 25."
-                },
-                {
-                  "disabled": false,
-                  "key": "_lineStart",
-                  "value": "<integer>",
-                  "description": "Pagination offset from the next node in previous response."
-                },
-                {
-                  "disabled": false,
-                  "key": "_order",
-                  "value": "<string>",
-                  "description": "Sort order. Use field name for ascending, append %20desc for descending (e.g., email%20desc)."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "cusResourceName",
-                  "description": "(Required) The name of the custom resource (with cus prefix, e.g., cusMyResource)."
-                },
-                {
-                  "description": "Your Campaign Classic instance name",
-                  "type": "any",
-                  "value": "{{instance}}",
-                  "key": "instance"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "{cusResourceName}",
+          "item": [
             {
-              "id": "a0e45e6a-289e-46e3-a6d8-7f6039f6f1c6",
-              "name": "Custom resource records retrieved successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "profileAndServicesExt",
-                    ":cusResourceName"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "_lineCount",
-                      "value": "25"
-                    },
-                    {
-                      "key": "_lineStart",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "_order",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "cusResourceName",
-                      "description": "(Required) The name of the custom resource (with cus prefix, e.g., cusMyResource)."
-                    },
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
-                    }
-                  ]
-                },
+              "name": "Adobe Campaign List Profile-linked Custom Resources",
+              "id": "6e889c96-9363-47ff-b7ef-466dd34c03b1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
                 "header": [
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"count\": {\n    \"href\": \"string\"\n  },\n  \"next\": {\n    \"href\": \"string\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "cf119b02-33b3-419d-b921-a879eaca84f0",
-              "name": "Authentication failed. Invalid or expired OAuth token.",
-              "originalRequest": {
                 "url": {
+                  "raw": "{{baseUrl}}/profileAndServicesExt/:cusResourceName?_lineCount=25&_lineStart=<integer>&_order=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "profileAndServicesExt",
                     ":cusResourceName"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
                   "query": [
                     {
+                      "description": "Number of records to return per page. Default is 25.",
                       "key": "_lineCount",
                       "value": "25"
                     },
                     {
+                      "description": "Pagination offset from the next node in previous response.",
                       "key": "_lineStart",
                       "value": "<integer>"
                     },
                     {
+                      "description": "Sort order. Use field name for ascending, append %20desc for descending (e.g., email%20desc).",
                       "key": "_order",
                       "value": "<string>"
                     }
                   ],
                   "variable": [
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
+                      "id": "a584d562-5d6a-41a9-bfaf-d4a7e8528bb8",
                       "key": "cusResourceName",
+                      "value": "<string>",
                       "description": "(Required) The name of the custom resource (with cus prefix, e.g., cusMyResource)."
-                    },
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
                     }
                   ]
                 },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                "description": "Retrieves records from a profile-linked custom resource. Custom resources are defined with the cus prefix in Campaign Standard."
               },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "2806d2f7-141f-4e52-a421-cf91ac786aa8",
-              "name": "The requested resource was not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "profileAndServicesExt",
-                    ":cusResourceName"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
+                  "id": "6797834e-0f35-4c5c-a50b-1f14fe2d139f",
+                  "name": "Custom resource records retrieved successfully.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/profileAndServicesExt/:cusResourceName?_lineCount=25&_lineStart=<integer>&_order=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "profileAndServicesExt",
+                        ":cusResourceName"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of records to return per page. Default is 25.",
+                          "key": "_lineCount",
+                          "value": "25"
+                        },
+                        {
+                          "description": "Pagination offset from the next node in previous response.",
+                          "key": "_lineStart",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Sort order. Use field name for ascending, append %20desc for descending (e.g., email%20desc).",
+                          "key": "_order",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "cusResourceName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
                     {
-                      "key": "_lineCount",
-                      "value": "25"
-                    },
-                    {
-                      "key": "_lineStart",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "_order",
-                      "value": "<string>"
+                      "key": "Content-Type",
+                      "value": "application/json"
                     }
                   ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "cusResourceName",
-                      "description": "(Required) The name of the custom resource (with cus prefix, e.g., cusMyResource)."
-                    },
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
-                    }
-                  ]
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"count\": {\n    \"href\": \"<string>\"\n  },\n  \"next\": {\n    \"href\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-6797834e-0f35-4c5c-a50b-1f14fe2d139f"
                 },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "cb7cfefb-5225-42a7-b9c9-ef8e7fb02efc",
-              "name": "Internal server error.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "profileAndServicesExt",
-                    ":cusResourceName"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
+                  "id": "9abdf6f6-a400-46c0-b950-71659eb093ad",
+                  "name": "Authentication failed. Invalid or expired OAuth token.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/profileAndServicesExt/:cusResourceName?_lineCount=25&_lineStart=<integer>&_order=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "profileAndServicesExt",
+                        ":cusResourceName"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of records to return per page. Default is 25.",
+                          "key": "_lineCount",
+                          "value": "25"
+                        },
+                        {
+                          "description": "Pagination offset from the next node in previous response.",
+                          "key": "_lineStart",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Sort order. Use field name for ascending, append %20desc for descending (e.g., email%20desc).",
+                          "key": "_order",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "cusResourceName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
                     {
-                      "key": "_lineCount",
-                      "value": "25"
-                    },
-                    {
-                      "key": "_lineStart",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "_order",
-                      "value": "<string>"
+                      "key": "Content-Type",
+                      "value": "application/json"
                     }
                   ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "cusResourceName",
-                      "description": "(Required) The name of the custom resource (with cus prefix, e.g., cusMyResource)."
-                    },
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
-                    }
-                  ]
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error_code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-9abdf6f6-a400-46c0-b950-71659eb093ad"
                 },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "0f8eb28f-e7f4-44f9-aa6b-b94c484c404f",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/profileAndServicesExt/:cusResourceName?_lineCount=25&_lineStart=<integer>&_order=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "profileAndServicesExt",
+                        ":cusResourceName"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of records to return per page. Default is 25.",
+                          "key": "_lineCount",
+                          "value": "25"
+                        },
+                        {
+                          "description": "Pagination offset from the next node in previous response.",
+                          "key": "_lineStart",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Sort order. Use field name for ascending, append %20desc for descending (e.g., email%20desc).",
+                          "key": "_order",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "cusResourceName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error_code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-0f8eb28f-e7f4-44f9-aa6b-b94c484c404f"
+                },
+                {
+                  "id": "fafd9cbf-e899-4528-86f7-4acc245ade3a",
+                  "name": "Internal server error.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/profileAndServicesExt/:cusResourceName?_lineCount=25&_lineStart=<integer>&_order=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "profileAndServicesExt",
+                        ":cusResourceName"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of records to return per page. Default is 25.",
+                          "key": "_lineCount",
+                          "value": "25"
+                        },
+                        {
+                          "description": "Pagination offset from the next node in previous response.",
+                          "key": "_lineStart",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Sort order. Use field name for ascending, append %20desc for descending (e.g., email%20desc).",
+                          "key": "_order",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "cusResourceName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error_code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-fafd9cbf-e899-4528-86f7-4acc245ade3a"
                 }
               ],
-              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-21T20:03:47.000Z",
+              "updatedAt": "2026-10-21T20:03:47.000Z",
+              "uid": "35240-6e889c96-9363-47ff-b7ef-466dd34c03b1"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "bfc7f9c2-5fa3-46fe-8993-0491ba4f0340",
-          "name": "Adobe Campaign List Non-profile Custom Resources",
-          "request": {
-            "name": "Adobe Campaign List Non-profile Custom Resources",
-            "description": {
-              "content": "Retrieves records from a standalone custom resource not linked to profiles.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "customResources",
-                ":cusResourceName"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "_lineCount",
-                  "value": "25",
-                  "description": "Number of records to return per page. Default is 25."
-                },
-                {
-                  "disabled": false,
-                  "key": "_lineStart",
-                  "value": "<integer>",
-                  "description": "Pagination offset from the next node in previous response."
-                },
-                {
-                  "disabled": false,
-                  "key": "_order",
-                  "value": "<string>",
-                  "description": "Sort order. Use field name for ascending, append %20desc for descending (e.g., email%20desc)."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "cusResourceName",
-                  "description": "(Required) The name of the custom resource."
-                },
-                {
-                  "description": "Your Campaign Classic instance name",
-                  "type": "any",
-                  "value": "{{instance}}",
-                  "key": "instance"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "d3f0a04f-c050-41a6-b3bc-3d12ad7c6441",
-              "name": "Custom resource records retrieved successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customResources",
-                    ":cusResourceName"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "_lineCount",
-                      "value": "25"
-                    },
-                    {
-                      "key": "_lineStart",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "_order",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "cusResourceName",
-                      "description": "(Required) The name of the custom resource."
-                    },
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"count\": {\n    \"href\": \"string\"\n  },\n  \"next\": {\n    \"href\": \"string\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "1e0ec885-3c00-46e5-9c7f-0bdf92a6f0a5",
-              "name": "Authentication failed. Invalid or expired OAuth token.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customResources",
-                    ":cusResourceName"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "_lineCount",
-                      "value": "25"
-                    },
-                    {
-                      "key": "_lineStart",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "_order",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "cusResourceName",
-                      "description": "(Required) The name of the custom resource."
-                    },
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "7437ebcd-ad83-4cc4-996f-acb9dd58b65e",
-              "name": "The requested resource was not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customResources",
-                    ":cusResourceName"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "_lineCount",
-                      "value": "25"
-                    },
-                    {
-                      "key": "_lineStart",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "_order",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "cusResourceName",
-                      "description": "(Required) The name of the custom resource."
-                    },
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "a6de678f-12e5-47cb-84b2-9b026397c50e",
-              "name": "Internal server error.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customResources",
-                    ":cusResourceName"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "_lineCount",
-                      "value": "25"
-                    },
-                    {
-                      "key": "_lineStart",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "_order",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "cusResourceName",
-                      "description": "(Required) The name of the custom resource."
-                    },
-                    {
-                      "description": "Your Campaign Classic instance name",
-                      "type": "any",
-                      "value": "{{instance}}",
-                      "key": "instance"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error_code\": \"example_value\",\n  \"message\": \"example_value\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "14dcc613-8a15-40b8-b1b7-ced6b51680d7",
+          "createdAt": "2026-10-21T20:03:47.000Z",
+          "updatedAt": "2026-10-21T20:03:47.000Z",
+          "uid": "35240-14dcc613-8a15-40b8-b1b7-ced6b51680d7"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "description": {
-        "content": "Your Campaign Classic instance name",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "YOUR_INSTANCE",
-      "key": "instance"
+      "id": "916033c1-a4e8-45d3-a355-d3dc86954ecf",
+      "createdAt": "2026-10-21T20:03:47.000Z",
+      "updatedAt": "2026-10-21T20:03:47.000Z",
+      "uid": "35240-916033c1-a4e8-45d3-a355-d3dc86954ecf"
     },
     {
-      "type": "string",
-      "value": "https://{{instance}}.campaign.adobe.com",
-      "key": "baseUrl"
+      "name": "customResources",
+      "item": [
+        {
+          "name": "{cusResourceName}",
+          "item": [
+            {
+              "name": "Adobe Campaign List Non-profile Custom Resources",
+              "id": "48d8cec4-9254-49be-872f-14bacc20dc31",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/customResources/:cusResourceName?_lineCount=25&_lineStart=<integer>&_order=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customResources",
+                    ":cusResourceName"
+                  ],
+                  "query": [
+                    {
+                      "description": "Number of records to return per page. Default is 25.",
+                      "key": "_lineCount",
+                      "value": "25"
+                    },
+                    {
+                      "description": "Pagination offset from the next node in previous response.",
+                      "key": "_lineStart",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Sort order. Use field name for ascending, append %20desc for descending (e.g., email%20desc).",
+                      "key": "_order",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "a3d58a2c-3c4a-46c9-ad6d-af1705eab7da",
+                      "key": "cusResourceName",
+                      "value": "<string>",
+                      "description": "(Required) The name of the custom resource."
+                    }
+                  ]
+                },
+                "description": "Retrieves records from a standalone custom resource not linked to profiles."
+              },
+              "response": [
+                {
+                  "id": "4424758a-bfee-4013-946c-5a9536dc3213",
+                  "name": "Custom resource records retrieved successfully.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/customResources/:cusResourceName?_lineCount=25&_lineStart=<integer>&_order=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customResources",
+                        ":cusResourceName"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of records to return per page. Default is 25.",
+                          "key": "_lineCount",
+                          "value": "25"
+                        },
+                        {
+                          "description": "Pagination offset from the next node in previous response.",
+                          "key": "_lineStart",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Sort order. Use field name for ascending, append %20desc for descending (e.g., email%20desc).",
+                          "key": "_order",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "cusResourceName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"count\": {\n    \"href\": \"<string>\"\n  },\n  \"next\": {\n    \"href\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-4424758a-bfee-4013-946c-5a9536dc3213"
+                },
+                {
+                  "id": "47beee91-51f6-4134-9f2f-f540b0d9bf1c",
+                  "name": "Authentication failed. Invalid or expired OAuth token.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/customResources/:cusResourceName?_lineCount=25&_lineStart=<integer>&_order=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customResources",
+                        ":cusResourceName"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of records to return per page. Default is 25.",
+                          "key": "_lineCount",
+                          "value": "25"
+                        },
+                        {
+                          "description": "Pagination offset from the next node in previous response.",
+                          "key": "_lineStart",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Sort order. Use field name for ascending, append %20desc for descending (e.g., email%20desc).",
+                          "key": "_order",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "cusResourceName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error_code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-47beee91-51f6-4134-9f2f-f540b0d9bf1c"
+                },
+                {
+                  "id": "b08157b3-4a17-41ba-bbd8-01dc24c4150f",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/customResources/:cusResourceName?_lineCount=25&_lineStart=<integer>&_order=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customResources",
+                        ":cusResourceName"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of records to return per page. Default is 25.",
+                          "key": "_lineCount",
+                          "value": "25"
+                        },
+                        {
+                          "description": "Pagination offset from the next node in previous response.",
+                          "key": "_lineStart",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Sort order. Use field name for ascending, append %20desc for descending (e.g., email%20desc).",
+                          "key": "_order",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "cusResourceName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error_code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-b08157b3-4a17-41ba-bbd8-01dc24c4150f"
+                },
+                {
+                  "id": "bd8f77ed-254a-4157-8939-d8bdfba5b84e",
+                  "name": "Internal server error.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/customResources/:cusResourceName?_lineCount=25&_lineStart=<integer>&_order=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customResources",
+                        ":cusResourceName"
+                      ],
+                      "query": [
+                        {
+                          "description": "Number of records to return per page. Default is 25.",
+                          "key": "_lineCount",
+                          "value": "25"
+                        },
+                        {
+                          "description": "Pagination offset from the next node in previous response.",
+                          "key": "_lineStart",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Sort order. Use field name for ascending, append %20desc for descending (e.g., email%20desc).",
+                          "key": "_order",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "cusResourceName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error_code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-bd8f77ed-254a-4157-8939-d8bdfba5b84e"
+                }
+              ],
+              "createdAt": "2026-10-21T20:03:47.000Z",
+              "updatedAt": "2026-10-21T20:03:47.000Z",
+              "uid": "35240-48d8cec4-9254-49be-872f-14bacc20dc31"
+            }
+          ],
+          "id": "28f1469c-d7aa-4fa1-a127-4999759dadc9",
+          "createdAt": "2026-10-21T20:03:47.000Z",
+          "updatedAt": "2026-10-21T20:03:47.000Z",
+          "uid": "35240-28f1469c-d7aa-4fa1-a127-4999759dadc9"
+        }
+      ],
+      "id": "a231b23f-f187-4a8a-800b-80605ffe4542",
+      "createdAt": "2026-10-21T20:03:47.000Z",
+      "updatedAt": "2026-10-21T20:03:47.000Z",
+      "uid": "35240-a231b23f-f187-4a8a-800b-80605ffe4542"
     }
   ],
-  "info": {
-    "_postman_id": "70bfa04d-d1f0-497d-9ca2-c7dfc7b9e530",
-    "name": "Adobe Campaign Classic Custom Resources API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "SOAP-based API for Adobe Campaign Classic v7 and v8, documented as HTTP POST operations. All operations target the single SOAP router endpoint at /nl/jsp/soaprouter.jsp and are differentiated by the SOAPAction header. Provides programmatic access to session management, data querying, record persistence, delivery management, workflow control, subscription management, and real-time transactional event ingestion.\n\nContact Support:\n Name: Adobe Developer Support",
-      "type": "text/plain"
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "ORGANIZATION",
+      "value": "YOUR_ORG_ID"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://mc.adobe.io/{{ORGANIZATION}}/campaign"
     }
-  }
+  ]
 }
