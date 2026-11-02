@@ -1,0 +1,121 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Adobe Campaign
+providerId: adobe-campaign
+created: '2026-05-04'
+# Provenance stamped 2026-08-11: the plan SHAPES below came from the API
+# Evangelist bulk sweep dated 2026-05-04. Upgraded 2026-08-13 to method:
+# searched — the contact-sales posture and the access gate are now quoted from
+# Adobe's own live documentation rather than inferred. See roadmap#35.
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://experienceleague.adobe.com/en/docs/campaign/campaign-v8/developer/apis/get-started-apis
+  (HTTP 200, fetched 2026-08-13) and
+  https://experienceleague.adobe.com/llms.txt (HTTP 200, fetched 2026-08-13).
+  https://business.adobe.com/products/campaign/adobe-campaign.html was probed
+  twice on 2026-08-13 and timed out at the edge both times, so no marketing
+  pricing page was read in this pass.
+plan_count: 2
+published_list_pricing: false
+access_gate: >-
+  Adobe Campaign publishes no list price and no self-serve sign-up. Beyond the
+  license itself, the API is separately gated: the Campaign v8 REST surface is
+  "only available on demand, for all Campaign FDA environments", is NOT available
+  for Enterprise (FFDA) deployments, and access requires contacting an Adobe
+  representative. Adobe's API documentation also instructs callers to check the
+  scale limitations of their license agreement, published in the Adobe Campaign
+  Managed Cloud Services product description, before making calls.
+modified: '2026-08-13'
+reconciled: true
+tags:
+  - Marketing
+  - Campaign Management
+  - Email Marketing
+  - Cross-Channel Marketing
+  - Customer Engagement
+notes: >-
+  Adobe Campaign is sold via enterprise contract. List pricing is not
+  published. Two product editions exist: Adobe Campaign Standard (cloud,
+  email-first) and Adobe Campaign v8 / Classic (on-premise/managed-cloud,
+  cross-channel). Pricing is keyed to active profiles, channels, and message
+  volume. API access is included with the underlying license.
+description: >-
+  Adobe Campaign is an enterprise cross-channel marketing platform sold via
+  contact-sales contracts. Pricing depends on edition (Standard vs v8/Classic),
+  active profile count, channels enabled (email, SMS, push, direct mail), and
+  annual message volume. The Campaign API is included in all editions.
+sources:
+  - https://business.adobe.com/products/campaign/adobe-campaign.html
+  - https://developer.adobe.com/campaign-standard-apis/
+plans:
+  - id: adobe-campaign-standard
+    name: Adobe Campaign Standard
+    type: enterprise
+    description: >-
+      Cloud-native edition for email-first cross-channel campaigns. Priced by
+      active profiles and message volume.
+    entries:
+      - label: Active profiles + message commit
+        name: campaign_standard_subscription
+        type: subscription
+        metric: profile
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+    elements:
+      - name: Campaign Standard REST API
+      - name: Email, SMS, push delivery
+      - name: Adobe Experience Cloud integration
+  - id: adobe-campaign-v8
+    name: Adobe Campaign v8 / Classic
+    type: enterprise
+    description: >-
+      Full cross-channel edition (email, SMS, push, direct mail, transactional)
+      with managed-cloud or on-premise deployment.
+    entries:
+      - label: Profiles + channels + message commit
+        name: campaign_v8_subscription
+        type: subscription
+        metric: profile
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+    elements:
+      - name: Campaign Classic SOAP / REST APIs
+      - name: Cross-channel orchestration
+      - name: Direct mail integration
+      - name: Customer Journey Analytics integration
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
+x-canonical:
+  generated: '2026-11-01'
+  vocabulary: engine/economics/plans-canonical.yml
+  models:
+  - subscription
+  units: []
+  plans:
+  - name: Adobe Campaign Standard
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - year
+  - name: Adobe Campaign v8 / Classic
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - year
